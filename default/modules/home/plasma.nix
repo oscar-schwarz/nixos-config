@@ -153,6 +153,7 @@ in
         };
         # do not occupy other windows
         "Window"."KeepAbove" = "false";
+        "Window"."KeepOpen" = "true";
         "Window"."ToggleToFocus" = "false";
         "Desktop Entry"."DefaultProfile" = "${konsoleThemeName}.profile";
       };
