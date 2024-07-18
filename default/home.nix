@@ -45,6 +45,7 @@ in {
     wl-clipboard-rs # copy to clip board from terminal
     
     pass-fetch # script for fetching password store repo
+    python311Packages.upass
   ];
 
   # Home Manager can also manage your environment variables through
