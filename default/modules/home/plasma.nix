@@ -155,6 +155,8 @@ in
         "Window"."KeepAbove" = "false";
         "Window"."KeepOpen" = "true";
         "Window"."ToggleToFocus" = "false";
+        "Window"."Height" = "100";
+        "Window"."Width" = "100";
         "Desktop Entry"."DefaultProfile" = "${konsoleThemeName}.profile";
       };
       "autostart/org.kde.yakuake.desktop"."Desktop Entry" = desktopEntries.yakuake;
