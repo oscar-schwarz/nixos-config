@@ -43,6 +43,7 @@ in {
     btop # task manager
     heygptWrapper # terminal gpt integration
     xournalpp # stylus note taking app
+    obsidian # markdown note taking app
 
     wl-clipboard-rs # copy to clip board from terminal
     

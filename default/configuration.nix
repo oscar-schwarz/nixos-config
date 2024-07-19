@@ -58,6 +58,7 @@
 
   home-manager = {
     extraSpecialArgs = {inherit inputs;};
+    useGlobalPkgs = true;
     users = {
       "osi" = import ./home.nix;
     };
@@ -112,7 +113,6 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
-      # Add additional package names here
       "obsidian"
     ];
 
