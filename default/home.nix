@@ -42,6 +42,8 @@ in {
     yakuake # dropdown terminal
     btop # task manager
     heygptWrapper # terminal gpt integration
+    xournalpp # note taking app
+
     wl-clipboard-rs # copy to clip board from terminal
     
     pass-fetch # script for fetching password store repo
