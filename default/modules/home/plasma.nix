@@ -175,7 +175,7 @@ in
     text = ''
       [Appearance]
       ColorScheme=${konsoleColorschemeName}
-      Font=Hack,10,-1,5,50,0,0,0,0,0
+      Font=Hack,5,-1,5,50,0,0,0,0,0
 
       [General]
       Command=$SHELL
