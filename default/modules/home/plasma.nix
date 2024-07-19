@@ -34,7 +34,7 @@ in
   ];
 
   home.packages = with pkgs; [
-    pop-icon-theme
+    luna-icons
   ];
 
   programs.plasma = {
