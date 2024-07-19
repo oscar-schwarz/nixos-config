@@ -157,6 +157,7 @@ in
         "Window"."ToggleToFocus" = "false";
         "Window"."Height" = "100";
         "Window"."Width" = "100";
+        "Window"."ShowTabBar" = "false";
         "Desktop Entry"."DefaultProfile" = "${konsoleThemeName}.profile";
       };
       "autostart/org.kde.yakuake.desktop"."Desktop Entry" = desktopEntries.yakuake;
@@ -181,8 +182,8 @@ in
       Parent=FALLBACK/
       TerminalCenter=true
       TerminalMargin=20
-      TerminalColumns=110
-      TerminalRows=28
+      TerminalColumns=130
+      
 
       [Interaction Options]
       TrimTrailingSpacesInSelectedText=true
