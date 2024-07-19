@@ -45,11 +45,10 @@ in {
     xournalpp # stylus note taking app
     obsidian # markdown note taking app
 
-    pkgs.fishPlugins.bobthefish
-
     wl-clipboard-rs # copy to clip board from terminal
     
     pass-fetch # script for fetching password store repo
+    python311Packages.upass
   ];
 
   # Home Manager can also manage your environment variables through
@@ -126,7 +125,15 @@ in {
     '';
     plugins = [
       # A nice theme
-      
+      {
+        name = "eclm";
+        src = pkgs.fetchFromGitHub {
+          owner = "oh-my-fish";
+          repo = "theme-eclm";
+          rev = "185c84a41947142d75c68da9bc6c59bcd32757e7";
+          sha256 = "sha256-OBku4wwMROu3HQXkaM26qhL0SIEtz8ShypuLcpbxp78=";
+        };
+      }
     ];
     functions = {
       termgpt = ''
