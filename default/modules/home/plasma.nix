@@ -181,6 +181,8 @@ in
       Parent=FALLBACK/
       TerminalCenter=true
       TerminalMargin=20
+      TerminalColumns=110
+      TerminalRows=28
 
       [Interaction Options]
       TrimTrailingSpacesInSelectedText=true
