@@ -34,7 +34,7 @@ in
   ];
 
   home.packages = with pkgs; [
-    luna-icons
+    numix-icon-theme
   ];
 
   programs.plasma = {
