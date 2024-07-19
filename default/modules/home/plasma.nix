@@ -33,6 +33,10 @@ in
     inputs.plasma-manager.homeManagerModules.plasma-manager
   ];
 
+  home.packages = with pkgs; [
+    pop-icon-theme
+  ];
+
   programs.plasma = {
     enable = true;
 

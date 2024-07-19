@@ -3,10 +3,6 @@
 let
   themeName = "oceanicnext";
 in {
-  environment.systemPackages = with pkgs; [
-    gruvbox-plus-icons
-  ];
-
   stylix = {
     base16Scheme = "${pkgs.base16-schemes}/share/themes/${themeName}.yaml";
     image = ../../images/nms.jpg;
