@@ -40,7 +40,6 @@ in {
   home.packages  = with pkgs; [
     signal-desktop # secure messaging
     yakuake # dropdown terminal
-    btop # task manager
     heygptWrapper # terminal gpt integration
     xournalpp # stylus note taking app
     obsidian # markdown note taking app
@@ -86,6 +85,15 @@ in {
     enableScDaemon = true;
     enableSshSupport = true;
     pinentryPackage = pkgs.pinentry-curses;
+  };
+
+  # btop - task manager
+  programs.btop = {
+    enable = true;
+    settings = {
+      # Using the theme provided by the terminal
+      force_tty = "False";
+    };
   };
 
   # Install firefox.

@@ -175,14 +175,14 @@ in
     text = ''
       [Appearance]
       ColorScheme=${konsoleColorschemeName}
-      Font=Liberation Mono,10,-1,5,50,0,0,0,0,0
+      Font=Hack,10,-1,5,50,0,0,0,0,0
 
       [General]
       Command=$SHELL
       Name=${konsoleThemeName}
       Parent=FALLBACK/
       TerminalCenter=true
-      TerminalMargin=20
+      TerminalMargin=15
 
       [Interaction Options]
       TrimTrailingSpacesInSelectedText=true
