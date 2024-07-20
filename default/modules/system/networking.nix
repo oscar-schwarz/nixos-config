@@ -13,7 +13,7 @@
     firewall = {
       enable = true;
       allowedTCPPorts = [
-        9003
+        
       ];
       allowedUDPPortRanges = [
         { from = 4000; to = 4007; }
