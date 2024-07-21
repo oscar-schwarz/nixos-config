@@ -107,7 +107,6 @@ in {
     enable = true;
     package = pkgs.vscodium;
     userSettings = {
-      "workbench.colorTheme" = "Stylix";
       "files.exclude" = {
         "**/.git" = false;
       };
