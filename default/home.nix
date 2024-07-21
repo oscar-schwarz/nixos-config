@@ -128,9 +128,9 @@ in {
         };
       };
     };
-    # extensions = with vscodeExts.vscode-marketplace; with vscodeExts.open-vsx-release; [
-    #   jnoortheen.nix-ide
-    # ];
+    extensions = with vscodeExts.vscode-marketplace; with vscodeExts.open-vsx-release; [
+      jnoortheen.nix-ide
+    ];
   };
 
   # terminal that makes me wet
