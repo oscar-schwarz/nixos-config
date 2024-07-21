@@ -25,11 +25,15 @@ let
       fi
     '';
   };
+
+  vscodeExts = inputs.nix-vscode-extensions.extensions.x86_64-linux;
 in {
+
   # Import modules
   imports = [
     ./modules/home/plasma.nix
   ];
+
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "osi";
@@ -49,26 +53,6 @@ in {
     
     pass-fetch # script for fetching password store repo
   ];
-
-  # Home Manager can also manage your environment variables through
-  # 'home.sessionVariables'. These will be explSicitly sourced when using a
-  # shell provided by Home Manager. If you don't want to manage your shell
-  # through Home Manager then you have to manually source 'hm-session-vars.sh'
-  # located at either
-  #
-  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  /etc/profiles/per-user/osi/etc/profile.d/hm-session-vars.sh
-  #
-  home.sessionVariables = {
-
-  };
 
   # Password store
   programs.password-store = {
@@ -126,7 +110,27 @@ in {
       "files.exclude" = {
         "**/.git" = false;
       };
+      "nix.enableLanguageServer" = true;
+      "nix.serverPath" = "${pkgs.nixd}";
+      "nix.serverSettings" = {
+        nixd =  {
+          formatting = {
+            command = ["${pkgs.nixpkgs-fmt}"];
+          };
+          options = {
+            nixos = {
+                expr = "(builtins.getFlake \"/home/osi/nixos/config\").nixosConfigurations.default.options";
+            };
+            home-manager = {
+                expr = "(builtins.getFlake \"/home/osi/nixos/config\").homeConfigurations.default.options";
+            };
+          };
+        };
+      };
     };
+    extensions = with vscodeExts.vscode-marketplace; with vscodeExts.open-vsx-release; [
+      jnoortheen.nix-ide
+    ];
   };
 
   # terminal that makes me wet
