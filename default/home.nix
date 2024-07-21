@@ -161,6 +161,10 @@ in {
         # Delete all backup files
         find ~ -type f -name "*.homeManagerBackupFileExtension" -delete 2>/dev/null
 
+        # deleting this will make it easier to have vscode extensions
+        rm -f ~/.vscode-oss/extensions/obsolete >/dev/null
+        rm -f ~/.vscode-oss/extensions/extensions.json >/dev/null
+
         # add all new files to git, so that they are seen by nixos
         set PREV_PWD "$PWD"
         cd ~/nixos/config
