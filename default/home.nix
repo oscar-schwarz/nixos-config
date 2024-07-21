@@ -11,9 +11,10 @@ let
   };
 
   # A small script that easily clones and pulls changes of the password store
-  pass-fetch = pkgs.writeShellApplication {
-    name = "pass-fetch";
-    text = ''
+  pass-fetch = pkgs.writeShellScriptBin 
+    "pass-fetch"
+
+    /*bash*/ ''
       REPO_URL="git@github.com:OsiPog/pass.git"
       DEST_DIR="$HOME/.password-store"
 
@@ -24,7 +25,6 @@ let
         ${lib.getExe pkgs.pass} git push
       fi
     '';
-  };
 
   vscodeExts = inputs.nix-vscode-extensions.extensions.x86_64-linux;
 in {
@@ -52,6 +52,8 @@ in {
     wl-clipboard-rs # copy to clip board from terminal
     
     pass-fetch # script for fetching password store repo
+
+    tree-sitter-grammars.tree-sitter-bash
   ];
 
   # Password store
@@ -130,6 +132,7 @@ in {
     };
     extensions = with vscodeExts.vscode-marketplace; with vscodeExts.open-vsx-release; [
       jnoortheen.nix-ide
+      alecghost.tree-sitter-vscode
     ];
   };
 
@@ -155,7 +158,7 @@ in {
       termgpt = ''
         ${lib.getExe heygptWrapper} --model "gpt-4o" """$argv""" | ${lib.getExe pkgs.glow}
       '';
-      rebuild = ''
+      rebuild = /*fish*/ ''
         # Delete all backup files
         find ~ -type f -name "*.homeManagerBackupFileExtension" -delete 2>/dev/null
 
