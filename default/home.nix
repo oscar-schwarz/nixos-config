@@ -162,7 +162,10 @@ in {
         find ~ -type f -name "*.homeManagerBackupFileExtension" -delete 2>/dev/null
 
         # No VSCodium, these plugins are NOT obsolete!
-        rm -f ~/.vscode-oss/extensions/.obsolete
+        if [ -e ~/.vscode-oss/extensions/.obsolete ]; then
+          rm -f ~/.vscode-oss/extensions/.obsolete
+          rm -f ~/.vscode-oss/extensions/extensions.json
+        fi
 
         # add all new files to git, so that they are seen by nixos
         set PREV_PWD "$PWD"
