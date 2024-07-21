@@ -11,10 +11,9 @@ let
   };
 
   # A small script that easily clones and pulls changes of the password store
-  pass-fetch = pkgs.writeShellScriptBin 
-    "pass-fetch"
-
-    /*bash*/ ''
+  pass-fetch = pkgs.writeShellApplication {
+    name = "pass-fetch";
+    text = ''
       REPO_URL="git@github.com:OsiPog/pass.git"
       DEST_DIR="$HOME/.password-store"
 
@@ -25,6 +24,7 @@ let
         ${lib.getExe pkgs.pass} git push
       fi
     '';
+  };
 
   vscodeExts = inputs.nix-vscode-extensions.extensions.x86_64-linux;
 in {
@@ -129,26 +129,9 @@ in {
           };
         };
       };
-      "tree-sitter-vscode.languageConfigs" =
-        let
-          treeSitter = {lang, pkg}: {
-            inherit lang;
-            parser = "${pkg}/parser";
-            highlights = "${pkg}/queries/highlights.scm";
-            injections = "${pkg}/queries/injections.scm";
-          };
-
-          grammars = pkgs.tree-sitter-grammars;
-        in map treeSitter [
-          {
-            lang = "nix";
-            pkg = grammars.tree-sitter-nix;
-          }
-        ];
     };
     extensions = with vscodeExts.vscode-marketplace; with vscodeExts.open-vsx-release; [
-      #jnoortheen.nix-ide
-      alecghost.tree-sitter-vscode
+      jnoortheen.nix-ide
     ];
   };
 
