@@ -54,6 +54,9 @@ in
       yakuake = {
         "toggle-window-state" = "F4";
       };
+      "org.kde.spectacle.desktop" = {
+        "RectangularRegionScreenShot" = "Meta+Shift+S";
+      };
     };
 
     # low level config editing
