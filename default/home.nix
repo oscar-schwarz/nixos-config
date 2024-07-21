@@ -111,11 +111,11 @@ in {
         "**/.git" = false;
       };
       "nix.enableLanguageServer" = true;
-      "nix.serverPath" = "${pkgs.nixd}";
+      "nix.serverPath" = "${lib.getExe pkgs.nixd}";
       "nix.serverSettings" = {
         nixd =  {
           formatting = {
-            command = ["${pkgs.nixpkgs-fmt}"];
+            command = ["${lib.getExe pkgs.nixpkgs-fmt}"];
           };
           options = {
             nixos = {
