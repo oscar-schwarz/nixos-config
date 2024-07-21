@@ -1,8 +1,7 @@
 {pkgs, lib,  config, ...}:
 
 let
-  # themeName = "oceanicnext";
-  themeName = "3024";
+  themeName = "oceanicnext";
 in {
   stylix = {
     base16Scheme = "${pkgs.base16-schemes}/share/themes/${themeName}.yaml";
