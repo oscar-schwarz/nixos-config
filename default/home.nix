@@ -43,15 +43,15 @@ in {
     heygptWrapper # terminal gpt integration
     xournalpp # stylus note taking app
     obsidian # markdown note taking app
+    spectacle # screenshot utility
 
     wl-clipboard-rs # copy to clip board from terminal
     
     pass-fetch # script for fetching password store repo
-    python311Packages.upass
   ];
 
   # Home Manager can also manage your environment variables through
-  # 'home.sessionVariables'. These will be explicitly sourced when using a
+  # 'home.sessionVariables'. These will be explSicitly sourced when using a
   # shell provided by Home Manager. If you don't want to manage your shell
   # through Home Manager then you have to manually source 'hm-session-vars.sh'
   # located at either
@@ -68,11 +68,6 @@ in {
   #
   home.sessionVariables = {
 
-  };
-
-  # Screenshot utility
-  services.flameshot = {
-    enable = true;
   };
 
   # Password store
