@@ -210,6 +210,7 @@ in
       [Appearance]
       ColorScheme=${konsoleColorschemeName}
       Font=Hack,10,-1,5,50,0,0,0,0,0
+      DimmValue=127
 
       [General]
       Command=$SHELL
@@ -217,6 +218,7 @@ in
       Parent=FALLBACK/
       TerminalCenter=true
       TerminalMargin=15
+      DimWhenInactive=true
 
       [Interaction Options]
       TrimTrailingSpacesInSelectedText=true
