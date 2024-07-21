@@ -70,6 +70,11 @@ in {
 
   };
 
+  # Screenshot utility
+  services.flameshot = {
+    enable = true;
+  };
+
   # Password store
   programs.password-store = {
     enable = true;
@@ -101,8 +106,10 @@ in {
     enable = true;
   };
   
+  # better cd
   programs.zoxide.enable = true;
 
+  # git stuff
   programs.git = {
     enable =true;
     extraConfig = {
@@ -116,6 +123,7 @@ in {
     };
   };
 
+  # code editor
   programs.vscode = {
     enable = true;
     package = pkgs.vscodium;
@@ -126,6 +134,7 @@ in {
     };
   };
 
+  # terminal that makes me wet
   programs.fish = {
     enable = true;
     interactiveShellInit = ''
