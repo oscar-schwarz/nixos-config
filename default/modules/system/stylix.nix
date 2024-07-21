@@ -7,7 +7,7 @@ in {
     base16Scheme = "${pkgs.base16-schemes}/share/themes/${themeName}.yaml";
     image = ../../images/nms.jpg;
     polarity = "dark";
-    autoEnable = true;
+    autoEnable = false;
 
     opacity = {
       desktop = 0.5;
