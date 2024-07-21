@@ -129,6 +129,22 @@ in {
           };
         };
       };
+      "tree-sitter-vscode.languageConfigs" =
+      let
+        treeSitter = {lang, pkg}: {
+          inherit lang;
+          parser = "${pkg}/parser";
+          highlights = "${pkg}/queries/highlights.scm";
+          injections = "${pkg}/queries/injections.scm";
+        };
+
+        grammars = pkgs.tree-sitter-grammars;
+      in map treeSitter [
+        {
+          lang = "nix";
+          pkg = grammars.tree-sitter-nix;
+        }
+      ];
     };
     extensions = with vscodeExts.vscode-marketplace; with vscodeExts.open-vsx-release; [
       jnoortheen.nix-ide
