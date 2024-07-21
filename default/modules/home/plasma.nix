@@ -161,7 +161,8 @@ in
           KeepAbove = "false";
           # don't close when focus lost 
           KeepOpen = "true";
-          ToggleToFocus = "true";
+          # double F4 feels a lot better for some reason
+          ToggleToFocus = "false";
 
           Height = "100";
           Width = "100";
@@ -210,7 +211,7 @@ in
       [Appearance]
       ColorScheme=${konsoleColorschemeName}
       Font=Hack,10,-1,5,50,0,0,0,0,0
-      DimmValue=127
+      DimmValue=50
 
       [General]
       Command=$SHELL
