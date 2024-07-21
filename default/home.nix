@@ -39,7 +39,7 @@ in {
   # environment.
   home.packages  = with pkgs; [
     signal-desktop # secure messaging
-    yakuake # dropdown terminal
+    kdePackages.yakuake # dropdown terminal
     heygptWrapper # terminal gpt integration
     xournalpp # stylus note taking app
     obsidian # markdown note taking app
