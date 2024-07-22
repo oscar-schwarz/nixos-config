@@ -12,14 +12,14 @@
       inputs.home-manager.nixosModules.default
       # setup networks
       ./modules/system/networking.nix
-      # styling
-      ./modules/system/stylix.nix
       # secret management
       ./modules/system/sops.nix
       # window manager and display manager
       ./modules/system/desktop.nix
       # language specific
       ./modules/system/locale.nix
+      # Theming
+      ./modules/system/stylix.nix
     ];
 
   # List packages installed in system profile
@@ -46,9 +46,6 @@
 
   # Enable bluetooth
   hardware.bluetooth.enable = true;
-
-  # Enable fish
-  programs.fish.enable = true;
 
   # enable nix-direnv
   programs.direnv = {
@@ -109,6 +106,12 @@
     description = "Osi";
     extraGroups = [ "networkmanager" "wheel" ];
   };
+
+  # For nix path in the shell
+  programs.fish.enable = true;
+
+  # This is a mandatory option that has to be set, any other settings are in my stylix.nix
+  stylix.image = ./images/nms.jpg;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfreePredicate = pkg:

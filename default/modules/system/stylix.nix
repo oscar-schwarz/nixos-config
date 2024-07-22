@@ -1,6 +1,7 @@
-{pkgs, lib,  config, ...}:
+{pkgs, lib,  config, inputs, ...}:
 
 let
+  # The base 16 colorscheme used, modify this to see a theme change!
   themeName = "oceanicnext";
 in {
   stylix = {
@@ -20,4 +21,9 @@ in {
       size = 25;
     };
   };
+
+  # Custom stylix based theming of other apps
+  home-manager.sharedModules = [ 
+    ../../../global-modules/home/yakuake-theme.nix
+  ];
 }

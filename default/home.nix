@@ -31,8 +31,14 @@ in {
 
   # Import modules
   imports = [
+    # KDE setup
     ./modules/home/plasma.nix
+
+    # Dropdown terminal settings
+    ./modules/home/yakuake.nix
   ];
+
+  stylix.enable = true;
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -157,7 +163,7 @@ in {
       termgpt = ''
         ${lib.getExe heygptWrapper} --model "gpt-4o" """$argv""" | ${lib.getExe pkgs.glow}
       '';
-      rebuild = /*fish*/ ''
+      rebuild = ''
         # Delete all backup files
         find ~ -type f -name "*.homeManagerBackupFileExtension" -delete 2>/dev/null
 
@@ -165,7 +171,7 @@ in {
         if [ -e ~/.vscode-oss/extensions/.obsolete ]; then
           rm -f ~/.vscode-oss/extensions/.obsolete
           rm -f ~/.vscode-oss/extensions/extensions.json
-        fi
+        end
 
         # add all new files to git, so that they are seen by nixos
         set PREV_PWD "$PWD"
@@ -174,7 +180,7 @@ in {
 
         sudo nixos-rebuild --flake ~/nixos/config#default $argv
 
-        # if succeeded
+        # only commit if succeeded
         if test $status -eq 0
           # commit all changes
           gptcommit
