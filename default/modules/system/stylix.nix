@@ -2,8 +2,9 @@
 
 let
   # The base 16 colorscheme used, modify this to see a theme change!
-  themeName = "brushtrees-dark";
+  # themeName = "oceanicnext";
   # themeName = "sakura";
+  themeName = "aztec";
 in {
   stylix = {
     base16Scheme = "${pkgs.base16-schemes}/share/themes/${themeName}.yaml";
