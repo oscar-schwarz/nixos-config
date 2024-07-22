@@ -13,7 +13,7 @@
     hotkeys.commands = {
       "launch-konsole" = {
         name = "Launch Konsole";
-        key = "Meta+K";
+        key = "Meta+R+Up";
         command = "konsole";
       };
     };
@@ -51,7 +51,7 @@
           "DisableWhileTyping" = "false";
         };
         "Mouse" = {
-          # take the cursor from stylix
+          # Make sure the default cursor is used
           "cursorTheme" = "default";
         };
       };
