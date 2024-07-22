@@ -59,8 +59,6 @@ in {
     wl-clipboard-rs # copy to clip board from terminal
     
     pass-fetch # script for fetching password store repo
-
-    tree-sitter-grammars.tree-sitter-bash
   ];
 
   # Password store

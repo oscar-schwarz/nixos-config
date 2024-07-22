@@ -50,7 +50,7 @@
           "ClickMethod" = "2";
           "NaturalScroll" = "true";
           "TapToClick" = "true";
-          "DisableWhileTyping" = "false";
+          "DisableWhileTyping" = "true";
         };
         Mouse = {
           # Make sure the default cursor is usedy
