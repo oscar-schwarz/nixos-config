@@ -4,9 +4,6 @@ let
   # The base 16 colorscheme used, modify this to see a theme change!
   themeName = "oceanicnext";
 in {
-  imports = [
-    ../../../global-modules/home/yakuake-theme.nix
-  ];
 
   stylix = {
     enable = true;
@@ -26,4 +23,8 @@ in {
       size = 25;
     };
   };
+
+  home-manager.sharedModules = [ 
+    ../../../global-modules/home/yakuake-theme.nix
+  ];
 }

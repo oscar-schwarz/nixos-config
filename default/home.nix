@@ -36,9 +36,6 @@ in {
 
     # Dropdown terminal settings
     ./modules/home/yakuake.nix
-
-      # Theme of everything
-      ./modules/home/stylix.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
