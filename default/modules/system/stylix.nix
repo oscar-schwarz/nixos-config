@@ -5,7 +5,6 @@ let
   themeName = "oceanicnext";
   # themeName = "sakura";
 in {
-
   stylix = {
     base16Scheme = "${pkgs.base16-schemes}/share/themes/${themeName}.yaml";
     image = ../../images/nms.jpg;
@@ -23,4 +22,8 @@ in {
       size = 25;
     };
   };
+
+  home-manager.sharedModules = [
+    ../../../global-modules/home/yakuake-theme.nix
+  ];
 }
