@@ -11,9 +11,11 @@
     # -- HOTKEYS --
     # custom
     hotkeys.commands = {
+      # I don't really use that, I just keep it here in case I forget how it's done.
+      # This could be really useful at some point.
       launch-konsole = {
         name = "Launch Konsole";
-        key = "Meta+Alt+Up";
+        key = "Meta+K";
         command = "konsole";
       };
     };

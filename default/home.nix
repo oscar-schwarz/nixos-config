@@ -1,6 +1,9 @@
 { config, nixosConfig, pkgs, inputs, lib,  ... }:
 
 let
+  username = "osi";
+  homeDir = "/home/" + username; 
+
   heygptWrapper = pkgs.writeShellApplication {
     name = "heygpt";
     text = ''
@@ -15,7 +18,7 @@ let
     name = "pass-fetch";
     text = ''
       REPO_URL="git@github.com:OsiPog/pass.git"
-      DEST_DIR="$HOME/.password-store"
+      DEST_DIR="${homeDir}/.password-store"
 
       if [ ! -d "$DEST_DIR" ]; then
         git clone "$REPO_URL" "$DEST_DIR"
@@ -40,8 +43,8 @@ in {
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "osi";
-  home.homeDirectory = "/home/osi";
+  home.username = username;
+  home.homeDirectory = homeDir;
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -68,6 +71,8 @@ in {
     };
   };
 
+
+  # Some encryption stuff
   programs.gpg.enable = true;
 
   services.gpg-agent = {
@@ -76,6 +81,21 @@ in {
     enableSshSupport = true;
     pinentryPackage = pkgs.pinentry-curses;
   };
+
+  programs.ssh.extraConfig = ''
+    Host github.com
+      HostName github.com
+      User git
+      IdentityFil ${homeDir}/.ssh/id_rsa_github_osipog
+      IdentitiesOnly yes
+
+    Host os.github.com
+      HostName github.com
+      User git
+      IdentityFile ${homeDir}/.ssh/id_rsa_github_os
+      IdentitiesOnly yes
+  '';
+
 
   # btop - task manager
   programs.btop = {
@@ -93,6 +113,12 @@ in {
   
   # better cd
   programs.zoxide.enable = true;
+
+  # enable nix-direnv
+  programs.direnv = {
+    enable = true;
+    silent = true;
+  };
 
   # git stuff
   programs.git = {
@@ -125,10 +151,10 @@ in {
           };
           options = {
             nixos = {
-                expr = "(builtins.getFlake \"/home/osi/nixos/config\").nixosConfigurations.default.options";
+                expr = "(builtins.getFlake \"${homeDir}/nixos/config\").nixosConfigurations.default.options";
             };
             home-manager = {
-                expr = "(builtins.getFlake \"/home/osi/nixos/config\").homeConfigurations.default.options";
+                expr = "(builtins.getFlake \"${homeDir}/nixos/config\").homeConfigurations.default.options";
             };
           };
         };

@@ -5,6 +5,10 @@
 { config, pkgs, inputs, lib, ... }:
 
 {
+  # Enable flakes
+  nix.settings.experimental-features = ["nix-command" "flakes"];
+
+  # Import system modules
   imports =
     [ # Include the results of the hardware scan.
       ../hosts/LENOVO_LNVNB161216.nix
@@ -31,26 +35,21 @@
     bat
   ];
 
-  # Enable flakes
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  # Allow some unfree packages
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "obsidian"
+    ];
 
   # Bootloader.
-  # boot.loader.systemd-boot.enable = true;
-  # boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.enable = true;
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable bluetooth
-  hardware.bluetooth.enable = true;
-
-  # enable nix-direnv
-  programs.direnv = {
-    enable = true;
-    silent = true;
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.users.osi = {
+    isNormalUser = true;
+    shell = pkgs.fish;
+    description = "Osi";
+    extraGroups = [ "networkmanager" "wheel" ];
   };
 
   home-manager = {
@@ -63,22 +62,14 @@
     backupFileExtension = "homeManagerBackupFileExtension";
   };
 
-  programs.ssh.extraConfig = ''
-    Host github.com
-      HostName github.com
-      User git
-      IdentityFile /home/osi/.ssh/id_rsa_github_osipog
-      IdentitiesOnly yes
-
-    Host os.github.com
-      HostName github.com
-      User git
-      IdentityFile /home/osi/.ssh/id_rsa_github_os
-      IdentitiesOnly yes
-  '';
+  # This needs to be enabled to be in NIX_PATH
+  programs.fish.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+
+  # Enable bluetooth
+  hardware.bluetooth.enable = true;
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
@@ -95,26 +86,6 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.osi = {
-    isNormalUser = true;
-    shell = pkgs.fish;
-    description = "Osi";
-    extraGroups = [ "networkmanager" "wheel" ];
-  };
-
-  # For nix path in the shell
-  programs.fish.enable = true;
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [
-      "obsidian"
-    ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
