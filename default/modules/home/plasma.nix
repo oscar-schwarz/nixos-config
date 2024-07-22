@@ -11,9 +11,9 @@
     # -- HOTKEYS --
     # custom
     hotkeys.commands = {
-      "launch-konsole" = {
+      launch-konsole = {
         name = "Launch Konsole";
-        key = "Meta+R+Up";
+        key = "Meta+K";
         command = "konsole";
       };
     };
@@ -31,11 +31,11 @@
     # low level config editing
     configFile = {
       # -- KWIN --
-      "kwinrc" = {
-        "Effect-windowview" = {
+      kwinrc = {
+        Effect-windowview = {
           "TouchBorderActivate" = "4";
         };
-        "Input" = {
+        Input = {
           "TabletMode" = "off";
         };
       };
@@ -43,16 +43,16 @@
       # -- SETTINGS --
       # Laptop touchpad settings
       # wayland
-      "kcminputrc" = {
+      kcminputrc = {
         "Libinput/1739/52856/MSFT0001:00 06CB:CE78 Touchpad" = {
           "ClickMethod" = "2";
           "NaturalScroll" = "true";
           "TapToClick" = "true";
           "DisableWhileTyping" = "false";
         };
-        "Mouse" = {
-          # Make sure the default cursor is used
-          "cursorTheme" = "default";
+        Mouse = {
+          # Make sure the default cursor is usedy
+          cursorTheme = "default";
         };
       };
       #  x11 version, dont use that
