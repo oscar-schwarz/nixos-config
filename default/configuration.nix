@@ -18,8 +18,6 @@
       ./modules/system/desktop.nix
       # language specific
       ./modules/system/locale.nix
-      # Theming
-      ./modules/system/stylix.nix
     ];
 
   # List packages installed in system profile

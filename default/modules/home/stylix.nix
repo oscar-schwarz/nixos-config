@@ -4,7 +4,12 @@ let
   # The base 16 colorscheme used, modify this to see a theme change!
   themeName = "oceanicnext";
 in {
+  imports = [
+    ../../../global-modules/home/yakuake-theme.nix
+  ];
+
   stylix = {
+    enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/${themeName}.yaml";
     image = ../../images/nms.jpg;
     polarity = "dark";
@@ -21,9 +26,4 @@ in {
       size = 25;
     };
   };
-
-  # Custom stylix based theming of other apps
-  home-manager.sharedModules = [ 
-    ../../../global-modules/home/yakuake-theme.nix
-  ];
 }
