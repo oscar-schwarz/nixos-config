@@ -42,6 +42,8 @@
           # Set them to 'none' because their defaults conflict with above shortcuts
           move-session-left = "none";
           move-session-right = "none";
+          
+          toggle-window-state = "F4";
         };
       };
 
@@ -57,13 +59,6 @@
         "X-KDE-StartupNotify" = "false";
       };
 
-    };
-
-    # Drowdown Key
-    shortcuts = {
-      yakuake = {
-        "toggle-window-state" = "F4";
-      };
     };
   };
 }
