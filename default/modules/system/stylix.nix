@@ -9,7 +9,6 @@ in {
     enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/${themeName}.yaml";
     image = ../../images/nms.jpg;
-    polarity = "dark";
     autoEnable = true;
 
     opacity = {
@@ -23,8 +22,4 @@ in {
       size = 25;
     };
   };
-
-  home-manager.sharedModules = [ 
-    ../../../global-modules/home/yakuake-theme.nix
-  ];
 }
