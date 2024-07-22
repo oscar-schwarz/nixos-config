@@ -13,7 +13,7 @@
     hotkeys.commands = {
       launch-konsole = {
         name = "Launch Konsole";
-        key = "Meta+K";
+        key = "Meta+Alt+Up";
         command = "konsole";
       };
     };
