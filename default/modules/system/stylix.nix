@@ -7,7 +7,7 @@ let
 in {
 
   stylix = {
-    enable = true;
+    enable = false;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/${themeName}.yaml";
     image = ../../images/nms.jpg;
     polarity = "dark";
