@@ -7,7 +7,7 @@ let
 
   # Function that takes a base16 color id (like 0A) and outputs a string with rgb values (like "129,89,199)
   rgbString = colorID:
-      lib.strings.concatStrings
+      builtins.concatStringsSep ","
         (map (x: config.lib.stylix.colors."${colorID}-${x}") ["rgb-r" "rgb-g" "rgb-b"]);
 in {
   imports = [

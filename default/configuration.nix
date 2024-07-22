@@ -110,9 +110,6 @@
   # For nix path in the shell
   programs.fish.enable = true;
 
-  # This is a mandatory option that has to be set, any other settings are in my stylix.nix
-  stylix.image = ./images/nms.jpg;
-
   # Allow unfree packages
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [

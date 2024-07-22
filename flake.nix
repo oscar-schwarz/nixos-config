@@ -13,7 +13,7 @@
 
     # Plasma manager a nice way to setup KDE declaratively
     plasma-manager = {
-      url = "github:pjones/plasma-manager/plasma-5";
+      url = "github:pjones/plasma-manager";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
