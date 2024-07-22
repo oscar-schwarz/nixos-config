@@ -186,9 +186,6 @@ in {
 
         # Go back to previous cwd
         cd "$PREV_PWD"
-
-        # Restart the plasmashell
-        silent-plasma-restart
       '';
       gptcommit = ''
         set message $(\
