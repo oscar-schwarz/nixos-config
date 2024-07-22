@@ -207,6 +207,7 @@ in {
 
       silent-plasma-restart = ''
         # restart plasmashell without any console output
+        echo "Restarting KDE..."
         plasmashell --replace >/dev/null 2>1 &
 
         # detach from terminal

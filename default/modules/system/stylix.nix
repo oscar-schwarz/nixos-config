@@ -2,7 +2,7 @@
 
 let
   # The base 16 colorscheme used, modify this to see a theme change!
-  themeName = "oceanicnext";
+  themeName = "brushtrees-dark";
   # themeName = "sakura";
 in {
   stylix = {
