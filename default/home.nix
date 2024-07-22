@@ -186,6 +186,9 @@ in {
 
         # Go back to previous cwd
         cd "$PREV_PWD"
+
+        # Restart the plasmashell
+        silent-plasma-restart
       '';
       gptcommit = ''
         set message $(\
@@ -200,6 +203,14 @@ in {
         )
 
         git commit -m """$message"""
+      '';
+
+      silent-plasma-restart = ''
+        # restart plasmashell without any console output
+        plasmashell --replace >/dev/null 2>1 &
+
+        # detach from terminal
+        disown
       '';
     };
   };
