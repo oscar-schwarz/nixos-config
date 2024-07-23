@@ -35,6 +35,7 @@
     bat
 
     usbutils
+    libusb
     python3
 
     android-tools
