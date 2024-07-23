@@ -13,7 +13,7 @@
       theme = "${pkgs.where-is-my-sddm-theme}";
       wayland = {
         enable = true;
-        # compositor = "kwin";
+        compositor = "kwin";
       };
     };
     defaultSession = "plasma";
