@@ -1,9 +1,9 @@
 { pkgs, lib, ... }:
 
 {
-	services.xserver.desktopManager = {
+	services.desktopManager = {
 		# Enable Desktop Environment.
-		plasma5.enable = true;
+		plasma6.enable = true;
 	};
 
   # Default should be wayland
@@ -15,6 +15,6 @@
         compositor = "kwin";
       };
     };
-    defaultSession = "plasmawayland";
+    defaultSession = "plasma";
   };
 }

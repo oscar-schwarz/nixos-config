@@ -34,12 +34,29 @@
     configFile = {
       # -- KWIN --
       kwinrc = {
-        Effect-windowview = {
-          "TouchBorderActivate" = "4";
-        };
+        # Deactivate this because this would falsely activate itself when laptop docked
         Input = {
           "TabletMode" = "off";
         };
+
+        # Configuring two virtual desktops
+        Desktops = {
+          Number = "2";
+        };
+
+        # --- DESKTOP EFFECTS ---
+
+        # When sliding between desktops there should be no gap between
+        Effect-slide = {
+          HorizontalGap = "0";
+        };
+
+
+        Effect-windowview = {
+          # Slide up from touchscreen bottom border to show all windows
+          "TouchBorderActivate" = "4";
+        };
+
       };
 
       # -- SETTINGS --
