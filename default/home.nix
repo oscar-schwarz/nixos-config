@@ -80,21 +80,6 @@ in {
     pinentryPackage = pkgs.pinentry-curses;
   };
 
-  programs.ssh.extraConfig = ''
-    Host github.com
-      HostName github.com
-      User git
-      IdentityFile ${homeDir}/.ssh/id_rsa_github_osipog
-      IdentitiesOnly yes
-
-    Host os.github.com
-      HostName github.com
-      User git
-      IdentityFile ${homeDir}/.ssh/id_rsa_github_os
-      IdentitiesOnly yes
-  '';
-
-
   # btop - task manager
   programs.btop = {
     enable = true;

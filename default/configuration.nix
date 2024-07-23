@@ -62,6 +62,21 @@
     backupFileExtension = "homeManagerBackupFileExtension";
   };
 
+  # Root programs need access to this info too
+  programs.ssh.extraConfig = ''
+    Host github.com
+      HostName github.com
+      User git
+      IdentityFile /home/osi/.ssh/id_rsa_github_osipog
+      IdentitiesOnly yes
+
+    Host os.github.com
+      HostName github.com
+      User git
+      IdentityFile /home/osi/.ssh/id_rsa_github_os
+      IdentitiesOnly yes
+  '';
+
   # This needs to be enabled to be in NIX_PATH
   programs.fish.enable = true;
 
