@@ -35,6 +35,8 @@
     bat
 
     android-tools
+
+    wineWowPackages.waylandFull
   ];
 
   # Allow some unfree packages
