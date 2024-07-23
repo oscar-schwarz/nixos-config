@@ -35,6 +35,7 @@
     bat
 
     usbutils
+    python3
 
     android-tools
 
