@@ -84,7 +84,7 @@ in {
     Host github.com
       HostName github.com
       User git
-      IdentityFil ${homeDir}/.ssh/id_rsa_github_osipog
+      IdentityFile ${homeDir}/.ssh/id_rsa_github_osipog
       IdentitiesOnly yes
 
     Host os.github.com
