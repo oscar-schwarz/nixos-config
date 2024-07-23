@@ -34,6 +34,8 @@
     tree
     bat
 
+    usbutils
+
     android-tools
 
     wineWowPackages.waylandFull
