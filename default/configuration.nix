@@ -33,6 +33,8 @@
     sops
     tree
     bat
+
+    android-tools
   ];
 
   # Allow some unfree packages
@@ -49,7 +51,7 @@
     isNormalUser = true;
     shell = pkgs.fish;
     description = "Osi";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "adbusers" ];
   };
 
   home-manager = {
@@ -85,6 +87,12 @@
 
   # Enable bluetooth
   hardware.bluetooth.enable = true;
+
+  programs.adb.enable = true;
+
+  services.udev.packages = [
+    pkgs.android-udev-rules
+  ];
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
