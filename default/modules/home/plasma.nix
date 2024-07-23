@@ -43,6 +43,12 @@
         Desktops = {
           Number = "2";
         };
+        
+        # Mouse should be sticking between screens
+        EdgeBarrier = {
+          CornerBarrier = "false";
+          EdgeBarrier = "0";
+        };
 
         # --- DESKTOP EFFECTS ---
 
