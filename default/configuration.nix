@@ -34,13 +34,6 @@
     tree
     bat
 
-    usbutils
-    libusb
-    python3
-    python312Packages.pip
-
-    android-tools
-
     wineWowPackages.waylandFull
   ];
 
