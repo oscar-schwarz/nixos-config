@@ -90,6 +90,9 @@
   # Enable bluetooth
   hardware.bluetooth.enable = true;
 
+  # Useful android stuff
+  virtualisation.waydroid.enable = true;
+
   programs.adb.enable = true;
 
   services.udev.packages = [
