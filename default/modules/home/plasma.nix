@@ -67,7 +67,6 @@
 
       # -- SETTINGS --
       # Laptop touchpad settings
-      # wayland
       kcminputrc = {
         "Libinput/1739/52856/MSFT0001:00 06CB:CE78 Touchpad" = {
           "ClickMethod" = "2";
@@ -95,6 +94,22 @@
       #     immutable = true;
       #   };
       # };
+
+      # Keyboard settings
+      kxbrc = {
+        Layout = {
+          Use = "true";
+          ResetOldOptions = "true";
+
+          # German QWERTY (physical) and US Colemak (emulated)
+          LayoutList = "de,us";
+          VariantList = ",colemak";
+
+          # Disable CAPS Lock (Who uses that anyway?)
+          # Alt+Space to toggle layouts
+          Options= "caps:none,grp:alt_space_toggle";          
+        };
+      };
 
       # -- LOOK AND FEEL --
       ksplashrc = {
