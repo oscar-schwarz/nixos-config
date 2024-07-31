@@ -107,7 +107,7 @@
 
           # Disable CAPS Lock (Who uses that anyway?)
           # Alt+Space to toggle layouts
-          Options= "caps:none,grp:alt_space_toggle";          
+          Options= "caps:backspace,grp:alt_space_toggle";          
         };
       };
 
