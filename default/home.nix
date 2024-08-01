@@ -56,7 +56,7 @@ in {
     obsidian # markdown note taking app
     spectacle # screenshot utility
 
-    wl-clipboard-rs # copy to clip board from terminal
+    wl-clipboard-rs # copy to clipboard from terminal
     
     pass-fetch # script for fetching password store repo
   ];
