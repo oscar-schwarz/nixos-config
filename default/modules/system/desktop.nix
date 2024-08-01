@@ -4,7 +4,9 @@ let
   sddmTheme = pkgs.where-is-my-sddm-theme.override {
     themeConfig.General = {
       hideCursor = "true";
-      backgroundFill = "#0A0A0A";
+      passwordFontSize= "48";
+      passwordInputWidth= "1";
+      passwordCharacter= "•";
     };
   };
 in {
