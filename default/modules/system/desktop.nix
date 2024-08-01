@@ -4,6 +4,7 @@ let
   sddmTheme = pkgs.where-is-my-sddm-theme.override {
     themeConfig.General = {
       hideCursor = "true";
+      backgroundFill = "#0A0A0A";
     };
   };
 in {
