@@ -1,12 +1,17 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, config, ... }:
 
 let
   sddmTheme = pkgs.where-is-my-sddm-theme.override {
-    themeConfig.General = {
+    themeConfig.General = with config.lib.stylix.colors; {
       hideCursor = "true";
       passwordFontSize= "48";
       passwordInputWidth= "1";
       passwordCharacter= "•";
+      
+      # Colors
+      backgroundFill = "#" + base00-hex;
+      basicTextColor = "#" + base05-hex;
+      passwordCursorColor = "#" + base0B-hex;
     };
   };
 in {
