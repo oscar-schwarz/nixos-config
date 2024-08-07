@@ -51,14 +51,15 @@ in {
   home.packages  = with pkgs; [
     signal-desktop # secure messaging
     yakuake # dropdown terminal
-    heygptWrapper # terminal gpt integration
     xournalpp # stylus note taking app
     obsidian # markdown note taking app
     spectacle # screenshot utility
 
     wl-clipboard-rs # copy to clipboard from terminal
     
+    # Scripts
     pass-fetch # script for fetching password store repo
+    heygptWrapper # terminal gpt integration
   ];
 
   # Password store
@@ -226,6 +227,8 @@ in {
         # detach from terminal
         disown
       '';
+
+      codium = "${lib.getExe pkgs.vscodium} --extensions-dir ~/.vscode-oss/extensions $argv";
     };
   };
 
