@@ -123,7 +123,11 @@ in {
   # code editor
   programs.vscode = {
     enable = true;
-    package = pkgs.vscodium;
+    package = pkgs.vscodium.override {
+      # VSCode has problems remembering where the extension dir is when multiple instances with different
+      # extensions are opened.
+      commandLineArgs = "--extensions-dir ~/.vscode-oss/extensions";
+    };
     userSettings = {
       "files.exclude" = {
         "**/.git" = false;
