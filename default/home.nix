@@ -29,6 +29,11 @@ let
     '';
   };
 
+  vscodiumWithExtParam = pkgs.writeShellApplication {
+    name = "codium";
+    text = ''${lib.getExe pkgs.vscodium} --extensions-dir ~/.vscode-oss/extensions "$@"'';
+  };
+
   vscodeExts = inputs.nix-vscode-extensions.extensions.x86_64-linux;
 in {
 
@@ -124,11 +129,16 @@ in {
   # code editor
   programs.vscode = {
     enable = true;
-    package = pkgs.vscodium.override {
-      # VSCode has problems remembering where the extension dir is when multiple instances with different
-      # extensions are opened.
-      commandLineArgs = "--extensions-dir ~/.vscode-oss/extensions";
-    };
+    package = (pkgs.vscodium.overrideAttrs (oldAttrs: {
+        postInstall = ''
+          mkdir -p $out/bin
+          cat > $out/bin/codium <<EOF
+          #!${pkgs.stdenv.shell}
+          exec ${lib.getExe pkgs.vscodium} --extensions-dir ~/.vscode-oss/extensions "\$@"
+          EOF
+          chmod +x $out/bin/codium
+        '';
+      }));
     userSettings = {
       "files.exclude" = {
         "**/.git" = false;
@@ -227,8 +237,6 @@ in {
         # detach from terminal
         disown
       '';
-
-      codium = "${lib.getExe pkgs.vscodium} --extensions-dir ~/.vscode-oss/extensions $argv";
     };
   };
 
