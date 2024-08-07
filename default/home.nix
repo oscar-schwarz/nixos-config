@@ -29,11 +29,6 @@ let
     '';
   };
 
-  vscodiumWithExtParam = pkgs.writeShellApplication {
-    name = "codium";
-    text = ''${lib.getExe pkgs.vscodium} --extensions-dir ~/.vscode-oss/extensions "$@"'';
-  };
-
   vscodeExts = inputs.nix-vscode-extensions.extensions.x86_64-linux;
 in {
 
@@ -130,7 +125,7 @@ in {
   programs.vscode = {
     enable = true;
     package = (pkgs.vscodium.overrideAttrs (oldAttrs: {
-        postInstall = ''
+        postFixup = oldAttrs.postFixup + ''
           mkdir -p $out/bin
           cat > $out/bin/codium <<EOF
           #!${pkgs.stdenv.shell}
