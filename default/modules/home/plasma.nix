@@ -57,10 +57,13 @@
           HorizontalGap = "0";
         };
 
-
         Effect-windowview = {
           # Slide up from touchscreen bottom border to show all windows
           "TouchBorderActivate" = "4";
+        };
+
+        Plugins = {
+          diminactiveEnabled = "true";
         };
 
       };

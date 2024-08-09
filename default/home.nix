@@ -124,16 +124,7 @@ in {
   # code editor
   programs.vscode = {
     enable = true;
-    package = (pkgs.vscodium.overrideAttrs (oldAttrs: {
-        postFixup = oldAttrs.postFixup + ''
-          mkdir -p $out/bin
-          cat > $out/bin/codium <<EOF
-          #!${pkgs.stdenv.shell}
-          exec ${lib.getExe pkgs.vscodium} --extensions-dir ~/.vscode-oss/extensions "\$@"
-          EOF
-          chmod +x $out/bin/codium
-        '';
-      }));
+    package = pkgs.vscodium;
     userSettings = {
       "files.exclude" = {
         "**/.git" = false;
