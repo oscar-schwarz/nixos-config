@@ -28,6 +28,9 @@
       "org.kde.spectacle.desktop" = {
         "RectangularRegionScreenShot" = "Meta+Shift+S";
       };
+      kcm_touchpad = {
+        "Toggle Touchpad" = "Meta+N";
+      };
     };
 
     # low level config editing
