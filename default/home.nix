@@ -121,6 +121,14 @@ in {
     };
   };
 
+  # nice cli git experience
+  programs.lazygit = {
+    enable = true;
+    settings = {
+      mouseEvents = false; # don't need no mouse
+    };
+  };
+
   # code editor
   programs.vscode = {
     enable = true;
