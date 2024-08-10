@@ -54,6 +54,7 @@ in {
     xournalpp # stylus note taking app
     obsidian # markdown note taking app
     spectacle # screenshot utility
+    libreoffice
 
     wl-clipboard-rs # copy to clipboard from terminal
     
