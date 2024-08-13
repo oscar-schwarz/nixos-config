@@ -83,7 +83,7 @@
     Host local.server
       HostName 192.168.178.65
       User user
-      IdentifyFile /home/osi/.ssh/id_server
+      IdentityFile /home/osi/.ssh/id_server
       IdentitiesOnly yes
   '';
 
