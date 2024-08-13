@@ -11,7 +11,7 @@
   # Import system modules
   imports =
     [ # Include the results of the hardware scan.
-      ../hosts/LENOVO_LNVNB161216.nix
+      ../../machines/LENOVO_LNVNB161216.nix
       # import home-manager
       inputs.home-manager.nixosModules.default
       # setup networks

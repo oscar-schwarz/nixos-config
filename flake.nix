@@ -49,7 +49,7 @@
         specialArgs = {inherit inputs;};
         modules = with inputs; [
           # Loading my configuration that loads all .nix files
-          ./hosts/configuration.nix
+          ./hosts/default/configuration.nix
 
           # Modules
           home-manager.nixosModules.default
