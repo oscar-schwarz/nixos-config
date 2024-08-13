@@ -10,6 +10,9 @@
       ../../machines/HP_250_G4_Notebook_PC.nix
     ];
 
+  # Enable flakes
+  nix.settings.experimental-features = ["nix-command" "flakes"];
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -61,14 +64,37 @@
   # Autologin with user
   services.getty.autologinUser = "user";
 
+  # Fishy shell
+  programs.fish = {
+    shellInit = "set fish_greeting";
+    enable = true;
+  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.user = {
-     isNormalUser = true;
-     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-  #   packages = with pkgs; [
-  #     firefox
-  #     tree
-  #   ];
+  users = {
+    defaultUserShell = pkgs.fish;
+    users = 
+    let
+      publicSshKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIONJE7lYiuiEMPYII3aFk3WBNeNeDN4YCFaKJ6pwYQtA user"; 
+    in {
+      root = {
+        isNormalUser = false;
+        openssh.authorizedKeys.keys = [
+          publicSshKey
+        ];
+      };
+      user = {
+        isNormalUser = true;
+        extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    #    packages = with pkgs; [
+    #      firefox
+    #      tree
+    #    ];
+        openssh.authorizedKeys.keys = [
+          publicSshKey
+        ];
+      };
+    };
   };
 
   # List packages installed in system profile. To search, run:
@@ -93,9 +119,7 @@
     enable = true;
     ports = [ 22 ];
     settings = {
-      #PasswordAuthentication = true;
-      #UseDns = true;
-      PermitRootLogin = "yes";
+      PasswordAuthentication = false;
     };
   };
 
