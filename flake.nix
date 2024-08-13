@@ -44,17 +44,24 @@
   };
 
   outputs = { self, nixpkgs, ... }@inputs: {
-    nixosConfigurations.default = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs;};
-      modules = with inputs; [
-        # Loading my configuration that loads all .nix files
-        ./default/configuration.nix
+    nixosConfigurations = { 
+      default = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs;};
+        modules = with inputs; [
+          # Loading my configuration that loads all .nix files
+          ./default/configuration.nix
 
-        # Modules
-        home-manager.nixosModules.default
-        stylix.nixosModules.stylix
-        flake-programs-sqlite.nixosModules.programs-sqlite
-      ];
+          # Modules
+          home-manager.nixosModules.default
+          stylix.nixosModules.stylix
+          flake-programs-sqlite.nixosModules.programs-sqlite
+        ];
+      };
+
+      server = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs;};
+        modules = [./default/configuration.nix];
+      };
     };
   };
 }
