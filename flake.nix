@@ -60,7 +60,7 @@
 
       server = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs;};
-        modules = [./default/configuration.nix];
+        modules = [./server/configuration.nix];
       };
     };
   };
