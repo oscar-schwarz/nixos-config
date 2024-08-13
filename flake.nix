@@ -49,7 +49,7 @@
         specialArgs = {inherit inputs;};
         modules = with inputs; [
           # Loading my configuration that loads all .nix files
-          ./default/configuration.nix
+          ./hosts/configuration.nix
 
           # Modules
           home-manager.nixosModules.default
@@ -60,7 +60,7 @@
 
       server = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs;};
-        modules = [./server/configuration.nix];
+        modules = [./hosts/server/configuration.nix];
       };
     };
   };
