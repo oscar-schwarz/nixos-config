@@ -79,6 +79,12 @@
       User git
       IdentityFile /home/osi/.ssh/id_rsa_github_os
       IdentitiesOnly yes
+
+    Host local.server
+      HostName 192.168.178.65
+      User user
+      IdentifyFile /home/osi/.ssh/id_server
+      IdentitiesOnly yes
   '';
 
   # This needs to be enabled to be in NIX_PATH
