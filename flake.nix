@@ -41,6 +41,8 @@
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    custom-udev-rules.url = "github:MalteT/custom-udev-rules";
   };
 
   outputs = { self, nixpkgs, ... }@inputs: {
@@ -55,6 +57,7 @@
           home-manager.nixosModules.default
           stylix.nixosModules.stylix
           flake-programs-sqlite.nixosModules.programs-sqlite
+          custom-udev-rules.nixosModule
         ];
       };
 
