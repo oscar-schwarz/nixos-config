@@ -31,6 +31,9 @@
       kcm_touchpad = {
         "Toggle Touchpad" = "Meta+N";
       };
+      yakuake = {
+        toggle-window-state = "Meta+Y,F4";
+      };
     };
 
     # low level config editing
