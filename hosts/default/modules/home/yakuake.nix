@@ -24,9 +24,9 @@
             fi
 
             if $ZOOM_IN; then
-              python -c "import pyautogui; pyautogui.scroll(-1)"
-            else
               python -c "import pyautogui; pyautogui.scroll(1)"
+            else
+              python -c "import pyautogui; pyautogui.scroll(-1)"
             fi
           '';
         };
