@@ -32,7 +32,7 @@
         "Toggle Touchpad" = "Meta+N";
       };
       yakuake = {
-        toggle-window-state = "Meta+Y,F4";
+        toggle-window-state = "Meta+Y";
       };
     };
 

@@ -4,8 +4,31 @@
   imports = [
     inputs.plasma-manager.homeManagerModules.plasma-manager
   ];
+  home.packages = [
+    (pkgs.writeShellApplication {
+      name = "zoom-yakuake";
+      text = ''
+        ZOOM_IN=''${1:-true}
+        IS_ACTIVE=$(qdbus org.kde.yakuake /yakuake/MainWindow_1 org.qtproject.Qt.QWidget.isActiveWindow)
 
+        if ! $IS_ACTIVE; then
+          exit
+        fi
+
+        SID=$(qdbus org.kde.yakuake /yakuake/sessions org.kde.yakuake.activeSessionId)
+
+        ${pkgs.libnotify}/bin/notify-send "$SID $ZOOM_IN"
+      '';
+    })
+  ];
   programs.plasma = {
+    hotkeys.commands = {
+      zoom-in-yakuake = {
+        name = "Yakuake Zoom In";
+        key = "Ctrl+Num++";
+        command = "zoom-yakuake";
+      };
+    };
     configFile = {
       # -- yakuake --
       yakuakerc = {
@@ -42,7 +65,7 @@
           move-session-left = "none";
           move-session-right = "none";
           
-          toggle-window-state = "Meta+T";
+          toggle-window-state = "Meta+Y";
         };
       };
 
