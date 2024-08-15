@@ -41,7 +41,7 @@
       yakuake-zoom-in = {
         name = "Yakuake Zoom In";
         key = "Ctrl++";
-        command = lib.getExe zoomYakuake;
+        command = "konsole";
       };
     };
     configFile = {
