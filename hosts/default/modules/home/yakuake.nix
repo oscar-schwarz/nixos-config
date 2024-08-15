@@ -6,7 +6,40 @@
   ];
 
   programs.plasma = {
+    hotkeys.commands =
+      let
+        zoomYakuake = pkgs.writeShellApplication {
+          runtimeInputs = with pkgs; [
+            python3
+            python3Packages.pyautogui
+          ];
+          name = "zoom-yakuake";
+          text = ''
+            #! ${lib.getExe pkgs.python3}
 
+            import pyautogui
+
+
+
+            # ZOOM_IN=''${1:-true}
+            # IS_ACTIVE=$(qdbus org.kde.yakuake /yakuake/MainWindow_1 org.qtproject.Qt.QWidget.isActiveWindow)
+
+            # if ! $IS_ACTIVE; then; exit; fi
+
+            # if $ZOOM_IN; then
+
+            # else
+
+            # fi
+          '';
+        };
+      in  {
+      yakuake-zoom-in = {
+        name = "Yakuake Zoom In";
+        key = "Ctrl++";
+        command = lib.getExe zoomYakuake;
+      };
+    };
     configFile = {
       # -- yakuake --
       yakuakerc = {
