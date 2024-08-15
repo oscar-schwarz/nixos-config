@@ -31,7 +31,7 @@
           '';
         };
       in  {
-      yakuake-zoom-in = {
+      zoom-in-yakuake = {
         name = "Yakuake Zoom In";
         key = "Ctrl+Num++";
         command = lib.getExe zoomYakuake;
