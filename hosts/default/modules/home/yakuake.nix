@@ -16,8 +16,9 @@
         fi
 
         SID=$(qdbus org.kde.yakuake /yakuake/sessions org.kde.yakuake.activeSessionId)
+        TID=$(qdbus org.kde.yakuake /yakuake/sessions org.kde.yakuake.activeTerminalId)
 
-        ${pkgs.libnotify}/bin/notify-send "$SID $ZOOM_IN"
+        ${pkgs.libnotify}/bin/notify-send "$SID $TID $ZOOM_IN"
       '';
     })
   ];
