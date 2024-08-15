@@ -6,37 +6,6 @@
   ];
 
   programs.plasma = {
-    hotkeys.commands =
-      let
-        zoomYakuake = pkgs.writeShellApplication {
-          runtimeInputs = with pkgs; [
-            (python3.withPackages (python-pkgs: with python3Packages; [
-              pyautogui
-            ]))
-          ];
-          name = "zoom-yakuake";
-          text = ''
-            ZOOM_IN=''${1:-true}
-            IS_ACTIVE=$(qdbus org.kde.yakuake /yakuake/MainWindow_1 org.qtproject.Qt.QWidget.isActiveWindow)
-
-            if ! $IS_ACTIVE; then
-              exit
-            fi
-
-            if $ZOOM_IN; then
-              python -c "import pyautogui; pyautogui.scroll(1)"
-            else
-              python -c "import pyautogui; pyautogui.scroll(-1)"
-            fi
-          '';
-        };
-      in  {
-      zoom-in-yakuake = {
-        name = "Yakuake Zoom In";
-        key = "Ctrl+Num++";
-        command = lib.getExe zoomYakuake;
-      };
-    };
     configFile = {
       # -- yakuake --
       yakuakerc = {
@@ -73,7 +42,7 @@
           move-session-left = "none";
           move-session-right = "none";
           
-          toggle-window-state = "F4";
+          toggle-window-state = "Meta+T";
         };
       };
 
@@ -88,7 +57,6 @@
         "X-DBUS-StartupType" = "Unique";
         "X-KDE-StartupNotify" = "false";
       };
-
     };
   };
 }
