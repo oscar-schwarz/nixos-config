@@ -8,18 +8,11 @@
   programs.plasma = {
     hotkeys.commands =
       let
-        pythonZoomIn = pkgs.writeText "" ''
-          import pyautogui
-          pyautogui.scroll(1)     
-        '';
-        pythonZoomOut = pkgs.writeText "" ''
-          import pyautogui
-          pyautogui.scroll(-1)     
-        '';
         zoomYakuake = pkgs.writeShellApplication {
           runtimeInputs = with pkgs; [
-            python3
-            python3Packages.pyautogui
+            (python3.withPackages (python-pkgs: with python3Packages; [
+              pyautogui
+            ]))
           ];
           name = "zoom-yakuake";
           text = ''
@@ -31,9 +24,9 @@
             fi
 
             if $ZOOM_IN; then
-              python ${pythonZoomIn}
+              python "import pyautogui; pyautogui.scroll(-1)"
             else
-              python ${pythonZoomOut}
+              python "import pyautogui; pyautogui.scroll(1)"
             fi
           '';
         };
