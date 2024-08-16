@@ -4,32 +4,8 @@
   imports = [
     inputs.plasma-manager.homeManagerModules.plasma-manager
   ];
-  home.packages = [
-    (pkgs.writeShellApplication {
-      name = "zoom-yakuake";
-      text = ''
-        ZOOM_IN=''${1:-true}
-        IS_ACTIVE=$(qdbus org.kde.yakuake /yakuake/MainWindow_1 org.qtproject.Qt.QWidget.isActiveWindow)
 
-        if ! $IS_ACTIVE; then
-          exit
-        fi
-
-        SID=$(qdbus org.kde.yakuake /yakuake/sessions org.kde.yakuake.activeSessionId)
-        TID=$(qdbus org.kde.yakuake /yakuake/sessions org.kde.yakuake.activeTerminalId)
-
-        ${pkgs.libnotify}/bin/notify-send "$SID $TID $ZOOM_IN"
-      '';
-    })
-  ];
   programs.plasma = {
-    hotkeys.commands = {
-      zoom-in-yakuake = {
-        name = "Yakuake Zoom In";
-        key = "Ctrl+Num++";
-        command = "zoom-yakuake";
-      };
-    };
     configFile = {
       # -- yakuake --
       yakuakerc = {
@@ -40,8 +16,8 @@
           KeepAbove = "false";
           # don't close when focus lost 
           KeepOpen = "true";
-          # double F4 feels a lot better for some reason
-          ToggleToFocus = "false";
+
+          ToggleToFocus = "true";
 
           Height = "100";
           Width = "100";
