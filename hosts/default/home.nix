@@ -55,6 +55,7 @@ in {
     obsidian # markdown note taking app
     spectacle # screenshot utility
     libreoffice
+    chromium
 
     wl-clipboard-rs # copy to clipboard from terminal
     
