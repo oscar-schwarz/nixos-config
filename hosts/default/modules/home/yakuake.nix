@@ -17,7 +17,7 @@
           # don't close when focus lost 
           KeepOpen = "true";
 
-          ToggleToFocus = "true";
+          ToggleToFocus = "false";
 
           Height = "100";
           Width = "100";
