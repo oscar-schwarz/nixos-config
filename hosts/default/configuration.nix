@@ -85,13 +85,7 @@
       User user
       IdentityFile /home/osi/.ssh/id_server
       IdentitiesOnly yes
-
-    Host remote6.server
-      HostName 2001:9e8:e95:4400:653f:a864:9821:d111
-      User user
-      IdentityFile /home/osi/.ssh/id_server
-      IdentitiesOnly yes
-  '';
+'';
 
   # This needs to be enabled to be in NIX_PATH
   programs.fish.enable = true;

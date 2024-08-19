@@ -157,6 +157,12 @@ in {
         };
       };
     };
+    keybindings = [
+      {
+        key = "ctrl+shift+0";
+        command = "workbench.action.splitEditorDown";
+      }
+    ];
     extensions = with vscodeExts.vscode-marketplace; with vscodeExts.open-vsx-release; [
       jnoortheen.nix-ide
       davidlgoldberg.jumpy2
