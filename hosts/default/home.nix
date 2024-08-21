@@ -59,7 +59,7 @@ in {
     
     # Tools
     wl-clipboard-rs # copy to clipboard from terminal
-    libsForQt5.polonium
+    #libsForQt5.polonium
 
     # Scripts
     pass-fetch # script for fetching password store repo
