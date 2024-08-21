@@ -136,7 +136,12 @@ in {
     enable = true;
     package = pkgs.vscodium;
     userSettings = {
-      "explorer.autoReveal" = false; # hide sidebar by default
+      # zen mode settings
+      "zenMode.restore" = true;
+      "zenMode.hideStatusBar" = false;
+      "zenMode.hideLineNumbers" = false;
+      "zenMode.fullScreen" = false;
+
       "window.menuBarVisibility" = "toggle"; # hide menu bar unless alt is pressed
       "files.exclude" = {
         "**/.git" = false;
