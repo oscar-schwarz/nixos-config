@@ -256,6 +256,10 @@ in {
     };
   };
 
+  programs.kitty = {
+    enable = true;
+  };
+
   # -- DANGER ZONE -- 
   # maybe I should not change those values
 
