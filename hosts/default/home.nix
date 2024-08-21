@@ -56,9 +56,11 @@ in {
     spectacle # screenshot utility
     libreoffice
     chromium
-
-    wl-clipboard-rs # copy to clipboard from terminal
     
+    # Tools
+    wl-clipboard-rs # copy to clipboard from terminal
+    libsForQt5.polonium
+
     # Scripts
     pass-fetch # script for fetching password store repo
     heygptWrapper # terminal gpt integration
