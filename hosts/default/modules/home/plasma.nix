@@ -74,6 +74,23 @@
 
       };
 
+      kwinrulesrc = let
+       rules = {
+        no-titlebar = {
+          Description = "Hide the title bar on all windows";
+          noborder = "true";
+          noborderrule = "3";
+          wmclass = ".*";
+          wmclassmatch = "3";
+        };
+       };
+      in {
+        General = let names = builtins.attrNames rules; in {
+          count = builtins.length names;
+          rules = builtins.concatStringsSep "," names;
+        };
+      } // rules;
+
       # -- SETTINGS --
       # Laptop touchpad settings
       kcminputrc = {
