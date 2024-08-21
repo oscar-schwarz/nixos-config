@@ -1,4 +1,4 @@
-{ config, nixosConfig, pkgs, inputs, lib,  ... }:
+{ nixosConfig, pkgs, inputs, lib,  ... }:
 
 let
   username = "osi";
@@ -58,8 +58,7 @@ in {
     chromium
     
     # Tools
-    wl-clipboard-rs # copy to clipboard from terminal
-    #libsForQt5.polonium
+    wl-clipboard-rs # copy to clipboard from terminal yy
 
     # Scripts
     pass-fetch # script for fetching password store repo
@@ -138,6 +137,9 @@ in {
     enable = true;
     package = pkgs.vscodium;
     userSettings = {
+      # nah dont need that
+      "window.commandCenter" = false;
+
       # zen mode settings
       "zenMode.restore" = true;
       "zenMode.hideStatusBar" = false;
