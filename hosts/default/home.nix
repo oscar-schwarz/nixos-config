@@ -137,8 +137,9 @@ in {
     enable = true;
     package = pkgs.vscodium;
     userSettings = {
-      # nah dont need that
+      # distracting extra windows turned off
       "window.commandCenter" = false;
+      "workbench.layoutControl.enabled" = false;
 
       # zen mode settings
       "zenMode.restore" = true;
@@ -258,6 +259,29 @@ in {
 
   programs.kitty = {
     enable = true;
+  };
+
+  wayland.windowManager.hyprland = {
+    enable = true;
+    settings = let
+      directions = [ "u" "d" "l" "r" ];
+
+      arrowsByDirection = {
+        u = "Up";
+        d = "Down";
+        l = "Left";
+        r = "Right";
+      };
+
+      perDirection = f: builtins.map (x: f x (arrowsByDirection."${x}")) directions;  
+    in {
+      bind = 
+      (perDirection (dir: arrow: "SUPER, ${arrow}, movefocus, ${dir}")) ++
+      [
+        "SUPER, N, exec, kitty"
+        "ALT, F4, killactive"
+      ];
+    };
   };
 
   # -- DANGER ZONE -- 
