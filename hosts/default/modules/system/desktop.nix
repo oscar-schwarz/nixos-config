@@ -16,6 +16,9 @@ let
   };
 in {
 
+  programs.hyprland.enable = true; 
+
+  
 	services.desktopManager = {
 		# Enable Desktop Environment.
 		plasma6.enable = true;
