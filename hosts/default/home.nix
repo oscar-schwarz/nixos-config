@@ -58,8 +58,8 @@ in {
     chromium
     
     # Tools
-    wl-clipboard-rs # copy to clipboard from terminal yy
-
+    wl-clipboard-rs # copy to clipboard from terminal
+    
     # Scripts
     pass-fetch # script for fetching password store repo
     heygptWrapper # terminal gpt integration
