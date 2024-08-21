@@ -136,6 +136,7 @@ in {
     enable = true;
     package = pkgs.vscodium;
     userSettings = {
+      "workbench.activityBar.visible" = "false"; # hide sidebar by default
       "window.menuBarVisibility" = "toggle"; # hide menu bar unless alt is pressed
       "files.exclude" = {
         "**/.git" = false;
