@@ -153,9 +153,9 @@
         "Containments/2/Applets/5/Configuration/General" = {
           launchers = 
              "applications:firefox.desktop" # Firefox, preferred://browser can have unexpected results when multiple are installed
-          + ",applications:chromium.desktop" # Chromium
+          + ",applications:chromium-browser.desktop" # Chromium
           + ",applications:codium.desktop" # Codium
-          + ",applications:konsole.desktop"; # Terminal: konsole
+          + ",applications:org.kde.konsole.desktop"; # Terminal: konsole
           immutability = "1";
         };
         # Date display
