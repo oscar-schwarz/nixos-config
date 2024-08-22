@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, config, ... }:
 
 let
   sddmTheme = pkgs.where-is-my-sddm-theme.override {

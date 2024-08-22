@@ -146,6 +146,9 @@ in {
       "zenMode.hideStatusBar" = false;
       "zenMode.hideLineNumbers" = false;
       "zenMode.fullScreen" = false;
+      "zenMode.centerLayout" = false;
+
+      "php.debug.executablePath" = lib.getExe pkgs.php83;
 
       "window.menuBarVisibility" = "toggle"; # hide menu bar unless alt is pressed
       "files.exclude" = {
@@ -160,10 +163,10 @@ in {
           };
           options = {
             nixos = {
-                expr = "(builtins.getFlake \"${homeDir}/nixos/config\").nixosConfigurations.default.options";
+                expr = "(builtins.getFlake \"${homeDir}/nixos\").nixosConfigurations.default.options";
             };
             home-manager = {
-                expr = "(builtins.getFlake \"${homeDir}/nixos/config\").homeConfigurations.default.options";
+                expr = "(builtins.getFlake \"${homeDir}/nixos\").homeConfigurations.default.options";
             };
           };
         };
@@ -176,8 +179,10 @@ in {
       }
     ];
     extensions = with vscodeExts.vscode-marketplace; with vscodeExts.open-vsx-release; [
+      vue.volar 
       jnoortheen.nix-ide
       davidlgoldberg.jumpy2
+      xdebug.php-debug
     ];
   };
 
@@ -204,8 +209,6 @@ in {
         ${lib.getExe heygptWrapper} --model "gpt-4o" """$argv""" | ${lib.getExe pkgs.glow}
       '';
       rebuild = ''
-
-
         # Delete all backup files
         find ~ -type f -name "*.homeManagerBackupFileExtension" -delete 2>/dev/null
 
@@ -217,10 +220,10 @@ in {
 
         # add all new files to git, so that they are seen by nixos
         set PREV_PWD "$PWD"
-        cd ~/nixos/config
+        cd ~/nixos
         git add *
 
-        sudo nixos-rebuild --flake ~/nixos/config#default $argv
+        sudo nixos-rebuild --flake ~/nixos#default $argv
 
         # only commit if succeeded
         if test $status -eq 0
