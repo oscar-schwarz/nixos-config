@@ -9,6 +9,11 @@
     enable = true;
     settings = {
 
+      input = {
+        kb_layout = "us,de";
+        kb_variant = "colemak,";
+      };
+
       "$meta" = "SUPER";
 
       bind = let
