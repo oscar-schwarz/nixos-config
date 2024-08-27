@@ -22,10 +22,10 @@
   # xserver keymap
   services.xserver = {
     # Configure keymap in X11.
-		xkb.layout = "de";
-		xkb.variant = "nodeadkeys";
+		xkb.layout = "us";
+		xkb.variant = "colemak";
   };
 
   # Configure console keymap
-  console.keyMap = "de-latin1-nodeadkeys";
+  console.keyMap = "colemak";
 }
