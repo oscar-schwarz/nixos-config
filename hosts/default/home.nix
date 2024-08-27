@@ -39,6 +39,9 @@ in {
 
     # Dropdown terminal settings
     ./modules/home/yakuake.nix
+
+    # All hyprland options (a lot of them)
+    ./modules/home/hyprland.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -213,7 +216,7 @@ in {
         find ~ -type f -name "*.homeManagerBackupFileExtension" -delete 2>/dev/null
 
         # No VSCodium, these plugins are NOT obsolete!
-        if [ -e ~/.vscode-oss/extensions/.obsolete ]; then
+        if -e ~/.vscode-oss/extensions/.obsolete y
           rm -f ~/.vscode-oss/extensions/.obsolete
           rm -f ~/.vscode-oss/extensions/extensions.json
         end
@@ -257,33 +260,6 @@ in {
         # detach from terminal
         disown
       '';
-    };
-  };
-
-  programs.kitty = {
-    enable = true;
-  };
-
-  wayland.windowManager.hyprland = {
-    enable = true;
-    settings = let
-      directions = [ "u" "d" "l" "r" ];
-
-      arrowsByDirection = {
-        u = "Up";
-        d = "Down";
-        l = "Left";
-        r = "Right";
-      };
-
-      perDirection = f: builtins.map (x: f x (arrowsByDirection."${x}")) directions;  
-    in {
-      bind = 
-      (perDirection (dir: arrow: "SUPER, ${arrow}, movefocus, ${dir}")) ++
-      [
-        "SUPER, N, exec, kitty"
-        "ALT, F4, killactive"
-      ];
     };
   };
 

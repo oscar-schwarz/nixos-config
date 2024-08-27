@@ -136,9 +136,9 @@
 
               # run vite (This is listening to CTRL+C)
               if $DEBUG; then
-                run-in-sail npm run dev -- --debug
+                npm run dev -- --debug
               else
-                run-in-sail npm run dev
+                npm run dev
               fi
 
 
@@ -300,10 +300,11 @@
             # Nushell script to interact with application api
             (callPackage "${inputs.malte}/pkgs/api.nix" {})
 
-            # You probably won't need these packages because 'env-up' should deal with them but here you go anyway
+            # You probably won't need these packages because 'env-up' should deal with them
             docker
             git
             pre-commit
+            nodejs
             php83Packages.composer
           ];
 
