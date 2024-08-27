@@ -143,10 +143,11 @@ in {
       # distracting extra windows turned off
       "window.commandCenter" = false;
       "workbench.layoutControl.enabled" = false;
+      "workbench.editor.showTabs" = false;
 
       # zen mode settings
       "zenMode.restore" = true;
-      "zenMode.hideStatusBar" = false;
+      "zenMode.hideStatusBar" = true;
       "zenMode.hideLineNumbers" = false;
       "zenMode.fullScreen" = false;
       "zenMode.centerLayout" = false;
@@ -214,12 +215,6 @@ in {
       rebuild = ''
         # Delete all backup files
         find ~ -type f -name "*.homeManagerBackupFileExtension" -delete 2>/dev/null
-
-        # No VSCodium, these plugins are NOT obsolete!
-        if test -f ~/.vscode-oss/extensions/.obsolete
-          rm -f ~/.vscode-oss/extensions/.obsolete
-          rm -f ~/.vscode-oss/extensions/extensions.json
-        end
 
         # add all new files to git, so that they are seen by nixos
         set PREV_PWD "$PWD"
