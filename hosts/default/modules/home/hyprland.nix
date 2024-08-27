@@ -5,14 +5,6 @@
     enable = true;
   };
 
-  services.hyprpaper = {
-    enable = true;
-    settings = {
-      preload = "../../images/nms.jpg";
-      wallpaper = ", ../../images/nms.jpg";
-    };
-  };
-
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
