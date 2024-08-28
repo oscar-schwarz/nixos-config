@@ -1,4 +1,4 @@
-{ nixosConfig, pkgs, inputs, lib,  ... }:
+{ nixosConfig, pkgs, lib, ... }:
 
 let
   username = "osi";
@@ -28,8 +28,6 @@ let
       fi
     '';
   };
-
-  vscodeExts = inputs.nix-vscode-extensions.extensions.x86_64-linux;
 in {
 
   # Import modules
@@ -42,6 +40,12 @@ in {
 
     # All hyprland options (a lot of them)
     ./modules/home/hyprland.nix
+
+    # VSCodium setup
+    ./modules/home/vscode.nix
+
+    # Shell
+    ./modules/home/fish.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -132,141 +136,6 @@ in {
     enable = true;
     settings = {
       mouseEvents = false; # don't need no mouse
-    };
-  };
-
-  # code editor
-  programs.vscode = {
-    enable = true;
-    package = pkgs.vscodium;
-    userSettings = {
-      # extra stuff turned off
-      "window.commandCenter" = false;
-      "workbench.layoutControl.enabled" = false;
-      "workbench.editor.showTabs" = "none";
-      "window.menuBarVisibility" = "toggle"; # hide menu bar unless alt is pressed
-
-      # minimap
-      "editor.minimap.maxColumn" = 100;
-      "editor.minimap.showSlider" = "always";
-      "editor.minimap.renderCharacters" = false;
-
-      # zen mode settings
-      "zenMode.restore" = true;
-      "zenMode.hideStatusBar" = true;
-      "zenMode.showTabs" = "none";
-      "zenMode.hideLineNumbers" = false;
-      "zenMode.fullScreen" = false;
-      "zenMode.centerLayout" = false;
-
-      "php.debug.executablePath" = lib.getExe pkgs.php83;
-
-      "files.exclude" = {
-        "**/.git" = false;
-      };
-      "nix.enableLanguageServer" = true;
-      "nix.serverPath" = "${lib.getExe pkgs.nixd}";
-      "nix.serverSettings" = {
-        nixd =  {
-          formatting = {
-            command = ["${lib.getExe pkgs.nixpkgs-fmt}"];
-          };
-          options = {
-            nixos = {
-                expr = "(builtins.getFlake \"${homeDir}/nixos\").nixosConfigurations.default.options";
-            };
-            home-manager = {
-                expr = "(builtins.getFlake \"${homeDir}/nixos\").homeConfigurations.default.options";
-            };
-          };
-        };
-      };
-    };
-    keybindings = [
-      {
-        key = "ctrl+shift+0";
-        command = "workbench.action.splitEditorDown";
-      }
-    ];
-    extensions = with vscodeExts.vscode-marketplace; with vscodeExts.open-vsx-release; [
-      vue.volar 
-      jnoortheen.nix-ide
-      davidlgoldberg.jumpy2
-      xdebug.php-debug
-    ];
-  };
-
-  # terminal that makes me wet
-  programs.fish = {
-    enable = true;
-    interactiveShellInit = ''
-      set fish_greeting
-    '';
-    plugins = [
-      # A nice theme
-      {
-        name = "eclm";
-        src = pkgs.fetchFromGitHub {
-          owner = "oh-my-fish";
-          repo = "theme-eclm";
-          rev = "185c84a41947142d75c68da9bc6c59bcd32757e7";
-          sha256 = "sha256-OBku4wwMROu3HQXkaM26qhL0SIEtz8ShypuLcpbxp78=";
-        };
-      }
-    ];
-    functions = {
-      termgpt = ''
-        ${lib.getExe heygptWrapper} --model "gpt-4o" """$argv""" | ${lib.getExe pkgs.glow}
-      '';
-      rebuild = ''
-        # Delete all backup files
-        find ~ -type f -name "*.homeManagerBackupFileExtension" -delete 2>/dev/null
-        
-        # No VSCodium, these plugins are NOT obsolete!
-        if test -f ~/.vscode-oss/extensions/.obsolete
-          rm -f ~/.vscode-oss/extensions/.obsolete
-          rm -f ~/.vscode-oss/extensions/extensions.json
-        end
-        
-        # add all new files to git, so that they are seen by nixos
-        set PREV_PWD "$PWD"
-        cd ~/nixos
-        git add *
-
-        sudo nixos-rebuild --flake ~/nixos#default $argv
-
-        # only commit if succeeded
-        if test $status -eq 0
-          # commit all changes
-          gptcommit
-        end
-
-        # Go back to previous cwd
-        cd "$PREV_PWD"
-      '';
-      gptcommit = ''
-        set message $(\
-          heygpt --model "gpt-4o" \
-            --system="You are a git commit generator. When given a certain diff you will reply with \
-            ONLY ONE commit message following the conventional commits specification. Make sure to use scopes. \
-            The allowed commit types are feat, fix, chore and refactor. \
-            No Markdown, no codeblocks just a commit message. I REPEAT: No codeblocks and allowed commit types \
-            are feat, fix, chore and refactor!" \
-            --temperature 0.1 \
-            """$(git diff --staged)"""
-        )
-
-        git commit -m """$message"""
-      '';
-
-      silent-plasma-restart = ''
-        # restart plasmashell without any console output
-        echo "Restarting KDE..."
-        plasmashell --replace >/dev/null 2>1 &
-
-        # detach from terminal
-        disown
-      '';
     };
   };
 
