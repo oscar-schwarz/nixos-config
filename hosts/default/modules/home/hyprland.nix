@@ -24,6 +24,13 @@
       monitor = [
         "eDP-1,preferred,auto,1"
         "desc:DZX EVP-304 000000000000, preferred, auto, 1, transform, 3"
+
+        "desc:LG Electronics 27EA53 312NDNU32431, preferred, auto, 1, transform, 1"
+      ];
+
+      bindl = [
+        '', switch:off:Lid Switch, exec, hyprctl keyword monitor "eDP-1"''
+        '', switch:on:Lid Switch, exec, hyprctl keyword monitor "eDP-1, disable"''
       ];
 
       bezier = [
@@ -73,6 +80,8 @@
         # window management
         "$meta, W, killactive"
         "$meta, M, fullscreen"
+        "$meta_CTRL, R, workspace, -1"
+        "$meta_CTRL, T, workspace, +1"
       ];
     };
   };

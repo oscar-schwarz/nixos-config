@@ -140,21 +140,27 @@ in {
     enable = true;
     package = pkgs.vscodium;
     userSettings = {
-      # distracting extra windows turned off
+      # extra stuff turned off
       "window.commandCenter" = false;
       "workbench.layoutControl.enabled" = false;
-      "workbench.editor.showTabs" = false;
+      "workbench.editor.showTabs" = "none";
+      "window.menuBarVisibility" = "toggle"; # hide menu bar unless alt is pressed
+
+      # minimap
+      "editor.minimap.maxColumn" = 100;
+      "editor.minimap.showSlider" = "always";
+      "editor.minimap.renderCharacters" = false;
 
       # zen mode settings
       "zenMode.restore" = true;
       "zenMode.hideStatusBar" = true;
+      "zenMode.showTabs" = "none";
       "zenMode.hideLineNumbers" = false;
       "zenMode.fullScreen" = false;
       "zenMode.centerLayout" = false;
 
       "php.debug.executablePath" = lib.getExe pkgs.php83;
 
-      "window.menuBarVisibility" = "toggle"; # hide menu bar unless alt is pressed
       "files.exclude" = {
         "**/.git" = false;
       };

@@ -39,6 +39,11 @@
     wineWowPackages.waylandFull
   ];
 
+  environment.variables = { 
+    # Fix for electron apps to use wayland
+    ELECTRON_OZONE_PLATFORM_HINT = "auto";
+  };
+
   # Allow some unfree packages
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
