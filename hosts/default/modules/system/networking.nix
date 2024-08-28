@@ -1,13 +1,10 @@
-{ config, pkgs, ...}:
+{ ... }:
 
 {
   networking = {
-    hostName = "nixos"; # Define your hostname.
+    hostName = "biome-fest";
     networkmanager = {
       enable = true;
-      ensureProfiles.profiles = {
-        
-      };
     };
 
     firewall = {
