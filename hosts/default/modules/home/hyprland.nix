@@ -41,8 +41,9 @@
       ];
 
       input = {
-        kb_layout = "us,de";
-        kb_variant = "colemak,";
+        kb_layout = "us,us";
+        kb_variant = "colemak,colemak";
+        kb_options = ",altwin:swap_alt_win";
       };
 
       "$meta" = "SUPER";
