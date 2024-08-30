@@ -63,6 +63,7 @@ in {
     spectacle # screenshot utility
     libreoffice
     chromium
+    ncpamixer # Pulse Audio mixer utility
     
     # Tools
     wl-clipboard-rs # copy to clipboard from terminal

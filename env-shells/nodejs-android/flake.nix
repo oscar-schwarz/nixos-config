@@ -97,30 +97,6 @@
         nodejs = pkgs.nodejs_20;
         chromium = pkgs.ungoogled-chromium;
 
-
-        # VSCodium
-        # Sets vscodium as the VSCode package and includes extensions
-        vscodiumWithExtensions = pkgs.vscode-with-extensions.override {
-          vscode = pkgs.vscodium;
-          vscodeExtensions =
-          let
-            exts = inputs.nix-vscode-extensions.extensions.${system};
-          in [
-	          
-            exts.vscode-marketplace.davidlgoldberg.jumpy2
-          ];
-        };
-
-        # VSCodium user settings
-        vscodeUserSettings = {
-          "workbench.colorTheme" = "Solarized Dark";
-          "files.exclude" = {
-            "**/.git" = false;
-          };
-          "git.confirmSync" = false;
-        };
-
-
         # Useful scripts
         shellScripts = [
 
@@ -202,8 +178,6 @@
           buildInputs =
             shellScripts ++
           [
-            vscodiumWithExtensions
-
             # You probably won't need these packages because 'env-up' should deal with them but here you go anyway
             nodejs
             chromium
@@ -214,10 +188,6 @@
           # Generate necessary files and create symlinks to them
           shellHook = ''
             echo "Entering Nuxt Environment"
-
-            # VSCodium user settings
-            mkdir .vscode -p
-            ln -fs ${writeJson vscodeUserSettings} .vscode/settings.json
 
             # Git exclude
             ln -fs "${writeList gitConfig.exclude}" .git/info/exclude
