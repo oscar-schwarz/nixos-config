@@ -5,6 +5,7 @@
   programs.fish = {
     enable = true;
     interactiveShellInit = ''
+      # disable the greeting
       set fish_greeting
     '';
     plugins = [
