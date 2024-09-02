@@ -29,7 +29,7 @@
       in {
         border_size = 3;
         gaps_out = gaps;
-        gaps_in = gaps; 
+        gaps_in = builtins.div gaps 2;
       };
 
       decoration = {
@@ -67,6 +67,7 @@
       ];
       animation = [
         "windows, 1, 3, fast-in, popin"
+        "workspaces, slidevert, 3, default"
       ];
 
       input = {
