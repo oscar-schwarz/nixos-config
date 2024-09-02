@@ -18,9 +18,6 @@
 
   programs.waybar = {
     enable = true;
-    settings = {
-
-    };
   };
 
   wayland.windowManager.hyprland = {
