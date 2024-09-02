@@ -32,6 +32,11 @@
         gaps_in = builtins.div gaps 2;
       };
 
+      misc = {
+        disable_hyprland_logo = true; # hyprpaper is already running
+        disable_splash_rendering = true; # not visible due to hyprpaper
+      };
+
       decoration = {
         dim_inactive = true;
         dim_strength = 0.3;

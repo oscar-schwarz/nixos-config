@@ -12,6 +12,7 @@
       enable = true;
       wayland = {
         enable = true;
+        compositor = "kwin";
       };
     };
     defaultSession = "hyprland";
