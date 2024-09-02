@@ -108,6 +108,10 @@
 
         # launcher
         "$meta, O, exec, ${lib.getExe openOrNotWofi}"
+        # emoji
+        "$meta, ., exec, wofi-emoji"
+        # password store selector
+        "$meta, P, exec, wofi-pass"
 
         # window management
         "$meta, W, killactive"
