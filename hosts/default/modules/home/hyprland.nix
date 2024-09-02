@@ -7,7 +7,7 @@
           name = "open-wofi-if-not-already";
           text = ''
             if [ "$(pidof wofi)" = "" ]; then
-             wofi -show drun
+             wofi --show drun
             fi
           '';
       })
