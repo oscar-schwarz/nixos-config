@@ -8,7 +8,7 @@
   programs.kitty = {
     enable = true;
     settings = {
-      window_padding_width = 5;
+      window_padding_width = 10;
     };
   };
 
@@ -18,13 +18,20 @@
 
   programs.waybar = {
     enable = true;
+    settings = {
+
+    };
   };
 
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
-      general = {
+      general = let 
+        gaps = 5;
+      in {
         border_size = 3;
+        gaps_out = gaps;
+        gaps_in = gaps; 
       };
 
       decoration = {
