@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   home.packages = with pkgs; [
@@ -76,7 +76,16 @@
 
         perDirection = keyByDirection: f: builtins.map (x: f x (keyByDirection."${x}")) directions;
         perDirectionLetter = perDirection lettersByDirection;  
-        perDirectionArrow = perDirection arrowsByDirection;  
+        perDirectionArrow = perDirection arrowsByDirection;
+
+        openOrNotWofi = pkgs.writeShellApplication {
+          name = "open-or-not-wofi";
+          text = ''
+            if [ "$(pidof wofi)" = "" ]; then
+             wofi -show drun
+            fi
+          '';
+        }; 
       in 
       (perDirectionLetter (dir: key: "$meta, ${key}, movefocus, ${dir}")) ++
       (perDirectionLetter (dir: key: "$meta_CTRL, ${key}, movewindow, ${dir}")) ++
@@ -86,7 +95,7 @@
         "$meta, E, exec, firefox"
 
         # launcher
-        "$meta, O, exec, wofi --show drun"
+        "$meta, O, exec, ${lib.getExe openOrNotWofi}"
 
         # window management
         "$meta, W, killactive"
