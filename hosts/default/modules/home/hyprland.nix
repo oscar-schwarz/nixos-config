@@ -18,7 +18,6 @@
 
   programs.waybar = {
     enable = true;
-    systemd.target = "hyprland.target";
     settings = {
 
     };
@@ -27,6 +26,7 @@
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
+
       general = let 
         gaps = 5;
       in {
@@ -39,6 +39,10 @@
         dim_inactive = true;
         dim_strength = 0.3;
       };
+
+      exec-once = [
+        "waybar"
+      ];
 
       monitor = let
         # Sometimes the portable monitor is listed under different names
