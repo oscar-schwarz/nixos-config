@@ -90,7 +90,7 @@ in {
     enable = true;
     enableScDaemon = true;
     enableSshSupport = true;
-    pinentryPackage = pkgs.pinentry-qt;
+    pinentryPackage = pkgs.pinentry-curses;
   };
 
   # btop - task manager
