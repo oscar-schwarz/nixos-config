@@ -3,7 +3,6 @@
 {
   home.packages = with pkgs; [
     wofi-emoji
-    wofi-pass
   ];
 
   programs.kitty = {
@@ -110,8 +109,6 @@
         "$meta, O, exec, ${lib.getExe openOrNotWofi}"
         # emoji
         "$meta, ., exec, wofi-emoji"
-        # password store selector
-        "$meta, P, exec, wofi-pass"
 
         # window management
         "$meta, W, killactive"
