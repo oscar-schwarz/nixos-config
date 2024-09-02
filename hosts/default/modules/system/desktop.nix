@@ -27,6 +27,9 @@ in {
   # Default should be wayland
   services.displayManager = {
     sddm = {
+      package = pkgs.sddm.override {
+        qtbase = pkgs.qt6;
+      };
       enable = true;
       theme = "${sddmTheme}/share/sddm/themes/where_is_my_sddm_theme";
       wayland = {
