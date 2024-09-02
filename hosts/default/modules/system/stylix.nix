@@ -20,7 +20,7 @@ in {
 
     cursor = {
       package = pkgs.material-cursors; 
-      name = "material_dark_cursors";
+      name = "material_cursors";
       size = 25;
     };
 
