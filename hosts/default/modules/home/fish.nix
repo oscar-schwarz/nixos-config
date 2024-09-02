@@ -27,13 +27,12 @@
         heygpt --model "gpt-4o" """$argv""" | ${lib.getExe pkgs.glow}
       '';
       rebuild = ''
-        # Delete all backup files
-        find ~ -type f -name "*.homeManagerBackupFileExtension" -delete 2>/dev/null
+        # Delete all backup files (not necessary anymore)
+        # find ~ -type f -name "*.homeManagerBackupFileExtension" -delete 2>/dev/null
         
         # No VSCodium, these plugins are NOT obsolete!
         if test -f ~/.vscode-oss/extensions/.obsolete
           rm -f ~/.vscode-oss/extensions/.obsolete
-          rm -f ~/.vscode-oss/extensions/extensions.json
         end
         
         # add all new files to git, so that they are seen by nixos
