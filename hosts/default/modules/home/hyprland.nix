@@ -25,7 +25,7 @@
     settings = {
 
       general = let 
-        gaps = 5;
+        gaps = 8;
       in {
         border_size = 3;
         gaps_out = gaps;
