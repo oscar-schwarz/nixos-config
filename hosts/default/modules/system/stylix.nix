@@ -19,8 +19,8 @@ in {
     };
 
     cursor = {
-      package = pkgs.simp1e-cursors; 
-      name = "Simp1e";
+      package = pkgs.material-cursors; 
+      name = "material-cursors";
       size = 25;
     };
   };
