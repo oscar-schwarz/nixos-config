@@ -19,8 +19,8 @@ in {
     };
 
     cursor = {
-      # package = pkgs.quintom-cursor-theme; name = "Quintum_Snow";
-      name = "breeze_cursors"; # KDE default, looks the best from what I've seen
+      package = pkgs.simp1e-cursors; 
+      name = "Simp1e";
       size = 25;
     };
   };
