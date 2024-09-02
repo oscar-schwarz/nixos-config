@@ -92,7 +92,16 @@ in {
     enableSshSupport = true;
     # pkgs.pinentry-curses is not sufficient as it won't work for non-terminal applications
     # This wrapper launcher a new terminal with curses
-    pinentryPackage = pkgs.pinentry-all;
+    pinentryPackage = pkgs.writeShellApplication {
+      name = "pinentry";
+      runtimeInputs = with pkgs; [ 
+        kitty
+        pinentry-curses
+      ];
+      text = ''
+        kitty pinentry "$@" 
+      '';
+    }; 
   };
 
   # btop - task manager
