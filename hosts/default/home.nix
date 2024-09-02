@@ -99,7 +99,7 @@ in {
         pinentry-curses
       ];
       text = ''
-        echo "$@" 
+        kitty pinentry-tty "$@" 
       '';
     }; 
   };
