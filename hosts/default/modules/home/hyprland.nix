@@ -67,7 +67,7 @@
       ];
       animation = [
         "windows, 1, 3, fast-in, popin"
-        "workspaces, 1, 3, default, slidevert"
+        "workspaces, 1, 5, default, slidevert"
       ];
 
       input = {
