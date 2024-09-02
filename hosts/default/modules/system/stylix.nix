@@ -29,6 +29,9 @@ in {
         package = pkgs.source-code-pro;
         name = "Source Code Pro";
       };
+      sizes = {
+        popups = 25;
+      };
     };
   };
 
