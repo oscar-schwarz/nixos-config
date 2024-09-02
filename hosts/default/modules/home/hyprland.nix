@@ -79,6 +79,7 @@
         perDirectionArrow = perDirection arrowsByDirection;  
       in 
       (perDirectionLetter (dir: key: "$meta, ${key}, movefocus, ${dir}")) ++
+      (perDirectionLetter (dir: key: "$meta_CTRL, ${key}, movewindow, ${dir}")) ++
       [
         # application shortcuts
         "$meta, N, exec, kitty"
@@ -90,8 +91,8 @@
         # window management
         "$meta, W, killactive"
         "$meta, M, fullscreen"
-        "$meta_CTRL, R, workspace, -1"
-        "$meta_CTRL, T, workspace, +1"
+        "$meta, H, focusworkspaceoncurrentmonitor, -1"
+        "$meta, J, focusworkspaceoncurrentmonitor, +1"
       ];
     };
   };

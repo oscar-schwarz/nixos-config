@@ -31,8 +31,6 @@ in {
       theme = "${sddmTheme}/share/sddm/themes/where_is_my_sddm_theme";
       wayland = {
         enable = true;
-
-        compositor = "kwin";
       };
     };
     defaultSession = "hyprland";
