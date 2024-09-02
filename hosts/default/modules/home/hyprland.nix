@@ -91,8 +91,8 @@
         # window management
         "$meta, W, killactive"
         "$meta, M, fullscreen"
-        "$meta, J, workspace, m-1"
-        "$meta, H, workspace, m+1"
+        "$meta, J, workspace, r-1"
+        "$meta, H, workspace, r+1"
       ];
     };
   };
