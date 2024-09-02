@@ -19,10 +19,10 @@ in {
   programs.hyprland.enable = true; 
 
   
-	services.desktopManager = {
-		# Enable Desktop Environment.
-		plasma6.enable = true;
-	};
+  # services.desktopManager = {
+  #   # Enable Desktop Environment.
+  # 	plasma6.enable = true;
+  # };
 
   # Default should be wayland
   services.displayManager = {
@@ -35,6 +35,6 @@ in {
         compositor = "kwin";
       };
     };
-    defaultSession = "plasma";
+    defaultSession = "hyprland";
   };
 }

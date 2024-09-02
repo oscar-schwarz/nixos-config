@@ -32,8 +32,8 @@ in {
 
   # Import modules
   imports = [
-    # KDE setup
-    ./modules/home/plasma.nix
+    # KDE setup (disabled for now as I switched to hyprland)
+    # ./modules/home/plasma.nix
 
     # Dropdown terminal settings
     ./modules/home/yakuake.nix
@@ -57,13 +57,11 @@ in {
   # environment.
   home.packages  = with pkgs; [
     signal-desktop # secure messaging
-    yakuake # dropdown terminal
     xournalpp # stylus note taking app
     obsidian # markdown note taking app
-    spectacle # screenshot utility
     libreoffice
     chromium
-    ncpamixer # Pulse Audio mixer utility
+    ncpamixer # Pulse Audio mixer utilityh
     
     # Tools
     wl-clipboard-rs # copy to clipboard from terminal

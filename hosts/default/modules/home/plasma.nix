@@ -1,8 +1,13 @@
-{ config, nixosConfig, inputs, pkgs, lib, ... }:
+{ inputs, pkgs, ... }:
 
 {
   imports = [
     inputs.plasma-manager.homeManagerModules.plasma-manager
+  ];
+
+  home.packages = with pkgs; [
+    spectacle # screenshot utility
+    yakuake # dropdown terminal
   ];
   
   programs.plasma = {
