@@ -94,7 +94,7 @@
         "$meta, E, exec, firefox"
 
         # launcher
-        "$meta, O, exec, open-wofi-if-not-open"
+        "$meta, O, exec, open-wofi-if-not-already"
 
         # window management
         "$meta, W, killactive"
