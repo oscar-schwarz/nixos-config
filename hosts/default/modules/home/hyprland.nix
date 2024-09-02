@@ -18,6 +18,7 @@
 
   programs.waybar = {
     enable = true;
+    systemd.target = "hyprland.target";
     settings = {
 
     };
