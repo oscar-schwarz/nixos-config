@@ -3,14 +3,6 @@
 {
   home.packages = with pkgs; [
     wofi
-    (pkgs.writeShellApplication {
-          name = "open-wofi-if-not-already";
-          text = ''
-            if [ "$(pidof wofi)" = "" ]; then
-             wofi --show drun
-            fi
-          '';
-      })
   ];
 
   programs.kitty = {
@@ -85,6 +77,15 @@
         perDirection = keyByDirection: f: builtins.map (x: f x (keyByDirection."${x}")) directions;
         perDirectionLetter = perDirection lettersByDirection;  
         perDirectionArrow = perDirection arrowsByDirection;
+
+        openOrNotWofi = pkgs.writeShellApplication {
+          name = "open-or-not-wofi";
+          text = ''
+            if [ "$(pidof wofi)" = "" ]; then
+             wofi --show drun
+            fi
+          '';
+        }; 
       in 
       (perDirectionLetter (dir: key: "$meta, ${key}, movefocus, ${dir}")) ++
       (perDirectionLetter (dir: key: "$meta_CTRL, ${key}, movewindow, ${dir}")) ++
@@ -94,7 +95,7 @@
         "$meta, E, exec, firefox"
 
         # launcher
-        "$meta, O, exec, open-wofi-if-not-already"
+        "$meta, O, exec, ${lib.getExe openOrNotWofi}"
 
         # window management
         "$meta, W, killactive"
