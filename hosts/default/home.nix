@@ -96,10 +96,9 @@ in {
       name = "pinentry";
       runtimeInputs = with pkgs; [ 
         kitty
-        pinentry-curses
       ];
       text = ''
-        kitty pinentry "$@" 
+        kitty ${pkgs.pinentry-curses}/bin/pinentry "$@" 
       '';
     }; 
   };
