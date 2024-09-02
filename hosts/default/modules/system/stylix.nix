@@ -19,8 +19,8 @@ in {
     };
 
     cursor = {
-      package = pkgs.material-cursors; 
-      name = "material_light_cursors";
+      package = pkgs.graphite-cursors; 
+      name = "graphite-dark";
       size = 25;
     };
 
