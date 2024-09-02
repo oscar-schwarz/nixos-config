@@ -2,10 +2,18 @@
 
 {
   home.packages = with pkgs; [
-    wofi
+    wofi-emoji
+    wofi-pass
   ];
 
   programs.kitty = {
+    enable = true;
+    settings = {
+      window_padding_width = 5;
+    };
+  };
+
+  programs.wofi = {
     enable = true;
   };
 

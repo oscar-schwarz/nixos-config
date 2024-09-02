@@ -1,4 +1,4 @@
-{pkgs, lib,  config, inputs, ...}:
+{pkgs, ...}:
 
 let
   # The base 16 colorscheme used, modify this to see a theme change!
@@ -22,6 +22,13 @@ in {
       package = pkgs.material-cursors; 
       name = "material-cursors";
       size = 25;
+    };
+
+    fonts = {
+      monospace = {
+        package = pkgs.source-code-pro;
+        name = "Source Code Pro";
+      };
     };
   };
 
