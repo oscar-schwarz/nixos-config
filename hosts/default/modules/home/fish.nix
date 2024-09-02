@@ -19,6 +19,9 @@
         };
       }
     ];
+    shellAliases = {
+      lg = "lazygit";
+    };
     functions = {
       ask = ''
         heygpt --model "gpt-4o" """$argv""" | ${lib.getExe pkgs.glow}
