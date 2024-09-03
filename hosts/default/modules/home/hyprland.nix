@@ -55,23 +55,8 @@
 
       # --- Autostart ---
       exec-once = [
-
+        "waybar"
       ];
-
-
-      # --- Run on reload ---
-      exec = let
-        restartWaybar = pkgs.writeShellApplication {
-          name = "restast-waybar";
-          text = ''
-            pkill waybar
-            waybar
-          '';
-        };
-      in [
-        (lib.getExe restartWaybar)
-      ];
-
 
       # --- Display setup
       monitor = let
