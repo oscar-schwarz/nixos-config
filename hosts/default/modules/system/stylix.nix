@@ -31,7 +31,7 @@ in {
       };
       sansSerif = {
         package = pkgs.merriweather-sans;
-        name = "merriweather-sans";
+        name = "MerriweatherSans";
       };
       sizes = {
         popups = 25;

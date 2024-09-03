@@ -55,7 +55,13 @@
 
       # --- Autostart ---
       exec-once = [
-        "waybar"
+
+      ];
+
+
+      # --- Run on reload ---
+      exec = [
+        "pkill waybar; waybar"
       ];
 
 
