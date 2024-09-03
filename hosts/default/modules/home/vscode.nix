@@ -13,6 +13,7 @@ in {
       "workbench.layoutControl.enabled" = false;
       "workbench.editor.showTabs" = "none";
       "window.menuBarVisibility" = "toggle"; # hide menu bar unless alt is pressed
+      "workbench.startupEditor" = "welcomePage"; # no welcome page
 
       # minimap
       "editor.minimap.maxColumn" = 100;
