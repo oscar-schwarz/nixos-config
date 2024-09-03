@@ -30,8 +30,8 @@ in {
         name = "Source Code Pro";
       };
       sansSerif = {
-        package = pkgs.public-sans;
-        name = "PublicSans";
+        package = pkgs.merriweather-sans;
+        name = "merriweather-sans";
       };
       sizes = {
         popups = 25;
