@@ -151,8 +151,8 @@
          resizeFactor = "50";
       in [
         # resize window
-        "$meta, G, resizeactive, ${resizeFactor} ${resizeFactor}"
-        "$meta, D, resizeactive, -${resizeFactor} -${resizeFactor}"
+        "$meta, G, resizeactive, -${resizeFactor} -${resizeFactor}"
+        "$meta, D, resizeactive, ${resizeFactor} ${resizeFactor}"
       ];
 
       # locked, also works on a lockscreen
