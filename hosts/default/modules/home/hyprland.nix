@@ -69,13 +69,6 @@
       ];
 
 
-      # --- Switch behaviour ---
-      bindl = [
-        '', switch:off:Lid Switch, exec, hyprctl keyword monitor "eDP-1"''
-        '', switch:on:Lid Switch, exec, hyprctl keyword monitor "eDP-1, disable"''
-      ];
-
-
       # --- Animations ---
       bezier = [
         "fast-in, 0.34, 0.12, 0.07, 0.96"
@@ -126,9 +119,7 @@
              wofi --show drun
             fi
           '';
-        };
-
-        resizeFactor = "50"; 
+        }; 
       in 
       (perDirectionLetter (dir: key: "$meta, ${key}, movefocus, ${dir}")) ++
       (perDirectionLetter (dir: key: "$meta_CTRL, ${key}, movewindow, ${dir}")) ++
@@ -153,11 +144,23 @@
         # move window to workspaces
         "$meta_CTRL, J, movetoworkspace, r-1"
         "$meta_CTRL, H, movetoworkspace, r+1"
+      ];
 
+      # Binds here will be repeated on press
+      binde = let
+         resizeFactor = "50";
+      in [
         # resize window
         "$meta, G, resizeactive, ${resizeFactor} ${resizeFactor}"
         "$meta, D, resizeactive, -${resizeFactor} -${resizeFactor}"
       ];
+
+      # locked, also works on a lockscreen
+      bindl = [
+        # switch behaviour
+        '', switch:off:Lid Switch, exec, hyprctl keyword monitor "eDP-1"''
+        '', switch:on:Lid Switch, exec, hyprctl keyword monitor "eDP-1, disable"''
+      ]; 
     };
   };
 }
