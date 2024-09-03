@@ -29,6 +29,10 @@ in {
         package = pkgs.source-code-pro;
         name = "Source Code Pro";
       };
+      sansSerif = {
+        package = pkgs.public-sans;
+        name = "Public Sans";
+      };
       sizes = {
         popups = 25;
         desktop = 15;
