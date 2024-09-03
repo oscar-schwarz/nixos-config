@@ -24,6 +24,8 @@
     enable = true;
     settings = {
 
+
+      # --- General ---
       general = let 
         gaps = 8;
       in {
@@ -42,10 +44,14 @@
         dim_strength = 0.3;
       };
 
+
+      # --- Autostart ---
       exec-once = [
         "waybar"
       ];
 
+
+      # --- Display setup
       monitor = let
         # Sometimes the portable monitor is listed under different names
         portableMonitorConfigs = map
@@ -62,11 +68,15 @@
         "desc:LG Electronics 27EA53 312NDNU32431, preferred, auto, 1, transform, 1"
       ];
 
+
+      # --- Switch behaviour ---
       bindl = [
         '', switch:off:Lid Switch, exec, hyprctl keyword monitor "eDP-1"''
         '', switch:on:Lid Switch, exec, hyprctl keyword monitor "eDP-1, disable"''
       ];
 
+
+      # --- Animations ---
       bezier = [
         "fast-in, 0.34, 0.12, 0.07, 0.96"
       ];
@@ -75,12 +85,17 @@
         "workspaces, 1, 5, default, slidevert"
       ];
 
+
+      # --- Keyboard settings ---
       input = {
         kb_layout = "us";
         kb_variant = "colemak";
         kb_options = "ctrl:swap_rwin_rctl";
       };
 
+
+
+      # --- Keybindings ---
       "$meta" = "SUPER";
 
       bind = let
@@ -123,13 +138,23 @@
         # launcher
         "$meta, O, exec, ${lib.getExe openOrNotWofi}"
         # emoji
-        "$meta, ., exec, wofi-emoji"
+        "$meta, U, exec, wofi-emoji"
 
         # window management
         "$meta, W, killactive"
         "$meta, M, fullscreen"
+
+        # switch workspaces
         "$meta, J, workspace, r-1"
         "$meta, H, workspace, r+1"
+
+        # move window to workspaces
+        "$meta_CTRL, J, movetoworkspace, r-1"
+        "$meta_CTRL, H, movetoworkspace, r+1"
+
+        # resize window
+        "$meta, G, resizeactive, +10 +10"
+        "$meta, D, resizeactive, -10 -10"
       ];
     };
   };
