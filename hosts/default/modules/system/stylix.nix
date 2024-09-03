@@ -31,7 +31,7 @@ in {
       };
       sansSerif = {
         package = pkgs.public-sans;
-        name = "Public Sans";
+        name = "PublicSans";
       };
       sizes = {
         popups = 25;
