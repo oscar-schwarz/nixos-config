@@ -1,5 +1,5 @@
 {
-  description = "A dev environment for a Nuxt project";
+  description = "A dev environment for a Android Nodejs project";
 
   inputs = {
     # Nix packages
@@ -95,7 +95,7 @@
 
         # PROGRAMS
         nodejs = pkgs.nodejs_20;
-        chromium = pkgs.ungoogled-chromium;
+        chromium = pkgs.chromium;
 
         # Useful scripts
         shellScripts = [
@@ -124,17 +124,6 @@
               adb shell am start -n de.schulverwalter.beste/de.schulverwalter.beste.MainActivity
             '';
           })
-
-          (pkgs.writeShellApplication {
-            name = "chrome-extension";
-            text = ''
-              CHROME_VERSION=$(chromium --version | awk '{print $2;exit}')
-              EXTENSION_ID="$1"
-              URL="https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx2,crx3&prodversion=$CHROME_VERSION&x=id%3D$EXTENSION_ID%26installsource%3Dondemand%26uc"
-              echo "$URL"
-              chromium "$URL"
-            '';
-          })
         ];
 
 
@@ -155,10 +144,6 @@
         # This config structure is just for readability
         # The actual assignments happen below
         gitConfig = {
-          user = {
-            email = "schwarz.oscar@protonmail.com";
-            name = "Oscar Schwarz";
-          };
           exclude = [
             ".envrc"
             ".direnv"
@@ -168,12 +153,6 @@
 
         # The actual shell config
         devShells.default = pkgs.mkShell {
-          # These git env variables define who is commiting
-          GIT_AUTHOR_NAME = gitConfig.user.name;
-          GIT_AUTHOR_EMAIL = gitConfig.user.email;
-          GIT_COMMITTER_EMAIL = gitConfig.user.email;
-          GIT_COMMITTER_NAME = gitConfig.user.name;
-
           # The packages exposed to the shell
           buildInputs =
             shellScripts ++
@@ -187,7 +166,7 @@
 
           # Generate necessary files and create symlinks to them
           shellHook = ''
-            echo "Entering Nuxt Environment"
+            echo "Entering Android Nodejs Environment"
 
             # Git exclude
             ln -fs "${writeList gitConfig.exclude}" .git/info/exclude
