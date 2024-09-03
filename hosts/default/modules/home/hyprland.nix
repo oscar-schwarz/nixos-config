@@ -60,8 +60,16 @@
 
 
       # --- Run on reload ---
-      exec = [
-        "pkill waybar; waybar"
+      exec = let
+        restartWaybar = pkgs.writeShellApplication {
+          name = "restast-waybar";
+          text = ''
+            pkill waybar
+            waybar
+          '';
+        };
+      in [
+        (lib.getExe restartWaybar)
       ];
 
 
