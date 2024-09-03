@@ -24,6 +24,9 @@
         modules-center = [
           "clock"
         ];
+        modules-left = [
+          "battery"
+        ];
       };
     };
   };
