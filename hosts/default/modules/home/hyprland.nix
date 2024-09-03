@@ -126,7 +126,9 @@
              wofi --show drun
             fi
           '';
-        }; 
+        };
+
+        resizeFactor = "25%"; 
       in 
       (perDirectionLetter (dir: key: "$meta, ${key}, movefocus, ${dir}")) ++
       (perDirectionLetter (dir: key: "$meta_CTRL, ${key}, movewindow, ${dir}")) ++
@@ -153,8 +155,8 @@
         "$meta_CTRL, H, movetoworkspace, r+1"
 
         # resize window
-        "$meta, G, resizeactive, +10 +10"
-        "$meta, D, resizeactive, -10 -10"
+        "$meta, G, resizeactive, ${resizeFactor} ${resizeFactor}"
+        "$meta, D, resizeactive, -${resizeFactor} -${resizeFactor}"
       ];
     };
   };
