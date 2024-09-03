@@ -128,7 +128,7 @@
           '';
         };
 
-        resizeFactor = "25%"; 
+        resizeFactor = "25"; 
       in 
       (perDirectionLetter (dir: key: "$meta, ${key}, movefocus, ${dir}")) ++
       (perDirectionLetter (dir: key: "$meta_CTRL, ${key}, movewindow, ${dir}")) ++
