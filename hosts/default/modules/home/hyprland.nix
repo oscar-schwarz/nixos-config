@@ -18,6 +18,11 @@
 
   programs.waybar = {
     enable = true;
+    settings = {
+      mainBar = {
+        height = 35;
+      };
+    };
   };
 
   wayland.windowManager.hyprland = {
