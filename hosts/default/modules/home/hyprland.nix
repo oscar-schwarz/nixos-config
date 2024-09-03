@@ -21,6 +21,9 @@
     settings = {
       mainBar = {
         height = 35;
+        modules-center = [
+          "clock"
+        ];
       };
     };
   };
