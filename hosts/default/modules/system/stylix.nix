@@ -14,7 +14,7 @@ in {
     autoEnable = true;
 
     opacity = {
-      desktop = 0.5;
+      desktop = 0.9;
       terminal = 0.9;
     };
 
