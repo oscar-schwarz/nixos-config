@@ -30,8 +30,8 @@ in {
         name = "SourceCodePro";
       };
       sansSerif = {
-        package = pkgs.serious-sans;
-        name = "SeriousSans";
+        package = pkgs.fira-sans;
+        name = "FiraSans";
       };
       sizes = {
         popups = 25;
