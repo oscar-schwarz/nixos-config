@@ -30,12 +30,13 @@ in {
         name = "Source Code Pro";
       };
       sansSerif = {
-        package = pkgs.dm-sans;
-        name = "DeepMindSans";
+        package = pkgs.encode-sans;
+        name = "EncodeSans";
       };
       sizes = {
         popups = 25;
         desktop = 16;
+        applications = 14;
       };
     };
   };
