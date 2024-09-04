@@ -35,7 +35,7 @@ in {
       };
       sizes = {
         popups = 25;
-        desktop = 16;
+        desktop = 14;
         applications = 14;
       };
     };
