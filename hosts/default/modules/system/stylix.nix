@@ -27,11 +27,11 @@ in {
     fonts = {
       monospace = {
         package = pkgs.source-code-pro;
-        name = "Source Code Pro";
+        name = "SourceCodePro";
       };
       sansSerif = {
-        package = pkgs.encode-sans;
-        name = "EncodeSansExpanded";
+        package = pkgs.serious-sans;
+        name = "SeriousSans";
       };
       sizes = {
         popups = 25;
