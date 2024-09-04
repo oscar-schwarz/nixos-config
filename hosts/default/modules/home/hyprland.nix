@@ -3,7 +3,12 @@
 {
   home.packages = with pkgs; [
     wofi-emoji
+
+    font-awesome # for waybar icons
   ];
+
+  # Allow installation of fonts through home.packages
+  fonts.fontconfig.enable =  true;
 
   programs.kitty = {
     enable = true;
