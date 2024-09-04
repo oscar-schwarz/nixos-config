@@ -62,13 +62,13 @@
           # Alias for ./vendor/bin/sail
           (pkgs.writeShellApplication {
             name = "sail";
-            text = ''./vendor/bin/sail "$@"'';
+            text = ''sudo ./vendor/bin/sail "$@"'';
           })
 
           # Alias to quickly execute a command inside the container
           (pkgs.writeShellApplication {
             name = "run-in-sail";
-            text = ''./vendor/bin/sail exec --user root laravel.test """$@"""'';
+            text = ''sudo ./vendor/bin/sail exec --user root laravel.test """$@"""'';
           })
 
           # Starts the docker daemon, the sail daemon and vite. After CTRL+C on vite the daemons are killed again
@@ -90,9 +90,9 @@
 
               # Run docker daemon
               if $DEBUG; then
-                dockerd-rootless &
+                sudo dockerd &
               else
-                dockerd-rootless >/dev/null 2>&1 &
+                sudo dockerd >/dev/null 2>&1 &
               fi
               DOCKER_PID="$!"
               
@@ -136,9 +136,9 @@
 
               # run vite (This is listening to CTRL+C)
               if $DEBUG; then
-                npm run dev -- --debug
+                run-in-sail npm run dev -- --debug
               else
-                npm run dev
+                run-in-sail npm run dev
               fi
 
 
@@ -146,7 +146,7 @@
 
               echo "SIGINT received, shutting down."
               sail down
-              kill "$DOCKER_PID"
+              sudo kill "$DOCKER_PID"
             '';
           })
 
