@@ -31,7 +31,7 @@ in {
       };
       sansSerif = {
         package = pkgs.encode-sans;
-        name = "EncodeSans";
+        name = "EncodeSansExpanded";
       };
       sizes = {
         popups = 25;
