@@ -177,7 +177,7 @@
 
               # Only update on change
               if [ "$SYMLINK" != "$STORE" ]; then
-                echo "Updating $FILE"w
+                echo "Updating $FILE"
                 ln -fs "$STORE" "$FILE"
               fi
             '';
