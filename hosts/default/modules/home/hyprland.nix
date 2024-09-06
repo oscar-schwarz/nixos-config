@@ -23,46 +23,6 @@
 
   programs.waybar = {
     enable = true;
-    settings = {
-      mainBar = {
-        layer = "top";
-        
-
-        # Module placement
-        modules-left = [
-
-        ];
-        modules-center = [
-          "clock"
-          "clock#date"
-        ];
-        modules-right = [
-          "battery"
-        ];
-
-
-        # Module settings
-        battery = {
-          format = "<span>{icon}</span> {capacity} %";
-          format-icons = [
-            "&#xf244;" # battery-empty
-            "&#xf243;" # battery-quarter
-            "&#xf242;" # battery-half
-            "&#xf241;" # battery-three-quarters
-            "&#xf240;" # battery-full
-          ];
-        };
-
-        clock = {
-          format = "<i>{:%H:%M}</i>";
-          tooltip = false;
-        };
-        "clock#date" = {
-          format = "{:%A, %d. %B %Y}";
-          tooltip = false;
-        };
-      };
-    };
   };
 
   wayland.windowManager.hyprland = {
