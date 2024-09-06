@@ -34,6 +34,7 @@
         ];
         modules-center = [
           "clock"
+          "clock#date"
         ];
         modules-right = [
           "battery"
@@ -53,7 +54,11 @@
         };
 
         clock = {
-          format = "{:%H:%M %A, %d. %B %Y}";
+          format = "<base0B>{:%H:%M}</base0B>";
+          tooltip = false;
+        };
+        "clock#date" = {
+          format = "{%A, %d. %B %Y}";
           tooltip = false;
         };
       };
