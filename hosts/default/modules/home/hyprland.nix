@@ -1,17 +1,14 @@
 { pkgs, lib, ... }:
 
 {
-  home.packages = with pkgs; [
-    wofi-emoji
-
-    # font-awesome # for waybar icons
-    font-awesome_5
-
-    xdg-desktop-portal-hyprland
+  imports = [
+    ./hyprland-rice.nix
   ];
 
-  # Allow installation of fonts through home.packages
-  fonts.fontconfig.enable =  true;
+  home.packages = with pkgs; [
+    wofi-emoji
+    xdg-desktop-portal-hyprland
+  ];
 
   programs.kitty = {
     enable = true;
@@ -26,66 +23,16 @@
 
   programs.waybar = {
     enable = true;
-    settings = {
-      mainBar = {
-        layer = "top";
-        height = 30;
-        modules-left = [
-
-        ];
-        modules-middle = [
-          "clock"
-        ];
-        modules-right = [
-          "battery"
-        ];
-
-        battery = {
-          format = "<span>{icon}</span> {capacity} %";
-          format-icons = [
-            "&#xf240;" # battery-full
-            "&#xf241;" # battery-three-quarters
-            "&#xf242;" # battery-half
-            "&#xf243;" # battery-quarter
-            "&#xf244;" # battery-empty
-          ];
-        };
-      };
-    };
   };
-  stylix.targets.waybar.enable = false;
 
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
-
-
-      # --- General ---
-      general = let 
-        gaps = 6;
-      in {
-        border_size = 3;
-        gaps_out = gaps;
-        gaps_in = builtins.div gaps 2;
-      };
-
-      misc = {
-        disable_hyprland_logo = true; # hyprpaper is already running
-        disable_splash_rendering = true; # not visible due to hyprpaper
-      };
-
-      decoration = {
-        dim_inactive = true;
-        dim_strength = 0.3;
-
-        rounding = 10;
-      };
-
-
       # --- Autostart ---
       exec-once = [
         "waybar"
       ];
+
 
       # --- Display setup
       monitor = let
@@ -104,24 +51,12 @@
         "desc:LG Electronics 27EA53 312NDNU32431, preferred, auto, 1, transform, 1"
       ];
 
-
-      # --- Animations ---
-      bezier = [
-        "fast-in, 0.34, 0.12, 0.07, 0.96"
-      ];
-      animation = [
-        "windows, 1, 3, fast-in, popin"
-        "workspaces, 1, 5, default, slidevert"
-      ];
-
-
       # --- Keyboard settings ---
       input = {
         kb_layout = "us";
         kb_variant = "colemak";
         kb_options = "ctrl:swap_rwin_rctl";
       };
-
 
 
       # --- Keybindings ---
