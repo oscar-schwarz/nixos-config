@@ -31,6 +31,9 @@
         layer = "top";
         height = 30;
         modules-left = [
+
+        ];
+        modules-middle = [
           "clock"
         ];
         modules-right = [
@@ -74,6 +77,8 @@
       decoration = {
         dim_inactive = true;
         dim_strength = 0.3;
+
+        rounding = 10;
       };
 
 
