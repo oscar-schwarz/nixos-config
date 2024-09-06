@@ -37,9 +37,9 @@
         ];
 
         battery = {
-          format = ''<div class="icon battery">{icon}</div> {capacity}%'';
+          format = ''<span class="icon battery">{icon}</span> {capacity}%'';
           format-icons = [
-            
+
           ];
         };
       };
