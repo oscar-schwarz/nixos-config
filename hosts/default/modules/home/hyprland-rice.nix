@@ -75,10 +75,10 @@ in {
       }
 
       window#waybar {
-        background-color: #00000000;
+        background-color: rgba(0, 0, 0, 0);
       }
 
-      box.module {
+      .module {
         border-style: solid;
         border-width: ${str border.width}px;
         border-radius: ${str border.radius}px;
