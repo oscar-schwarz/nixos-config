@@ -79,8 +79,8 @@ in {
 
       * {
         /* `otf-font-awesome` is required to be installed for icons */
-        font-family: FontAwesome, ${fonts.monospace.name}, monospace;
-        font-size: ${str (fonts.sizes.terminal + 5) /* quick fix kitty is larger so adjusting here*/}px;
+        font-family: FontAwesome, ${fonts.monospace.name};
+        font-size: ${str fonts.sizes.terminal}pt;
       }
 
       window#waybar {
