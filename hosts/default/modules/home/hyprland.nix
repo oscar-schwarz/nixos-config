@@ -26,7 +26,9 @@
     settings = {
       mainBar = {
         layer = "top";
-        height = 30;
+        
+
+        # Module placement
         modules-left = [
 
         ];
@@ -37,6 +39,8 @@
           "battery"
         ];
 
+
+        # Module settings
         battery = {
           format = "<span>{icon}</span> {capacity} %";
           format-icons = [
@@ -46,6 +50,11 @@
             "&#xf241;" # battery-three-quarters
             "&#xf240;" # battery-full
           ];
+        };
+
+        clock = {
+          format = "{:%H:%M A} ";
+          tooltip = false;
         };
       };
     };
