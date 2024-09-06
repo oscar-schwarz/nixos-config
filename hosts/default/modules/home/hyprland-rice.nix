@@ -94,7 +94,7 @@ in {
       .module {
         border-style: solid;
         border-width: ${str border.width}px;
-        border-radius: ${str border.radius}px;
+        border-radius: ${str border.radius}pt;
         border-color: @base03;
 
         margin-top: ${str margin}px;
