@@ -109,7 +109,7 @@ in {
 
         padding: ${str terminal-padding}px;
 
-        background-color: rgba(${rgbString "base00"}, 0.9);
+        background-color: rgba(${rgbString "base00"}, ${str opacity.terminal});
 
         color: @base05;
       }
@@ -136,6 +136,10 @@ in {
         dim_strength = 1 - brightness-inactive;
 
         rounding = border.radius;
+
+        blur = {
+          enable = true;
+        };
       };
 
 
