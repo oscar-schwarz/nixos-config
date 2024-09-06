@@ -24,7 +24,9 @@ in {
   # Allow installation of fonts through home.packages
   fonts.fontconfig.enable =  true;
 
-  home.packages = with pkgs; [  
+  home.packages = with pkgs; 
+    fonts.packages ++
+  [  
     # font-awesome # for waybar icons
     font-awesome_5
   ];
