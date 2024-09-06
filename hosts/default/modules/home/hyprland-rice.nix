@@ -85,10 +85,18 @@ in {
 
       window#waybar {
         background-color: rgba(0, 0, 0, 0);
-        padding-right: ${str margin}px;
-        padding-left: ${str margin}px;
+      }
+
+      .modules-left, .modules-center, .modules-right {
         padding-top: ${str margin}px;
       }
+      .modules-left {
+        padding-left: ${str margin}px;
+      }
+      .modules-right {
+        padding-right: ${str margin}px;
+      }
+
 
       .module {
         border-style: solid;
@@ -101,7 +109,7 @@ in {
 
         padding: ${str terminal-padding}px;
 
-        background-color: rgba(${rgbString "base00"}, ${str opacity.terminal});
+        background-color: rgba(${rgbString "base00"}, 0.5);
 
         color: @base05;
       }
