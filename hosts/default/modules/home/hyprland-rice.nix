@@ -3,7 +3,7 @@
 let
   border = {
     radius = 10;
-    width = 3;
+    width = 30;
   };
   margin = 5;
   terminal-padding = 10;
