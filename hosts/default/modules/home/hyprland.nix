@@ -37,9 +37,13 @@
         ];
 
         battery = {
-          format = "<span>{icon}</span> {capacity}%";
+          format = "<span>{icon}</span> {capacity} %";
           format-icons = [
-            "&#xf240;"
+            "&#xf240;" # battery-full
+            "&#xf241;" # battery-three-quarters
+            "&#xf242;" # battery-half
+            "&#xf243;" # battery-quarter
+            "&#xf244;" # battery-empty
           ];
         };
       };
