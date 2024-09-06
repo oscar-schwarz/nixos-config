@@ -28,6 +28,7 @@
     enable = true;
     settings = {
       mainBar = {
+        layer = "top";
         height = 30;
         modules-left = [
           "clock"
