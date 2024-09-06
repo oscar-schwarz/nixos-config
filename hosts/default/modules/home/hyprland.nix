@@ -53,7 +53,7 @@
         };
 
         clock = {
-          format = "{:%H:%M %A, %d. %B %Y}";
+          format = "{<base0B>:%H:%M</base0B> %A, %d. %B %Y}";
           tooltip = false;
         };
       };
