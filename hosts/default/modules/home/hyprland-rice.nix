@@ -93,7 +93,9 @@ in {
         border-radius: ${str border.radius}px;
         border-color: @base03;
 
-        margin: ${str margin}px;
+        margin-top: ${str (margin*2)}px;
+        margin-left: ${str margin}px;
+        margin-right: ${str margin}px;
 
         padding: ${str terminal-padding}px;
 
