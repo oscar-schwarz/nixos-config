@@ -5,6 +5,7 @@
     wofi-emoji
 
     font-awesome # for waybar icons
+    font-awesome_5
 
     xdg-desktop-portal-hyprland
   ];
