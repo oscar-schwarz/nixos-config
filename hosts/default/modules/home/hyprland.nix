@@ -13,7 +13,7 @@
   programs.kitty = {
     enable = true;
     settings = {
-      window_padding_width = 10;
+      enable_audio_bell = "no";
     };
   };
 

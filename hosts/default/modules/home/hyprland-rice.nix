@@ -10,6 +10,7 @@ let
 
   brightness-inactive = 0.7;
 
+  # Defined by stylix somewhere else
   fonts = config.stylix.fonts;
   colors = config.lib.stylix.colors;
   opacity = config.stylix.opacity;
@@ -79,11 +80,12 @@ in {
       * {
         /* `otf-font-awesome` is required to be installed for icons */
         font-family: FontAwesome, ${fonts.monospace.name}, monospace;
-        font-size: ${str fonts.sizes.terminal}px;
+        font-size: ${str (fonts.sizes.terminal + 5) /* quick fix kitty is larger so adjusting here*/}px;
       }
 
       window#waybar {
         background-color: rgba(0, 0, 0, 0);
+        margin-top: ${str margin}px;
       }
 
       .module {
@@ -92,9 +94,7 @@ in {
         border-radius: ${str border.radius}px;
         border-color: @base03;
 
-        margin-top: ${str margin}px;
-        margin-left: ${str margin}px;
-        margin-right: ${str margin}px;
+        margin: ${str margin}px;
 
         padding: ${str terminal-padding}px;
 
@@ -111,7 +111,7 @@ in {
       # --- General ---
       general = {
         border_size = border.width;
-        gaps_out = margin;
+        gaps_out = margin * 2; # screen edge margin is not a double margin
         gaps_in = margin;
       };
 
