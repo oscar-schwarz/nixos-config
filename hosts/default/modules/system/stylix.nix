@@ -2,9 +2,9 @@
 
 let
   # The base 16 colorscheme used, modify this to see a theme change!
-  # themeName = "oceanicnext";
+  themeName = "oceanicnext";
   # themeName = "sakura";
-  themeName = "aztec";
+  # themeName = "aztec";
 in {
   stylix = {
     enable = true;
@@ -12,6 +12,10 @@ in {
     image = ../../images/nms.jpg;
     polarity = "dark";
     autoEnable = true;
+
+    # targets = {
+    #   waybar.enable = false;
+    # };
 
     opacity = {
       desktop = 1.0;
