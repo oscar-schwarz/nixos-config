@@ -88,7 +88,7 @@ in {
       }
 
       .modules-left, .modules-center, .modules-right {
-        padding-top: ${str (margin*2)}px;
+        padding-top: ${str margin}px;
       }
       .modules-left {
         padding-left: ${str margin}px;
