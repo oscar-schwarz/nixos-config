@@ -13,10 +13,6 @@ in {
     polarity = "dark";
     autoEnable = true;
 
-    # targets = {
-    #   waybar.enable = false;
-    # };
-
     opacity = {
       desktop = 1.0;
       terminal = 0.9;

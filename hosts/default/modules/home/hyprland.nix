@@ -37,6 +37,7 @@
       };
     };
   };
+  stylix.targets.waybar.enable = false;
 
   wayland.windowManager.hyprland = {
     enable = true;
