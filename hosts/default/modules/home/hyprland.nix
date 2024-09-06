@@ -58,7 +58,7 @@
           tooltip = false;
         };
         "clock#date" = {
-          format = "{%A, %d. %B %Y}";
+          format = "{:%A, %d. %B %Y}";
           tooltip = false;
         };
       };
