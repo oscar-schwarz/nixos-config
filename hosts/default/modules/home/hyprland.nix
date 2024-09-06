@@ -54,7 +54,7 @@
         };
 
         clock = {
-          format = ''<span font-desc="base0B">{:%H:%M}</span>'';
+          format = "<i>{:%H:%M}</i>";
           tooltip = false;
         };
         "clock#date" = {

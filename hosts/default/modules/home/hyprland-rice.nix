@@ -57,6 +57,11 @@ in {
         font-size: ${str fonts.sizes.terminal}pt;
       }
 
+      i {
+        font-style: normal;
+        color: @base0B;
+      }
+
       window#waybar {
         background-color: rgba(0, 0, 0, 0);
       }
