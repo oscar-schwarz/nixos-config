@@ -106,7 +106,7 @@
 
         # window management
         "$meta, W, killactive"
-        "$meta, M, fullscreen"
+        "$meta, M, fullscreen, 1"
 
         # switch workspaces
         "$meta, J, workspace, r-1"
