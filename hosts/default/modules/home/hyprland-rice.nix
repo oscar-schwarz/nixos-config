@@ -138,7 +138,7 @@ in {
         rounding = border.radius;
 
         blur = {
-          enable = true;
+          enabled = true;
         };
       };
 
