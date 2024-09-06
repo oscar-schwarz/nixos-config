@@ -6,7 +6,7 @@ let
     width = 3;
   };
   margin = 3;
-  terminal-padding = 5;
+  terminal-padding = 7;
 
   brightness-inactive = 0.7;
 
