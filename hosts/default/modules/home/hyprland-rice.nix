@@ -74,6 +74,10 @@ in {
         font-size: ${str fonts.sizes.desktop}px;
       }
 
+      window#waybar {
+        background-color: #00000000;
+      }
+
       box.module {
         border-style: solid;
         border-width: ${str border.width}px;
