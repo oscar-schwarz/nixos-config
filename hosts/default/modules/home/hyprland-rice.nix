@@ -87,9 +87,9 @@ in {
         background-color: rgba(0, 0, 0, 0);
       }
       window {
-        margin-right: ${str margin}px;
-        margin-left: ${str margin}px;
-        margin-top: ${str margin}px;
+        padding-right: ${str margin}px;
+        padding-left: ${str margin}px;
+        padding-top: ${str margin}px;
       }
 
       .module {
