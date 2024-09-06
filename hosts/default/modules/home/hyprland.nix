@@ -26,17 +26,24 @@
 
   programs.waybar = {
     enable = true;
-    # settings = {
-    #   mainBar = {
-    #     height = 35;
-    #     modules-center = [
-    #       "clock"
-    #     ];
-    #     modules-left = [
-    #       "battery"
-    #     ];
-    #   };
-    # };
+    settings = {
+      mainBar = {
+        height = 35;
+        modules-center = [
+          "clock"
+        ];
+        modules-left = [
+          "battery"
+        ];
+
+        battery = {
+          format = ''<div class="icon battery">{icon}</div> {capacity}%'';
+          format-icons = [
+            
+          ];
+        };
+      };
+    };
   };
   stylix.targets.waybar.enable = false;
 
