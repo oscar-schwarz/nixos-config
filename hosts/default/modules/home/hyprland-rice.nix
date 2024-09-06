@@ -104,8 +104,6 @@ in {
         border-radius: ${str border.radius}pt;
         border-color: @base03;
 
-        /* needs additional margin because screen edge */
-        margin-top: ${str margin}px;
         margin-left: ${str margin}px;
         margin-right: ${str margin}px;
 
