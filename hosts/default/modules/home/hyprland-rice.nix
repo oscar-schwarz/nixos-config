@@ -3,7 +3,7 @@
 let
   border = {
     radius = 10;
-    width = 30;
+    width = 3;
   };
   margin = 5;
   terminal-padding = 10;
@@ -94,7 +94,7 @@ in {
       .module {
         border-style: solid;
         border-width: ${str border.width}px;
-        border-radius: ${str border.radius}em;
+        border-radius: ${str border.radius}pt;
         border-color: @base03;
 
         margin-top: ${str margin}px;
