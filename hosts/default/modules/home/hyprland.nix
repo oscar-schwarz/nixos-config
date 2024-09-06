@@ -28,7 +28,7 @@
     enable = true;
     settings = {
       mainBar = {
-        height = 35;
+        height = 30;
         modules-left = [
           "clock"
         ];
