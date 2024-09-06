@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 let
   border = {
@@ -9,6 +9,11 @@ let
 
   brightness-inactive = 0.7;
 
+  fonts = config.stylix.fonts;
+  colors = config.lib.stylix.colors;
+
+  # Some functions
+  str = builtins.toString; # need that a lot
 in {
   # Allow installation of fonts through home.packages
   fonts.fontconfig.enable =  true;
@@ -46,15 +51,40 @@ in {
         battery = {
           format = "<span>{icon}</span> {capacity} %";
           format-icons = [
-            "&#xf240;" # battery-full
-            "&#xf241;" # battery-three-quarters
-            "&#xf242;" # battery-half
-            "&#xf243;" # battery-quarter
             "&#xf244;" # battery-empty
+            "&#xf243;" # battery-quarter
+            "&#xf242;" # battery-half
+            "&#xf241;" # battery-three-quarters
+            "&#xf240;" # battery-full
           ];
         };
       };
     };
+    style = with colors; ''
+      /* Stylix colors */
+      @define-color base00 ${base00}; @define-color base01 ${base01}; @define-color base02 ${base02}; @define-color base03 ${base03};
+      @define-color base04 ${base04}; @define-color base05 ${base05}; @define-color base06 ${base06}; @define-color base07 ${base07};
+
+      @define-color base08 ${base08}; @define-color base09 ${base09}; @define-color base0A ${base0A}; @define-color base0B ${base0B};
+      @define-color base0C ${base0C}; @define-color base0D ${base0D}; @define-color base0E ${base0E}; @define-color base0F ${base0F};
+
+      * {
+        /* `otf-font-awesome` is required to be installed for icons */
+        font-family: FontAwesome, ${fonts.sansSerif.name}, sans-serif;
+        font-size: ${str fonts.sizes.desktop}px;
+      }
+
+      box.module {
+        border-style: solid;
+        border-width: ${str border.width}px;
+        border-radius: ${str border.radius}px;
+        border-color: @base03;
+
+        background-color: @base00;
+
+        color: @base05;
+      }
+    '';
   };
 
   # Hyprland itself
