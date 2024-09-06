@@ -78,7 +78,7 @@ in {
 
       * {
         /* `otf-font-awesome` is required to be installed for icons */
-        font-family: "${fonts.sansSerif.name}";
+        font-family: "${fonts.monospace.name}";
         font-size: ${str fonts.sizes.terminal}pt;
       }
 
