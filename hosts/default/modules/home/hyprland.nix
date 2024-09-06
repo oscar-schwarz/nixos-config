@@ -29,10 +29,10 @@
     settings = {
       mainBar = {
         height = 35;
-        modules-center = [
+        modules-left = [
           "clock"
         ];
-        modules-left = [
+        modules-right = [
           "battery"
         ];
 
