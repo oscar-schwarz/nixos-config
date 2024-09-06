@@ -62,7 +62,7 @@
 
       # --- General ---
       general = let 
-        gaps = 8;
+        gaps = 6;
       in {
         border_size = 3;
         gaps_out = gaps;
