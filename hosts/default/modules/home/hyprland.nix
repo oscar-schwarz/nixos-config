@@ -5,6 +5,8 @@
     wofi-emoji
 
     font-awesome # for waybar icons
+
+    xdg-desktop-portal-hyprland
   ];
 
   # Allow installation of fonts through home.packages

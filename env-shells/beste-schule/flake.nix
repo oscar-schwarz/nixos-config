@@ -84,7 +84,8 @@
           tcpPort = "13306";
           pidFile = ''"$XDG_RUNTIME_DIR"/besteschule-mariadb.pid'';
           socketFile = ''"$XDG_RUNTIME_DIR"/besteschule-mariadb.sock'';
-          dataDir = ''"$PWD/.mariadb-data"'';
+          dataDirRelative = ".mariadb-data";
+          dataDir = ''"$PWD/${mariadbConfig.dataDirRelative}"'';
           
           user = {
             name = "user";
@@ -109,7 +110,7 @@
             ".envrc"
             ".direnv"
             ".pre-commit-config.yaml"
-            mariadbConfig.dataDir
+            mariadbConfig.dataDirRelative
           ];
           pre-commit-config = {
             repos = [
@@ -165,6 +166,8 @@
           APP_ENV = "local";
           APP_URL = "http://${dotEnv.SERVER_HOST}:${dotEnv.SERVER_PORT}";
           APP_KEY = "base64:Igl3VDbdMSWnCDABL7k9ioK8hJ1EKgM25kh6vnxUntQ="; # This has to be set
+
+          VITE_APP_ENV = "debug";
 
           TOKEN_VALID = "14";
           TOKEN_LENGTH = "16";
