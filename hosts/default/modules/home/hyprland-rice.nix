@@ -25,11 +25,10 @@ in {
   # Allow installation of fonts through home.packages
   fonts.fontconfig.enable =  true;
 
-  home.packages = with pkgs; 
-    fonts.packages ++
-  [  
+  home.packages = with pkgs; [  
     # font-awesome # for waybar icons
     font-awesome_5
+    fonts.monospace.package
   ];
 
   # Terminal
