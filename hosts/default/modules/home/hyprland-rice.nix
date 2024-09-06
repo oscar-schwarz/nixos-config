@@ -85,10 +85,11 @@ in {
 
       window#waybar {
         background-color: rgba(0, 0, 0, 0);
-        margin: 0;
       }
       window {
-        margin: 0;
+        margin-right: ${str margin}px;
+        margin-left: ${str margin}px;
+        margin-top: ${str margin}px;
       }
 
       .module {
@@ -97,6 +98,7 @@ in {
         border-radius: ${str border.radius}pt;
         border-color: @base03;
 
+        /* needs additional margin because screen edge */
         margin-top: ${str margin}px;
 
         padding: ${str terminal-padding}px;
