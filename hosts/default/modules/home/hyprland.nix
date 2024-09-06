@@ -39,7 +39,7 @@
         battery = {
           format = "<span>{icon}</span> {capacity}%";
           format-icons = [
-
+            "&#xf240"
           ];
         };
       };
