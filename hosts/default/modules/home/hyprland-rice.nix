@@ -90,11 +90,11 @@ in {
         border-radius: ${str border.radius}px;
         border-color: @base03;
 
-        margin-top: ${str margin};
-        margin-left: ${str margin};
-        margin-right: ${str margin};
+        margin-top: ${str margin}px;
+        margin-left: ${str margin}px;
+        margin-right: ${str margin}px;
 
-        padding: ${str terminal-padding};
+        padding: ${str terminal-padding}px;
 
         background-color: rgba(${rgbString "base00"}, ${str opacity.terminal});
 
