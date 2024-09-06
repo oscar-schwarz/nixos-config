@@ -36,6 +36,7 @@ in {
       sizes = {
         popups = 25;
         desktop = 16;
+        terminal = 16;
         applications = 13;
       };
     };
