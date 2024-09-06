@@ -85,8 +85,6 @@ in {
 
       window#waybar {
         background-color: rgba(0, 0, 0, 0);
-      }
-      window {
         padding-right: ${str margin}px;
         padding-left: ${str margin}px;
         padding-top: ${str margin}px;
