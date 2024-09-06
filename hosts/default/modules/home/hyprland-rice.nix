@@ -91,10 +91,10 @@ in {
         padding-top: ${str (margin*2)}px;
       }
       .modules-left {
-        padding-left: ${str (margin*2)}px;
+        padding-left: ${str margin}px;
       }
       .modules-right {
-        padding-right: ${str (margin*2)}px;
+        padding-right: ${str margin}px;
       }
 
 
@@ -106,6 +106,8 @@ in {
 
         /* needs additional margin because screen edge */
         margin-top: ${str margin}px;
+        margin-left: ${str margin}px;
+        margin-right: ${str margin}px;
 
         padding: ${str terminal-padding}px;
 
