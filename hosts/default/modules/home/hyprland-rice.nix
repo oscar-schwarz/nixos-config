@@ -5,8 +5,8 @@ let
     radius = 10;
     width = 3;
   };
-  margin = 5;
-  terminal-padding = 10;
+  margin = 3;
+  terminal-padding = 5;
 
   brightness-inactive = 0.7;
 
