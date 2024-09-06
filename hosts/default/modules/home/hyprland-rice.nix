@@ -6,14 +6,20 @@ let
     width = 3;
   };
   margin = 3;
+  terminal-padding = 10;
 
   brightness-inactive = 0.7;
 
   fonts = config.stylix.fonts;
   colors = config.lib.stylix.colors;
+  opacity = config.stylix.opacity;
 
   # Some functions
   str = builtins.toString; # need that a lot
+  # Function that takes a base16 color id (like 0A) and outputs a string with rgb values (like "129,89,199)
+  rgbString = colorID:
+      builtins.concatStringsSep ","
+        (map (x: config.lib.stylix.colors."${colorID}-${x}") ["rgb-r" "rgb-g" "rgb-b"]);
 in {
   # Allow installation of fonts through home.packages
   fonts.fontconfig.enable =  true;
@@ -27,7 +33,7 @@ in {
   programs.kitty = {
     settings = {
       # Text is moved a bit inwards, like that its not so close to the border
-      window_padding_width = 10;
+      window_padding_width = terminal-padding;
     };
   };
 
@@ -60,7 +66,7 @@ in {
         };
       };
     };
-    style = with colors.withHashtag; ''
+    style = with colors.withHashtag; with colors;''
       /* Stylix colors */
       @define-color base00 ${base00}; @define-color base01 ${base01}; @define-color base02 ${base02}; @define-color base03 ${base03};
       @define-color base04 ${base04}; @define-color base05 ${base05}; @define-color base06 ${base06}; @define-color base07 ${base07};
@@ -70,8 +76,8 @@ in {
 
       * {
         /* `otf-font-awesome` is required to be installed for icons */
-        font-family: FontAwesome, ${fonts.sansSerif.name}, sans-serif;
-        font-size: ${str fonts.sizes.desktop}px;
+        font-family: FontAwesome, ${fonts.monospace.name}, monospace;
+        font-size: ${str fonts.sizes.terminal}px;
       }
 
       window#waybar {
@@ -84,7 +90,13 @@ in {
         border-radius: ${str border.radius}px;
         border-color: @base03;
 
-        background-color: @base00;
+        margin-top: ${str margin};
+        margin-left: ${str margin};
+        margin-right: ${str margin};
+
+        padding: ${str terminal-padding};
+
+        background-color: rgba(${rgbString "base00"}, ${str opacity.terminal});
 
         color: @base05;
       }
