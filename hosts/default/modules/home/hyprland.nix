@@ -23,6 +23,32 @@
 
   programs.waybar = {
     enable = true;
+    settings = {
+      mainBar = {
+        layer = "top";
+        height = 30;
+        modules-left = [
+
+        ];
+        modules-center = [
+          "clock"
+        ];
+        modules-right = [
+          "battery"
+        ];
+
+        battery = {
+          format = "<span>{icon}</span> {capacity} %";
+          format-icons = [
+            "&#xf244;" # battery-empty
+            "&#xf243;" # battery-quarter
+            "&#xf242;" # battery-half
+            "&#xf241;" # battery-three-quarters
+            "&#xf240;" # battery-full
+          ];
+        };
+      };
+    };
   };
 
   wayland.windowManager.hyprland = {
