@@ -79,13 +79,12 @@ in {
 
       * {
         /* `otf-font-awesome` is required to be installed for icons */
-        font-family: "Source Code Pro";
+        font-family: "${fonts.monospace.name}", monospace;
         font-size: ${str fonts.sizes.terminal}pt;
       }
 
       window#waybar {
         background-color: rgba(0, 0, 0, 0);
-        margin-top: ${str margin}px;
       }
 
       .module {
