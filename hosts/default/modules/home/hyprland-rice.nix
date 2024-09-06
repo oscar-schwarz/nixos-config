@@ -88,13 +88,13 @@ in {
       }
 
       .modules-left, .modules-center, .modules-right {
-        padding-top: ${str margin}px;
+        padding-top: ${str (margin*2)}px;
       }
       .modules-left {
-        padding-left: ${str margin}px;
+        padding-left: ${str (margin*2)}px;
       }
       .modules-right {
-        padding-right: ${str margin}px;
+        padding-right: ${str (margin*2)}px;
       }
 
 
