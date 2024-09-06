@@ -79,13 +79,16 @@ in {
       * {
         /* `otf-font-awesome` is required to be installed for icons */
         font-family: "${fonts.monospace.name}";
-        font-weight: 600;
+        font-weight: 500;
         font-size: ${str fonts.sizes.terminal}pt;
       }
 
       window#waybar {
         background-color: rgba(0, 0, 0, 0);
-        padding: ${str margin}px; 
+        margin: 0;
+      }
+      window {
+        margin: 0;
       }
 
       .module {
