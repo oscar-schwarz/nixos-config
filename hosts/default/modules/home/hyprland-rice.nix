@@ -39,7 +39,7 @@ in {
 
   home.packages = with pkgs; [  
     # font-awesome # for waybar icons
-    font-awesome_5
+    font-awesome
     fonts.monospace.package
   ];
 
@@ -86,7 +86,7 @@ in {
           format-fatal = "{icon}! {capacity} %";
           
           "format-not charging" = "{icon} 100 %";
-          format-charging = (fa "bolt") + " {icon} {capacity} %";
+          format-charging = (fa "bolt") + " {icon}o {capacity} %";
           
           format-icons = map fa [
             "battery-empty"
