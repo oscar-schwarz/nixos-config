@@ -137,7 +137,6 @@ in {
 
 
       /* BATTERY */
-      .module
     '';
   };
 
