@@ -162,7 +162,7 @@ in {
 
       /* SHORT BORDER CHANGE ON UPDATE */
       ${builtins.concatStringsSep "\n" (
-        map (selector: let animationName = "notifyChange" + (filterStr selector ["#" "."]); in ''
+        map (selector: let animationName = "notifyChange" + (filterStr selector ["#" "." "(" ")" ":"]); in ''
           @keyframes ${animationName} {
             0% {
               border-color: @base03;
@@ -175,7 +175,7 @@ in {
             }
           }
           ${selector} {
-            animation: ${animationName} 1.5s ease-in-out;
+            animation: ${animationName} 1.5s ease-out;
             animation-play-state: running;
           } 
         '') [
