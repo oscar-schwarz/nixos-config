@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, config, lib, ... }:
 
 let
   border = {
@@ -33,6 +33,8 @@ let
     battery-empty = "f244";
   };
   fa = name: "&#x" + fa-icons.${name} + ";";
+
+  filterStr = str: cs: builtins.concatStringsSep "" (lib.filter (c: ! builtins.elem c cs) (lib.splitString "" str));
 in {
   # Allow installation of fonts through home.packages
   fonts.fontconfig.enable =  true;
@@ -167,8 +169,8 @@ in {
 
       /* SHORT BORDER CHANGE ON UPDATE */
       ${builtins.concatStringsSep "\n" (
-        map (selector: ''
-          @keyframes notifyChange${selector} {
+        map (selector: let cleanedSelector = filterStr selector ["#" "."]; in ''
+          @keyframes notifyChange${cleanedSelector} {
             0% {
               border-color: @base03;
             }
