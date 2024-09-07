@@ -77,8 +77,6 @@ in {
         # Module settings
         battery = {
           states = {
-            full = 100;
-            fine = 90;
             warning = 30;
             critical = 15;
             fatal = 5;
@@ -87,7 +85,6 @@ in {
           format = "{icon} {capacity} %";
           format-fatal = "{icon}! {capacity} %";
           
-          "format-not-charging" = "{icon} 100 %";
           format-charging = (fa "bolt") + " {icon} {capacity} %";
           
           format-icons = map fa [
@@ -193,7 +190,7 @@ in {
       )}
 
       /* BATTERY */
-      label#battery.not-charging {
+      label#battery:not(.charging):not(.discharging) {
         color: @base0B;
       }
       #battery.warning {
