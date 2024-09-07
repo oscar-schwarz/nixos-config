@@ -167,13 +167,17 @@ in {
 
       /* SHORT BORDER CHANGE ON UPDATE */
       @keyframes notifyChange {
-        0%, 100% {
+        0% {
           border-color: @base03;
         }
         50% {
           border-color: @base0D;
         }
+        100% {
+          border-color: @base03;
+        }
       }
+
       #battery.charging, #battery.not-charging {
         animation: notifyChange 0.5s ease-in-out forwards;
       }
