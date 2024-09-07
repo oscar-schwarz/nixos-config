@@ -84,8 +84,10 @@ in {
 
           format = "{icon} {capacity} %";
           format-fatal = "{icon}! {capacity} %";
+          
           "format-not charging" = "{icon} 100 %";
-          format-charging = "{icon}${fa "bolt"} {capacity} %";
+          format-charging = (fa "bolt") + " {icon} {capacity} %";
+          
           format-icons = map fa [
             "battery-empty"
             "battery-quarter"
@@ -93,6 +95,8 @@ in {
             "battery-three-quarters"
             "battery-full"
           ];
+
+          interval = 2;
         };
 
         "clock#time" = {
