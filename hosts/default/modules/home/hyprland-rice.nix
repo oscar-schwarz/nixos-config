@@ -166,7 +166,9 @@ in {
 
 
       /* BATTERY */
-      #battery. 
+      #battery.full {
+        color: @base0B;
+      }
     '';
   };
 
