@@ -158,7 +158,6 @@ in {
 
 
       /* BATTERY */
-      battery.
     '';
   };
 
