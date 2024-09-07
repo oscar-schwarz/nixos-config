@@ -175,7 +175,7 @@ in {
             }
           }
           ${selector} {
-            animation: ${animationName} 1.5s ease-out;
+            animation: ${animationName} 1s ease;
             animation-play-state: running;
           } 
         '') [
