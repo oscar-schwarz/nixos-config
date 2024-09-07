@@ -166,8 +166,8 @@ in {
       }
 
       /* SHORT BORDER CHANGE ON UPDATE */
-      ${
-        builtins.concatStringsSep "\n" (map (selector: ''
+      ${builtins.concatStringsSep "\n" (
+        map (selector: ''
           @keyframes notifyChange${selector} {
             0% {
               border-color: @base03;
@@ -187,8 +187,8 @@ in {
           "#battery.charging" 
           "#battery.not-charging"
           "#battery.discharging"
-        ])
-      }
+        ]
+      )}
 
       /* BATTERY */
       #battery.not-charging {
