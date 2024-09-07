@@ -131,7 +131,13 @@ in {
         background-color: rgba(${rgbString "base00"}, ${str opacity.terminal});
 
         color: @base05;
+
+        box-shadow: 0 0 #ffffff
       }
+
+
+      /* BATTERY */
+      .module
     '';
   };
 
