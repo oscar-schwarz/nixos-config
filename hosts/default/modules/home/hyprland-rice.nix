@@ -179,6 +179,7 @@ in {
             animation-play-state: running;
           } 
         '') [
+          "#battery:not(.charging):not(.discharging)"
           "#battery.charging"
           "#battery.discharging"
           "#battery.warning"
