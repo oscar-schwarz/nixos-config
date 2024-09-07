@@ -179,7 +179,8 @@ in {
       }
 
       #battery.charging, #battery.not-charging, #battery.discharging {
-        animation: notifyChange 1s ease-in-out forwards;
+        animation: notifyChange 1s ease-in-out;
+        animation-play-state: running;
       }
 
       /* BATTERY */
