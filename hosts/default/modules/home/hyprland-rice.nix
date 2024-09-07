@@ -21,6 +21,18 @@ let
   rgbString = colorID:
       builtins.concatStringsSep ","
         (map (x: config.lib.stylix.colors."${colorID}-${x}") ["rgb-r" "rgb-g" "rgb-b"]);
+
+  # Set of font awesome name and unicode code
+  fa-icons = {
+    bolt = "f0e7";
+
+    battery-full = "f240";
+    battery-three-quarters = "f241";
+    battery-half = "f242";
+    battery-quarter = "f243";
+    battery-empty = "f244";
+  };
+  fa = name: "&#x" + fa-icons.${name} + ";";
 in {
   # Allow installation of fonts through home.packages
   fonts.fontconfig.enable =  true;
@@ -52,7 +64,7 @@ in {
 
         ];
         modules-center = [
-          "clock"
+          "clock#time"
           "clock#date"
         ];
         modules-right = [
@@ -62,18 +74,29 @@ in {
 
         # Module settings
         battery = {
-          format = "<span>{icon}</span> {capacity} %";
-          format-icons = [
-            "&#xf244;" # battery-empty
-            "&#xf243;" # battery-quarter
-            "&#xf242;" # battery-half
-            "&#xf241;" # battery-three-quarters
-            "&#xf240;" # battery-full
+          states = {
+            full = 100;
+            fine = 90;
+            warning = 30;
+            critical = 15;
+            fatal = 5;
+          };
+
+          format = "{icon} {capacity} %";
+          format-fatal = "{icon}! {capacity} %";
+          "format-not charging" = "{icon} 100 %";
+          format-charging = "{icon}${fa "bolt"} {capacity} %";
+          format-icons = map fa [
+            "battery-empty"
+            "battery-quarter"
+            "battery-half"
+            "battery-three-quarters"
+            "battery-full"
           ];
         };
 
-        clock = {
-          format = ''<span color="${colors.withHashtag.base0B}">{:%H:%M}</span>'';
+        "clock#time" = {
+          format = "{:%H:%M}";
           tooltip = false;
         };
         "clock#date" = {
@@ -93,7 +116,7 @@ in {
       * {
         /* `otf-font-awesome` is required to be installed for icons */
         font-family: "${fonts.monospace.name}";
-        font-weight: 500;
+        font-weight: 550;
         font-size: ${str fonts.sizes.terminal}pt;
       }
 
@@ -131,12 +154,11 @@ in {
         background-color: rgba(${rgbString "base00"}, ${str opacity.terminal});
 
         color: @base05;
-
-        box-shadow: 0 0 #ffffff;
       }
 
 
       /* BATTERY */
+      battery.
     '';
   };
 
