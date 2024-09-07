@@ -87,7 +87,7 @@ in {
           format = "{icon} {capacity} %";
           format-fatal = "{icon}! {capacity} %";
           
-          "format-not charging" = "{icon} 100 %";
+          "format-not-charging" = "{icon} 100 %";
           format-charging = (fa "bolt") + " {icon} {capacity} %";
           
           format-icons = map fa [
