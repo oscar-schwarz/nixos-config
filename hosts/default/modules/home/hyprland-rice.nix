@@ -144,6 +144,7 @@ in {
       }
 
 
+      /* BASE STYLE OF MODULES */
       .module {
         border-style: solid;
         border-width: ${str border.width}px;
@@ -161,13 +162,34 @@ in {
 
         transition-property: all;
         transition-duration: 0.1s;
-        transition-timing-function: ease;
+        transition-timing-function: ease-in-out;
       }
 
+      /* SHORT BORDER CHANGE ON UPDATE */
+      @keyframes notifyChange {
+        0%, 100% {
+          border-color: @base03;
+        }
+        50% {
+          border-color: @base0D;
+        }
+      }
+      #battery.charging, #battery.not-charging {
+        animation: notifyChange 0.5s ease-in-out forwards;
+      }
 
       /* BATTERY */
-      #battery.full {
+      #battery.not-charging {
         color: @base0B;
+      }
+      #battery.warning {
+        color: @base0A;
+      }
+      #battery.critical {
+        color: @base09;
+      }
+      #battery.fatal {
+        color: @base08;
       }
     '';
   };
