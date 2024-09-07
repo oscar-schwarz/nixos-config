@@ -187,13 +187,13 @@ in {
           } 
         '') [
           "#battery.charging" 
-          "#battery.not-charging"
+          "#battery.not_charging"
           "#battery.discharging"
         ]
       )}
 
       /* BATTERY */
-      #battery.not-charging {
+      #battery.not_charging {
         color: @base0B;
       }
       #battery.warning {
