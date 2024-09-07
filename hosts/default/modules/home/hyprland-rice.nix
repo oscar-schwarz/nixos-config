@@ -166,21 +166,28 @@ in {
       }
 
       /* SHORT BORDER CHANGE ON UPDATE */
-      @keyframes notifyChange {
-        0% {
-          border-color: @base03;
-        }
-        50% {
-          border-color: @base0D;
-        }
-        100% {
-          border-color: @base03;
-        }
-      }
-
-      #battery.charging, #battery.not-charging, #battery.discharging {
-        animation: notifyChange 1s ease-in-out;
-        animation-play-state: running;
+      ${
+        builtins.concatStringsSep "\n" (map (selector: ''
+          @keyframes notifyChange${selector} {
+            0% {
+              border-color: @base03;
+            }
+            50% {
+              border-color: @base0D;
+            }
+            100% {
+              border-color: @base03;
+            }
+          }
+          ${selector} {
+            animation: notifyChange 1s ease-in-out;
+            animation-play-state: running;
+          } 
+        '') [
+          "#battery.charging" 
+          "#battery.not-charging"
+          "#battery.discharging"
+        ])
       }
 
       /* BATTERY */
