@@ -132,7 +132,7 @@ in {
 
         color: @base05;
 
-        box-shadow: 0 0 #ffffff
+        box-shadow: 0 0 #ffffff;
       }
 
 
