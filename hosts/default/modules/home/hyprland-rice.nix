@@ -158,10 +158,6 @@ in {
         background-color: rgba(${rgbString "base00"}, ${str opacity.terminal});
 
         color: @base05;
-
-        transition-property: all;
-        transition-duration: 0.1s;
-        transition-timing-function: ease-in-out;
       }
 
       /* SHORT BORDER CHANGE ON UPDATE */
@@ -179,13 +175,15 @@ in {
             }
           }
           ${selector} {
-            animation: ${animationName} 1s ease-in-out;
+            animation: ${animationName} 1.5s ease-in-out;
             animation-play-state: running;
           } 
         '') [
-          "#battery.charging" 
-          "#battery.not_charging"
+          "#battery.charging"
           "#battery.discharging"
+          "#battery.warning"
+          "#battery.critical"
+          "#battery.fatal"
         ]
       )}
 
