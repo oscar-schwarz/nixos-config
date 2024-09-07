@@ -193,7 +193,7 @@ in {
       )}
 
       /* BATTERY */
-      #battery.not_charging {
+      #battery.not.charging {
         color: @base0B;
       }
       #battery.warning {
