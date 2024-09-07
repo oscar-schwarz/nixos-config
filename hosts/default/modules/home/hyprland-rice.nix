@@ -86,7 +86,7 @@ in {
           format-fatal = "{icon}! {capacity} %";
           
           "format-not charging" = "{icon} 100 %";
-          format-charging = (fa "bolt") + " {icon}o {capacity} %";
+          format-charging = (fa "bolt") + " {icon} {capacity} %";
           
           format-icons = map fa [
             "battery-empty"
@@ -158,10 +158,15 @@ in {
         background-color: rgba(${rgbString "base00"}, ${str opacity.terminal});
 
         color: @base05;
+
+        transition-property: all;
+        transition-duration: 0.1s;
+        transition-timing-function: ease;
       }
 
 
-      /* BATTERY */ 
+      /* BATTERY */
+      #battery. 
     '';
   };
 
