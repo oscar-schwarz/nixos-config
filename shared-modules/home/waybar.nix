@@ -87,6 +87,7 @@ in {
         };
 
         "custom/hypridle-toggle" = {
+          format = "{} " + (fa "display");
           exec = pkgs.writeShellScript "" ''
             if [ -z "$(pidof hypridle)" ]; then 
               echo ${fa "moon"}
