@@ -92,10 +92,12 @@ in {
         
           defaultStyle = ''
             border-color: @base03;          
+            min-width: 1rem;
           '';
 
           emphasizedStyle = ''
             border-color: @base0D;
+            min-width: 10rem;
           '';
         in ''
           @keyframes ${animationName} {
