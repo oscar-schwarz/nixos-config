@@ -1,6 +1,15 @@
 { pkgs, lib, ... }:
 
-{
+let 
+  execIfNotRunning = command: lib.getExe (pkgs.writeShellApplication {
+    name = "if-not-running";
+    text = ''
+      if [ "$(pidof ${builtins.elemAt (lib.splitString " " command) 0})" = "" ]; then
+        ${command}
+      fi
+    '';
+  });
+in {
   imports = [
     ./hyprland-rice.nix
   ];
@@ -93,16 +102,7 @@
 
         perDirection = keyByDirection: f: builtins.map (x: f x (keyByDirection."${x}")) directions;
         perDirectionLetter = perDirection lettersByDirection;  
-        perDirectionArrow = perDirection arrowsByDirection;
-
-        openOrNotWofi = pkgs.writeShellApplication {
-          name = "open-or-not-wofi";
-          text = ''
-            if [ "$(pidof wofi)" = "" ]; then
-             wofi --show drun
-            fi
-          '';
-        }; 
+        perDirectionArrow = perDirection arrowsByDirection; 
       in 
       (perDirectionLetter (dir: key: "$meta, ${key}, movefocus, ${dir}")) ++
       (perDirectionLetter (dir: key: "$meta_CTRL, ${key}, movewindow, ${dir}")) ++
@@ -112,7 +112,7 @@
         "$meta, E, exec, firefox"
 
         # launcher
-        "$meta, O, exec, ${lib.getExe openOrNotWofi}"
+        "$meta, O, exec, ${execIfNotRunning "wofi --show drun"}"
         # emoji
         "$meta, U, exec, wofi-emoji"
 
@@ -141,7 +141,7 @@
       # locked, also works on a lockscreen
       bindl = [
         # switch behaviour
-        ", switch:Lid Switch, exec, hyprlock"
+        ", switch:Lid Switch, exec, ${execIfNotRunning "hyprlock"}" # lock device on lid close
         '', switch:off:Lid Switch, exec, hyprctl keyword monitor "eDP-1"''
         '', switch:on:Lid Switch, exec, hyprctl keyword monitor "eDP-1, disable"''
       ]; 

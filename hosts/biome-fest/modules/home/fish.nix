@@ -19,6 +19,7 @@
     shellAliases = {
       lg = "lazygit";
       logout = "hyprctl dispatch exit 1";
+      c = "codium";
     };
     functions = {
       ask = ''
