@@ -18,7 +18,6 @@ in {
 
   home.packages = with pkgs; [
     wofi-emoji
-    xdg-desktop-portal-hyprland
   ];
 
   programs.kitty = {
