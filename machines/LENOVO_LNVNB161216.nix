@@ -37,6 +37,7 @@
   # Power management
   powerManagement.enable = true;
   security.protectKernelImage = false;
+  boot.resumeDevice = "/dev/disk/by-partlabel/Swap";
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
