@@ -91,13 +91,14 @@ in {
           animationName = "notifyChange" + (filterStr selector ["#" "."]); 
         
           defaultStyle = ''
-            border-color: @base03;
+            border-color: @base03;          
+            min-width: 2rem;
           '';
 
           emphasizedStyle = ''
             background-color: rgba(${rgbString "base00"}, ${str opacity.terminal});
             border-color: @base0D;
-            transform: scale(1.1);
+            min-width: 10rem;
           '';
         in ''
           @keyframes ${animationName} {
