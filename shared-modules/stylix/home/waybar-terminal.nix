@@ -102,10 +102,10 @@ in {
             0% {
               ${defaultStyle}
             }
-            25% {
+            10% {
               ${emphasizedStyle}
             }
-            75% {
+            90% {
               ${emphasizedStyle}
             }
             100% {
