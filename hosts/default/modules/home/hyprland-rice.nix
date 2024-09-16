@@ -154,14 +154,16 @@ in {
 
         padding: ${str terminal-padding}px;
 
-        background-color: rgba(${rgbString "base00"}, ${str opacity.terminal});
+        background-color: rgba(${rgbString "base00"}, ${str (opacity.terminal * 0.7)});
 
         color: @base05;
+
+        transition: all 0.3s ease;
       }
 
       .module:hover {
         border-color: @base0D;
-        background-color: @base00;
+        background-color: rgba(${rgbString "base00"}, ${str opacity.terminal});
       }
 
 
