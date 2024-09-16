@@ -25,6 +25,18 @@
     enable = true;
   };
 
+  programs.hyprlock = {
+    enable = true;
+    settings = {
+      background = {
+        monitor = "";
+        path = "screenshot";
+        blur_passes = 1;
+        blur_size = 7;
+      };
+    };
+  };
+
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
