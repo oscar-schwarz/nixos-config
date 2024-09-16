@@ -139,15 +139,24 @@ in {
       # locked, also works on a lockscreen
       bindl = let
         closeLid = pkgs.writeShellScript "" ''
-          # Run hyprlock
+          # Run hyprlock if not started
           pidof hyperlock || hyprlock
-          #     
+          
+          # disable monitor     
           hyprctl keyword monitor "eDP-1" disable
+        '';
+
+        openLid = pkgs.writeShellScript "" ''
+          # Enable monitor
+          hyprctl keyword monitor "eDP-1"
+
+          # Run hyprlock if not started
+          pidof hyprlock || hyprlock
         '';
       in [
         # switch behaviour
-        ",  switch:on:Lid Switch, exec, ${closeLid}"
-        '', switch:off:Lid Switch, exec, hyprctl keyword monitor "eDP-1"''
+        ", switch:on:Lid Switch, exec, ${closeLid}"
+        ", switch:off:Lid Switch, exec, ${openLid}"
       ]; 
     };
   };
