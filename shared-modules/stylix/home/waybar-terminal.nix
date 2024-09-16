@@ -105,10 +105,10 @@ in {
             0% {
               ${defaultStyle}
             }
-            10% {
+            20% {
               ${emphasizedStyle}
             }
-            90% {
+            80% {
               ${emphasizedStyle}
             }
             100% {
@@ -116,7 +116,7 @@ in {
             }
           }
           ${selector} {
-            animation: ${animationName} 3s ease-in-out;
+            animation: ${animationName} 2s ease-in-out;
             animation-play-state: running;
           } 
         '') [
