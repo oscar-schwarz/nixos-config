@@ -138,6 +138,8 @@ in {
         "$meta, O, exec, pidof wofi || wofi --show drun"
         # emoji
         "$meta, U, exec, pidof wofi || wofi-emoji"
+        # lock screen
+        "$meta, L, exec, pidof hyprlock || hyprlock"
 
         # window management
         "$meta, W, killactive"
