@@ -32,7 +32,7 @@
         monitor = "";
         path = "screenshot";
         blur_passes = 2;
-        blur_size = 7;
+        blur_size = 15;
       };
     };
   };
