@@ -35,7 +35,7 @@
   sops.defaultSopsFile = ../../secrets.yaml;
   sops.defaultSopsFormat = "yaml";
 
-  # set default shell
+  # configure fish and set default shell
   programs.fish = {
     enable = true;
     interactiveShellInit = ''
