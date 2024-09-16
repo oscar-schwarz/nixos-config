@@ -42,6 +42,7 @@ in {
           "clock#date"
         ];
         modules-right = [
+          "idle-inhibitor"
           "battery"
         ];
 
