@@ -93,6 +93,7 @@ in {
           format = "{} " + (fa "display");
           interval = 1;
           exec = pkgs.writeShellScript "test-script" ''
+            set +e
             if [ -z "$(pidof hypridle)" ]; then 
               echo """${fa "moon"}"""
             else
