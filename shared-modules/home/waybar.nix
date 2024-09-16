@@ -86,8 +86,12 @@ in {
           tooltip = false;
         };
 
-        "custom/hypridle_toggle" = {
+        "custom/hypridle_toggle" = let 
+          signal = 5;
+        in {
+          inherit signal;
           format = "{} " + (fa "display");
+          interval = 1;
           exec = pkgs.writeShellScript "" ''
             if [ -z "$(pidof hypridle)" ]; then 
               echo ${fa "moon"}
@@ -103,6 +107,9 @@ in {
             else
               kill "$PID"
             fi
+
+            # notify this very module
+            kill -s SIGRTMIN+${builtins.toString signal} "$(pidof waybar)"
           '';
         };
       };
