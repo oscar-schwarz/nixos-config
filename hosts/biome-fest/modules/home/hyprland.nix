@@ -1,14 +1,11 @@
 { pkgs, lib, ... }:
 
 let 
-  execIfNotRunning = command: lib.getExe (pkgs.writeShellApplication {
-    name = "if-not-running";
-    text = ''
+  execIfNotRunning = command: pkgs.writeShellScript "" ''
       if [ "$(pidof ${builtins.elemAt (lib.splitString " " command) 0})" = "" ]; then
         ${command}
       fi
     '';
-  });
 in {
   imports = [
     ./hyprland-rice.nix
@@ -139,11 +136,17 @@ in {
       ];
 
       # locked, also works on a lockscreen
-      bindl = [
+      bindl = let
+        closeLid = pkgs.writeShellScript "" ''
+          # Run hyprlock
+          ${execIfNotRunning "hyprlock"}
+          #     
+          hyprctl keyword monitor "eDP-1" disable
+        '';
+      in [
         # switch behaviour
-        ", switch:Lid Switch, exec, ${execIfNotRunning "hyprlock"}" # lock device on lid close
+        ",  switch:on:Lid Switch, exec, ${closeLid}"
         '', switch:off:Lid Switch, exec, hyprctl keyword monitor "eDP-1"''
-        '', switch:on:Lid Switch, exec, hyprctl keyword monitor "eDP-1, disable"''
       ]; 
     };
   };

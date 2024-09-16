@@ -1,4 +1,4 @@
-{ pkgs, inputs, lib, ... }:
+{ pkgs, lib, ... }:
 
 {
   # Import system modules
@@ -22,6 +22,8 @@
 
   # List packages installed in system profile
   environment.systemPackages = with pkgs; [
+    brightnessctl
+    
     android-tools
     wineWowPackages.waylandFull
   ];
