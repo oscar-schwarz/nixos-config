@@ -144,8 +144,8 @@ in {
         "$meta, D, resizeactive, ${resizeFactor} ${resizeFactor}"
         
         # Brightness keys
-        ", code:233, exec, brightnessctl +5%"
-        ", code:232, exec, brightnessctl 5%-"
+        ", code:233, exec, brightnessctl set +5%"
+        ", code:232, exec, brightnessctl set 5%-"
       ];
 
       # locked, also works on a lockscreen
