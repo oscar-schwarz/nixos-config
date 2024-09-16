@@ -31,7 +31,7 @@
       background = {
         monitor = "";
         path = "screenshot";
-        blur_passes = 2;
+        blur_passes = 3;
         blur_size = 15;
       };
     };
