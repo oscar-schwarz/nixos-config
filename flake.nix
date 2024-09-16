@@ -11,6 +11,18 @@
        inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Tiling window manager
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Hyprland plugin for touchscreen support
+    hyprglass = {
+      url = "github:horriblename/hyprgrass";
+      inputs.hyprland.follows = "hyprland";
+    };
+
     # Plasma manager a nice way to setup KDE declaratively
     plasma-manager = {
       url = "github:pjones/plasma-manager";
@@ -28,6 +40,7 @@
     # Secret management
     sops-nix = {
       url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Flake programs.sqlite, fixes the command-not-found error on flake systems
@@ -42,10 +55,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    custom-udev-rules.url = "github:MalteT/custom-udev-rules";
+    # Better udev nix interface
+    custom-udev-rules = {
+      url = "github:MalteT/custom-udev-rules";
+    };
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: {
+  outputs = { nixpkgs, ... }@inputs: {
     nixosConfigurations = { 
       default = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs;};
