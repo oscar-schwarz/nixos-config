@@ -50,8 +50,10 @@ in {
   services.hypridle = {
     enable = true;
     settings = {
-      lock_cmd = "pidof hyprlock || hyprlock";
-      
+      general = {
+        lock_cmd = "pidof hyprlock || hyprlock";
+
+      };
     };
   };
 
@@ -155,12 +157,12 @@ in {
           pidof hyperlock || hyprlock 
           
           # disable monitor     
-          hyprctl keyword monitor "eDP-1" disable
+          systemctl suspend
         '';
 
         openLid = pkgs.writeShellScript "" ''
           # Enable monitor
-          hyprctl keyword monitor "eDP-1"
+          systemctl suspend
 
           # Run hyprlock if not started
           pidof hyprlock || hyprlock 
