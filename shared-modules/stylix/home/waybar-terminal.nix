@@ -113,7 +113,7 @@ in {
             }
           }
           ${selector} {
-            animation: ${animationName} 1s ease-in-out;
+            animation: ${animationName} 3s ease-in-out;
             animation-play-state: running;
           } 
         '') [
