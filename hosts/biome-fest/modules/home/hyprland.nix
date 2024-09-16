@@ -151,7 +151,7 @@
         "$meta_CTRL, H, movetoworkspace, r+1"
 
         # Taking screenshots
-        "$meta, A, exec, hyprshot -m active --clipboard-only"
+        "$meta, A, exec, hyprshot -m window -m active --clipboard-only"
         "$meta_CTRL, A, exec, hyprshot -m region --clipboard-only"
         "$meta, Z, exec, hyprshot -m output --clipboard-only"
       ];
