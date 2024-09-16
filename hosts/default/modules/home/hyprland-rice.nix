@@ -53,7 +53,7 @@ in {
     };
   };
 
-  # Waybar is ric
+  # Waybar is rice
   stylix.targets.waybar.enable = false; # turn off stylix ricing that style.css can be changed
   programs.waybar = {
     settings = {
@@ -109,13 +109,15 @@ in {
       };
     };
     style = with colors.withHashtag;''
-      /* Stylix colors */
+      /* STYLIX COLORS */
       @define-color base00 ${base00}; @define-color base01 ${base01}; @define-color base02 ${base02}; @define-color base03 ${base03};
       @define-color base04 ${base04}; @define-color base05 ${base05}; @define-color base06 ${base06}; @define-color base07 ${base07};
 
       @define-color base08 ${base08}; @define-color base09 ${base09}; @define-color base0A ${base0A}; @define-color base0B ${base0B};
       @define-color base0C ${base0C}; @define-color base0D ${base0D}; @define-color base0E ${base0E}; @define-color base0F ${base0F};
 
+
+      /* FONT SETTINGS */
       * {
         /* `otf-font-awesome` is required to be installed for icons */
         font-family: "${fonts.monospace.name}";
@@ -123,12 +125,9 @@ in {
         font-size: ${str fonts.sizes.terminal}pt;
       }
 
-      i {
-        font-style: normal;
-        color: @base0B;
-      }
 
       window#waybar {
+        /* transparent background */
         background-color: rgba(0, 0, 0, 0);
       }
 
@@ -160,33 +159,11 @@ in {
         color: @base05;
       }
 
-      /* SHORT BORDER CHANGE ON UPDATE */
-      ${builtins.concatStringsSep "\n" (
-        map (selector: let animationName = "notifyChange" + (filterStr selector ["#" "." "(" ")" ":"]); in ''
-          @keyframes ${animationName} {
-            0% {
-              border-color: @base03;
-            }
-            50% {
-              border-color: @base0D;
-            }
-            100% {
-              border-color: @base03;
-            }
-          }
-          ${selector} {
-            animation: ${animationName} 1s ease;
-            animation-play-state: running;
-          } 
-        '') [
-          "#battery:not(.charging):not(.discharging)"
-          "#battery.charging"
-          "#battery.discharging"
-          "#battery.warning"
-          "#battery.critical"
-          "#battery.fatal"
-        ]
-      )}
+      .module:hover {
+        border-color: @base0D;
+        background-color: @base00;
+      }
+
 
       /* BATTERY */
       label#battery:not(.charging):not(.discharging) {
