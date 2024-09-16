@@ -1,12 +1,6 @@
 { pkgs, lib, ... }:
 
-let 
-  execIfNotRunning = command: pkgs.writeShellScript "" ''
-      if [ "$(pidof ${builtins.elemAt (lib.splitString " " command) 0})" = "" ]; then
-        ${command}
-      fi
-    '';
-in {
+{
   imports = [
     # Styled
     ./hyprland-rice.nix
@@ -18,6 +12,7 @@ in {
 
   home.packages = with pkgs; [
     wofi-emoji
+    hyprshot
   ];
 
   programs.kitty = {
@@ -75,6 +70,10 @@ in {
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
+      exec-once = [
+        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+      ];
+
       # --- Display setup
       monitor = let
         # Sometimes the portable monitor is listed under different names
@@ -150,6 +149,11 @@ in {
         # move window to workspaces
         "$meta_CTRL, J, movetoworkspace, r-1"
         "$meta_CTRL, H, movetoworkspace, r+1"
+
+        # Taking screenshots
+        "$meta, A, exec, hyprshot -m region --clipboard-only"
+        "$meta_CTRL, A, exec, hyprshot -m active --clipboard-only"
+        "$meta, Z, exec, hyprshot -m output --clipboard-only"
       ];
 
       # Binds here will be repeated on press
