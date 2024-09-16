@@ -105,7 +105,7 @@ in {
             if [ -z "$PID" ]; then
               ${lib.getExe pkgs.hypridle} &
             else
-              kill "$PID"
+              pkill hypridle
             fi
 
             # notify this very module
