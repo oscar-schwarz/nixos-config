@@ -91,7 +91,7 @@ in {
         in {
           inherit signal;
           format = "{} " + (fa "display");
-          interval = 1;
+          interval = "once";
           exec = pkgs.writeShellScript "test-script" ''
             set +e
             if [ -z "$(pidof hypridle)" ]; then 
