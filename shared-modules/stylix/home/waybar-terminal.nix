@@ -116,7 +116,7 @@ in {
             }
           }
           ${selector} {
-            animation: ${animationName} 2s ease-in-out;
+            animation: ${animationName} 2s ease;
             animation-play-state: running;
           } 
         '') [
