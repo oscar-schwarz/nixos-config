@@ -1,4 +1,3 @@
-  
 { 
   border ? {
     radius = 10;
@@ -7,7 +6,7 @@
   margin ? 3,
   terminal-padding ? 7,
 
-  config, ... 
+  config, lib, ... 
 }:
 
 let
@@ -23,7 +22,7 @@ let
       builtins.concatStringsSep ","
         (map (x: config.lib.stylix.colors."${colorID}-${x}") ["rgb-r" "rgb-g" "rgb-b"]);
 
-
+  filterStr = str: cs: builtins.concatStringsSep "" (lib.filter (c: ! builtins.elem c cs) (lib.splitString "" str));
 in {
   stylix.targets.waybar.enable = false; # turn off stylix ricing that style.css can be changed
   programs.waybar = {
@@ -84,6 +83,45 @@ in {
         border-color: @base0D;
         background-color: rgba(${rgbString "base00"}, ${str opacity.terminal});
       }
+
+      /* SHORT BORDER CHANGE ON UPDATE */
+      ${builtins.concatStringsSep "\n" (
+        map (selector: 
+        let 
+          animationName = "notifyChange" + (filterStr selector ["#" "."]); 
+        
+          defaultStyle = ''
+            border-color: @base03;          
+          '';
+
+          emphasizedStyle = ''
+            border-color: @base0D;
+          '';
+        in ''
+          @keyframes ${animationName} {
+            0% {
+              ${defaultStyle}
+            }
+            25% {
+              ${emphasizedStyle}
+            }
+            75% {
+              ${emphasizedStyle}
+            }
+            100% {
+              ${defaultStyle}
+            }
+          }
+          ${selector} {
+            animation: ${animationName} 1s ease-in-out;
+            animation-play-state: running;
+          } 
+        '') [
+          "#battery.charging" 
+          "#battery.not_charging"
+          "#battery.discharging"
+        ]
+      )}
 
 
       /* BATTERY */
