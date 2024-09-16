@@ -61,26 +61,25 @@
     };
   };
 
-  outputs = { nixpkgs, ... }@inputs: {
-    nixosConfigurations = { 
-      default = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs;};
-        modules = with inputs; [
-          # Loading my configuration that loads all .nix files
-          ./hosts/default/configuration.nix
+  outputs = { nixpkgs, ... }@inputs: 
+    let 
+      lib = nixpkgs.lib;
+      configsPath = ./hosts;
 
-          # Modules
-          home-manager.nixosModules.default
-          stylix.nixosModules.stylix
-          flake-programs-sqlite.nixosModules.programs-sqlite
-          custom-udev-rules.nixosModule
-        ];
-      };
-
-      server = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs;};
-        modules = [./hosts/server/configuration.nix];
-      };
-    };
+      # filter all items in configsPath to be only folders
+      dirContent = builtins.readDir configsPath;
+      configNames = builtins.filter 
+        (x: (builtins.getAttr x dirContent) == "directory" ) 
+        (builtins.attrNames dirContent);
+    in {
+    nixosConfigurations = lib.attrsets.genAttrs configNames 
+      (name: lib.nixosSystem {
+          specialArgs = {inherit inputs;};
+          modules = [
+            # Loading the configuration
+            (configsPath + "/${name}/configuration.nix")
+          ];
+        }
+      );
   };
 }

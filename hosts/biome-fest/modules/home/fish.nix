@@ -4,10 +4,6 @@
   # terminal that makes me wet
   programs.fish = {
     enable = true;
-    interactiveShellInit = ''
-      # disable the greeting
-      set fish_greeting
-    '';
     plugins = [
       # A nice theme
       {
@@ -42,7 +38,7 @@
         cd ~/nixos
         git add *
 
-        sudo nixos-rebuild --flake ~/nixos#default $argv
+        sudo nixos-rebuild --flake ~/nixos#biome-fest $argv
 
         # only commit if succeeded
         if test $status -eq 0

@@ -1,11 +1,17 @@
 { pkgs, inputs, ... }:
 
 {
-  imports = [
+  imports = with inputs; [
     # import home-manager
-    inputs.home-manager.nixosModules.default
+    home-manager.nixosModules.default
     # secret management
-    inputs.sops-nix.nixosModules.sops
+    sops-nix.nixosModules.sops
+    # stylix rice
+    stylix.nixosModules.stylix
+    # fix for program not found
+    flake-programs-sqlite.nixosModules.programs-sqlite
+    # easier udev config
+    custom-udev-rules.nixosModule
   ];
   
   # Enable flakes
@@ -30,7 +36,13 @@
   sops.defaultSopsFormat = "yaml";
 
   # set default shell
-  programs.fish.enable = true;
+  programs.fish = {
+    enable = true;
+    interactiveShellInit = ''
+      # disable the greeting
+      set fish_greeting
+    '';
+  };
   users.defaultUserShell = pkgs.fish;
 
   environment.variables = { 
