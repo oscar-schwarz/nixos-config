@@ -94,9 +94,9 @@ in {
           interval = 1;
           exec = pkgs.writeShellScript "test-script" ''
             if [ -z "$(pidof hypridle)" ]; then 
-              echo ${fa "moon"}
+              echo """${fa "moon"}"""
             else
-              echo ${fa "mug-hot"}
+              echo """${fa "mug-hot"}"""
             fi
           '';
           on-click = pkgs.writeShellScript "" ''
