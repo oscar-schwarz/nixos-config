@@ -140,7 +140,7 @@ in {
       bindl = let
         closeLid = pkgs.writeShellScript "" ''
           # Run hyprlock if not started
-          pidof hyperlock || hyprlock
+          pidof hyperlock || hyprlock --immediate
           
           # disable monitor     
           hyprctl keyword monitor "eDP-1" disable
@@ -151,7 +151,7 @@ in {
           hyprctl keyword monitor "eDP-1"
 
           # Run hyprlock if not started
-          pidof hyprlock || hyprlock
+          pidof hyprlock || hyprlock --immediate
         '';
       in [
         # switch behaviour
