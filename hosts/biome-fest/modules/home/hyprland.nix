@@ -111,11 +111,12 @@ in {
         # launcher
         "$meta, O, exec, pidof wofi || wofi --show drun"
         # emoji
-        "$meta, U, exec, wofi-emoji"
+        "$meta, U, exec, pidof wofi || wofi-emoji"
 
         # window management
         "$meta, W, killactive"
         "$meta, M, fullscreen, 1"
+        "$meta_CTRL, M, fullscreen"
 
         # switch workspaces
         "$meta, J, workspace, r-1"
