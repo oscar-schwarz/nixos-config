@@ -154,7 +154,7 @@ in {
 
         padding: ${str terminal-padding}px;
 
-        background-color: rgba(${rgbString "base00"}, ${str (opacity.terminal * 0.8)});
+        background-color: rgba(${rgbString "base00"}, ${str (opacity.terminal * 0.9)});
 
         color: @base05;
 
