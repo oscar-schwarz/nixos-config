@@ -86,7 +86,7 @@ in {
           tooltip = false;
         };
 
-        "custom/hypridle-toggle" = {
+        "idle_inhibitor" = {
           format = "{icon} " + (fa "display"); 
           format-icons = {
             activated = fa "mug-hot";
