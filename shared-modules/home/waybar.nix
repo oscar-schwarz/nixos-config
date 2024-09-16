@@ -85,9 +85,12 @@ in {
           tooltip = false;
         };
 
-        "idle_inhibitor" = {
-          format-activated = (fa "moon") + " " + (fa "display");
-          format-deactivated = (fa "mug-saucer") + " " + (fa "display");
+        idle_inhibitor = {
+          format = "{icon} " + (fa "display"); 
+          format-icons = {
+            activated = fa "mug-saucer";
+            deactivated = fa "moon";
+          };
         };
       };
     };
