@@ -5,6 +5,7 @@ let
   fa-icons = {
     bolt = "f0e7";
     mug-saucer = "f0f4";
+    mug-hot = "f7b6";
     display = "e163";
     moon = "f186";
 
@@ -88,7 +89,7 @@ in {
         idle_inhibitor = {
           format = "{icon} " + (fa "display"); 
           format-icons = {
-            activated = fa "mug-saucer";
+            activated = fa "mug-hot";
             deactivated = fa "moon";
           };
         };
