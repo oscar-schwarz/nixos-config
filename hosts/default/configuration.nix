@@ -1,19 +1,13 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { pkgs, inputs, lib, ... }:
 
 {
-  # Enable flakes
-  nix.settings.experimental-features = ["nix-command" "flakes"];
-
   # Import system modules
   imports =
-    [ # Include the results of the hardware scan.
+    [ 
+      # Essential stuff needed on every system
+      ../../shared-modules/system/essentials.nix
+      # Include the results of the hardware scan.
       ../../machines/LENOVO_LNVNB161216.nix
-      # import home-manager
-      inputs.home-manager.nixosModules.default
       # setup networks
       ./modules/system/networking.nix
       # secret management
@@ -28,21 +22,9 @@
 
   # List packages installed in system profile
   environment.systemPackages = with pkgs; [
-    manix
-    neofetch
-    sops
-    tree
-    bat
-
     android-tools
-
     wineWowPackages.waylandFull
   ];
-
-  environment.variables = { 
-    # Fix for electron apps to use wayland
-    ELECTRON_OZONE_PLATFORM_HINT = "auto";
-  };
 
   # Allow some unfree packages
   nixpkgs.config.allowUnfreePredicate = pkg:
@@ -50,20 +32,14 @@
       "obsidian"
     ];
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.osi = {
     isNormalUser = true;
-    shell = pkgs.fish;
     description = "Osi";
     extraGroups = [ "networkmanager" "wheel" "adbusers" ];
   };
 
   home-manager = {
-    extraSpecialArgs = {inherit inputs;};
-    useGlobalPkgs = true;
     users = {
       "osi" = import ./home.nix;
     };
@@ -92,15 +68,6 @@
       IdentitiesOnly yes
 '';
 
-  # This needs to be enabled to be in NIX_PATH
-  programs.fish.enable = true;
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Enable bluetooth
-  hardware.bluetooth.enable = true;
-
   # Useful android stuff
   virtualisation.waydroid.enable = true;
 
@@ -123,22 +90,6 @@
         '';
       }
     ];
-  };
-
-  # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
   };
 
   # This value determines the NixOS release from which the default
