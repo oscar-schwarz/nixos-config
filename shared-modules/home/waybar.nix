@@ -46,7 +46,7 @@ in {
           "clock#date"
         ];
         modules-right = [
-          "custom/hypridle-toggle"
+          "custom/hypridle_toggle"
           "battery"
         ];
 
@@ -86,7 +86,7 @@ in {
           tooltip = false;
         };
 
-        "custom/hypridle-toggle" = {
+        "custom/hypridle_toggle" = {
           format = "{} " + (fa "display");
           exec = pkgs.writeShellScript "" ''
             if [ -z "$(pidof hypridle)" ]; then 
