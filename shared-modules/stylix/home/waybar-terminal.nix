@@ -92,7 +92,7 @@ in {
         
           defaultStyle = ''
             border-color: @base03;          
-            min-width: 1rem;
+            min-width: 2rem;
           '';
 
           emphasizedStyle = ''
