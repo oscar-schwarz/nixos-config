@@ -161,9 +161,6 @@ in {
         '';
 
         openLid = pkgs.writeShellScript "" ''
-          # Enable monitor
-          systemctl suspend
-
           # Run hyprlock if not started
           pidof hyprlock || hyprlock 
         '';
