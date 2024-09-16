@@ -41,8 +41,4 @@ in {
       };
     };
   };
-
-  home-manager.sharedModules = [
-    ../../../../global-modules/home/yakuake-theme.nix
-  ];
 }
