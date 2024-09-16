@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 let
   # Set of font awesome name and unicode code
@@ -102,8 +102,8 @@ in {
           on-click = pkgs.writeShellScript "" ''
             PID="$(pidof hypridle)"
 
-            if [ -z "$(PID)" ]; then
-              hypridle &
+            if [ -z "$PID" ]; then
+              ${lib.getExe pkgs.hypridle} &
             else
               kill "$PID"
             fi
