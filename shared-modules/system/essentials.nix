@@ -18,10 +18,14 @@
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Bootloader setup
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot = {
+    enable = true;
+    configurationLimit = 42;
+  };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+  
 
   # needed packages
   environment.systemPackages = with pkgs; [
