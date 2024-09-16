@@ -36,13 +36,13 @@ in {
     settings = {
       general = {
         hide_cursor = true;
-        no_fade_in = true;
+        ignore_empty_input = true;
       };
       background = {
         monitor = "";
         path = "screenshot";
         blur_passes = 4;
-        blur_size = 15;
+        blur_size = 10;
       };
     };
   };
@@ -144,7 +144,7 @@ in {
       bindl = let
         closeLid = pkgs.writeShellScript "" ''
           # Run hyprlock if not started
-          pidof hyperlock || hyprlock --immediate
+          pidof hyperlock || hyprlock 
           
           # disable monitor     
           hyprctl keyword monitor "eDP-1" disable
@@ -155,7 +155,7 @@ in {
           hyprctl keyword monitor "eDP-1"
 
           # Run hyprlock if not started
-          pidof hyprlock || hyprlock --immediate
+          pidof hyprlock || hyprlock 
         '';
       in [
         # switch behaviour
