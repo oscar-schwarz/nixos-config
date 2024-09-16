@@ -24,7 +24,7 @@ in {
 
   # Autostart on hyprland
   wayland.windowManager.hyprland.settings.exec-once = [
-    "wayland"
+    "waybar"
   ];
 
   programs.waybar = {

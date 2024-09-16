@@ -8,12 +8,19 @@ let
     '';
 in {
   imports = [
+    # Styled
     ./hyprland-rice.nix
+
+    # shared waybar module
+    ../../../../shared-modules/home/waybar.nix
+
   ];
 
   home.packages = with pkgs; [
     wofi-emoji
     xdg-desktop-portal-hyprland
+
+    hypridle
   ];
 
   programs.kitty = {
@@ -52,16 +59,25 @@ in {
     settings = {
       general = {
         lock_cmd = "pidof hyprlock || hyprlock";
-
       };
+      listener = let 
+        MinsToSecs = mins: builtins.floor (mins*60);
+      in [  
+        {
+          timeout = MinsToSecs 1.5;
+          on-timeout = "systemctl suspend";
+        }
+        {
+          timeout = MinsToSecs 5;
+          on-timeout = "loginctl lock-session";
+        }
+      ];
     };
   };
 
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
-
-
       # --- Display setup
       monitor = let
         # Sometimes the portable monitor is listed under different names

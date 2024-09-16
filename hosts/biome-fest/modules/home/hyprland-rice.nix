@@ -20,9 +20,6 @@ in {
         inherit terminal-padding;
       })
     )
-
-    # shared waybar module
-    ../../../../shared-modules/home/waybar.nix
   ];
 
   # Terminal
