@@ -64,7 +64,7 @@ in {
         MinsToSecs = mins: builtins.floor (mins*60);
       in [  
         {
-          timeout = MinsToSecs 1.5;
+          timeout = 1; #MinsToSecs 1.5;
           on-timeout = "systemctl suspend";
         }
         {
