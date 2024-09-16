@@ -81,7 +81,7 @@ in {
 
       .module:hover {
         border-color: @base0D;
-        background-color: rgba(${rgbString "base00"}, ${str opacity.terminal});
+        background-color: rgba(${rgbString "base00"}, ${str (opacity.terminal * 0.9)});
       }
 
       /* SHORT BORDER CHANGE ON UPDATE */
@@ -96,6 +96,7 @@ in {
           '';
 
           emphasizedStyle = ''
+            background-color: rgba(${rgbString "base00"}, ${str opacity.terminal});
             border-color: @base0D;
             min-width: 10rem;
           '';
