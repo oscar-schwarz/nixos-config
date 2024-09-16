@@ -139,7 +139,7 @@ in {
         # emoji
         "$meta, U, exec, pidof wofi || wofi-emoji"
         # lock screen
-        "$meta, L, exec, pidof hyprlock || hyprlock"
+        "$meta, L, exec, loginctl lock-session"
 
         # window management
         "$meta, W, killactive"
