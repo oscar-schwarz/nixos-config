@@ -109,7 +109,7 @@ in {
         "$meta, E, exec, firefox"
 
         # launcher
-        "$meta, O, exec, ${execIfNotRunning "wofi --show drun"}"
+        "$meta, O, exec, pidof wofi || wofi --show drun"
         # emoji
         "$meta, U, exec, wofi-emoji"
 
@@ -139,7 +139,7 @@ in {
       bindl = let
         closeLid = pkgs.writeShellScript "" ''
           # Run hyprlock
-          ${execIfNotRunning "hyprlock"}
+          pidof hyperlock || hyprlock
           #     
           hyprctl keyword monitor "eDP-1" disable
         '';
