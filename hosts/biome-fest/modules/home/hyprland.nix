@@ -47,13 +47,17 @@ in {
     };
   };
 
+  services.hypridle = {
+    enable = true;
+    settings = {
+      lock_cmd = "pidof hyprlock || hyprlock";
+      
+    };
+  };
+
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
-      # --- Autostart ---
-      exec-once = [
-        "waybar"
-      ];
 
 
       # --- Display setup
@@ -138,6 +142,10 @@ in {
         # resize window
         "$meta, G, resizeactive, -${resizeFactor} -${resizeFactor}"
         "$meta, D, resizeactive, ${resizeFactor} ${resizeFactor}"
+        
+        # Brightness keys
+        ", code:233, exec, brightnessctl +5%"
+        ", code:232, exec, brightnessctl 5%-"
       ];
 
       # locked, also works on a lockscreen
