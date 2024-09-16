@@ -20,7 +20,19 @@ in {
     wofi-emoji
     xdg-desktop-portal-hyprland
 
-    hypridle
+    (pkgs.writeShellApplication {
+      name = "hypridle-toggle";
+      runtimeInputs = [ pkgs.hypridle ];
+      text = ''
+        PID="$(pidof hypridle)"
+
+        if [ -z "$(pidof)" ]; then
+          hypridle &
+        else
+          kill "$PID"
+        fi
+      '';
+    })
   ];
 
   programs.kitty = {
@@ -64,7 +76,7 @@ in {
         MinsToSecs = mins: builtins.floor (mins*60);
       in [  
         {
-          timeout = 1; #MinsToSecs 1.5;
+          timeout = MinsToSecs 1.5;
           on-timeout = "systemctl suspend";
         }
         {

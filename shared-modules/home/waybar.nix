@@ -46,7 +46,7 @@ in {
           "clock#date"
         ];
         modules-right = [
-          "idle_inhibitor"
+          "custom/hypridle-toggle"
           "battery"
         ];
 
@@ -86,12 +86,23 @@ in {
           tooltip = false;
         };
 
-        idle_inhibitor = {
-          format = "{icon} " + (fa "display"); 
-          format-icons = {
-            activated = fa "mug-hot";
-            deactivated = fa "moon";
-          };
+        "custom/hypridle-toggle" = {
+          exec = pkgs.writeShellScript "" ''
+            if [ -z "$(pidof hypridle)" ]; then 
+              echo ${fa "moon"}
+            else
+              echo ${fa "mug-hot"}
+            fi
+          '';
+          on-click = pkgs.writeShellScript "" ''
+            PID="$(pidof hypridle)"
+
+            if [ -z "$(PID)" ]; then
+              hypridle &
+            else
+              kill "$PID"
+            fi
+          '';
         };
       };
     };
