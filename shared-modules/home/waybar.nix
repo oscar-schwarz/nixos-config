@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 
 let
   # Set of font awesome name and unicode code
@@ -46,7 +46,7 @@ in {
           "clock#date"
         ];
         modules-right = [
-          "custom/hypridle_toggle"
+          "idle_inhibitor"
           "battery"
         ];
 
@@ -86,32 +86,12 @@ in {
           tooltip = false;
         };
 
-        "custom/hypridle_toggle" = let 
-          signal = 5;
-        in {
-          inherit signal;
-          format = "{} " + (fa "display");
-          interval = "once";
-          exec = pkgs.writeShellScript "test-script" ''
-            set +e
-            if [ -z "$(pidof hypridle)" ]; then 
-              echo """${fa "moon"}"""
-            else
-              echo """${fa "mug-hot"}"""
-            fi
-          '';
-          on-click = pkgs.writeShellScript "" ''
-            PID="$(pidof hypridle)"
-
-            if [ -z "$PID" ]; then
-              ${lib.getExe pkgs.hypridle} &
-            else
-              pkill hypridle
-            fi
-
-            # notify this very module
-            kill -s SIGRTMIN+${builtins.toString signal} "$(pidof waybar)"
-          '';
+        "custom/hypridle-toggle" = {
+          format = "{icon} " + (fa "display"); 
+          format-icons = {
+            activated = fa "mug-hot";
+            deactivated = fa "moon";
+          };
         };
       };
     };

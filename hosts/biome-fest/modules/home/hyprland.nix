@@ -19,20 +19,6 @@ in {
   home.packages = with pkgs; [
     wofi-emoji
     xdg-desktop-portal-hyprland
-
-    (pkgs.writeShellApplication {
-      name = "hypridle-toggle";
-      runtimeInputs = [ pkgs.hypridle ];
-      text = ''
-        PID="$(pidof hypridle)"
-
-        if [ -z "$(pidof)" ]; then
-          hypridle &
-        else
-          kill "$PID"
-        fi
-      '';
-    })
   ];
 
   programs.kitty = {
