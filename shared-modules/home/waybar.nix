@@ -4,6 +4,9 @@ let
   # Set of font awesome name and unicode code
   fa-icons = {
     bolt = "f0e7";
+    mug-saucer = "f0f4";
+    display = "e163";
+    moon = "f186";
 
     battery-full = "f240";
     battery-three-quarters = "f241";
@@ -80,6 +83,11 @@ in {
         "clock#date" = {
           format = "{:%A, %d. %B %Y}";
           tooltip = false;
+        };
+
+        "idle_inhibitor" = {
+          format-activated = (fa "moon") + " " + (fa "display");
+          format-deactivated = (fa "mug-saucer") + " " + (fa "display");
         };
       };
     };
