@@ -56,7 +56,11 @@
       };
       listener = let 
         MinsToSecs = mins: builtins.floor (mins*60);
-      in [  
+      in [
+        {
+          timeout = 10;
+          on-timeout = "loginctl lock-session";
+        }  
         {
           timeout = MinsToSecs 1.5;
           on-timeout = "systemctl suspend";
