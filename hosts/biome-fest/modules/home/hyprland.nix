@@ -153,9 +153,9 @@
         "$meta_CTRL, H, movetoworkspace, r+1"
 
         # Taking screenshots
-        "$meta, A, exec, pidof hyprshot || hyprshot -m window -m active --clipboard-only"
+        "$meta, A, exec, hyprshot -m window -m active --clipboard-only"
         "$meta_CTRL, A, exec, pidof hyprshot || hyprshot -m region --clipboard-only"
-        "$meta, Z, exec, pidof hyprshot || hyprshot -m output --clipboard-only"
+        "$meta, Z, exec, hyprshot -m output --clipboard-only"
       ];
 
       # Binds here will be repeated on press
