@@ -60,7 +60,6 @@ in {
     xournalpp # stylus note taking app
     obsidian # markdown note taking app
     libreoffice
-    chromium
     ncpamixer # Pulse Audio mixer utilityh
     
     # Tools
@@ -106,7 +105,12 @@ in {
   programs.firefox = {
     enable = true;
   };
-  
+
+  programs.chromium = {
+    enable = true;
+    package = pkgs.brave;
+  };
+
   # better cd
   programs.zoxide.enable = true;
 
