@@ -98,6 +98,9 @@ in {
 
         "backlight" = {
           format = (fa "lightbulb") + " {percent} %";
+          states = {
+            maximum = 100;
+          };
         };
       };
     };

@@ -129,6 +129,7 @@ in {
       /* HIDE MODULES IN CERTAIN STATES */
         /* Battery is full and plugged in */
         #battery:not(.charging):not(.discharging)
+        #backlight.maximum
       {
         transition: all 0.3s ease;
         opacity: 0;
