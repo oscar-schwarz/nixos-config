@@ -117,7 +117,7 @@ in {
           Cryptomining = true;
           Fingerprinting = true;
         };
-        Cookies = "reject-tracker-and-partition-foreign";
+        Cookies = "reject-foreign";
 
         DisablePocket = true;
         ShowHomeButton = false;
@@ -134,10 +134,6 @@ in {
         OverridePostUpdatePage = "";
         
         DontCheckDefaultBrowser = true;
-        
-        SearchEngine = {
-          Default = "DuckDuckGo";
-        };
         
         SanitizeOnShutdown = {
           Cache = true;
