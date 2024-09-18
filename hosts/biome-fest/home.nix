@@ -70,6 +70,13 @@ in {
     heygptWrapper # terminal gpt integration
   ];
 
+  # Mime apps
+  xdg.mimeApps.defaultApplications = {
+    image = [
+      "kitty.desktop"
+    ];
+  };
+
   # Password store
   programs.password-store = {
     enable = true;
