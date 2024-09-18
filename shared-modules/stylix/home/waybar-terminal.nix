@@ -130,7 +130,10 @@ in {
       #battery:not(.charging):not(.discharging) {
         transition: all 0.5s ease;
         opacity: 0;
-        position: absolute;
+        margin: 0;
+        padding: 0;
+        border-width: 0;
+        font-size: 0;
       }
 
       /* BATTERY */
