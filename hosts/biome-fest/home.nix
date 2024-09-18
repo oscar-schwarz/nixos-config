@@ -136,7 +136,7 @@ in {
         DontCheckDefaultBrowser = true;
         
         SearchEngine = {
-          Default = "duckduckgo";
+          Default = "DuckDuckGo";
         };
         
         SanitizeOnShutdown = {
