@@ -109,6 +109,13 @@ in {
   programs.chromium = {
     enable = true;
     package = pkgs.brave;
+    extensions = [
+      {
+        # Vimium
+        id = "dbepggeogbaibhgnhhndojpepiihcmeb";
+      }
+    ]
+    ;
   };
 
   # better cd
