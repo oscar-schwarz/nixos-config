@@ -142,7 +142,6 @@ in {
         SanitizeOnShutdown = {
           Cache = true;
           FormData = true;
-          Cookies = true;
           History = true;
         };
 
@@ -175,7 +174,7 @@ in {
       # All options that should be shared by all profiles
       sharedOptions = {
         settings = {
-
+          media.gmp-widevinecdm.enabled = true;
         };
       };
 
