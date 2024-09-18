@@ -99,7 +99,9 @@ in {
         };
 
         "hyprland/workspaces" = {
-
+          persistant-workspaces = {
+            "*" = 5;
+          };
         };
       };
     };
