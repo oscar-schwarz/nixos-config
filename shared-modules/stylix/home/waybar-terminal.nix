@@ -72,8 +72,8 @@ in {
 
         padding-left: ${str terminal-padding}px;
         padding-right: ${str terminal-padding}px;
-        padding-top: ${str (terminal-padding*0.5)}px;
-        padding-bottom: ${str (terminal-padding*0.5)}px;
+        padding-top: ${str (terminal-padding*0.7)}px;
+        padding-bottom: ${str (terminal-padding*0.7)}px;
 
         background-color: rgba(${rgbString "base00"}, ${str (opacity.terminal * 0.9)});
 
