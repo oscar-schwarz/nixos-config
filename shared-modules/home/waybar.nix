@@ -100,7 +100,7 @@ in {
 
         "hyprland/workspaces" = {
           persistant-workspaces = {
-            "*" = 5;
+            "*" = builtins.genList (x: x+1 ) 5;
           };
         };
       };
