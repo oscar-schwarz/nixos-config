@@ -36,7 +36,7 @@ in {
     settings = {
       mainBar = {
         layer = "top";
-        
+        output = ["eDP-1"];
 
         # Module placement
         modules-left = [
