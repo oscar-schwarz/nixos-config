@@ -8,6 +8,7 @@ let
     mug-hot = "f7b6";
     display = "e163";
     moon = "f186";
+    lightbulb = "f0eb";
 
     battery-full = "f240";
     battery-three-quarters = "f241";
@@ -48,6 +49,7 @@ in {
         modules-right = [
           "idle_inhibitor"
           "battery"
+          "backlight"
         ];
 
 
@@ -92,6 +94,10 @@ in {
             activated = fa "mug-hot";
             deactivated = fa "moon";
           };
+        };
+
+        "backlight" = {
+          format = (fa "lightbulb") + " {capacity} %";
         };
       };
     };

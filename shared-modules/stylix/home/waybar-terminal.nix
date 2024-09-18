@@ -98,7 +98,7 @@ in {
           emphasizedStyle = ''
             background-color: rgba(${rgbString "base00"}, ${str opacity.terminal});
             border-color: @base0D;
-            min-width: 7rem;
+            min-width: 10rem;
           '';
         in ''
           @keyframes ${animationName} {
