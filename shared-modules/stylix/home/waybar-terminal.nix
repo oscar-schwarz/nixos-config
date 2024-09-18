@@ -130,6 +130,7 @@ in {
       #battery:not(.charging):not(.discharging) {
         transition: all 0.5s ease;
         opacity: 0;
+        position: absolute;
       }
 
       /* BATTERY */
