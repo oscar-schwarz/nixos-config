@@ -53,8 +53,8 @@ in {
     };
     keybindings = [
       {
-        key = "ctrl+shift+0";
-        command = "workbench.action.splitEditorDown";
+        key = "ctrl+k m";
+        command = "git.openMergeEditor";
       }
     ];
     extensions = with vscodeExts.vscode-marketplace; with vscodeExts.open-vsx-release; [
