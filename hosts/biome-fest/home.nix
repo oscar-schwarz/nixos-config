@@ -70,13 +70,6 @@ in {
     heygptWrapper # terminal gpt integration
   ];
 
-  # Mime apps
-  xdg.mimeApps.defaultApplications = {
-    image = [
-      "kitty.desktop"
-    ];
-  };
-
   # Password store
   programs.password-store = {
     enable = true;
@@ -112,6 +105,65 @@ in {
   programs.firefox = {
     enable = true;
     package = pkgs.firefox-wayland;
+    policies = {
+        DisableTelemetry = true;
+        DisableFirefoxStudies = true;
+        EnableTrackingProtection = {
+          Value= true;
+          Locked = true;
+          Cryptomining = true;
+          Fingerprinting = true;
+        };
+        DisablePocket = true;
+        DisableFirefoxAccounts = true;
+        DisableAccounts = true;
+        DisableFirefoxScreenshots = true;
+        OverrideFirstRunPage = "";
+        OverridePostUpdatePage = "";
+        DontCheckDefaultBrowser = true;
+        DisplayBookmarksToolbar = "never"; # alternatives: "always" or "newtab"
+        DisplayMenuBar = "default-off"; # alternatives: "always", "never" or "default-on"
+        SearchBar = "unified"; # alternative: "separate"
+
+        ExtensionSettings = {
+          # uBlock Origin
+          "uBlock0@raymondhill.net" = {
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
+            installation_mode = "force_installed";
+          };
+          # Time-to-Work
+          "{c52a7349-0c5d-479d-9917-0155a0c58c0a}" = {
+            install_url = "https://github.com/OsiPog/time-to-work/releases/download/v1.2.5/time-to-work-1.2.5.xpi";
+            installation_mode = "force_installed";
+          };
+          # Chameleon, user-agent headers and more spoofer
+          "{3579f63b-d8ee-424f-bbb6-6d0ce3285e6a}" = {
+            install_url = "https://addons.mozilla.org/firefox/downloads/file/4349329/chameleon_ext-0.22.65.1.xpi";
+            installation_mode = "force_installed";
+          };
+        };
+    };
+    profiles = let 
+      merge = lib.recursiveUpdate;
+
+      # All options that should be shared by all profiles
+      sharedOptions = {
+        
+      };
+
+    in {
+      default = merge sharedOptions {
+        id = 0;
+        isDefault = true;
+      };
+      work = merge sharedOptions {
+        id = 1;
+        settings = {
+          # Set a by-default installed distinguishable theme from the default
+          "extensions.activeThemeID" = "firefox-alpenglow@mozilla.org";
+        };
+      };
+    };
   };
 
   programs.chromium = {
