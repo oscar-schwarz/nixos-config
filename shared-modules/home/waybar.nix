@@ -40,7 +40,7 @@ in {
 
         # Module placement
         modules-left = [
-          "hyprland/workspaces"
+
         ];
         modules-center = [
           "clock#time"
@@ -80,7 +80,7 @@ in {
 
         "clock#time" = {
           format = "{:%H:%M}";
-          tooltip = "{:%A, %d. %B %Y}";
+          tooltip-format = "{:%A, %d. %B %Y}";
         };
 
         "idle_inhibitor" = {
@@ -95,12 +95,6 @@ in {
           format = (fa "lightbulb") + " {percent} %";
           states = {
             maximum = 100;
-          };
-        };
-
-        "hyprland/workspaces" = {
-          persistant-workspaces = {
-            "*" = builtins.genList (x: x+1 ) 5;
           };
         };
       };
