@@ -126,11 +126,14 @@ in {
         ]
       )}
 
+      /* HIDE MODULES IN CERTAIN STATES
+      .module#battery:not(.charging):not(.discharging) {
+        transition: all 0.5s ease;
+        max-width: 0;
+        opacity: 0;
+      }
 
       /* BATTERY */
-      label#battery:not(.charging):not(.discharging) {
-        color: @base0B;
-      }
       #battery.warning {
         color: @base0A;
       }

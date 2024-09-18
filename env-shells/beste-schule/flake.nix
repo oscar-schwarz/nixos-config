@@ -169,6 +169,11 @@
 
           VITE_APP_ENV = "debug";
 
+          VIDIS_BASE_URL="https://aai-test.vidis.schule/auth";
+          VIDIS_CLIENT_SECRET="ymls85RV9XkPDRX9DuoUNKx8U8IrMNk0";
+          VIDIS_REDIRECT_URI="http://localhost/login/vidis/callback";
+          VIDIS_CLIENT_ID="schulki-o";          
+
           TOKEN_VALID = "14";
           TOKEN_LENGTH = "16";
 
