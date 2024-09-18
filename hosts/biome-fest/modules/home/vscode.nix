@@ -56,6 +56,21 @@ in {
         key = "ctrl+k m";
         command = "git.openMergeEditor";
       }
+      {
+        when = "isMergeEditor";
+        key = "ctrl+k b";
+        command = "merge-conflict.accept.both";
+      }
+      {
+        when = "isMergeEditor";
+        key = "ctrl+k i";
+        command = "merge-conflict.accept.incoming";
+      }
+      {
+        when = "isMergeEditor";
+        key = "ctrl+k c";
+        command = "merge-conflict.accept.current";
+      }
     ];
     extensions = with vscodeExts.vscode-marketplace; with vscodeExts.open-vsx-release; [
       vue.volar 
