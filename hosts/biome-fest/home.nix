@@ -105,6 +105,9 @@ in {
   programs.firefox = {
     enable = true;
     package = pkgs.firefox-wayland;
+
+    # Some installation-wide settings and extensions
+    # https://mozilla.github.io/policy-templates/
     policies = {
         DisableTelemetry = true;
         DisableFirefoxStudies = true;
@@ -114,16 +117,34 @@ in {
           Cryptomining = true;
           Fingerprinting = true;
         };
+        Cookies = "reject-tracker-and-partition-foreign";
+
         DisablePocket = true;
-        DisableFirefoxAccounts = true;
-        DisableAccounts = true;
-        DisableFirefoxScreenshots = true;
-        OverrideFirstRunPage = "";
-        OverridePostUpdatePage = "";
-        DontCheckDefaultBrowser = true;
+        ShowHomeButton = false;
         DisplayBookmarksToolbar = "never"; # alternatives: "always" or "newtab"
         DisplayMenuBar = "default-off"; # alternatives: "always", "never" or "default-on"
         SearchBar = "unified"; # alternative: "separate"
+        TranslateEnabled = false;
+
+        DisableFirefoxAccounts = true;
+        DisableAccounts = true;
+        DisableFirefoxScreenshots = true;
+        
+        OverrideFirstRunPage = "";
+        OverridePostUpdatePage = "";
+        
+        DontCheckDefaultBrowser = true;
+        
+        SearchEngine = {
+          Default = "duckduckgo";
+        };
+        
+        SanitizeOnShutdown = {
+          Cache = true;
+          FormData = true;
+          Cookies = true;
+          History = true;
+        };
 
         ExtensionSettings = {
           # uBlock Origin
@@ -141,6 +162,11 @@ in {
             install_url = "https://addons.mozilla.org/firefox/downloads/file/4349329/chameleon_ext-0.22.65.1.xpi";
             installation_mode = "force_installed";
           };
+          # Vimium, keyboard driven website navigation
+          "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = {
+            install_url = "https://addons.mozilla.org/firefox/downloads/file/4259790/vimium_ff-2.1.2.xpi";
+            installation_mode = "force_installed";
+          };
         };
     };
     profiles = let 
@@ -148,14 +174,20 @@ in {
 
       # All options that should be shared by all profiles
       sharedOptions = {
-        
+        settings = {
+
+        };
       };
 
     in {
+
+      # The default profile
       default = merge sharedOptions {
         id = 0;
         isDefault = true;
       };
+
+      # A profile meant for work stuff
       work = merge sharedOptions {
         id = 1;
         settings = {
