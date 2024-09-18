@@ -104,6 +104,7 @@ in {
   # Install firefox.
   programs.firefox = {
     enable = true;
+    package = pkgs.firefox-wayland;
   };
 
   programs.chromium = {
@@ -113,6 +114,10 @@ in {
       {
         # Vimium
         id = "dbepggeogbaibhgnhhndojpepiihcmeb";
+      }
+      {
+        # Vue Devtools
+        id = "nhdogjmejiglipccpnnnanhbledajbpd";
       }
     ]
     ;
