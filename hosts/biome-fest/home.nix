@@ -117,7 +117,15 @@ in {
           Cryptomining = true;
           Fingerprinting = true;
         };
-        Cookies = "reject-foreign";
+        Cookies = {
+          Behavior = "reject-foreign";
+
+          # Exceptions from the above
+          Allow = [
+            # sucking big tech dicks for good music
+            "https://spotify.com"
+          ];
+        };
 
         DisablePocket = true;
         ShowHomeButton = false;
@@ -170,7 +178,8 @@ in {
       # All options that should be shared by all profiles
       sharedOptions = {
         settings = {
-          media.gmp-widevinecdm.enabled = true;
+          # Enable widevine for spotify
+          "media.gmp-widevinecdm.enabled" = true;
         };
       };
 
