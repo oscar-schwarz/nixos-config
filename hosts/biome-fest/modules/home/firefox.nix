@@ -27,6 +27,11 @@
           ];
         };
 
+        ManagedBookmarks = map ( url: { inherit url; } ) [
+          "mynixos.com"
+          "open.spotify.com"
+        ];
+
         DisablePocket = true;
         ShowHomeButton = false;
         DisplayBookmarksToolbar = "never"; # alternatives: "always" or "newtab"
@@ -68,6 +73,11 @@
           # Vimium, keyboard driven website navigation
           "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = {
             install_url = "https://addons.mozilla.org/firefox/downloads/file/4259790/vimium_ff-2.1.2.xpi";
+            installation_mode = "force_installed";
+          };
+          # DuckDuckGo, this extension sets the default search engine to ddg
+          "jid1-ZAdIEUB7XOzOJw@jetpack" = {
+            install_url = "https://addons.mozilla.org/firefox/downloads/file/4325805/duckduckgo_for_firefox-2024.7.24.xpi";
             installation_mode = "force_installed";
           };
         };
