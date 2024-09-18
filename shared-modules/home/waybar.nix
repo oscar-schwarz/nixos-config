@@ -40,11 +40,10 @@ in {
 
         # Module placement
         modules-left = [
-
+          "hyprland/workspaces"
         ];
         modules-center = [
           "clock#time"
-          "clock#date"
         ];
         modules-right = [
           "idle_inhibitor"
@@ -81,11 +80,7 @@ in {
 
         "clock#time" = {
           format = "{:%H:%M}";
-          tooltip = false;
-        };
-        "clock#date" = {
-          format = "{:%A, %d. %B %Y}";
-          tooltip = false;
+          tooltip = "{:%A, %d. %B %Y}";
         };
 
         "idle_inhibitor" = {
@@ -101,6 +96,10 @@ in {
           states = {
             maximum = 100;
           };
+        };
+
+        "hyprland/workspaces" = {
+
         };
       };
     };
