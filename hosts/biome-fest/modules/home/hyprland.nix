@@ -58,11 +58,11 @@
         MinsToSecs = mins: builtins.floor (mins*60);
       in [
         {
-          timeout = MinsToSecs 1.5;
+          timeout = MinsToSecs 5;
           on-timeout = "systemctl suspend";
         }
         {
-          timeout = MinsToSecs 5;
+          timeout = MinsToSecs 1.5;
           on-timeout = "loginctl lock-session";
         }
       ];
