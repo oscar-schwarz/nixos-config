@@ -127,7 +127,7 @@ in {
       )}
 
       /* HIDE MODULES IN CERTAIN STATES */
-      .module#battery:not(.charging):not(.discharging) {
+      box#battery:not(.charging):not(.discharging) {
         transition: all 0.5s ease;
         width: 0;
         opacity: 0;
