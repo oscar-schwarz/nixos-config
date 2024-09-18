@@ -98,7 +98,7 @@ in {
           emphasizedStyle = ''
             background-color: rgba(${rgbString "base00"}, ${str opacity.terminal});
             border-color: @base0D;
-            min-width: 10rem;
+            min-width: 7rem;
           '';
         in ''
           @keyframes ${animationName} {
@@ -127,8 +127,10 @@ in {
       )}
 
       /* HIDE MODULES IN CERTAIN STATES */
-      #battery:not(.charging):not(.discharging) {
-        transition: all 0.5s ease;
+        /* Battery is full and plugged in */
+        #battery:not(.charging):not(.discharging)
+      {
+        transition: all 0.3s ease;
         opacity: 0;
         margin: 0;
         padding: 0;
