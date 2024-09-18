@@ -97,7 +97,7 @@ in {
         };
 
         "backlight" = {
-          format = (fa "lightbulb") + " {capacity} %";
+          format = (fa "lightbulb") + " {percent} %";
         };
       };
     };
