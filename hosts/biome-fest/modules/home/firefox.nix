@@ -27,17 +27,14 @@
           ];
         };
 
-        ManagedBookmarks = [
+        Bookmarks = [
           {
-            toplevel_name = "My Bookmarks";
+            Title = "MyNixOS";
+            URL = "mynixos.com";
           }
           {
-            name = "MyNixOS";
-            url = "mynixos.com";
-          }
-          {
-            name = "Spotify";
-            url = "open.spotify.com";
+            Title = "Spotify";
+            URL = "open.spotify.com";
           }
         ];
 
