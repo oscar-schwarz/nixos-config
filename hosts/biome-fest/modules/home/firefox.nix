@@ -24,6 +24,7 @@
           Allow = [
             "https://spotify.com/"
             "https://open.spotify.com/"
+            "https://accounts.spotify.com/"
           ];
         };
 
@@ -54,10 +55,10 @@
         
         DontCheckDefaultBrowser = true;
         
-        # SanitizeOnShutdown = {
-        #   FormData = true;
-        #   History = true;
-        # };
+        SanitizeOnShutdown = {
+          FormData = true;
+          History = true;
+        };
 
         ExtensionSettings = {
           # uBlock Origin
