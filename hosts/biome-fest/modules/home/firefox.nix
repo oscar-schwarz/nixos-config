@@ -19,13 +19,6 @@
         };
         Cookies = {
           Behavior = "reject-foreign";
-
-          # Exceptions from the above
-          Allow = [
-            "https://spotify.com/"
-            "https://open.spotify.com/"
-            "https://accounts.spotify.com/"
-          ];
         };
 
         Bookmarks = [
@@ -35,7 +28,11 @@
           }
           {
             Title = "Spotify";
-            URL = "https://open.spotify.com";
+            URL = "https://accounts.spotify.com/en/login?continue=https%3A%2F%2Fopen.spotify.com%2F";
+          }
+          {
+            Title = "DuckDuckGo";
+            URL = "https://duckduckgo.com/";
           }
         ];
 
@@ -99,6 +96,7 @@
           };
         in {
           "browser.contentblocking.category" = { Value = "strict"; Status = "locked"; };
+          "browser.urlbar.suggest.searches" = lock-false;
         
           "extensions.pocket.enabled" = lock-false;
           "extensions.screenshots.disabled" = lock-true;
