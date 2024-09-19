@@ -23,7 +23,7 @@
           # Exceptions from the above
           Allow = [
             # sucking big tech dicks for good music
-            "https://spotify.com/"
+            "https://open.spotify.com/"
           ];
         };
 
