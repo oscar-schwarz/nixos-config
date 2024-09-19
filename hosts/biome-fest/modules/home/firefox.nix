@@ -22,19 +22,18 @@
 
           # Exceptions from the above
           Allow = [
-            # sucking big tech dicks for good music
-            "https://open.spotify.com/"
+            "https://www.spotify.com/"
           ];
         };
 
         Bookmarks = [
           {
             Title = "MyNixOS";
-            URL = "mynixos.com";
+            URL = "https://mynixos.com";
           }
           {
             Title = "Spotify";
-            URL = "open.spotify.com";
+            URL = "https://open.spotify.com";
           }
         ];
 
