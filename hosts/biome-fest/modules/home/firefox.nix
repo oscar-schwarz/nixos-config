@@ -46,7 +46,7 @@
         TranslateEnabled = false;
 
         DisableFirefoxAccounts = true;
-        DisableAccounts = true;
+        # DisableAccounts = true;
         DisableFirefoxScreenshots = true;
         
         OverrideFirstRunPage = "";
