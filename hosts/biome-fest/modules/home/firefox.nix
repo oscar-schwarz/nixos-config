@@ -11,12 +11,12 @@
     policies = {
         DisableTelemetry = true;
         DisableFirefoxStudies = true;
-        EnableTrackingProtection = {
-          Value= true;
-          Locked = true;
-          Cryptomining = true;
-          # Fingerprinting = true;
-        };
+        # EnableTrackingProtection = {
+        #   Value= true;
+        #   Locked = true;
+        #   Cryptomining = true;
+        #   Fingerprinting = true;
+        # };
         Cookies = {
           # Behavior = "limit-foreign";
 
@@ -97,12 +97,8 @@
             Status = "locked";
           };
         in {
-          "browser.contentblocking.category" = { Value = "strict"; Status = "locked"; };
-        
           "extensions.pocket.enabled" = lock-false;
           "extensions.screenshots.disabled" = lock-true;
-
-
         };
     };
   };
