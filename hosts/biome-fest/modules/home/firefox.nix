@@ -18,7 +18,7 @@
           Fingerprinting = true;
         };
         Cookies = {
-          Behavior = "reject-foreign";
+          Behavior = "limit-foreign";
 
           # Exceptions from the above
           Allow = [
@@ -55,7 +55,6 @@
         DontCheckDefaultBrowser = true;
         
         SanitizeOnShutdown = {
-          Cache = true;
           FormData = true;
           History = true;
         };
