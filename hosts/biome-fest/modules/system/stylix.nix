@@ -26,8 +26,8 @@ in {
 
     fonts = {
       monospace = {
-        package = pkgs.source-code-pro;
-        name = "SourceCodePro";
+        package = pkgs.comic-mono;
+        name = "ComicMono";
       };
       sansSerif = {
         package = pkgs.source-sans;
