@@ -23,13 +23,22 @@
           # Exceptions from the above
           Allow = [
             # sucking big tech dicks for good music
-            "https://spotify.com"
+            "https://spotify.com/"
           ];
         };
 
-        ManagedBookmarks = map ( url: { inherit url; } ) [
-          "mynixos.com"
-          "open.spotify.com"
+        ManagedBookmarks = [
+          {
+            toplevel_name = "My Bookmarks";
+          }
+          {
+            name = "MyNixOS";
+            url = "mynixos.com";
+          }
+          {
+            name = "Spotify";
+            url = "open.spotify.com";
+          }
         ];
 
         DisablePocket = true;
@@ -80,6 +89,38 @@
             install_url = "https://addons.mozilla.org/firefox/downloads/file/4325805/duckduckgo_for_firefox-2024.7.24.xpi";
             installation_mode = "force_installed";
           };
+        };
+
+        Preferences =   let
+          lock-false = {
+            Value = false;
+            Status = "locked";
+          };
+          lock-true = {
+            Value = true;
+            Status = "locked";
+          };
+        in {
+          "browser.contentblocking.category" = { Value = "strict"; Status = "locked"; };
+        
+          "extensions.pocket.enabled" = lock-false;
+          "extensions.screenshots.disabled" = lock-true;
+        
+          "browser.topsites.contile.enabled" = lock-false;
+          "browser.formfill.enable" = lock-false;
+          "browser.search.suggest.enabled" = lock-false;
+          "browser.search.suggest.enabled.private" = lock-false;
+          "browser.urlbar.suggest.searches" = lock-false;
+          "browser.urlbar.showSearchSuggestionsFirst" = lock-false;
+          "browser.newtabpage.activity-stream.feeds.section.topstories" = lock-false;
+          "browser.newtabpage.activity-stream.feeds.snippets" = lock-false;
+          "browser.newtabpage.activity-stream.section.highlights.includePocket" = lock-false;
+          "browser.newtabpage.activity-stream.section.highlights.includeBookmarks" = lock-false;
+          "browser.newtabpage.activity-stream.section.highlights.includeDownloads" = lock-false;
+          "browser.newtabpage.activity-stream.section.highlights.includeVisited" = lock-false;
+          "browser.newtabpage.activity-stream.showSponsored" = lock-false;
+          "browser.newtabpage.activity-stream.system.showSponsored" = lock-false;
+          "browser.newtabpage.activity-stream.showSponsoredTopSites" = lock-false;
         };
     };
   };
