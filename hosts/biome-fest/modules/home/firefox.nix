@@ -15,10 +15,10 @@
           Value= true;
           Locked = true;
           Cryptomining = true;
-          Fingerprinting = true;
+          # Fingerprinting = true;
         };
         Cookies = {
-          Behavior = "limit-foreign";
+          # Behavior = "limit-foreign";
 
           # Exceptions from the above
           Allow = [
@@ -54,10 +54,10 @@
         
         DontCheckDefaultBrowser = true;
         
-        SanitizeOnShutdown = {
-          FormData = true;
-          History = true;
-        };
+        # SanitizeOnShutdown = {
+        #   FormData = true;
+        #   History = true;
+        # };
 
         ExtensionSettings = {
           # uBlock Origin
@@ -101,22 +101,8 @@
         
           "extensions.pocket.enabled" = lock-false;
           "extensions.screenshots.disabled" = lock-true;
-        
-          "browser.topsites.contile.enabled" = lock-false;
-          "browser.formfill.enable" = lock-false;
-          "browser.search.suggest.enabled" = lock-false;
-          "browser.search.suggest.enabled.private" = lock-false;
-          "browser.urlbar.suggest.searches" = lock-false;
-          "browser.urlbar.showSearchSuggestionsFirst" = lock-false;
-          "browser.newtabpage.activity-stream.feeds.section.topstories" = lock-false;
-          "browser.newtabpage.activity-stream.feeds.snippets" = lock-false;
-          "browser.newtabpage.activity-stream.section.highlights.includePocket" = lock-false;
-          "browser.newtabpage.activity-stream.section.highlights.includeBookmarks" = lock-false;
-          "browser.newtabpage.activity-stream.section.highlights.includeDownloads" = lock-false;
-          "browser.newtabpage.activity-stream.section.highlights.includeVisited" = lock-false;
-          "browser.newtabpage.activity-stream.showSponsored" = lock-false;
-          "browser.newtabpage.activity-stream.system.showSponsored" = lock-false;
-          "browser.newtabpage.activity-stream.showSponsoredTopSites" = lock-false;
+
+
         };
     };
   };
