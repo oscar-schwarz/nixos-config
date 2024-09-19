@@ -53,10 +53,6 @@ in {
     };
     keybindings = [
       {
-        key = "ctrl+k m";
-        command = "git.openMergeEditor";
-      }
-      {
         key = "ctrl+k b";
         command = "merge-conflict.accept.both";
       }
@@ -67,6 +63,12 @@ in {
       {
         key = "ctrl+k c";
         command = "merge-conflict.accept.current";
+      }
+      {
+        # Open the search results as a text file in the editor
+        key = "ctrl+enter";
+        command = "search.action.openInEditor";
+        when = "hasSearchResult && searchViewletFocus";
       }
     ];
     extensions = with vscodeExts.vscode-marketplace; with vscodeExts.open-vsx-release; [
