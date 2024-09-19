@@ -24,6 +24,7 @@
           Allow = [
             "https://spotify.com/"
             "https://open.spotify.com/"
+            "https://accounts.spotify.com/"
           ];
         };
 
@@ -46,7 +47,6 @@
         TranslateEnabled = false;
 
         DisableFirefoxAccounts = true;
-        # DisableAccounts = true;
         DisableFirefoxScreenshots = true;
         
         OverrideFirstRunPage = "";
