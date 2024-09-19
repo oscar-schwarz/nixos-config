@@ -53,8 +53,6 @@
         DontCheckDefaultBrowser = true;
         
         SanitizeOnShutdown = {
-          FormData = true;
-          History = true;
           Cache = true;
         };
 
