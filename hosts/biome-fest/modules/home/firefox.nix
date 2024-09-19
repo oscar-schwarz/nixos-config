@@ -23,6 +23,7 @@
           # Exceptions from the above
           Allow = [
             "https://spotify.com/"
+            "https://open.spotify.com/"
           ];
         };
 
