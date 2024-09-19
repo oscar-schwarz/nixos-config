@@ -55,6 +55,7 @@
         SanitizeOnShutdown = {
           FormData = true;
           History = true;
+          Cache = true;
         };
 
         ExtensionSettings = {
@@ -86,20 +87,17 @@
         };
 
         Preferences =   let
-          lock-false = {
-            Value = false;
-            Status = "locked";
-          };
-          lock-true = {
-            Value = true;
+          lock = Value: {
+            inherit Value;
             Status = "locked";
           };
         in {
-          "browser.contentblocking.category" = { Value = "strict"; Status = "locked"; };
-          "browser.urlbar.suggest.searches" = lock-false;
+          "browser.contentblocking.category" = lock "strict";
+          "browser.urlbar.suggest.searches" = lock "false";
+          "browser.startup.homepage" = lock "https://duckduckgo.com/";
         
-          "extensions.pocket.enabled" = lock-false;
-          "extensions.screenshots.disabled" = lock-true;
+          "extensions.pocket.enabled" = lock "false";
+          "extensions.screenshots.disabled" = lock "false";
         };
     };
   };
