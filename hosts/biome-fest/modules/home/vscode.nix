@@ -86,7 +86,7 @@ in {
   programs.git.extraConfig = let codium = "codium --wait --new-window"; in {
     core.editor = "codium --wait";
     diff.tool = "vscodium";
-    "difftool \"vscodium\"".cmd = codium + " --diff \"$LOCAL\" \"$REMOTE\"";
+    "difftool \"vscodium\"".cmd = codium + " --diff $LOCAL $REMOTE;echo $LOCAL $REMOTE";
     merge.tool = "vscodium";
     "mergetool \"vscodium\"".cmd = codium + " \"$MERGED\"";
   };
