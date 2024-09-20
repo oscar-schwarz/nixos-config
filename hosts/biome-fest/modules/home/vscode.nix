@@ -15,6 +15,9 @@ in {
       "window.menuBarVisibility" = "toggle"; # hide menu bar unless alt is pressed
       "workbench.startupEditor" = "none"; # no welcome page
 
+      # Trust all workspaces
+      "security.workspace.trust.enabled" = false;
+
       # minimap
       "editor.minimap.maxColumn" = 100;
       "editor.minimap.showSlider" = "always";
