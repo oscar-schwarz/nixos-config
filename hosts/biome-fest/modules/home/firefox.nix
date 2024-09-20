@@ -1,20 +1,22 @@
 { pkgs, ... }: 
 
 {
-
-  # Alias for librewolf
-  home.packages = with pkgs; [
-    (writeShellScriptBin "firefox" ''librewolf "$@"'')
-  ];
-
   # Install firefox.
   programs.firefox = {
     enable = true;
-    package = pkgs.librewolf-wayland;
+    package = pkgs.firefox-wayland;
 
     # Some installation-wide settings and extensions
     # https://mozilla.github.io/policy-templates/
     policies = {
+        DisableTelemetry = true;
+        DisableFirefoxStudies = true;
+        EnableTrackingProtection = {
+          Value= true;
+          Locked = true;
+          Cryptomining = true;
+          Fingerprinting = true;
+        };
         Cookies = {
           Behavior = "reject-foreign";
         };
@@ -34,9 +36,24 @@
           }
         ];
 
+        DisablePocket = true;
+        ShowHomeButton = false;
+        DisplayBookmarksToolbar = "never"; # alternatives: "always" or "newtab"
+        DisplayMenuBar = "default-off"; # alternatives: "always", "never" or "default-on"
+        SearchBar = "unified"; # alternative: "separate"
+        TranslateEnabled = false;
+
+        DisableFirefoxAccounts = true;
+        DisableAccounts = true;
+        DisableFirefoxScreenshots = true;
+        
+        OverrideFirstRunPage = "";
+        OverridePostUpdatePage = "";
+        
+        DontCheckDefaultBrowser = true;
+        
         SanitizeOnShutdown = {
           Cache = true;
-          History = false;
         };
 
         ExtensionSettings = {
@@ -60,6 +77,11 @@
             install_url = "https://addons.mozilla.org/firefox/downloads/file/4259790/vimium_ff-2.1.2.xpi";
             installation_mode = "force_installed";
           };
+          # DuckDuckGo, this extension sets the default search engine to ddg
+          "jid1-ZAdIEUB7XOzOJw@jetpack" = {
+            install_url = "https://addons.mozilla.org/firefox/downloads/file/4325805/duckduckgo_for_firefox-2024.7.24.xpi";
+            installation_mode = "force_installed";
+          };
         };
 
         Preferences =   let
@@ -68,7 +90,12 @@
             Status = "locked";
           };
         in {
+          "browser.contentblocking.category" = lock "strict";
           "browser.urlbar.suggest.searches" = lock "false";
+          "browser.startup.homepage" = lock "https://duckduckgo.com/";
+        
+          "extensions.pocket.enabled" = lock "false";
+          "extensions.screenshots.disabled" = lock "false";
         };
     };
   };
