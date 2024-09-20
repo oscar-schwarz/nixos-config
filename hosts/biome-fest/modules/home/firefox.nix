@@ -32,6 +32,18 @@
           History = false;
         };
 
+        DisplayBookmarksToolbar = "never"; # alternatives: "always" or "newtab"
+        DisplayMenuBar = "default-off"; # alternatives: "always", "never" or "default-on"
+        SearchBar = "unified"; # alternative: "separate"
+
+        # Disable first run page
+        OverrideFirstRunPage = "";
+        OverridePostUpdatePage = "";
+
+        DontCheckDefaultBrowser = true;
+
+        NewTabPage = false;
+
         ExtensionSettings = {
           # uBlock Origin
           "uBlock0@raymondhill.net" = {
