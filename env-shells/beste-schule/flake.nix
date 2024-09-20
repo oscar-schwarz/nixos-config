@@ -146,7 +146,7 @@
                   {
                     id = "check-types-ts";
                     name = "Check export type declaration order";
-                    entry = "./scripts/check-types-ts";
+                    entry = pkgs.writeShellScript "" ''grep -o '^export type \w\+' "''${@}" | sort --check'';
                     language = "script";
                     files = "^resources/js/types\\.ts$";
                   }

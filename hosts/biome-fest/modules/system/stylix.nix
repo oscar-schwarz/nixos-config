@@ -1,4 +1,4 @@
-{pkgs, ...}:
+{pkgs, config, ...}:
 
 let
   # The base 16 colorscheme used, modify this to see a theme change!
