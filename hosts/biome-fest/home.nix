@@ -138,13 +138,6 @@ in {
         email = "osibluber@protonmail.com";
         name = "Osi Bluber";
       };
-      
-      # Set VSCodium to be git editor
-      core.editor = "codium --wait";
-      diff.tool = "vscodium";
-      "difftool \"vscodium\"".cmd = codium + " --diff \"$LOCAL\" \"$REMOTE\"";
-      merge.tool = "vscodium";
-      "mergetool \"vscodium\"".cmd = codium + " \"$MERGED\"";
     };
   };
 

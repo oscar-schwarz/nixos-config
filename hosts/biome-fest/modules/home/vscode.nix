@@ -82,4 +82,12 @@ in {
     ];
   };
 
+  # Set VSCodium to be git editor
+  programs.git.extraConfig = let codium = "codium --wait --new-window"; in {
+    core.editor = "codium --wait";
+    diff.tool = "vscodium";
+    "difftool \"vscodium\"".cmd = codium + " --diff \"$LOCAL\" \"$REMOTE\"";
+    merge.tool = "vscodium";
+    "mergetool \"vscodium\"".cmd = codium + " \"$MERGED\"";
+  };
 }
