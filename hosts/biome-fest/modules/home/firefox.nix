@@ -79,8 +79,7 @@
           };
         in {
           "browser.urlbar.suggest.searches" = lock "false";
-          "browser.startup.homepage" = lock "https://duckduckgo.com/";
-          "browser.newtab.url" = lock "https://duckduckgo.com/";
+          "browser.startup.homepage" = lock "about:blank";
         
           "privacy.resistFingerprinting.letterboxing" = lock "true";
         };
