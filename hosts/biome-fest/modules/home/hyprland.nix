@@ -134,7 +134,15 @@
       [
         # application shortcuts
         "$meta, N, exec, kitty"
-        "$meta, E, exec, firefox"
+        "$meta, E, exec, ${pkgs.writeShellScript "" ''
+          # Test if librewolf is installed, if so run it
+          if which librewolf; then
+            librewolf
+          # Fallback to firefox
+          else
+            firefox
+          fi
+        ''}"
 
         # launcher
         "$meta, O, exec, pidof wofi || wofi --show drun"
