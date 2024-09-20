@@ -49,7 +49,7 @@ in {
     ./modules/home/firefox.nix
   ];
 
-  # Home Manager needs a bit of information about you and the paths it should
+  # Home Manager needs a bit of tinformation about you and the paths it should
   # manage.
   home.username = username;
   home.homeDirectory = homeDir;
@@ -138,6 +138,13 @@ in {
         email = "osibluber@protonmail.com";
         name = "Osi Bluber";
       };
+      
+      # Set VSCodium to be git editor
+      core.editor = "codium --wait";
+      diff.tool = "vscodium";
+      "difftool \"vscodium\"".cmd = "codium --wait --diff $LOCAL $REMOTE";
+      merge.tool = "vscodium";
+      "mergetool \"vscodium\"".cmd = "codium --wait $MERGED";
     };
   };
 
