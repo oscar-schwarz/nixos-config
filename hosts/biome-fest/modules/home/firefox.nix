@@ -44,6 +44,8 @@
 
         NewTabPage = false;
 
+        OfferToSaveLogins = true;
+
         ExtensionSettings = {
           # uBlock Origin
           "uBlock0@raymondhill.net" = {
