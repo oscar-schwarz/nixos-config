@@ -1,6 +1,12 @@
 { pkgs, ... }: 
 
 {
+
+  # Alias for librewolf
+  home.packages = with pkgs; [
+    (writeShellScriptBin "firefox" ''librewolf "$@"'')
+  ];
+
   # Install firefox.
   programs.firefox = {
     enable = true;
