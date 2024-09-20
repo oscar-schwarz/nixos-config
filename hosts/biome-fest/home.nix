@@ -130,7 +130,7 @@ in {
   # git stuff
   programs.git = {
     enable =true;
-    extraConfig = {
+    extraConfig = let codium = "codium --wait --new-window"; in {
       init = {
         defaultBranch = "main";
       };
@@ -142,9 +142,9 @@ in {
       # Set VSCodium to be git editor
       core.editor = "codium --wait";
       diff.tool = "vscodium";
-      "difftool \"vscodium\"".cmd = "codium --wait --diff $LOCAL $REMOTE";
+      "difftool \"vscodium\"".cmd = codium + " --diff $LOCAL $REMOTE";
       merge.tool = "vscodium";
-      "mergetool \"vscodium\"".cmd = "codium --wait $MERGED";
+      "mergetool \"vscodium\"".cmd = codium + " $MERGED";
     };
   };
 
