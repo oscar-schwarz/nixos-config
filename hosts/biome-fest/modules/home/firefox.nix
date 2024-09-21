@@ -35,6 +35,7 @@
         DisplayBookmarksToolbar = "never"; # alternatives: "always" or "newtab"
         DisplayMenuBar = "default-off"; # alternatives: "always", "never" or "default-on"
         SearchBar = "unified"; # alternative: "separate"
+        TranslateEnabled = false;
 
         # Disable first run page
         OverrideFirstRunPage = "";
@@ -85,10 +86,10 @@
             Status = "locked";
           };
         in {
-          "browser.urlbar.suggest.searches" = lock "false";
+          "browser.urlbar.suggest.searches" = lock false;
           "browser.startup.homepage" = lock "about:blank";
         
-          "privacy.resistFingerprinting.letterboxing" = lock "true";
+          "privacy.resistFingerprinting.letterboxing" = lock true;
         };
     };
   };
