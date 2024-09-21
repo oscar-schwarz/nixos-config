@@ -25,6 +25,16 @@
 
   programs.rofi = {
     enable = true;
+    package = pkgs.rofi-wayland;
+
+    plugins = with pkgs; [
+      rofi-emoji-wayland
+    ];
+
+    pass = {
+      enable = true;
+      package = pkgs.rofi-pass-wayland;
+    };
   };
 
   programs.waybar = {
@@ -147,7 +157,9 @@
         # launcher
         "$meta, O, exec, pidof rofi || rofi -show drun"
         # emoji
-        "$meta, U, exec, pidof rofi || rofi-emoji"
+        "$meta, U, exec, pidof rofi || rofi -show emoji"
+        # Pass
+        "$meta, P, exec, pidof rofi || rofi -show pass"
         # lock screen
         "$meta, L, exec, loginctl lock-session"
 
