@@ -83,16 +83,11 @@
     profiles = {
       default = {
         isDefault = true;
-        settings = let
-          lock = Value: {
-            inherit Value;
-            Status = "locked";
-          };
-        in {
-          "browser.urlbar.suggest.searches" = lock false;
-          "browser.startup.homepage" = lock "about:blank";
+        settings = {
+          "browser.urlbar.suggest.searches" = false;
+          "browser.startup.homepage" = "about:blank";
         
-          "privacy.resistFingerprinting.letterboxing" = lock true;
+          "privacy.resistFingerprinting.letterboxing" = true;
         };
       };
     };
