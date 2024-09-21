@@ -11,7 +11,7 @@
   ];
 
   home.packages = with pkgs; [
-    wofi-emoji
+    rofi-emoji
     hyprshot
     hypridle
   ];
@@ -23,7 +23,7 @@
     };
   };
 
-  programs.wofi = {
+  programs.rofi = {
     enable = true;
   };
 
@@ -145,9 +145,9 @@
         ''}"
 
         # launcher
-        "$meta, O, exec, pidof wofi || wofi --show drun"
+        "$meta, O, exec, pidof rofi || rofi --show drun"
         # emoji
-        "$meta, U, exec, pidof wofi || wofi-emoji"
+        "$meta, U, exec, pidof rofi || rofi-emoji"
         # lock screen
         "$meta, L, exec, loginctl lock-session"
 
