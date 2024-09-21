@@ -36,6 +36,7 @@
       package = pkgs.rofi-pass-wayland;
     };
   };
+  services.gpg-agent.pinentryPackage = pkgs.pinentry-rofi;
 
   programs.waybar = {
     enable = true;
@@ -159,7 +160,7 @@
         # emoji
         "$meta, U, exec, pidof rofi || rofi -show emoji"
         # Pass
-        "$meta, P, exec, pidof rofi || rofi -show pass"
+        "$meta, P, exec, pidof rofi || rofi-pass"
         # lock screen
         "$meta, L, exec, loginctl lock-session"
 

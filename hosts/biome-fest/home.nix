@@ -90,7 +90,6 @@ in {
     enable = true;
     enableScDaemon = true;
     enableSshSupport = true;
-    pinentryPackage = pkgs.pinentry-curses;
   };
 
   # btop - task manager
@@ -130,7 +129,7 @@ in {
   # git stuff
   programs.git = {
     enable =true;
-    extraConfig = let codium = "codium --wait --new-window"; in {
+    extraConfig = {
       init = {
         defaultBranch = "main";
       };
