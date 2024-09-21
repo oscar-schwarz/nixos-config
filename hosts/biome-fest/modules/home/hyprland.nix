@@ -145,7 +145,7 @@
         ''}"
 
         # launcher
-        "$meta, O, exec, pidof rofi || rofi --show drun"
+        "$meta, O, exec, pidof rofi || rofi -show drun"
         # emoji
         "$meta, U, exec, pidof rofi || rofi-emoji"
         # lock screen
