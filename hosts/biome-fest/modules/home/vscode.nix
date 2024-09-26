@@ -73,6 +73,24 @@ in {
         command = "search.action.openInEditor";
         when = "hasSearchResult && searchViewletFocus";
       }
+
+      # Comments
+      {
+        key = "ctrl+/";
+        command = "editor.action.commentLine";
+        when = "editorTextFocus && !editorReadonly";
+      }
+      {
+        key = "ctrl+shift+/";
+        command = "editor.action.blockComment";
+        when = "editorTextFocus && !editorReadonly";
+      }
+
+      # Diff
+      {
+        key = "ctrl+shift+l";
+        command = "toggle.diff.renderSideBySide";
+      }
     ];
     extensions = with vscodeExts.vscode-marketplace; with vscodeExts.open-vsx-release; [
       vue.volar 
