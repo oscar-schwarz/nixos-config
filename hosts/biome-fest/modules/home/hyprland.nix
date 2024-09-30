@@ -203,7 +203,7 @@
           pidof hyperlock || hyprlock &
           
           # disable monitor     
-          hyprctl keyword monitor "eDP-1" disable
+          hyprctl keyword monitor "eDP-1" disabled
         '';
 
         openLid = pkgs.writeShellScript "" ''

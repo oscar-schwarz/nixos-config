@@ -4,7 +4,7 @@
     devenv.url = "github:cachix/devenv";
   };
 
-  outputs = { nixpkgs, devenv, ... } @ inputs:
+  outputs = { self, nixpkgs, devenv, ... } @ inputs:
     let
       system = "x86_64-linux";
 
@@ -21,6 +21,8 @@
       };
     in
     {
+      packages.${system}.devenv-up = self.devShells.${system}.default.config.procfileScript;
+
       devShells.${system}.default = devenv.lib.mkShell {
         inherit inputs pkgs;
         modules = [
