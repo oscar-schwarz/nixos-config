@@ -48,6 +48,7 @@ in {
           "idle_inhibitor"
           "battery"
           "backlight"
+          "network"
         ];
 
 
