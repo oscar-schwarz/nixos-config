@@ -15,7 +15,7 @@
     ];
 
     "custom/matcha" = {
-      exec = "matcha --toggle";
+      exec = "matcha --toggle --bar=waybar";
     };
   };
 }
