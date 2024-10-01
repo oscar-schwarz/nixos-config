@@ -62,6 +62,8 @@
   };
 
   outputs = { nixpkgs, ... }@inputs: 
+    
+    # SYSTEMS - Declare all systems found in ./hosts
     let 
       lib = nixpkgs.lib;
       configsPath = ./hosts;
@@ -77,7 +79,7 @@
           specialArgs = {inherit inputs;};
           modules = [
             # Loading the configuration
-            (configsPath + "/${name}/configuration.nix")
+            (configsPath + "/${name}")
           ];
         }
       );
