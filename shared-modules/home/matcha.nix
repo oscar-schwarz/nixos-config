@@ -10,7 +10,7 @@
 
   # Waybar integration
   programs.waybar.settings.mainBar = {
-    left_modules = [
+    modules-right = [
       "custom/matcha"
     ];
 
