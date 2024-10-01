@@ -11,6 +11,8 @@ let
     lightbulb = "f0eb";
     network-wired = "f6ff";
     wifi = "f1eb";
+    download = "f019";
+    upload = "f093";
 
     battery-full = "f240";
     battery-three-quarters = "f241";
@@ -101,8 +103,9 @@ in {
         };
 
         "network" = {
-          format-ethernet = fa "network-wired";
-          format-wifi = fa "wifi";
+          format-ethernet = (fa "network-wired");
+          format-wifi = (fa "wifi") + " {essid}";
+          tooltip = (fa "download") + " {bandwidthDownBits} B/s  " + (fa "upload") + " {bandwidthUpBits} B/s";
         };
       };
     };
