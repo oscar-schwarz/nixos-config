@@ -5,13 +5,15 @@
     # Nix packages
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    # Home manager for all user related stuff
+
+    # HOME MANAGER - for all user related stuff
     home-manager = {
        url = "github:nix-community/home-manager";
        inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Tiling window manager
+
+    # HYPRLAND - Tiling window manager
     hyprland = {
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -23,12 +25,20 @@
       inputs.hyprland.follows = "hyprland";
     };
 
+    # Idle inhibitor
+    matcha = {
+      url = "git+https://codeberg.org/QuincePie/matcha";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+
     # Plasma manager a nice way to setup KDE declaratively
     plasma-manager = {
       url = "github:pjones/plasma-manager";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
+
 
     # Stylix, theming made easy peasy
     stylix = {
@@ -37,11 +47,13 @@
       inputs.home-manager.follows = "home-manager";
     };
 
+
     # Secret management
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
 
     # Flake programs.sqlite, fixes the command-not-found error on flake systems
     flake-programs-sqlite = {
@@ -49,11 +61,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+
     # Repo containing vscode extensions from marketplace and open vsx
     nix-vscode-extensions = {
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
 
     # Better udev nix interface
     custom-udev-rules = {
