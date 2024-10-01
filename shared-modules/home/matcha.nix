@@ -16,6 +16,7 @@
 
     "custom/matcha" = {
       exec = "matcha --toggle -b waybar";
+      interval = 1;
     };
   };
 }
