@@ -9,12 +9,14 @@ let
     display = "e163";
     moon = "f186";
     lightbulb = "f0eb";
+    network-wired = "f6ff";
+    wifi = "f1eb";
 
     battery-full = "f240";
     battery-three-quarters = "f241";
     battery-half = "f242";
     battery-quarter = "f243";
-    battery-empty = "f244";
+    battery-empty = "f244";    
   };
   # get html unicode escape sequence for font awesome icon name
   fa = name: "&#x" + fa-icons.${name} + ";";
@@ -96,6 +98,11 @@ in {
           states = {
             maximum = 100;
           };
+        };
+
+        "network" = {
+          format-ethernet = fa "network-wired";
+          format-wifi = fa "wifi";
         };
       };
     };
