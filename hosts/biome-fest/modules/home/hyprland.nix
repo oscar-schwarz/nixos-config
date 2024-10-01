@@ -14,7 +14,7 @@
     rofi-emoji
     hyprshot
     hypridle
-    matcha
+    matcha # custom package from flake
   ];
 
   programs.kitty = {
@@ -90,6 +90,7 @@
       
         "pkill hypridle; hypridle"
         "pkill waybar; waybar"
+        "pkill matcha; matcha --daemon"
       ];
 
       # --- Display setup

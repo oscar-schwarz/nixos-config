@@ -87,7 +87,7 @@ in {
           tooltip-format = "{:%A, %d. %B %Y}";
         };
 
-        "idle_inhibitor" = {
+        "custom/idle_inhibitor" = {
           format = "{icon} " + (fa "display"); 
           format-icons = {
             activated = fa "mug-hot";
