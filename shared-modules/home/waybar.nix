@@ -106,8 +106,8 @@ in {
           format-ethernet = (fa "network-wired");
           format-wifi = (fa "wifi") + " {essid}";
           tooltip-format = ''
-            ${fa "download"} {bandwidthDownBits} B/s<br/>
-            ${fa "upload"} {bandwidthUpBits} B/s        
+            ${fa "download"} {bandwidthDownBits}
+            ${fa "upload"} {bandwidthUpBits}        
           '';
         };
       };
