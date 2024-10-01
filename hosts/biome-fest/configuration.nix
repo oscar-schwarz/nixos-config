@@ -18,6 +18,8 @@
       ./modules/system/locale.nix
       # Theme of everything
       ./modules/system/stylix.nix
+      # Settings specific to my monitor setup
+      ./modules/monitors.nix
     ];
 
   # List packages installed in system profile
