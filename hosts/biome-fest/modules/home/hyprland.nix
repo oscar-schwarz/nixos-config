@@ -8,13 +8,14 @@
     # shared waybar module
     ../../../../shared-modules/home/waybar.nix
 
+    # matche idle inhibitor
+    ../../../../shared-modules/home/matcha.nix  
   ];
 
   home.packages = with pkgs; [
     rofi-emoji
     hyprshot
     hypridle
-    matcha # custom package from flake
   ];
 
   programs.kitty = {
@@ -90,7 +91,6 @@
       
         "pkill hypridle; hypridle"
         "pkill waybar; waybar"
-        "pkill matcha; matcha --daemon"
       ];
 
       # --- Display setup

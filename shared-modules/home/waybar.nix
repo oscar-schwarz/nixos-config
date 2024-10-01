@@ -49,7 +49,6 @@ in {
           "clock#time"
         ];
         modules-right = [
-          "idle_inhibitor"
           "battery"
           "backlight"
           "network"
@@ -85,14 +84,6 @@ in {
         "clock#time" = {
           format = "{:%H:%M}";
           tooltip-format = "{:%A, %d. %B %Y}";
-        };
-
-        "custom/idle_inhibitor" = {
-          format = "{icon} " + (fa "display"); 
-          format-icons = {
-            activated = fa "mug-hot";
-            deactivated = fa "moon";
-          };
         };
 
         "backlight" = {
