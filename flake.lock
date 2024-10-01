@@ -489,6 +489,26 @@
         "type": "github"
       }
     },
+    "matcha": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1704517827,
+        "narHash": "sha256-WhpLwINCuXYxa9y8o4bcFsryvD/VcGi/9VimwJmbobw=",
+        "ref": "refs/heads/main",
+        "rev": "438da25cacd014b99460de76a59a9fecec04f48a",
+        "revCount": 18,
+        "type": "git",
+        "url": "https://codeberg.org/QuincePie/matcha"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://codeberg.org/QuincePie/matcha"
+      }
+    },
     "nix-vscode-extensions": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -573,6 +593,7 @@
         "home-manager": "home-manager",
         "hyprglass": "hyprglass",
         "hyprland": "hyprland",
+        "matcha": "matcha",
         "nix-vscode-extensions": "nix-vscode-extensions",
         "nixpkgs": "nixpkgs",
         "plasma-manager": "plasma-manager",

@@ -94,6 +94,17 @@
           modules = [
             # Loading the configuration
             (configsPath + "/${name}")
+
+            # Some shared settings specific to this flake
+            ({ inputs, ... }: {
+              # Add the matcha package to pkgs
+              nixpkgs.overlays = [
+                (final: prev: {
+                  matcha = inputs.matcha.packages.${prev.system}.default;
+                })
+              ]
+              ;
+            })
           ];
         }
       );

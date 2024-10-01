@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, inputs, ... }:
 
 {
   imports = [
@@ -14,6 +14,7 @@
     rofi-emoji
     hyprshot
     hypridle
+    matcha
   ];
 
   programs.kitty = {
@@ -90,6 +91,9 @@
         "pkill hypridle; hypridle"
         "pkill waybar; waybar"
       ];
+
+      # --- Display setup
+      
 
       # --- Keyboard settings ---
       input = {
