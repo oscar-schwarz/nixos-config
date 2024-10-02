@@ -37,16 +37,16 @@ in {
     # ./modules/home/yakuake.nix
 
     # All hyprland options (a lot of them)
-    ./modules/home/hyprland.nix
+    ./home/hyprland.nix
 
     # VSCodium setup
-    ./modules/home/vscode.nix
+    ./home/vscode.nix
 
     # Shell
-    ./modules/home/fish.nix
+    ./home/fish.nix
   
     # Firefox settings
-    ./modules/home/firefox.nix
+    ./home/firefox.nix
   ];
 
   # Home Manager needs a bit of tinformation about you and the paths it should
@@ -164,30 +164,7 @@ VwasqP4uNduPqrMf89I0tu6zGqXCNggOnopuUt8=
       }
     ]
     ;
-  };
-
-  # better cd
-  programs.zoxide.enable = true;
-
-  # enable nix-direnv
-  programs.direnv = {
-    enable = true;
-    silent = true;
-  };
-
-  # git stuff
-  programs.git = {
-    enable =true;
-    extraConfig = {
-      init = {
-        defaultBranch = "main";
-      };
-      user = {
-        email = "osibluber@protonmail.com";
-        name = "Osi Bluber";
-      };
-    };
-  };
+  };  
 
   # nice cli git experience
   programs.lazygit = {
@@ -198,11 +175,6 @@ VwasqP4uNduPqrMf89I0tu6zGqXCNggOnopuUt8=
   };
 
   # -- DANGER ZONE -- 
-  # maybe I should not change those values
-
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
-
   # You should not change this value, even if you update Home Manager. If you do
   # want to update the value, then make sure to first check the Home Manager
   # release notes.

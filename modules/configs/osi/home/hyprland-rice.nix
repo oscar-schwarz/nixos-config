@@ -13,7 +13,7 @@ in {
 
   imports = [
     # Waybar styling from stylix that is based of stylix terminal
-    (import ../../../../shared-modules/stylix/home/waybar-terminal.nix 
+    (import ../../../stylix/home/waybar-terminal.nix 
       (args // {
         inherit border;
         inherit margin;

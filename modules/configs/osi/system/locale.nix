@@ -5,8 +5,9 @@
   time.timeZone = "Europe/Berlin";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_GB.UTF-8";
+  i18n.defaultLocale = "en_US.UTF-8";
 
+  # Home sweet home german formats
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "de_DE.UTF-8";
     LC_IDENTIFICATION = "de_DE.UTF-8";
@@ -18,14 +19,4 @@
     LC_TELEPHONE = "de_DE.UTF-8";
     LC_TIME = "de_DE.UTF-8";
   };
-
-  # xserver keymap
-  services.xserver = {
-    # Configure keymap in X11.
-		xkb.layout = "us";
-		xkb.variant = "colemak";
-  };
-
-  # Configure console keymap
-  console.keyMap = "colemak";
 }

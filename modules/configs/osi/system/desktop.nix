@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ../../../../shared-modules/stylix/system/where-is-my-sddm-theme.nix
+    ../../../stylix/system/where-is-my-sddm-theme.nix
   ];
 
   programs.hyprland.enable = true; 

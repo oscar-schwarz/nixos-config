@@ -1,4 +1,4 @@
-{ pkgs, lib, inputs, ... }:
+{ pkgs, config, lib, ... }:
 
 {
   imports = [
@@ -6,16 +6,17 @@
     ./hyprland-rice.nix
 
     # shared waybar module
-    ../../../../shared-modules/home/waybar.nix
+    ./waybar.nix
 
-    # matche idle inhibitor
-    ../../../../shared-modules/home/matcha.nix  
+    # matcha idle inhibitor
+    ../../../shared/home/matcha.nix  
   ];
 
   home.packages = with pkgs; [
     rofi-emoji
     hyprshot
     hypridle
+    brightnessctl
   ];
 
   programs.kitty = {
@@ -90,11 +91,7 @@
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
       
         "pkill hypridle; hypridle"
-        "pkill waybar; waybar"
       ];
-
-      # --- Display setup
-      
 
       # --- Keyboard settings ---
       input = {
@@ -188,7 +185,7 @@
       bindl = let
         closeLid = pkgs.writeShellScript "" ''
           # Run hyprlock if not started
-          pidof hyperlock || hyprlock &
+          loginctl lock-session
           
           # disable monitor     
           hyprctl keyword monitor "eDP-1, disable"
@@ -199,8 +196,9 @@
           hyprctl keyword monitor "eDP-1"
 
           # Run hyprlock if not started
-          pidof hyprlock || hyprlock 
+          loginctl lock-session
         '';
+      # Only enable these binds if hardware is a laptop
       in [
         # switch behaviour
         ", switch:on:Lid Switch, exec, ${closeLid}"

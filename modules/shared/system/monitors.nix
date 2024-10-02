@@ -18,8 +18,5 @@
         # external portrait monitor       
         "desc:LG Electronics 27EA53 312NDNU32431, preferred, auto, 1, transform, 1"
       ];
-
-      # Waybar output on which monitor
-      programs.waybar.settings.mainBar.output = ["eDP-1" "DP-3"];
     })];
 }

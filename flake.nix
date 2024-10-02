@@ -78,15 +78,16 @@
   outputs = { nixpkgs, ... }@inputs: 
     
     # SYSTEMS - Declare all systems found in ./hosts
+    with builtins; 
     let 
       lib = nixpkgs.lib;
       configsPath = ./hosts;
 
       # filter all items in configsPath to be only folders
-      dirContent = builtins.readDir configsPath;
-      configNames = builtins.filter 
-        (x: (builtins.getAttr x dirContent) == "directory" ) 
-        (builtins.attrNames dirContent);
+      dirContent = readDir configsPath;
+      configNames = filter 
+        (x: (getAttr x dirContent) == "directory" ) 
+        (attrNames dirContent);
     in {
     nixosConfigurations = lib.attrsets.genAttrs configNames 
       (name: lib.nixosSystem {
