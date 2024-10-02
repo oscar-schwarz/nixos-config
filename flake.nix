@@ -123,22 +123,24 @@
       connections = lib.lists.foldr (a: b: a // b) {} (concatLists ( 
         map (config: 
           map (machine: {
-            # interpolated name is just `configName:machineName`
-            "${config}:${machine}" = {inherit config;inherit machine;};
+            # interpolated name is just `configName.machineName`
+            "${config}.${machine}" = {inherit config;inherit machine;};
           }) machineNames
         ) configNames
       ));
       
       
-      interpolatedSystems = lib.attrsets.genAttrs (attrNames connections) (connection: mkSystem [
-        # Include config
-        "${configsPath}/${connection.config}"
+      interpolatedSystems = lib.attrsets.genAttrs (attrNames connections) (name: let 
+        connection = connections.${name};
+      in mkSystem [
+        # Include configs
+        (configsPath + "/${connection.config}")
         # Include machine
-        "${machinesPath}/${connection.machine}.nix"
+        (machinesPath + "/${connection.machine}.nix")
         
         # Some interpolation specific settings
         ({ ... }: {
-          networking.hostName = connection.config + ":" + connection.machine;
+          networking.hostName = name;
         })
       ]);
     in {
