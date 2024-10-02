@@ -94,6 +94,13 @@ in {
         when = "editorLangId == php";
       }
 
+      # Imports
+      { # PHP Imports
+        key = "ctrl+o i";
+        command = "namespaceResolver.import";
+        when = "editorLangId == php";
+      }
+
       # Diff
       {
         key = "ctrl+shift+l";
