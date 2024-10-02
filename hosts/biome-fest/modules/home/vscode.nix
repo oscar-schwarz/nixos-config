@@ -91,7 +91,7 @@ in {
       { # phpDoc block
         key = "ctrl+enter";
         command = "phpdoc-generator.generatePHPDoc";
-        when = "editorLangId == 'php'";
+        when = "editorLangId == php";
       }
 
       # Diff
