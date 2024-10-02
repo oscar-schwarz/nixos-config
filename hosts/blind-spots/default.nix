@@ -9,7 +9,7 @@
       ./feldlinien.nix
 
       # vpn
-      ./wireguard.nix
+      # ./wireguard.nix
 
       # Essential stuff
       ../../modules/shared/system/essentials.nix

@@ -39,6 +39,26 @@
     # Enable adb
     programs.adb.enable = true;
 
+    programs.ssh.extraConfig = ''
+      Host github.com
+        HostName github.com
+        User git
+        IdentityFile /home/osi/.ssh/id_rsa_github_osipog
+        IdentitiesOnly yes
+
+      Host os.github.com
+        HostName github.com
+        User git
+        IdentityFile /home/osi/.ssh/id_rsa_github_os
+        IdentitiesOnly yes
+
+      Host local.server
+        HostName 192.168.178.65
+        User user
+        IdentityFile /home/osi/.ssh/id_server
+        IdentitiesOnly yes
+    '';
+
     # Define a user account. Don't forget to set a password with ‘passwd’.
     users.users.osi = {
       isNormalUser = true;
