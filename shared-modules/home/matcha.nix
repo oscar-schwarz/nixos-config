@@ -14,7 +14,7 @@
     "custom/matcha" = let 
       # Toggles matcha, kill if running, start if not running
       toggleProgram = pkgs.writeShellScript "" ''
-        if [ '$(pidof matcha)' != "" ]; then
+        if pidof matcha; then
           pkill matcha
         else
           matcha --deamon &
@@ -22,7 +22,7 @@
       '';
       # Checks whether match is running
       statusCheck = pkgs.writeShellScript "" ''
-        if [ '$(pidof matcha)' != "" ]; then
+        if pidof matcha; then
           echo -e '&#xf7b6; &#xe163;\nEnabled'
         else
           echo -e '&#xf186; &#xe163;\nDisabled'
