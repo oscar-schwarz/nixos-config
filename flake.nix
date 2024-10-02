@@ -81,33 +81,67 @@
     with builtins; 
     let 
       lib = nixpkgs.lib;
-      configsPath = ./hosts;
 
-      # filter all items in configsPath to be only folders
-      dirContent = readDir configsPath;
-      configNames = filter 
-        (x: (getAttr x dirContent) == "directory" ) 
-        (attrNames dirContent);
+      # function to make a system
+      mkSystem = modules: lib.nixosSystem {
+        specialArgs = {inherit inputs;};
+        modules = modules ++ [
+          ({ inputs, ... }: {
+            # Add the matcha package to pkgs
+            nixpkgs.overlays = [
+              (final: prev: {
+                matcha = inputs.matcha.packages.${prev.system}.default;
+              })
+            ]
+            ;
+          })
+        ];
+      };
+
+      readDirDirNames = path_: let 
+        dirContent = readDir path_;
+      in filter (x: (getAttr x dirContent) == "directory" ) (attrNames dirContent);
+
+      # Path to hosts
+      hostsPath = ./hosts;
+
+      # filter all items in hostsPath to be only folders
+      hostNames = readDirDirNames hostsPath;
+
+      systemsFromHosts = lib.attrsets.genAttrs hostNames (name: mkSystem [ (hostsPath + "/${name}") ]);
+
+      # Interpolate systems with doing a combination from all configs from `configsPath` with all machines in
+      # `machinesPath`
+      configsPath = ./modules/configs;
+      machinesPath = ./machines;
+
+      configNames = readDirDirNames configsPath;
+      # only machine names without .nix
+      machineNames = map (lib.strings.removeSuffix ".nix") (attrNames (readDir machinesPath));
+
+      # All configs connected to machine names in the form { interpolatedName = { machine; config }; ...}
+      connections = lib.lists.foldr (a: b: a // b) {} (concatLists ( 
+        map (config: 
+          map (machine: {
+            # interpolated name is just `configName:machineName`
+            "${config}:${machine}" = {inherit config;inherit machine;};
+          }) machineNames
+        ) configNames
+      ));
+      
+      
+      interpolatedSystems = lib.attrsets.genAttrs (attrNames connections) (connection: mkSystem [
+        # Include config
+        "${configsPath}/${connection.config}"
+        # Include machine
+        "${machinesPath}/${connection.machine}.nix"
+        
+        # Some interpolation specific settings
+        ({ ... }: {
+          networking.hostName = connection.config + ":" + connection.machine;
+        })
+      ]);
     in {
-    nixosConfigurations = lib.attrsets.genAttrs configNames 
-      (name: lib.nixosSystem {
-          specialArgs = {inherit inputs;};
-          modules = [
-            # Loading the configuration
-            (configsPath + "/${name}")
-
-            # Some shared settings specific to this flake
-            ({ inputs, ... }: {
-              # Add the matcha package to pkgs
-              nixpkgs.overlays = [
-                (final: prev: {
-                  matcha = inputs.matcha.packages.${prev.system}.default;
-                })
-              ]
-              ;
-            })
-          ];
-        }
-      );
+    nixosConfigurations = systemsFromHosts // interpolatedSystems; 
   };
 }
