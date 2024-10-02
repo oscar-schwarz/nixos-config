@@ -42,7 +42,7 @@
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
 
-  # configure fish and set default shell
+  # configure fish* and set default shell
   programs.fish = {
     enable = true;
     interactiveShellInit = ''

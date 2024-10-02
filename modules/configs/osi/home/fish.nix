@@ -26,6 +26,13 @@
         heygpt --model "gpt-4o" """$argv""" | ${lib.getExe pkgs.glow}
       '';
       rebuild = ''
+        # --host= or -h may be passed to define which host
+        argparse -i 'h/host=' -- $args
+        if not set -q _flag_host
+          set _flag_host "biome-fest"
+        end
+        echo $argv
+
         # Delete all backup files (not necessary anymore)
         # find ~ -type f -name "*.homeManagerBackupFileExtension" -delete 2>/dev/null
         
@@ -39,7 +46,7 @@
         cd ~/nixos
         git add *
 
-        sudo nixos-rebuild --flake ~/nixos#biome-fest $argv
+        sudo nixos-rebuild --flake ~/nixos#$_flag_host $argv
 
         # only commit if succeeded
         if test $status -eq 0
