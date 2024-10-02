@@ -17,7 +17,7 @@
         if pidof matcha; then
           pkill matcha
         else
-          matcha --deamon &
+          matcha --daemon &
         fi 
       '';
       # Checks whether match is running
