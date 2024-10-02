@@ -14,8 +14,8 @@
       # Essential stuff
       ../../modules/shared/system/essentials.nix
     ];
-  
-  # 
+
+  networking.hostName = "blind-spots";
 
   # Autologin with user
   services.getty.autologinUser = "user";
@@ -68,6 +68,5 @@
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "24.05"; # Did you read the comment?
-
 }
 

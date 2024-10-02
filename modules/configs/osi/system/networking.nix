@@ -2,7 +2,6 @@
 
 {
   networking = {
-    hostName = "biome-fest";
     networkmanager = {
       enable = true;
     };
