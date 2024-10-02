@@ -54,6 +54,9 @@ in {
         };
       };
     };
+    # Keybindings
+    # `when` makes the keybind only available in certain contexts: more on that here
+    # https://code.visualstudio.com/api/references/when-clause-contexts
     keybindings = [
       {
         key = "ctrl+k b";
@@ -75,15 +78,20 @@ in {
       }
 
       # Comments
-      {
+      { # Line
         key = "ctrl+/";
         command = "editor.action.commentLine";
         when = "editorTextFocus && !editorReadonly";
       }
-      {
+      { # Block
         key = "ctrl+shift+/";
         command = "editor.action.blockComment";
         when = "editorTextFocus && !editorReadonly";
+      }
+      { # phpDoc block
+        key = "ctrl+enter";
+        command = "phpdoc-generator.generatePHPDoc";
+        when = "editorLangId == 'php'";
       }
 
       # Diff
