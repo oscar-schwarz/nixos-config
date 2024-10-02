@@ -123,8 +123,8 @@
       connections = lib.lists.foldr (a: b: a // b) {} (concatLists ( 
         map (config: 
           map (machine: {
-            # interpolated name is just `configName.machineName`
-            "${config}.${machine}" = {inherit config;inherit machine;};
+            # interpolated name is just `configName--machineName`
+            "${config}--${machine}" = {inherit config;inherit machine;};
           }) machineNames
         ) configNames
       ));

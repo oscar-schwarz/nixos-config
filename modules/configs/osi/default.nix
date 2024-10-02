@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ lib, pkgs, nixosConfig, ... }:
 
 {
   imports = [
@@ -64,6 +64,7 @@
       isNormalUser = true;
       description = "Osi";
       extraGroups = [ "networkmanager" "wheel" "adbusers" ];
+      initialPassword = "osi";
     };
 
     services.udev = {

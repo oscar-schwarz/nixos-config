@@ -7,5 +7,6 @@
     "api-keys/open-ai"
     "uni-leipzig/idm/user"
     "uni-leipzig/idm/secret"
+    "osi/hashed-password"
   ] (name: { owner = "osi"; });
 }
