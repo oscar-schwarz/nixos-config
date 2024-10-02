@@ -129,7 +129,9 @@
       (perDirectionLetter (dir: key: "$meta_CTRL, ${key}, movewindow, ${dir}")) ++
       [
         # application shortcuts
+          # Terminal
         "$meta, N, exec, kitty"
+          # Firefox (or LibreWolf?)
         "$meta, E, exec, ${pkgs.writeShellScript "" ''
           # Test if librewolf is installed, if so run it
           if which librewolf; then
@@ -139,15 +141,19 @@
             firefox
           fi
         ''}"
-
-        # launcher
+        
+        # Rofi menus
+          # launcher
         "$meta, O, exec, pidof rofi || rofi -show drun"
-        # emoji
+          # emoji
         "$meta, U, exec, pidof rofi || rofi -show emoji"
-        # Pass
+          # Pass
         "$meta, P, exec, pidof rofi || rofi-pass"
+        
         # lock screen
         "$meta, L, exec, loginctl lock-session"
+        # toggle matcha idle inhibitor
+        "$meta, I, exec, matcha-toggle"
 
         # window management
         "$meta, W, killactive"

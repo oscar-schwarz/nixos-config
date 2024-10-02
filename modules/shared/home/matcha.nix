@@ -3,6 +3,14 @@
 {
   home.packages = [
     pkgs.matcha
+
+    (pkgs.writeShellScriptBin "matcha-toggle" ''
+      if pidof matcha >/dev/null; then
+        pkill matcha
+      else
+        matcha --daemon &
+      fi 
+    '')
   ];
 
   # Waybar integration
@@ -13,13 +21,7 @@
 
     "custom/matcha" = let 
       # Toggles matcha, kill if running, start if not running
-      toggleProgram = pkgs.writeShellScript "" ''
-        if pidof matcha >/dev/null; then
-          pkill matcha
-        else
-          matcha --daemon &
-        fi 
-      '';
+      
       # Checks whether match is running
       statusCheck = pkgs.writeShellScript "" ''
         if pidof matcha>/dev/null; then
@@ -33,7 +35,7 @@
       exec = statusCheck;
       interval = 1;
       # Toggle on click
-      on-click = toggleProgram;
+      on-click = "matcha-toggle";
     };
   };
 }

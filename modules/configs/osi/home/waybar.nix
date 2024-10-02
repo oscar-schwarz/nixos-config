@@ -31,11 +31,6 @@ in {
     font-awesome
   ];
 
-  # Autostart on hyprland
-  wayland.windowManager.hyprland.settings.exec-once = [
-    "waybar"
-  ];
-
   programs.waybar = {
     settings = {
       mainBar = {
