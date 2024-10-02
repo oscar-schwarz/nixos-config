@@ -23,9 +23,9 @@
       # Checks whether match is running
       statusCheck = pkgs.writeShellScript "" ''
         if [ '$(pidof matcha)' != "" ]; then
-          echo -e '&#xf7b6;&#xe163;\nEnabled'
+          echo -e '&#xf7b6; &#xe163;\nEnabled'
         else
-          echo -e '&#xf186;&#xe163;\nDisabled'
+          echo -e '&#xf186; &#xe163;\nDisabled'
         fi
       '';
     in {
