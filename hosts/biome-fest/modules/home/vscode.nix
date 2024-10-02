@@ -101,14 +101,19 @@ in {
       }
     ];
     extensions = with vscodeExts.vscode-marketplace; with vscodeExts.open-vsx-release; [
-      vue.volar # vue language features 
-      
-      jnoortheen.nix-ide # nix language features
-      
+      # UTILITIES
       davidlgoldberg.jumpy2 # jumping cursors with short letter combo 
 
+      # PHP
       xdebug.php-debug # debugging php applications
       ronvanderheijden.phpdoc-generator # generate php doc comments
+      mehedidracula.php-namespace-resolver # php everything namespace
+    
+      # NIX
+      jnoortheen.nix-ide # nix language features
+
+      # NODE
+      vue.volar # vue language features 
     ];
   };
 
