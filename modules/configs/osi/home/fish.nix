@@ -45,6 +45,7 @@
         if test $status -eq 0
           # commit all changes
           gptcommit
+          git push
         end
 
         # Go back to previous cwd
