@@ -1,4 +1,4 @@
-{ lib, pkgs, nixosConfig, ... }:
+{ lib, pkgs, ... }:
 
 {
   imports = [

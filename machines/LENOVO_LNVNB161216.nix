@@ -14,22 +14,17 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/badc3b21-b495-4d64-8133-820efbf4828b";
+    { device = "/dev/disk/by-uuid/7aefc206-56e9-4426-a19e-f215dc813886";
       fsType = "ext4";
     };
 
+  boot.initrd.luks.devices."luks-ff0fdffe-9e8d-4956-92ef-ce2317629a32".device = "/dev/disk/by-uuid/ff0fdffe-9e8d-4956-92ef-ce2317629a32";
+
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/97A1-52C2";
+    { device = "/dev/disk/by-uuid/8DFC-47EE";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
-
-  swapDevices = [ 
-    {
-      device = "/var/lib/swapfile";
-      size = 16*1024;
-    } 
-  ];
 
   # Enable bluetooth
   hardware.bluetooth.enable = true;

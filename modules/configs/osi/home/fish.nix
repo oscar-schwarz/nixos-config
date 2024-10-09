@@ -37,7 +37,7 @@
         # add all new files to git, so that they are seen by nixos
         set PREV_PWD "$PWD"
         cd ~/nixos
-        git add *
+        git add --all
 
         sudo nixos-rebuild --flake ~/nixos#biome-fest $argv
 

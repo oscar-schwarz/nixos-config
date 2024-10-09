@@ -1,7 +1,7 @@
 { lib, ... }:
 
 {  
-  sops.age.keyFile = "/home/osi/.config/sops/age/keys.txt";
+  sops.age.sshKeyPaths = [ "/home/osi/.ssh/id_ed25519_sops" ];
 
   sops.secrets = lib.attrsets.genAttrs [
     "api-keys/open-ai"
