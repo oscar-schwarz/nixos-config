@@ -6,7 +6,7 @@
       # Include the results of the hardware scan.
       ../../machines/HP_250_G4_Notebook_PC.nix
 
-      # Osi modules
+      # Server modules
       ../../modules/configs/server
     ];
 
