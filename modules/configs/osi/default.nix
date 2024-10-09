@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ lib, pkgs, config, ... }:
 
 {
   imports = [
@@ -6,8 +6,6 @@
     ../../shared/system/essentials.nix
     # setup networks
     ./system/networking.nix
-    # secret management
-    ./system/sops.nix
     # window manager and display manager
     ./system/desktop.nix
     # language specific
@@ -32,7 +30,13 @@
   };
 
   config = {
-    
+
+    # Implement options from above
+    sops.secrets = lib.attrsets.genAttrs  (lib.attrsets.attrValues config.osi.secrets) (name: {
+      owner = "osi";
+      mode = "0440";
+    });
+
     # Allow some unfree packages
     nixpkgs.config.allowUnfreePredicate = pkg:
       builtins.elem (lib.getName pkg) [
