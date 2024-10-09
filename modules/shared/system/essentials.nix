@@ -89,8 +89,13 @@
           };
         };
       };
+
+      programs.bashmount.enable = true;
     })];
   };
+
+  # Mounts to /run/media/username
+  services.udisks2.enable = true;
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;

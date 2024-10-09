@@ -91,6 +91,7 @@
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
       
         "pkill hypridle; hypridle"
+        "pkill waybar; waybar"
       ];
 
       # --- Keyboard settings ---

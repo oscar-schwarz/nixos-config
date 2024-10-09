@@ -15,21 +15,24 @@
     # Theme of everything
     ./system/stylix.nix
     # Settings specific to my monitor setup
-    ../../shared/system/monitors.nix
-
-    # Define home manager settings
-    ({ ... }: {
-      home-manager = {
-        users = {
-          "osi" = import ./home.nix;
-        };
-        # files with this extension should be deleted regulary 
-        backupFileExtension = "homeManagerBackupFileExtension";
-      };
-    })    
+    ../../shared/system/monitors.nix    
   ];
 
+  options.osi = with lib; {
+    # Define all secrets used in this config
+    secrets = let 
+      mkSecretOption = mkOption {
+        default = "";
+        description = "A path in secrets.yaml managed by sops.";
+      };
+    in {
+      openAiKey = mkSecretOption;
+      publicPgpKey = mkSecretOption;
+    };
+  };
+
   config = {
+    
     # Allow some unfree packages
     nixpkgs.config.allowUnfreePredicate = pkg:
       builtins.elem (lib.getName pkg) [
@@ -66,6 +69,14 @@
       extraGroups = [ "networkmanager" "wheel" "adbusers" ];
       initialPassword = "osi";
     };
+
+    home-manager = {
+        users = {
+          "osi" = import ./home.nix;
+        };
+        # files with this extension should be deleted regulary 
+        backupFileExtension = "homeManagerBackupFileExtension";
+      };
 
     services.udev = {
     packages = [

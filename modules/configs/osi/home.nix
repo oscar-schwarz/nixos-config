@@ -60,9 +60,10 @@ in {
     signal-desktop # secure messaging
     xournalpp # stylus note taking app
     obsidian # markdown note taking app
-    libreoffice
-    ncpamixer # Pulse Audio mixer utilityh
-    
+    libreoffice # office suite
+    ncpamixer # Pulse Audio mixer utility
+    restic
+
     # Tools
     wl-clipboard-rs # copy to clipboard from terminal
     
