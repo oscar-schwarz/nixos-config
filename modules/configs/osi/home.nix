@@ -84,12 +84,6 @@ in {
     };
   };
 
-  # Flawless connection to phone
-  services.kdeconnect = {
-    enable = true;
-    indicator = true;
-  };
-
   # Some encryption stuff
   programs.gpg = {
     enable = true;
