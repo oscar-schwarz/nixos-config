@@ -37,4 +37,16 @@
   environment.etc.crypttab.text = ''
     speicherfresser UUID=9debc741-b5d9-4721-a2bc-971008511283 ${config.sops.secrets."drives/speicherfresser".path} luks
   '';
+  fileSystems."/home/osi/files/remote" = {
+    device = "/dev/disks/by-uuid/1c9bb556-309f-4add-a7f0-723a3b96b2f6";
+    fsType = "ext4";
+    options = [
+      "defaults"
+      "noatime"
+      "x-systemd.automount"
+      "x-systemd.device-timeout=5"
+      "noauto"
+    ];
+  }
+  ;
 }
