@@ -79,7 +79,7 @@ in {
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
-      "text/html" = [ "librewolf.desktop" ];
+      "video" = [ "vlc.desktop" ];
     };
   };
 
