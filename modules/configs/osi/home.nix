@@ -66,6 +66,7 @@ in {
     nautilus # File Browser
     loupe # Image Viewer
     vlc # Media Player
+    prismlauncher # Open Source Minecraft Launcher
 
     # Tools
     wl-clipboard-rs # copy to clipboard from terminal
