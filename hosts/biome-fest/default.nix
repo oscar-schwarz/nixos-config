@@ -41,7 +41,7 @@
     { 
       name = "99-speicherfresser";
       rules = ''
-        ACTION=="add" ATTRS{serial}=="ST1000DM010-2EP102_Z9AB4D0R" TAG+="systemd" ENV{SYSTEMD_WANTS}="systemd-cryptsetup@speicherfresser.service"
+        ACTION=="add" TAG+="systemd" ENV{SYSTEMD_WANTS}="systemd-cryptsetup@speicherfresser.service"
       '';
     }
   ];
