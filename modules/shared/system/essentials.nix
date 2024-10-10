@@ -84,6 +84,10 @@
       programs.git = {
         enable = true;
         extraConfig = {
+          user = {
+            name = "Oscar Schwarz";
+            email = "121044740+oscar-schwarz@users.noreply.github.com";
+          };
           init = {
             defaultBranch = "main";
           };

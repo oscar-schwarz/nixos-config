@@ -15,6 +15,9 @@
         # Laptop built-in
         "eDP-1,preferred,auto,1"
 
+        # Desk monitors
+        # I have two 1080p monitors one landscape and one portrait 
+        
         # Main landscape monitor
         "desc:Samsung Electric Company U28H75x HTPK700051, preferred, 0x420, 1"
 
