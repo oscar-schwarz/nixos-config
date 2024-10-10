@@ -63,6 +63,7 @@ in {
     libreoffice # office suite
     ncpamixer # Pulse Audio mixer utility
     restic
+    nautilus # File Browser
 
     # Tools
     wl-clipboard-rs # copy to clipboard from terminal

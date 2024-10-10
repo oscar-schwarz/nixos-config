@@ -46,15 +46,13 @@
     }
   ];
   fileSystems."/home/osi/files/remote" = {
-    device = "/dev/disks/by-uuid/1c9bb556-309f-4add-a7f0-723a3b96b2f6";
+    device = "/dev/disk/by-uuid/1c9bb556-309f-4add-a7f0-723a3b96b2f6";
     fsType = "ext4";
-    label = "speicherfresser";
     options = [
       "defaults"
       "noatime"
       "x-systemd.automount"
       "x-systemd.device-timeout=5"
-      "noauto"
     ];
   }
   ;
