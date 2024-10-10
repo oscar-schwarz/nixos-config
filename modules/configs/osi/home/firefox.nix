@@ -3,10 +3,16 @@
 {
   # Make firefox default
   xdg.mimeApps.defaultApplications = lib.attrsets.genAttrs [
+    
+    # Open links in firefox
     "x-scheme-handler/http"
     "x-scheme-handler/https" 
     "x-scheme-handler/about" 
     "x-scheme-handler/unknown"
+
+    # Open PDF Files with firefox
+    "application/pdf"
+
   ] (type: "librewolf.desktop");
   home.sessionVariables.DEFAULT_BROWSER = lib.getExe config.programs.firefox.package;
 
