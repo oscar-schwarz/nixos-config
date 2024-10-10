@@ -80,6 +80,7 @@ in {
     enable = true;
     defaultApplications = {
       "video/mp4" = [ "vlc.desktop" ];
+      "image/jpeg" = [ "org.gnome.Loupe.desktop" ];
     };
   };
 
