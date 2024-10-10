@@ -15,8 +15,11 @@
         # Laptop built-in
         "eDP-1,preferred,auto,1"
 
-        # external portrait monitor       
-        "desc:LG Electronics 27EA53 312NDNU32431, preferred, auto, 1, transform, 1"
+        # Main landscape monitor
+        "desc:Samsung Electric Company U28H75x HTPK700051, preferred, 0x420, 1"
+
+        # external portrait monitor
+        "desc:LG Electronics 27EA53 312NDNU32431, preferred, 1920x0, 1, transform, 1"
       ];
     })];
 }
