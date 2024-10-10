@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 
 {
   # Import system modules
@@ -11,17 +11,6 @@
     ];
 
   networking.hostName = "biome-fest";
-
-  # Auto mount my drive
-  services.udisks2.settings = {
-    "drives.conf" = {
-      fs1 = {
-        match-device = "uuid:1c9bb556-309f-4add-a7f0-723a3b96b2f6";
-        mount-options = "default";
-        mount-point = "/home/osi/files/remote";
-      };
-    };
-  };
 
   sops.age = {
     generateKey = true;
@@ -41,4 +30,11 @@
       publicPgpKey = "pgp-keys/id-0x675D2CB5013E8731/public";
     };
   };
+
+
+  # Automount the bid hdd which is not always connected
+  sops.secrets."drives/speicherfresser" = {owner = "osi"; mode = "0440";};
+  environment.etc.crypttab.text = ''
+    speicherfresser UUID=9debc741-b5d9-4721-a2bc-971008511283 ${config.sops.secrets."drives/speicherfresser".path} noauto
+  '';
 }
