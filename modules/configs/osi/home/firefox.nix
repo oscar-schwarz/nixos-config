@@ -1,6 +1,16 @@
-{ pkgs, ... }: 
+{ pkgs, lib, config, ... }: 
 
 {
+  # Make firefox default
+  xdg.mimeApps.defaultApplications = lib.attrsets.genAttrs [
+    "x-scheme-handler/http"
+    "x-scheme-handler/https" 
+    "x-scheme-handler/about" 
+    "x-scheme-handler/unknown"
+  ] (type: "librewolf.desktop");
+  home.sessionVariables.DEFAULT_BROWSER = lib.getExe config.programs.firefox.package;
+
+
   # Install firefox.
   programs.firefox = {
     enable = true;
