@@ -41,7 +41,7 @@
     { 
       name = "99-speicherfresser";
       rules = ''
-        SUBSYSTEM="block" ENV{ID_WWM}=="0x5000c500a22a895e" ENV{SYSTEMD_WANTS}="systemd-cryptsetup@speicherfresser.service"
+        SUBSYSTEM="block" ENV{ID_WWN}=="0x5000c500a22a895e" ENV{SYSTEMD_WANTS}="systemd-cryptsetup@speicherfresser.service"
       '';
     }
   ];
