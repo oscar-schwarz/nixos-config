@@ -55,6 +55,7 @@
 
         # PHP
         phpPackageName = "php82";
+        composer = pkgs."${phpPackageName}Packages".composer;
         php = pkgs.${phpPackageName}.buildEnv {
           extensions = ({ enabled, all }: enabled ++ (with all; [
             xdebug
@@ -317,7 +318,7 @@
               set +e
 
               # Main process is vite, which can be stopped using CTRL+C
-              npm run dev -- --port ${nodejsConfig.tcpPort} --mode development --debug
+              npm run dev -- --port ${nodejsConfig.tcpPort} --mode development
 
               # After vite was stopped kill the processes
               echo "Stopping services..."
@@ -359,6 +360,7 @@
             shellScripts ++
           [
             php
+            composer
             nodejs
 
             pkgs.pre-commit
