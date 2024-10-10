@@ -35,7 +35,7 @@
   # Automount the bid hdd which is not always connected
   sops.secrets."drives/speicherfresser" = {owner = "osi"; mode = "0440";};
   environment.etc.crypttab.text = ''
-    speicherfresser UUID=9debc741-b5d9-4721-a2bc-971008511283 ${config.sops.secrets."drives/speicherfresser".path} luks
+    speicherfresser UUID=9debc741-b5d9-4721-a2bc-971008511283 ${config.sops.secrets."drives/speicherfresser".path} noauto
   '';
   fileSystems."/home/osi/files/remote" = {
     device = "/dev/disks/by-uuid/1c9bb556-309f-4add-a7f0-723a3b96b2f6";
