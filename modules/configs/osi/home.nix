@@ -75,6 +75,14 @@ in {
     heygptWrapper # terminal gpt integration
   ];
 
+  # Default apps
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "text/html" = [ "librewolf.desktop" ];
+    };
+  };
+
   # Password store
   programs.password-store = {
     enable = true;
