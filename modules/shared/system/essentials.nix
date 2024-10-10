@@ -29,10 +29,11 @@
 
   # needed packages
   environment.systemPackages = with pkgs; [
-    neofetch
-    sops
-    tree
-    bat
+    fastfetch # System info
+    sops # Nix secret management
+    tree # File tree
+    bat # Better cat
+    atool # Extract any archive
   ];
 
   # Secrets
