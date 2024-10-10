@@ -79,7 +79,7 @@ in {
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
-      "video" = [ "vlc.desktop" ];
+      "video/mp4" = [ "vlc.desktop" ];
     };
   };
 
