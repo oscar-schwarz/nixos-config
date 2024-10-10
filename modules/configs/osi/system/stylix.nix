@@ -34,7 +34,7 @@ in {
         name = "SourceSans3";
       };
       sizes = {
-        popups = 25;
+        popups = 18;
         desktop = 16;
         terminal = 13;
         applications = 13;

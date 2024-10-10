@@ -1,4 +1,4 @@
-args@{ ... }:
+args@{ lib, ... }:
 
 let
   border = {
@@ -21,6 +21,9 @@ in {
       })
     )
   ];
+
+  # Rofi
+  programs.rofi.theme = lib.mkForce "material"; # Force because of stylix
 
   # Terminal
   programs.kitty = {
