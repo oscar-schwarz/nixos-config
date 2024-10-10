@@ -83,10 +83,10 @@
       };
 
     services.udev = {
-    packages = [
-      pkgs.android-udev-rules
-    ];
-    customRules = [
+      packages = [
+        pkgs.android-udev-rules
+      ];
+      customRules = [
         {
           name = "50-kaleidoscope";
           rules = ''

@@ -37,6 +37,14 @@
   environment.etc.crypttab.text = ''
     speicherfresser UUID=9debc741-b5d9-4721-a2bc-971008511283 ${config.sops.secrets."drives/speicherfresser".path} noauto
   '';
+  services.udev.customRules = [
+    { 
+      name = "99-speicherfresser";
+      rules = ''
+        SUBSYSTEM="block" ENV{ID_WWM}=="0x5000c500a22a895e" ENV{SYSTEMD_WANTS}="systemd-cryptsetup@speicherfresser.service"
+      '';
+    }
+  ];
   fileSystems."/home/osi/files/remote" = {
     device = "/dev/disks/by-uuid/1c9bb556-309f-4add-a7f0-723a3b96b2f6";
     fsType = "ext4";
