@@ -324,13 +324,15 @@
             # only overwrite symlink when FILE is already a symlink
             if [ -f  "$FILE" ] && [ """$(readlink "$FILE")""" == "" ]; then
               echo "cannot create symlink at $FILE. Move it to another location to use this flake."
-              exit
+              exit 1
             fi
 
             # Only update on change
             if [ ! -f  "$FILE" ] || [ """$(readlink "$FILE")""" != "$STORE" ]; then
               echo "Updating $FILE"
               ln -fs "$STORE" "$FILE"
+            else
+              exit 1
             fi
           '';
         })
@@ -354,8 +356,7 @@
           try-symlink .git/info/exclude "${writeList gitConfig.exclude}"
 
           # Pre commit config
-          try-symlink .pre-commit-config.yaml "${writeYaml gitConfig.pre-commit-config}"
-          pre-commit install
+          try-symlink .pre-commit-config.yaml "${writeYaml gitConfig.pre-commit-config}" && pre-commit install
 
           # Write .env, not a symlink because php cant read it
           newEnvPath="${writeDotEnv dotEnv}"
