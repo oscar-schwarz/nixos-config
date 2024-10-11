@@ -321,20 +321,14 @@
             FILE="$1"
             STORE="$2"
 
-            # If file doesn't exist create it
-            if [ ! -f  "$FILE" ]; then
-              touch "$FILE"
-            fi
-
-            # Only overwrite symlink when FILE is already a symlink
-            SYMLINK=$(readlink "$FILE")
-            if [ "$SYMLINK" == "" ]; then
+            # only overwrite symlink when FILE is already a symlink
+            if [ -f  "$FILE" ] && [ """$(readlink "$FILE")""" == "" ]; then
               echo "cannot create symlink at $FILE. Move it to another location to use this flake."
               exit
             fi
 
             # Only update on change
-            if [ "$SYMLINK" != "$STORE" ]; then
+            if [ ! -f  "$FILE" ] || [ """$(readlink "$FILE")""" != "$STORE" ]; then
               echo "Updating $FILE"
               ln -fs "$STORE" "$FILE"
             fi
