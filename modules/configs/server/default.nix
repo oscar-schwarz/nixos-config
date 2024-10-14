@@ -4,7 +4,7 @@
   imports =
     [
       # Essential stuff
-      ../../shared/system/essentials.nix
+      .././shared/system/essentials.nix
     ];
 
   options.server = with lib; {
