@@ -31,7 +31,9 @@ in {
       "zenMode.fullScreen" = false;
       "zenMode.centerLayout" = false;
 
+      # PHP plugins
       "php.debug.executablePath" = lib.getExe pkgs.php83;
+      "namespaceResolver.autoSort" = false;
 
       "files.exclude" = {
         "**/.git" = false;
