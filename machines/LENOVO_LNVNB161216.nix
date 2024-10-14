@@ -40,7 +40,7 @@
     serviceConfig.Type = "simple";
   };
   services.fprintd.tod.enable = true;
-  services.fprintd.tod.driver = pkgs.libfprint-2-tod1-elan;
+  services.fprintd.tod.driver = pkgs.libfprint-2-tod1-vfs0090;
   nixpkgs.config = { allowUnfree = true;};
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
