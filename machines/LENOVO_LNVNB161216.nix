@@ -39,11 +39,9 @@
     wantedBy = [ "multi-user.target" ];
     serviceConfig.Type = "simple";
   };
-  # services.fprintd.tod.enable = true;
-  # services.fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix;
-  # nixpkgs.config = {
-  #   allowUnfree = true;
-  # };
+  services.fprintd.tod.enable = true;
+  services.fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix;
+  nixpkgs.config = { allowUnfree = true;};
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
