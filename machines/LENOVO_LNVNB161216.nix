@@ -31,6 +31,9 @@
     size = 16*1024;
   } ];
 
+  # Enable plymouth to enable monitors before secret entry
+  boot.plymouth.enable = true;
+
   # Enable bluetooth
   hardware.bluetooth.enable = true;
 
