@@ -306,7 +306,7 @@
 
             # Main process is vite, which can be stopped using CTRL+C
             set +e
-            npm run dev -- --port ${nodejsConfig.tcpPort} --mode development
+            npm run dev -- --port ${nodejsConfig.tcpPort} --mode development --debug
 
             # After vite was stopped kill the processes
             echo "Stopping services..."
