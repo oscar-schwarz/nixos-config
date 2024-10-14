@@ -35,6 +35,7 @@
   boot = {
     plymouth.enable = true;
     kernelParams = [
+      "quiet"
       "splash"
       "boot.shell_on_fail"
     ];
