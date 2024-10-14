@@ -26,10 +26,10 @@
       options = [ "fmask=0022" "dmask=0022" ];
     };
 
-  # swapDevices = [ {
-  #   device = "/var/lib/swapfile";
-  #   size = 16*1024;
-  # } ];
+  swapDevices = [ {
+    device = "/var/lib/swapfile";
+    size = 16*1024;
+  } ];
 
   # Enable bluetooth
   hardware.bluetooth.enable = true;
