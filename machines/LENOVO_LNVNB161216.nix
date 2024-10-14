@@ -41,7 +41,7 @@
     serviceConfig.Type = "simple";
   };
   services.fprintd.tod.enable = true;
-  services.fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix-550a;
+  services.fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix;
   nixpkgs.config = {
     allowUnfree = true;
   };
