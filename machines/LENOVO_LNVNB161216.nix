@@ -10,7 +10,6 @@
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "uas" "usb_storage" "usbhid" "sd_mod" "sdhci_pci" "i915" ];
   boot.initrd.kernelModules = [ ];
-  boot.initrd.verbose = false;
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
@@ -33,11 +32,18 @@
   } ];
 
   # Enable plymouth to enable monitors before secret entry
+  boot.plymouth.enable = true;
+  # Make boot silent for plymouth to work
+  boot.initrd.verbose = false;
   boot = {
-    plymouth.enable = true;
+    consoleLogLevel = 0;
     kernelParams = [
       "splash"
       "boot.shell_on_fail"
+      "loglevel=3"
+      "rd.systemd.show_status=false"
+      "rd.udev.log_level=3"
+      "udev.log_priority=3"
     ];
   };
 
