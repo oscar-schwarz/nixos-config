@@ -1,26 +1,15 @@
-{ ... }:
+{ pkgs, lib, ... }:
 
 {
-  imports = [
-    ../../../stylix/system/where-is-my-sddm-theme.nix
-  ];
-
   programs.hyprland.enable = true; 
 
-  services.displayManager = {
-    ly = {
-      enable = true;
-      settings = {
-        # Erase password on failure
-        blank_password = false;
-
-        # Save settings
-        save = true;
-
-        # Hide ugly f keys hints at the top
-        hide_key_hints = true;
+  services.greetd = {
+    enable = true;
+    package = pkgs.greetd.tuigreet;
+    settings = {
+      default_session = {
+        command = lib.getExe pkgs.hyprland;
       };
     };
-    defaultSession = "hyprland";
   };
 }
