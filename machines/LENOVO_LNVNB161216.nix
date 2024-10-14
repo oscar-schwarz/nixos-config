@@ -35,7 +35,7 @@
   hardware.bluetooth.enable = true;
   # Fingerprint
   services.fprintd.enable = true;
-  systemd.services.fprint = {
+  systemd.services.fprintd = {
     wantedBy = [ "multi-user.target" ];
     serviceConfig.Type = "simple";
   };
