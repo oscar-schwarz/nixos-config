@@ -14,6 +14,9 @@
     enable = true;
 
     settings = {
+      # Animation
+      animate = true;
+
       # Erase password on failure
       blank_password = true;
 
