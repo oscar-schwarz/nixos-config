@@ -8,7 +8,7 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "uas" "usb_storage" "usbhid" "sd_mod" "sdhci_pci" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "uas" "usb_storage" "usbhid" "sd_mod" "sdhci_pci" "i915" ];
   boot.initrd.kernelModules = [ ];
   boot.initrd.verbose = false;
   boot.kernelModules = [ "kvm-intel" ];
@@ -36,7 +36,6 @@
   boot = {
     plymouth.enable = true;
     kernelParams = [
-      "quiet"
       "splash"
       "boot.shell_on_fail"
     ];
