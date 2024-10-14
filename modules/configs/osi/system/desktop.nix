@@ -5,10 +5,9 @@
 
   services.greetd = {
     enable = true;
-    package = pkgs.greetd.tuigreet;
     settings = {
-      default_session = {
-        command = lib.getExe pkgs.hyprland;
+      initial_session = {
+        command = lib.getExe pkgs.greetd.tuigreet;
       };
     };
   };
