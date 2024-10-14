@@ -32,7 +32,13 @@
   } ];
 
   # Enable plymouth to enable monitors before secret entry
-  boot.plymouth.enable = true;
+  boot = {
+    plymouth.enable = true;
+    kernelParams = [
+      "splash"
+      "boot.shell_on_fail"
+    ];
+  };
 
   # Enable bluetooth
   hardware.bluetooth.enable = true;
