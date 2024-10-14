@@ -1,4 +1,4 @@
-{ pkgs, config, lib, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -17,6 +17,7 @@
     hyprshot
     hypridle
     brightnessctl
+    hyprpaper
   ];
 
   programs.kitty = {
@@ -92,6 +93,7 @@
       
         "pkill hypridle; hypridle"
         "pkill waybar; waybar"
+        "pkill hyprpaper; hyprpaper"
       ];
 
       # --- Keyboard settings ---
