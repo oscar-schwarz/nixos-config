@@ -3,12 +3,18 @@
 {
   programs.hyprland.enable = true; 
 
-  services.greetd = {
+  services.displayManager.ly = { 
     enable = true;
+
     settings = {
-      initial_session = {
-        command = lib.getExe pkgs.greetd.tuigreet;
-      };
+      # Erase password on failure
+      blank_password = true;
+
+      # Save user
+      save = true;
+
+      # Hide ugly f keys info
+      hide_key_hints = true;
     };
   };
 }
