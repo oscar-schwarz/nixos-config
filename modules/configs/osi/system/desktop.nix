@@ -11,7 +11,7 @@
   };
   
   services.greetd = let 
-    command = "${pkgs.hyprland}/bin/Hyprland";
+    command = pkgs.writeShellScript "" "${pkgs.hyprland}/bin/Hyprland >/dev/null";
   in {
     enable = true;
     settings = {
@@ -21,6 +21,7 @@
         user = "osi";
       };
       # user needs to authenticate on relogin
+      # This is broken. There will be an error when tuigreet tries to launch hyprland.
       default_session = {
         command = "${lib.getExe pkgs.greetd.tuigreet} --greeting 'Welcome to NixOS!' --asterisks --remember --remember-user-session --time -cmd ${command}";
         user = "greeter";

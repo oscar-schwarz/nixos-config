@@ -88,6 +88,8 @@
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
+      
+      # --- Autostart ---
       exec-once = [
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
       
