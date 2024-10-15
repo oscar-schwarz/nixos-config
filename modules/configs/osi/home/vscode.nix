@@ -162,7 +162,7 @@ in {
       { # Add a watch expression
         key = "ctrl+o a";
         command = "workbench.debug.viewlet.action.addWatchExpression";
-        when = "inDebugMode";
+        when = "watchExpressionsFocused";
       }
       { # Remove a watched expression
         key = "shift+backspace";
