@@ -122,24 +122,24 @@ in {
       }
     ];
     extensions = with vscodeExts.vscode-marketplace; with vscodeExts.open-vsx-release; [
-      # # --- UTILITIES ---
-      # davidlgoldberg.jumpy2 # jumping cursors with short letter combo 
+      # --- UTILITIES ---
+      davidlgoldberg.jumpy2 # jumping cursors with short letter combo 
 
-      # # --- PHP ---
-      # xdebug.php-debug # debugging php applications
-      # ronvanderheijden.phpdoc-generator # generate php doc comments
-      # mehedidracula.php-namespace-resolver # php everything namespace
+      # --- PHP ---
+      xdebug.php-debug # debugging php applications
+      ronvanderheijden.phpdoc-generator # generate php doc comments
+      mehedidracula.php-namespace-resolver # php everything namespace
     
       # --- NIX ---
-      # jnoortheen.nix-ide # nix language features
+      jnoortheen.nix-ide # nix language features
 
       # --- NODE ---
-      # vue.volar # vue language features 
+      vue.volar # vue language features 
     
       # --- JAVA ---
-      # redhat.java # language features
-      # vscjava.vscode-java-debug # debugger
-      # vscjava.vscode-java-dependency # project manager
+      redhat.java # language features
+      vscjava.vscode-java-debug # debugger
+      vscjava.vscode-java-dependency # project manager
     ];
   };
 
