@@ -64,7 +64,23 @@ in {
 
 
       # --- JAVA ---
-
+      # All JDKs used for compiling
+      "java.configuration.runtimes" = with pkgs; [
+        {
+          name = "JavaSE-11";
+          path = openjdk11;
+        }
+        {
+          name = "JavaSE-17";
+          path = openjdk17;
+        }
+        {
+          name = "JavaSE-21";
+          path = openjdk21;
+        }
+      ];
+      "java.jdt.ls.java.home" = pkgs.openjdk; # JDK used for the language server
+      "java.configuration.detectJdksAtStart" = false; # Do not try to detect JDKs
     };
     # Keybindings
     # `when` makes the keybind only available in certain contexts: more on that here
