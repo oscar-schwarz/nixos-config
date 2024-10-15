@@ -11,10 +11,7 @@
   };
   
   services.greetd = let 
-    command = pkgs.writeShellScript "" ''
-      clear
-      "${pkgs.hyprland}/bin/Hyprland"
-    '';
+    command = "${pkgs.hyprland}/bin/Hyprland";
   in {
     enable = true;
     settings = rec {
