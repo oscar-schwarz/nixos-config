@@ -26,16 +26,27 @@
     in {
       openAiKey = mkSecretOption;
       publicPgpKey = mkSecretOption;
+      osiPasswordHash = mkSecretOption;
     };
   };
 
   config = {
 
     # Implement options from above
-    sops.secrets = lib.attrsets.genAttrs  (lib.attrsets.attrValues config.osi.secrets) (name: {
-      owner = "osi";
-      mode = "0440";
-    });
+    # Define sops secrets
+    sops.secrets = with config.osi.secrets; let
+      common = {
+        owner = "osi";
+        mode = "0440";
+      };
+    in {
+      ${openAiKey} = common;
+      ${publicPgpKey} = common;
+      ${osiPasswordHash}.neededForUsers = true;
+    };
+
+    # Set hashed password for osi
+    users.users.osi.hashedPasswordFile = config.sops.secrets.${config.osi.secrets.osiPasswordHash}.path;
 
     # Allow some unfree packages
     nixpkgs.config.allowUnfreePredicate = pkg:
@@ -74,7 +85,6 @@
       isNormalUser = true;
       description = "Osi";
       extraGroups = [ "networkmanager" "wheel" "adbusers" ];
-      initialPassword = "osi";
     };
 
     home-manager = {

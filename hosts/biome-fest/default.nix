@@ -28,6 +28,7 @@
     secrets = {
       openAiKey = "api-keys/open-ai";
       publicPgpKey = "pgp-keys/id-0x675D2CB5013E8731/public";
+      osiPasswordHash = "pass-hashes/osi";
     };
   };
 
