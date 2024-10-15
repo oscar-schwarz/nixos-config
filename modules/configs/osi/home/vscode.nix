@@ -64,6 +64,7 @@ in {
 
 
       # --- JAVA ---
+
     };
     # Keybindings
     # `when` makes the keybind only available in certain contexts: more on that here
@@ -134,6 +135,7 @@ in {
       vue.volar # vue language features 
     
       # JAVA
+      vscjava.vscode-java-pack
     ];
   };
 
