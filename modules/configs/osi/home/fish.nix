@@ -36,8 +36,8 @@
         
         # add all new files to git, so that they are seen by nixos
         set PREV_PWD "$PWD"
-        direnv reload
         cd ~/nixos
+        direnv reload
         git add --all
 
         sudo nixos-rebuild --flake ~/nixos#biome-fest $argv
