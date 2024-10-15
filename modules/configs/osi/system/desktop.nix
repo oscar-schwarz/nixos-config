@@ -25,13 +25,12 @@
         command = ''${lib.getExe pkgs.greetd.tuigreet} \
           --greeting 'Welcome to NixOS!' \
           --asterisks \
-          #--remember \
-          #--remember-user-session \
+          --remember \
+          --remember-user-session \
           --time \
           --cmd ${command}"'';
         user = "greeter";
       };
-      environment.etc."greetd/environments".text = "bash";
     };
   };
 }
