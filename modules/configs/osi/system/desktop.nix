@@ -14,7 +14,7 @@
     enable = true;
     settings = {
       initial_session = {
-        command = "${pkgs.hyprland}/bin/hyprland";
+        command = "${pkgs.hyprland}/bin/Hyprland";
         user = "osi";
       };
     };
