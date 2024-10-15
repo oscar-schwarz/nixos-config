@@ -14,7 +14,7 @@
     command = "${pkgs.hyprland}/bin/Hyprland";
   in {
     enable = true;
-    settings = rec {
+    settings = {
       # Run hyprland on boot (autologin)
       initial_session = {
         inherit command;
