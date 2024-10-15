@@ -28,7 +28,7 @@
           --remember \
           --remember-user-session \
           --time \
-          --sessions ${command}'';
+          --cmd "${pkgs.bash}/bin/bash ${command}"'';
         user = "greeter";
       };
     };
