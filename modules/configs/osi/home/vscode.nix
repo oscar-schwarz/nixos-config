@@ -70,6 +70,17 @@ in {
     # `when` makes the keybind only available in certain contexts: more on that here
     # https://code.visualstudio.com/api/references/when-clause-contexts
     keybindings = [
+      # --- MISC ---
+      {
+        # Open the search results as a text file in the editor
+        key = "ctrl+enter";
+        command = "search.action.openInEditor";
+        when = "hasSearchResult && searchViewletFocus";
+      }
+
+
+      # --- GIT ---
+      # Merge conflicts accept
       {
         key = "ctrl+k b";
         command = "merge-conflict.accept.both";
@@ -82,14 +93,9 @@ in {
         key = "ctrl+k c";
         command = "merge-conflict.accept.current";
       }
-      {
-        # Open the search results as a text file in the editor
-        key = "ctrl+enter";
-        command = "search.action.openInEditor";
-        when = "hasSearchResult && searchViewletFocus";
-      }
 
-      # Comments
+
+      # --- COMMENTS ---
       { # Line
         key = "ctrl+/";
         command = "editor.action.commentLine";
@@ -100,42 +106,40 @@ in {
         command = "editor.action.blockComment";
         when = "editorTextFocus && !editorReadonly";
       }
-      { # phpDoc block
+      # --- DOCBLOCK ---
+      { # phpDoc
         key = "ctrl+enter";
         command = "phpdoc-generator.generatePHPDoc";
         when = "editorLangId == php";
       }
 
-      # Imports
+
+      # --- IMPORTS ---
       { # PHP Imports
         key = "ctrl+o i";
         command = "namespaceResolver.import";
         when = "editorLangId == php";
       }
-
-      # Diff
-      {
-        key = "ctrl+shift+l";
-        command = "toggle.diff.renderSideBySide";
-      }
     ];
     extensions = with vscodeExts.vscode-marketplace; with vscodeExts.open-vsx-release; [
-      # UTILITIES
+      # --- UTILITIES ---
       davidlgoldberg.jumpy2 # jumping cursors with short letter combo 
 
-      # PHP
+      # --- PHP ---
       xdebug.php-debug # debugging php applications
       ronvanderheijden.phpdoc-generator # generate php doc comments
       mehedidracula.php-namespace-resolver # php everything namespace
     
-      # NIX
+      # --- NIX ---
       jnoortheen.nix-ide # nix language features
 
-      # NODE
+      # --- NODE ---
       vue.volar # vue language features 
     
-      # JAVA
-      vscjava.vscode-java-pack
+      # --- JAVA ---
+      redhat.java # language features
+      vscjava.vscode-java-debug # debugger
+      vscjava.vscode-java-dependency # project manager
     ];
   };
 
