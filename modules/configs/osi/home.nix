@@ -124,7 +124,7 @@ in {
 
   programs.chromium = {
     enable = true;
-    package = pkgs.brave;
+    package = pkgs.chromium;
     extensions = [
       {
         # Vimium
