@@ -28,9 +28,10 @@
           --remember \
           --remember-user-session \
           --time \
-          --cmd "${pkgs.bash}/bin/bash ${command}"'';
+          --cmd ${command}"'';
         user = "greeter";
       };
+      environment.etc."greetd/environments".text = "bash";
     };
   };
 }
