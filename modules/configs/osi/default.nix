@@ -32,7 +32,8 @@
 
   config = {
 
-    # Implement options from above
+    # IMPLEMENT OPTIONS
+
     # Define sops secrets
     sops.secrets = with config.osi.secrets; let
       common = {
@@ -47,6 +48,7 @@
 
     # Set hashed password for osi
     users.users.osi.hashedPasswordFile = config.sops.secrets.${config.osi.secrets.osiPasswordHash}.path;
+
 
     # Allow some unfree packages
     nixpkgs.config.allowUnfreePredicate = pkg:
@@ -80,12 +82,14 @@
         IdentitiesOnly yes
     '';
 
-    # Define a user account. Don't forget to set a password with ‘passwd’.
+    # DEFINE USER
     users.users.osi = {
       isNormalUser = true;
       description = "Osi";
       extraGroups = [ "networkmanager" "wheel" "adbusers" ];
     };
+    # Autologin (is fine, the drive should be encrypted anyway)
+    services.getty.autologinUser = "osi";
 
     home-manager = {
         users = {
@@ -95,6 +99,7 @@
         backupFileExtension = "homeManagerBackupFileExtension";
       };
 
+    # CUSTOM USB DEVICE
     services.udev = {
       packages = [
         pkgs.android-udev-rules
