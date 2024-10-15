@@ -17,7 +17,7 @@ in {
       "workbench.startupEditor" = "none"; # no welcome page
 
       # Activity bar at the bottom
-      "workbench.activityBar.location" = "bottom";
+      "workbench.sideBar.location" = "bottom";
 
       # Trust all workspaces
       "security.workspace.trust.enabled" = false;
