@@ -18,7 +18,14 @@
       fsType = "ext4";
     };
 
-  boot.initrd.luks.devices."luks-ff0fdffe-9e8d-4956-92ef-ce2317629a32".device = "/dev/disk/by-uuid/ff0fdffe-9e8d-4956-92ef-ce2317629a32";
+  boot.initrd = {
+    luks.devices."luks-ff0fdffe-9e8d-4956-92ef-ce2317629a32" = {
+      device = "/dev/disk/by-uuid/ff0fdffe-9e8d-4956-92ef-ce2317629a32";
+      # About key enrolling: https://nixos.org/manual/nixos/stable/#sec-luks-file-systems-fido2
+      crypttabExtraOpts = [ "fido2-device=auto" ];
+    };
+    systemd.enable = true;
+  };
 
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/8DFC-47EE";
