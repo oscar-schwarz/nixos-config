@@ -172,7 +172,6 @@ in {
       { # Toggle breakpoint
         key = "ctrl+shift+t";
         command = "editor.debug.action.toggleBreakpoint";
-        when = "inDebugMode";
       }
     ];
     extensions = with vscodeExts.vscode-marketplace; with vscodeExts.open-vsx-release; [
