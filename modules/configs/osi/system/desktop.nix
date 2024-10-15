@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   programs.hyprland.enable = true; 
@@ -10,14 +10,24 @@
     XDG_CURRENT_DESKTOP = "Hyprland";
   };
   
-  services.greetd = {
+  services.greetd = let 
+    command = pkgs.writeShellScript "" ''
+      clear
+      "${pkgs.hyprland}/bin/Hyprland"
+    '';
+  in {
     enable = true;
     settings = rec {
+      # Run hyprland on boot (autologin)
       initial_session = {
-        command = "${pkgs.hyprland}/bin/Hyprland";
+        inherit command;
         user = "osi";
       };
-      default_session = initial_session;
+      # user needs to authenticate on relogin
+      default_session = {
+        command = "${lib.getExe pkgs.greetd.tuigreet} --greeting 'Welcome to NixOS!' --asterisks --remember --remember-user-session --time -cmd ${command}";
+        user = "greeter";
+      };
     };
   };
 }
