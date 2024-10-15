@@ -123,7 +123,7 @@ in {
     ];
     extensions = with vscodeExts.vscode-marketplace; with vscodeExts.open-vsx-release; [
       # --- UTILITIES ---
-      # davidlgoldberg.jumpy2 # jumping cursors with short letter combo 
+      davidlgoldberg.jumpy2 # jumping cursors with short letter combo 
 
       # --- PHP ---
       xdebug.php-debug # debugging php applications
