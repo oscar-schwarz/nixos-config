@@ -67,10 +67,6 @@ in {
       # All JDKs used for compiling
       "java.configuration.runtimes" = with pkgs; [
         {
-          name = "JavaSE-8";
-          path = openjdk8 + "/lib/openjdk";
-        }
-        {
           name = "JavaSE-11";
           path = openjdk11 + "/lib/openjdk";
         }
