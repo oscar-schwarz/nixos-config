@@ -8,6 +8,7 @@ in {
     enable = true;
     package = pkgs.vscodium;
     userSettings = {
+      # --- VSCODE ---
       # extra stuff turned off
       "window.commandCenter" = false;
       "workbench.layoutControl.enabled" = false;
@@ -23,6 +24,11 @@ in {
       "editor.minimap.showSlider" = "always";
       "editor.minimap.renderCharacters" = false;
 
+      # Include git files in file tree and file search
+      "files.exclude" = {
+        "**/.git" = false;
+      };
+
       # zen mode settings
       "zenMode.restore" = true;
       "zenMode.hideStatusBar" = true;
@@ -31,13 +37,13 @@ in {
       "zenMode.fullScreen" = false;
       "zenMode.centerLayout" = false;
 
-      # PHP plugins
+
+      # --- PHP ---
       "php.debug.executablePath" = lib.getExe pkgs.php83;
       "namespaceResolver.autoSort" = false;
 
-      "files.exclude" = {
-        "**/.git" = false;
-      };
+
+      # --- NIX ---
       "nix.enableLanguageServer" = true;
       "nix.serverPath" = "${lib.getExe pkgs.nixd}";
       "nix.serverSettings" = {
@@ -55,6 +61,9 @@ in {
           };
         };
       };
+
+
+      # --- JAVA ---
     };
     # Keybindings
     # `when` makes the keybind only available in certain contexts: more on that here
@@ -123,6 +132,8 @@ in {
 
       # NODE
       vue.volar # vue language features 
+    
+      # JAVA
     ];
   };
 
