@@ -159,9 +159,9 @@ in {
         command = "workbench.debug.action.focusWatchView";
         when = "inDebugMode";
       }
-      { # Add to watch expression
+      { # Add a watch expression
         key = "ctrl+o a";
-        command = "debug.addToWatchExpressions";
+        command = "workbench.debug.viewlet.action.addWatchExpression";
         when = "inDebugMode";
       }
       { # Remove a watched expression
