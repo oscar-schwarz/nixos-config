@@ -1,5 +1,6 @@
 { pkgs, lib, inputs, ... }:
 
+with builtins;
 let
   vscodeExts = inputs.nix-vscode-extensions.extensions.x86_64-linux;
 in {
@@ -7,10 +8,12 @@ in {
   programs.vscode = {
     enable = true;
     package = pkgs.vscodium.overrideAttrs (prev: {
-      # Make the package belief the env variable is not set
-      preFixup = ''
-        export NIXOS_OZONE_WL=0
-      '' + prev.preFixup;
+      # Remove the line about ozone platform hint (not needed here)
+      preFixup = lib.strings.concatStringsSep "\n" (
+        filter 
+          (str: (match ".*NIXOS_OZONE_WL.*" str) == null) 
+          (lib.strings.splitString "\n" prev.preFixup)
+      );
     });
     userSettings = {
       # --- VSCODE ---
