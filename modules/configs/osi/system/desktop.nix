@@ -12,11 +12,12 @@
   
   services.greetd = {
     enable = true;
-    settings = {
+    settings = rec {
       initial_session = {
         command = "${pkgs.hyprland}/bin/Hyprland";
         user = "osi";
       };
+      default_session = initial_session;
     };
   };
 }
