@@ -71,10 +71,11 @@
     battery = {
       governor = "powersave";
       turbo = "never";
+      scaling_max_freq = 800000; # I'd rather wait a bit than have battery drain
     };
     charger = {
       governor = "performance";
-      turbo = "auto";
+      turbo = "always"; # Turbo should be used on charger
     };
   };
 
