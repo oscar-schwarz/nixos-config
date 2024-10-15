@@ -1,14 +1,22 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   programs.hyprland.enable = true; 
 
-  # Important when using hyprland with ly
+  # Important when using hyprland
   environment.sessionVariables = {
     XDG_SESSION_TYPE = "wayland";
     XDG_SESSION_DESKTOP = "Hyprland";
     XDG_CURRENT_DESKTOP = "Hyprland";
   };
   
-  services.displayManager.ly.enable = true;
+  services.greetd = {
+    enable = true;
+    settings = {
+      initial_session = {
+        command = "${pkgs.hyprland}/bin/hyprland";
+        user = "osi";
+      };
+    };
+  };
 }

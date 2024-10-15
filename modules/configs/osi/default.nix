@@ -88,8 +88,6 @@
       description = "Osi";
       extraGroups = [ "networkmanager" "wheel" "adbusers" ];
     };
-    # Autologin (is fine, the drive should be encrypted anyway)
-    services.getty.autologinUser = "osi";
 
     home-manager = {
         users = {
