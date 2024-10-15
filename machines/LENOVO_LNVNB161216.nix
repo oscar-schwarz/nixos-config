@@ -22,7 +22,7 @@
     luks.devices."luks-ff0fdffe-9e8d-4956-92ef-ce2317629a32" = {
       device = "/dev/disk/by-uuid/ff0fdffe-9e8d-4956-92ef-ce2317629a32";
       # About key enrolling: https://nixos.org/manual/nixos/stable/#sec-luks-file-systems-fido2
-      crypttabExtraOpts = [ "fido2-device=auto" ];
+      # crypttabExtraOpts = [ "fido2-device=auto" ];
     };
     systemd.enable = true;
   };
@@ -37,6 +37,28 @@
     device = "/var/lib/swapfile";
     size = 16*1024;
   } ];
+
+  # Plymouth boot animation
+  boot = {
+    plymouth.enable = true;
+
+    # Enable "Silent Boot"
+    consoleLogLevel = 0;
+    kernelParams = [
+      "quiet"
+      "splash"
+      "boot.shell_on_fail"
+      "loglevel=3"
+      "rd.systemd.show_status=false"
+      "rd.udev.log_level=3"
+      "udev.log_priority=3"
+    ];
+    # Hide the OS choice for bootloaders.
+    # It's still possible to open the bootloader list by pressing any key
+    # It will just not appear on screen unless a key is pressed
+    loader.timeout = 0;
+  };
+  boot.initrd.verbose = false;
 
   # Enable bluetooth
   hardware.bluetooth.enable = true;
