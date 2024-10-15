@@ -9,7 +9,7 @@ in {
     package = pkgs.vscodium.overrideAttrs (prev: {
       # Make the package belief the env variable is not set
       preFixup = ''
-        NIXOS_OZONE_WL=0
+        export NIXOS_OZONE_WL=0
       '' + prev.preFixup;
     });
     userSettings = {
