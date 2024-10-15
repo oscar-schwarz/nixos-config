@@ -136,6 +136,44 @@ in {
         command = "namespaceResolver.import";
         when = "editorLangId == php";
       }
+
+
+      # --- DEBUGGING ---
+      { # Start debugger
+        key = "ctrl+o e";
+        command = "workbench.action.debug.start";
+        when = "debuggersAvailable && !inDebugMode";
+      } 
+      { # Stop debugger
+        key = "ctrl+o e";
+        command = "workbench.action.debug.stop";
+        when = "inDebugMode";
+      }
+      { # Contiune when stopped
+        key = "ctrl+shift+o";
+        command = "workbench.action.debug.continue";
+        when = "inDebugMode";
+      }
+      { # Open watch panel
+        key = "ctrl+o w";
+        command = "workbench.debug.action.focusWatchView";
+        when = "inDebugMode";
+      }
+      { # Add to watch expression
+        key = "ctrl+o a";
+        command = "debug.addToWatchExpressions";
+        when = "inDebugMode";
+      }
+      { # Remove a watched expression
+        key = "shift+backspace";
+        command = "debug.removeWatchExpression";
+        when = "watchExpressionsFocused";
+      }
+      { # Toggle breakpoint
+        key = "ctrl+shift+n";
+        command = "editor.debug.action.toggleBreakpoint";
+        when = "inDebugMode";
+      }
     ];
     extensions = with vscodeExts.vscode-marketplace; with vscodeExts.open-vsx-release; [
       # --- UTILITIES ---
