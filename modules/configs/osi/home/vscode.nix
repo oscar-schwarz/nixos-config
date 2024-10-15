@@ -68,18 +68,18 @@ in {
       "java.configuration.runtimes" = with pkgs; [
         {
           name = "JavaSE-11";
-          path = openjdk11;
+          path = openjdk11 + "/bin";
         }
         {
           name = "JavaSE-17";
-          path = openjdk17;
+          path = openjdk17 + "/bin";
         }
         {
           name = "JavaSE-21";
-          path = openjdk21;
+          path = openjdk21  + "/bin";
         }
       ];
-      "java.jdt.ls.java.home" = pkgs.openjdk; # JDK used for the language server
+      "java.jdt.ls.java.home" = pkgs.openjdk + "/bin"; # JDK used for the language server
       "java.configuration.detectJdksAtStart" = false; # Do not try to detect JDKs
     };
     # Keybindings
