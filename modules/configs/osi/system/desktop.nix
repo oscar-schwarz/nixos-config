@@ -23,7 +23,13 @@
       # user needs to authenticate on relogin
       # This is broken. There will be an error when tuigreet tries to launch hyprland.
       default_session = {
-        command = "${lib.getExe pkgs.greetd.tuigreet} --greeting 'Welcome to NixOS!' --asterisks --remember --remember-user-session --time -cmd ${command}";
+        command = ''${lib.getExe pkgs.greetd.tuigreet} \
+          --greeting 'Welcome to NixOS!' \
+          --asterisks \
+          --remember \
+          --remember-user-session \
+          --time \
+          --cmd ${command}'';
         user = "greeter";
       };
     };
