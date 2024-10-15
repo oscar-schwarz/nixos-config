@@ -16,6 +16,9 @@ in {
       "window.menuBarVisibility" = "toggle"; # hide menu bar unless alt is pressed
       "workbench.startupEditor" = "none"; # no welcome page
 
+      # Activity bar at the bottom
+      "workbench.activityBar.location" = "bottom";
+
       # Trust all workspaces
       "security.workspace.trust.enabled" = false;
 
@@ -162,7 +165,6 @@ in {
       { # Add a watch expression
         key = "ctrl+o a";
         command = "workbench.debug.viewlet.action.addWatchExpression";
-        when = "watchExpressionsFocused";
       }
       { # Remove a watched expression
         key = "shift+backspace";
