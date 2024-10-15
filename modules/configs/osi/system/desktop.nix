@@ -11,7 +11,7 @@
   };
   
   services.greetd = let 
-    command = "sh ${pkgs.hyprland}/bin/Hyprland";
+    command = "${pkgs.hyprland}/bin/Hyprland";
   in {
     enable = true;
     settings = {
@@ -21,7 +21,7 @@
         user = "osi";
       };
       # user needs to authenticate on relogin
-      default_ssession = {
+      default_session = {
         command = "${lib.getExe pkgs.greetd.tuigreet} --greeting 'Welcome to NixOS!' --asterisks --remember --remember-user-session --time -cmd ${command}";
         user = "greeter";
       };
