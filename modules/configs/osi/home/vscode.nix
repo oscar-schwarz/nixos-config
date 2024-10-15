@@ -6,7 +6,12 @@ in {
     # code editor
   programs.vscode = {
     enable = true;
-    package = pkgs.vscodium;
+    package = pkgs.vscodium.overrideAttrs (prev: {
+      # Make the package belief the env variable is not set
+      preFixup = ''
+        NIXOS_OZONE_WL=0
+      '' + prev.preFixup;
+    });
     userSettings = {
       # --- VSCODE ---
       # extra stuff turned off
