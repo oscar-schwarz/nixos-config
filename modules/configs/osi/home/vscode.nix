@@ -170,7 +170,7 @@ in {
         when = "watchExpressionsFocused";
       }
       { # Toggle breakpoint
-        key = "ctrl+shift+n";
+        key = "ctrl+shift+t";
         command = "editor.debug.action.toggleBreakpoint";
         when = "inDebugMode";
       }
