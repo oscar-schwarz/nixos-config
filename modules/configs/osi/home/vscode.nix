@@ -1,18 +1,19 @@
 { pkgs, lib, inputs, ... }:
 
-with builtins;
 let
   vscodeExts = inputs.nix-vscode-extensions.extensions.x86_64-linux;
 in {
     # code editor
   programs.vscode = {
     enable = true;
-    package = pkgs.vscodium.overrideAttrs (prev: {
-      # Remove the line about ozone platform hint (not needed here)
-      preFixup = lib.strings.concatStringsSep "\n" (
+    package = pkgs.vscodium.overrideAttrs (prev: with builtins; with lib.strings; {
+      # As NIXOS_OZONE_WL is enabled, it is tried here too. But VSCodium shows a warning that is it an
+      # unsupported parameter. This hack removes that parameter added by the environment v
+      preFixup = concatStringsSep "\n" (
+        # Filter out the line containing the parameter that causes the warning
         filter 
-          (str: (match ".*NIXOS_OZONE_WL.*" str) == null) 
-          (lib.strings.splitString "\n" prev.preFixup)
+          (str: (match ".*ozone-platform-hint.*" str) == null) 
+          (splitString "\n" prev.preFixup)
       );
     });
     userSettings = {
