@@ -98,6 +98,11 @@
         "pkill hyprpaper; hyprpaper"
       ];
 
+      # --- Misc ---
+      misc = {
+        allow_session_lock_restore = true;
+      };
+
       # --- Keyboard settings ---
       input = {
         kb_layout = "us";
