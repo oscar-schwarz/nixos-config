@@ -54,7 +54,6 @@
     nixpkgs.config.allowUnfreePredicate = pkg:
       builtins.elem (lib.getName pkg) [
         "obsidian"
-        "vivaldi"
       ];
 
     # Enable adb
@@ -72,6 +71,12 @@
 
       Host os.github.com
         HostName github.com
+        User git
+        IdentityFile /home/osi/.ssh/id_rsa_github_os
+        IdentitiesOnly yes
+        
+      Host git.informatik.uni-leipzig.de
+        HostName git.informatik.uni-leipzig.de
         User git
         IdentityFile /home/osi/.ssh/id_rsa_github_os
         IdentitiesOnly yes
