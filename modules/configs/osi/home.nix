@@ -67,6 +67,7 @@ in {
     loupe # Image Viewer
     vlc # Media Player
     prismlauncher # Open Source Minecraft Launcher
+    godot_4
 
     # Tools
     wl-clipboard-rs # copy to clipboard from terminal
