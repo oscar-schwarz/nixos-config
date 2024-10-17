@@ -93,6 +93,12 @@ in {
       ];
       "java.jdt.ls.java.home" = pkgs.openjdk + "/lib/openjdk"; # JDK used for the language server
       "java.configuration.detectJdksAtStart" = false; # Do not try to detect JDKs
+
+
+      # --- GODOT ---
+      "godotTools.editorPath.godot4" = lib.getExe pkgs.godot_4;
+
+      
     };
     # Keybindings
     # `when` makes the keybind only available in certain contexts: more on that here
@@ -206,7 +212,7 @@ in {
       vscjava.vscode-java-dependency # project manager
 
       # --- GODOT ENGINE ---
-      # geequlim.godot-tools
+      geequlim.godot-tools
     ];
   };
 
