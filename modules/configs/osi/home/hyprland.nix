@@ -169,6 +169,7 @@
         "$meta, W, killactive"
         "$meta, M, fullscreen, 1"
         "$meta_CTRL, M, fullscreen"
+        "$meta, K, togglefloating"
 
         # switch workspaces
         "$meta, J, workspace, r-1"
