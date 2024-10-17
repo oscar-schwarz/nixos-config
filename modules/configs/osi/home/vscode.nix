@@ -206,7 +206,7 @@ in {
       vscjava.vscode-java-dependency # project manager
 
       # --- GODOT ENGINE ---
-      geequlim.godot-tools
+      # geequlim.godot-tools
     ];
   };
 
