@@ -1,6 +1,10 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
+  environment.systemPackages = [
+    # Script to install the cert for eduroam uni leipzig
+    pkgs.eduroam.install-eduroam-leipzig
+  ];
   networking = {
     networkmanager = {
       enable = true;

@@ -5,24 +5,15 @@
     # Nix packages
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-
     # HOME MANAGER - for all user related stuff
     home-manager = {
        url = "github:nix-community/home-manager";
        inputs.nixpkgs.follows = "nixpkgs";
     };
 
-
-    # HYPRLAND - Tiling window manager
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # Hyprland plugin for touchscreen support
-    hyprglass = {
+    hyprgrass = {
       url = "github:horriblename/hyprgrass";
-      inputs.hyprland.follows = "hyprland";
     };
 
     # Idle inhibitor
@@ -31,14 +22,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-
-    # Plasma manager a nice way to setup KDE declaratively
-    plasma-manager = {
-      url = "github:pjones/plasma-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
-    };
-
+    # # Plasma manager a nice way to setup KDE declaratively
+    # plasma-manager = {
+    #   url = "github:pjones/plasma-manager";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    #   inputs.home-manager.follows = "home-manager";
+    # };
 
     # Stylix, theming made easy peasy
     stylix = {
@@ -47,13 +36,11 @@
       inputs.home-manager.follows = "home-manager";
     };
 
-
     # Secret management
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
 
     # Flake programs.sqlite, fixes the command-not-found error on flake systems
     flake-programs-sqlite = {
@@ -61,36 +48,57 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-
     # Repo containing vscode extensions from marketplace and open vsx
     nix-vscode-extensions = {
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-
     # Better udev nix interface
     custom-udev-rules = {
       url = "github:MalteT/custom-udev-rules";
+    };
+
+    # Scripts to login into eduroam networks (university wifi)
+    eduroam = {
+      url = "github:MayNiklas/eduroam-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
   outputs = { nixpkgs, ... }@inputs: 
     
-    # SYSTEMS - Declare all systems found in ./hosts
+    # --- SYSTEMS --- 
+    # Declare all systems found in ./hosts
     with builtins; 
     let 
       lib = nixpkgs.lib;
 
       # function to make a system
+      # A modules list can be passed.
       mkSystem = modules: lib.nixosSystem {
         specialArgs = {inherit inputs;};
         modules = modules ++ [
+          # A shared module among all systems to reference this flake
           ({ inputs, ... }: {
-            # Add the matcha package to pkgs
+            # Import all modules of the inputs 
+            imports = with inputs; [
+              # import home-manager
+              home-manager.nixosModules.default
+              sops-nix.nixosModules.sops
+              stylix.nixosModules.stylix
+              flake-programs-sqlite.nixosModules.programs-sqlite
+              custom-udev-rules.nixosModule
+            ];
+
+            # Enable flakes
+            nix.settings.experimental-features = ["nix-command" "flakes"];
+
+            # Add packages of the flakes
             nixpkgs.overlays = [
-              (final: prev: {
-                matcha = inputs.matcha.packages.${prev.system}.default;
+              (final: prev: with inputs; {
+                matcha = matcha.packages.${prev.system}.default;
+                eduroam = eduroam.packages.${prev.system};
               })
             ]
             ;
@@ -110,6 +118,8 @@
 
       systemsFromHosts = lib.attrsets.genAttrs hostNames (name: mkSystem [ (hostsPath + "/${name}") ]);
 
+
+      # --- INTERPOLATED SYSTEMS ---
       # Interpolate systems with doing a combination from all configs from `configsPath` with all machines in
       # `machinesPath`
       configsPath = ./modules/configs;
@@ -144,6 +154,8 @@
         })
       ]);
     in {
+
+    # Add all systems as nixos configs
     nixosConfigurations = systemsFromHosts // interpolatedSystems; 
   };
 }

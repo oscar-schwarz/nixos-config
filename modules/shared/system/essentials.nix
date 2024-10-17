@@ -1,22 +1,6 @@
 { pkgs, inputs, ... }:
 
 {
-  imports = with inputs; [
-    # import home-manager
-    home-manager.nixosModules.default
-    # secret management
-    sops-nix.nixosModules.sops
-    # stylix rice
-    stylix.nixosModules.stylix
-    # fix for program not found
-    flake-programs-sqlite.nixosModules.programs-sqlite
-    # easier udev config
-    custom-udev-rules.nixosModule
-  ];
-  
-  # Enable flakes
-  nix.settings.experimental-features = ["nix-command" "flakes"];
-
   # Bootloader setup
   boot.loader.systemd-boot = {
     enable = true;
