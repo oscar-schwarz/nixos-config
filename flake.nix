@@ -7,8 +7,8 @@
 
     # HOME MANAGER - for all user related stuff
     home-manager = {
-       url = "github:nix-community/home-manager";
-       inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Hyprland plugin for touchscreen support
@@ -66,18 +66,19 @@
     };
   };
 
-  outputs = { nixpkgs, ... }@inputs: 
-    
-    # --- SYSTEMS --- 
-    # Declare all systems found in ./hosts
-    with builtins; 
-    let 
+  outputs = { nixpkgs, ... }@inputs:
+
+    with builtins;
+    let
+      # --- FUNCTIONS, ALIASES ---
       lib = nixpkgs.lib;
+      forAllSystems = f: builtins.listToAttrs (map (name: { inherit name; value = f name; }) [ "x86_64-linux" "i686-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ]);
+
 
       # function to make a system
       # A modules list can be passed.
       mkSystem = modules: lib.nixosSystem {
-        specialArgs = {inherit inputs;};
+        specialArgs = { inherit inputs; };
         modules = modules ++ [
           # A shared module among all systems to reference this flake
           ({ inputs, ... }: {
@@ -92,7 +93,7 @@
             ];
 
             # Enable flakes
-            nix.settings.experimental-features = ["nix-command" "flakes"];
+            nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
             # Add packages of the flakes
             nixpkgs.overlays = [
@@ -100,15 +101,22 @@
                 matcha = matcha.packages.${prev.system}.default;
                 eduroam = eduroam.packages.${prev.system};
               })
-            ]
-            ;
+            ];
           })
         ];
       };
 
-      readDirDirNames = path_: let 
-        dirContent = readDir path_;
-      in filter (x: (getAttr x dirContent) == "directory" ) (attrNames dirContent);
+      # Function to that takes a path and returns all directory names in that path
+      readDirDirNames = path_:
+        let
+          dirContent = readDir path_;
+        in
+        filter (x: (getAttr x dirContent) == "directory") (attrNames dirContent);
+
+
+
+      # --- SYSTEMS --- 
+      # Declare all systems found in ./hosts
 
       # Path to hosts
       hostsPath = ./hosts;
@@ -130,32 +138,58 @@
       machineNames = map (lib.strings.removeSuffix ".nix") (attrNames (readDir machinesPath));
 
       # All configs connected to machine names in the form { interpolatedName = { machine; config }; ...}
-      connections = lib.lists.foldr (a: b: a // b) {} (concatLists ( 
-        map (config: 
-          map (machine: {
-            # interpolated name is just `configName--machineName`
-            "${config}--${machine}" = {inherit config;inherit machine;};
-          }) machineNames
-        ) configNames
+      connections = lib.lists.foldr (a: b: a // b) { } (concatLists (
+        map
+          (config:
+            map
+              (machine: {
+                # interpolated name is just `configName--machineName`
+                "${config}--${machine}" = { inherit config; inherit machine; };
+              })
+              machineNames
+          )
+          configNames
       ));
-      
-      
-      interpolatedSystems = lib.attrsets.genAttrs (attrNames connections) (name: let 
-        connection = connections.${name};
-      in mkSystem [
-        # Include configs
-        (configsPath + "/${connection.config}")
-        # Include machine
-        (machinesPath + "/${connection.machine}.nix")
-        
-        # Some interpolation specific settings
-        ({ ... }: {
-          networking.hostName = name;
-        })
-      ]);
-    in {
 
-    # Add all systems as nixos configs
-    nixosConfigurations = systemsFromHosts // interpolatedSystems; 
-  };
+
+      interpolatedSystems = lib.attrsets.genAttrs (attrNames connections) (name:
+        let
+          connection = connections.${name};
+        in
+        mkSystem [
+          # Include configs
+          (configsPath + "/${connection.config}")
+          # Include machine
+          (machinesPath + "/${connection.machine}.nix")
+
+          # Some interpolation specific settings
+          ({ ... }: {
+            networking.hostName = name;
+          })
+        ]);
+
+      # Add all systems as nixos configs
+      nixosConfigurations = systemsFromHosts // interpolatedSystems;
+
+
+
+      # --- DEV SHELL ---
+      # Declare the shell environment for working with this flake
+      devShells = forAllSystems (system: 
+        let 
+          pkgs = inputs.nixpkgs.legacyPackages.${system};
+        in {
+          # Here starts the shell definition
+          default = pkgs.mkShell {
+            # Show a greeter on entering the shell
+            shellHook = ''
+              ${lib.getExe onefetch}
+            '';
+          };
+        });
+    in
+    {
+      inherit nixosConfigurations;
+      inherit devShells;
+    };
 }

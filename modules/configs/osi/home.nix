@@ -125,7 +125,8 @@ in {
 
   programs.chromium = {
     enable = true;
-    package = pkgs.brave;
+    # relatively simple (vivaldi is overkill for my usecase of "this page doesnt in firefox") with an ad-blocker
+    package = pkgs.brave; 
     extensions = [
       {
         # Vimium
