@@ -202,17 +202,28 @@
 
       # locked, also works on a lockscreen
       bindl = let
+        docked = pkgs.writeShellScript "" ''
+          [ $(hyprctl monitors | grep -c '(ID ') -ge 2 ]
+        '';
+
         closeLid = pkgs.writeShellScript "" ''
-          # disable monitor     
-          hyprctl keyword monitor "eDP-1, disable"
+          # disable monitor if it is not the only one
+          if ${docked}; then
+            hyprctl keyword monitor "eDP-1, disable"
+          # otherwise lock the screen
+          else
+            loginctl lock-session
+          fi
         '';
 
         openLid = pkgs.writeShellScript "" ''
           # enable monitor
           hyprctl keyword monitor "eDP-1"
 
-          # Run hyprlock if not started
-          loginctl lock-session
+          # Run hyprlock if laptop is not docked
+          if ! ${docked}; then
+            loginctl lock-session
+          fi
         '';
       # Only enable these binds if hardware is a laptop
       in [
