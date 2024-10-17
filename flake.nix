@@ -66,54 +66,80 @@
     };
   };
 
-  outputs = { nixpkgs, ... }@inputs:
+  outputs =
+    { nixpkgs, ... }@inputs:
 
     with builtins;
     let
       # --- FUNCTIONS, ALIASES ---
       lib = nixpkgs.lib;
-      forAllSystems = f: builtins.listToAttrs (map (name: { inherit name; value = f name; }) [ "x86_64-linux" "i686-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ]);
-
+      forAllSystems =
+        f:
+        builtins.listToAttrs (
+          map
+            (name: {
+              inherit name;
+              value = f name;
+            })
+            [
+              "x86_64-linux"
+              "i686-linux"
+              "x86_64-darwin"
+              "aarch64-linux"
+              "aarch64-darwin"
+            ]
+        );
 
       # function to make a system
       # A modules list can be passed.
-      mkSystem = modules: lib.nixosSystem {
-        specialArgs = { inherit inputs; };
-        modules = modules ++ [
-          # A shared module among all systems to reference this flake
-          ({ inputs, ... }: {
-            # Import all modules of the inputs 
-            imports = with inputs; [
-              # import home-manager
-              home-manager.nixosModules.default
-              sops-nix.nixosModules.sops
-              stylix.nixosModules.stylix
-              flake-programs-sqlite.nixosModules.programs-sqlite
-              custom-udev-rules.nixosModule
-            ];
+      mkSystem =
+        modules:
+        lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+          };
+          modules = modules ++ [
+            # A shared module among all systems to reference this flake
+            (
+              { inputs, ... }:
+              {
+                # Import all modules of the inputs 
+                imports = with inputs; [
+                  # import home-manager
+                  home-manager.nixosModules.default
+                  sops-nix.nixosModules.sops
+                  stylix.nixosModules.stylix
+                  flake-programs-sqlite.nixosModules.programs-sqlite
+                  custom-udev-rules.nixosModule
+                ];
 
-            # Enable flakes
-            nix.settings.experimental-features = [ "nix-command" "flakes" ];
+                # Enable flakes
+                nix.settings.experimental-features = [
+                  "nix-command"
+                  "flakes"
+                ];
 
-            # Add packages of the flakes
-            nixpkgs.overlays = [
-              (final: prev: with inputs; {
-                matcha = matcha.packages.${prev.system}.default;
-                eduroam = eduroam.packages.${prev.system};
-              })
-            ];
-          })
-        ];
-      };
+                # Add packages of the flakes
+                nixpkgs.overlays = [
+                  (
+                    final: prev: with inputs; {
+                      matcha = matcha.packages.${prev.system}.default;
+                      eduroam = eduroam.packages.${prev.system};
+                    }
+                  )
+                ];
+              }
+            )
+          ];
+        };
 
       # Function to that takes a path and returns all directory names in that path
-      readDirDirNames = path_:
+      readDirDirNames =
+        path_:
         let
           dirContent = readDir path_;
         in
         filter (x: (getAttr x dirContent) == "directory") (attrNames dirContent);
-
-
 
       # --- SYSTEMS --- 
       # Declare all systems found in ./hosts
@@ -126,7 +152,6 @@
 
       systemsFromHosts = lib.attrsets.genAttrs hostNames (name: mkSystem [ (hostsPath + "/${name}") ]);
 
-
       # --- INTERPOLATED SYSTEMS ---
       # Interpolate systems with doing a combination from all configs from `configsPath` with all machines in
       # `machinesPath`
@@ -138,21 +163,23 @@
       machineNames = map (lib.strings.removeSuffix ".nix") (attrNames (readDir machinesPath));
 
       # All configs connected to machine names in the form { interpolatedName = { machine; config }; ...}
-      connections = lib.lists.foldr (a: b: a // b) { } (concatLists (
-        map
-          (config:
-            map
-              (machine: {
-                # interpolated name is just `configName--machineName`
-                "${config}--${machine}" = { inherit config; inherit machine; };
-              })
-              machineNames
-          )
-          configNames
-      ));
+      connections = lib.lists.foldr (a: b: a // b) { } (
+        concatLists (
+          map (
+            config:
+            map (machine: {
+              # interpolated name is just `configName--machineName`
+              "${config}--${machine}" = {
+                inherit config;
+                inherit machine;
+              };
+            }) machineNames
+          ) configNames
+        )
+      );
 
-
-      interpolatedSystems = lib.attrsets.genAttrs (attrNames connections) (name:
+      interpolatedSystems = lib.attrsets.genAttrs (attrNames connections) (
+        name:
         let
           connection = connections.${name};
         in
@@ -163,35 +190,42 @@
           (machinesPath + "/${connection.machine}.nix")
 
           # Some interpolation specific settings
-          ({ ... }: {
-            networking.hostName = name;
-          })
-        ]);
+          (
+            { ... }:
+            {
+              networking.hostName = name;
+            }
+          )
+        ]
+      );
 
       # Add all systems as nixos configs
       nixosConfigurations = systemsFromHosts // interpolatedSystems;
 
-
-
       # --- DEV SHELL ---
       # Declare the shell environment for working with this flake
-      devShells = forAllSystems (system: 
-        let 
+      devShells = forAllSystems (
+        system:
+        let
           pkgs = inputs.nixpkgs.legacyPackages.${system};
-        in {
+        in
+        {
           # Here starts the shell definition
           default = pkgs.mkShell {
             buildInputs = with pkgs; [
               onefetch
+              pre-commit
             ];
 
             # Show a greeter on entering the shell
             shellHook = ''
+              pre-commit install >/dev/null
               onefetch
             '';
           };
-        });
-      
+        }
+      );
+
       # --- FORMATTER ---
       # Flake feature that auto-formats nix files
       formatter = forAllSystems (system: inputs.nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
