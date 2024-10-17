@@ -181,15 +181,24 @@
         in {
           # Here starts the shell definition
           default = pkgs.mkShell {
+            buildInputs = with pkgs; [
+              onefetch
+            ];
+
             # Show a greeter on entering the shell
             shellHook = ''
-              ${lib.getExe onefetch}
+              onefetch
             '';
           };
         });
+      
+      # --- FORMATTER ---
+      # Flake feature that auto-formats nix files
+      formatter = forAllSystems (system: inputs.nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
     in
     {
       inherit nixosConfigurations;
       inherit devShells;
+      inherit formatter;
     };
 }

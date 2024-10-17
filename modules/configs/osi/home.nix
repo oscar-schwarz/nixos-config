@@ -68,6 +68,7 @@ in {
     vlc # Media Player
     prismlauncher # Open Source Minecraft Launcher
     godot_4
+    gource # Git history visualisation
 
     # Tools
     wl-clipboard-rs # copy to clipboard from terminal
