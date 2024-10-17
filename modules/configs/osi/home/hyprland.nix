@@ -203,15 +203,12 @@
       # locked, also works on a lockscreen
       bindl = let
         closeLid = pkgs.writeShellScript "" ''
-          # Run hyprlock if not started
-          loginctl lock-session
-          
           # disable monitor     
           hyprctl keyword monitor "eDP-1, disable"
         '';
 
         openLid = pkgs.writeShellScript "" ''
-          # enable screen
+          # enable monitor
           hyprctl keyword monitor "eDP-1"
 
           # Run hyprlock if not started
