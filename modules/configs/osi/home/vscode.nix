@@ -204,6 +204,9 @@ in {
       redhat.java # language features
       vscjava.vscode-java-debug # debugger
       vscjava.vscode-java-dependency # project manager
+
+      # --- GODOT ENGINE ---
+      geequlim.godot-tools
     ];
   };
 
