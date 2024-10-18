@@ -218,7 +218,7 @@
 
             # Show a greeter on entering the shell
             shellHook = ''
-              onefetch
+              # onefetch
             '';
           };
         }
