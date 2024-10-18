@@ -66,7 +66,7 @@
     enable = true;
     settings = {
       general = {
-        lock_cmd = "pkill hyprlock; hyprlock";
+        lock_cmd = "pkill hyprlock & hyprlock";
         ignore_systemd_inhibit = true;
         ignore_dbus_inhibit = true;
       };
@@ -78,7 +78,7 @@
           on-timeout = "systemctl suspend";
         }
         {
-          timeout = MinsToSecs 1.5;
+          timeout = MinsToSecs 3;
           on-timeout = "loginctl lock-session";
         }
       ];
