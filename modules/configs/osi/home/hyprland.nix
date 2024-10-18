@@ -66,7 +66,7 @@
     enable = true;
     settings = {
       general = {
-        lock_cmd = "pidof hyprlock || hyprlock";
+        lock_cmd = "pkill hyprlock; hyprlock";
         ignore_systemd_inhibit = true;
         ignore_dbus_inhibit = true;
       };
