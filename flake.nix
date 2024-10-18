@@ -214,12 +214,10 @@
           default = pkgs.mkShell {
             buildInputs = with pkgs; [
               onefetch
-              pre-commit
             ];
 
             # Show a greeter on entering the shell
             shellHook = ''
-              pre-commit install >/dev/null
               onefetch
             '';
           };
