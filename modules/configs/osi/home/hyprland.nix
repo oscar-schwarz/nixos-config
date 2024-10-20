@@ -18,6 +18,7 @@
     hypridle
     brightnessctl
     hyprpaper
+    waylock
   ];
 
   programs.kitty = {
@@ -46,27 +47,11 @@
     enable = true;
   };
 
-  programs.hyprlock = {
-    enable = true;
-    settings = {
-      general = {
-        hide_cursor = true;
-        ignore_empty_input = true;
-      };
-      background = {
-        monitor = "";
-        path = "screenshot";
-        blur_passes = 4;
-        blur_size = 10;
-      };
-    };
-  };
-
   services.hypridle = {
     enable = true;
     settings = {
       general = {
-        lock_cmd = "pkill hyprlock; hyprlock";
+        lock_cmd = "pidof waylock || waylock";
         ignore_systemd_inhibit = true;
         ignore_dbus_inhibit = true;
       };
