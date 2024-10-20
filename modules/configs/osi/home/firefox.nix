@@ -42,6 +42,10 @@
           Title = "DuckDuckGo";
           URL = "https://duckduckgo.com/";
         }
+        {
+          Title = "Moodle";
+          URL = "https://moodle2.uni-leipzig.de/my/courses.php";
+        }
       ];
       SanitizeOnShutdown = {
         Cache = true;
