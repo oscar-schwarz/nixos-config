@@ -18,7 +18,6 @@
     hypridle
     brightnessctl
     hyprpaper
-    waylock
   ];
 
   programs.kitty = {
@@ -47,11 +46,15 @@
     enable = true;
   };
 
+  programs.swaylock = {
+    enable = true;
+  };
+
   services.hypridle = {
     enable = true;
     settings = {
       general = {
-        lock_cmd = "pidof waylock || waylock";
+        lock_cmd = "pidof swaylock || swaylock";
         ignore_systemd_inhibit = true;
         ignore_dbus_inhibit = true;
       };
