@@ -48,14 +48,14 @@
 
   programs.swaylock = {
     enable = true;
-    package = pkgs.swaylock-fancy;
+    package = pkgs.swaylock-effects;
   };
 
   services.hypridle = {
     enable = true;
     settings = {
       general = {
-        lock_cmd = "pidof swaylock || swaylock";
+        lock_cmd = "pidof swaylock || swaylock --screenshots";
         ignore_systemd_inhibit = true;
         ignore_dbus_inhibit = true;
       };
