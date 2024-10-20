@@ -28,7 +28,7 @@
           --remember \
           --remember-user-session \
           --time \
-          --cmd ${command}"'';
+          --cmd "${command}"'';
         user = "greeter";
       };
     };
