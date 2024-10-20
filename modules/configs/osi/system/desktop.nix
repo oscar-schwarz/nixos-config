@@ -11,7 +11,7 @@
   };
   
   services.greetd = let 
-    command = pkgs.writeShellScript "" "${pkgs.hyprland}/bin/Hyprland >/dev/null";
+    command = "Hyprland >/dev/null";
   in {
     enable = true;
     settings = {
