@@ -73,8 +73,9 @@
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
           installation_mode = "force_installed";
         };
-        "{174b2d58-b983-4501-ab4b-07e71203cb43}" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/file/4367168/dark_mode_webextension-0.5.3.xpi";
+        # Dark Mode for every website
+        "{addon@darkreader.org}" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/file/4359254/darkreader-4.9.94.xpi";
           installation_mode = "force_installed";
         };
         # Time-to-Work
