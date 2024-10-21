@@ -158,12 +158,7 @@
         APP_URL = "http://${dotEnv.SERVER_HOST}:${dotEnv.SERVER_PORT}";
         APP_KEY = "base64:Igl3VDbdMSWnCDABL7k9ioK8hJ1EKgM25kh6vnxUntQ="; # This has to be set
 
-        VITE_APP_ENV = "debug";
-
-        VIDIS_BASE_URL="https://aai-test.vidis.schule/auth";
-        VIDIS_CLIENT_SECRET="ymls85RV9XkPDRX9DuoUNKx8U8IrMNk0";
-        VIDIS_REDIRECT_URI="http://localhost/login/vidis/callback";
-        VIDIS_CLIENT_ID="schulki-o";          
+        VITE_APP_ENV = "debug";        
 
         TOKEN_VALID = "14";
         TOKEN_LENGTH = "16";
@@ -314,26 +309,33 @@
           '';
         })
 
-        # Create a symlink with additional checks
+        # Show what should be in some files
         (pkgs.writeShellApplication {
-          name = "try-symlink";
+          name = "env-files-content";
           text = ''
-            FILE="$1"
-            STORE="$2"
+            OPTIONS=".env .pre-commit.yaml .git/info/exclude"
 
-            # only overwrite symlink when FILE is already a symlink
-            if [ -f  "$FILE" ] && [ """$(readlink "$FILE")""" == "" ]; then
-              echo "cannot create symlink at $FILE. Move it to another location to use this flake."
+            if [ "$*" = "" ]; then
+              echo Please provide one of the following options:
+              for opt in $OPTIONS; do
+                echo "$opt"
+              done
               exit 1
             fi
 
-            # Only update on change
-            if [ ! -f  "$FILE" ] || [ """$(readlink "$FILE")""" != "$STORE" ]; then
-              echo "Updating $FILE"
-              ln -fs "$STORE" "$FILE"
-            else
-              exit 1
-            fi
+            case "$1" in
+              ".env")
+                cat ${writeDotEnv dotEnv}
+              ;;
+              
+              ".pre-commit.yaml")
+                cat ${writeYaml gitConfig.pre-commit-config}
+              ;;
+
+              ".git/info/exclude")
+                cat ${writeList gitConfig.exclude}
+              ;;
+            esac
           '';
         })
       ];
@@ -352,24 +354,16 @@
 
         # Generate necessary files and create symlinks to them
         shellHook = ''
-          # Git exclude
-          try-symlink .git/info/exclude "${writeList gitConfig.exclude}"
-
-          # Pre commit config
-          try-symlink .pre-commit-config.yaml "${writeYaml gitConfig.pre-commit-config}" && pre-commit install
-
-          # Write .env, not a symlink because php cant read it
-          newEnvPath="${writeDotEnv dotEnv}"
-          if [ ! -e ".env" ]; then
-            touch .env # to make diff never fail
+          # Install pre-commit
+          if [ -f ".pre-commit-config.yaml" ]; then
+            pre-commit install
           fi
-          if [ "$(diff $newEnvPath .env)" != "" ]; then
-            echo "Updating .env"
-            echo -e "$(cat $newEnvPath)" > .env
-          fi
-
+          
           # Welcome to the Git repository
           ${lib.getExe pkgs.onefetch}
+          
+          # Info about file content
+          echo Some files have to be manually altered, for more info type \"env-files-content\"
         '';
       };
     in
