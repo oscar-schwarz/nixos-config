@@ -55,7 +55,7 @@
     enable = true;
     settings = {
       general = {
-        lock_cmd = "pidof swaylock || swaylock --screenshots";
+        lock_cmd = "swaylock --screenshots";
         ignore_systemd_inhibit = true;
         ignore_dbus_inhibit = true;
       };
