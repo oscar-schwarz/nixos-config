@@ -75,9 +75,8 @@
             name = "Oscar Schwarz";
             email = "121044740+oscar-schwarz@users.noreply.github.com";
           };
-          init = {
-            defaultBranch = "main";
-          };
+          init.defaultBranch = "main";
+          pull.rebase = true;
         };
       };
 
