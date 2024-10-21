@@ -46,16 +46,28 @@
     enable = true;
   };
 
-  programs.swaylock = {
+  programs.hyprlock = {
     enable = true;
-    package = pkgs.swaylock-effects;
+    settings = {
+      general = {
+        hide_cursor = true;
+        ignore_empty_input = true;
+      };
+      background = {
+        monitor = "";
+        path = "screenshot";
+        blur_passes = 4;
+        blur_size = 10;
+      };
+    };
   };
+  
 
   services.hypridle = {
     enable = true;
     settings = {
       general = {
-        lock_cmd = "swaylock --screenshots";
+        lock_cmd = "pidof hyprlock || hyprlock";
         ignore_systemd_inhibit = true;
         ignore_dbus_inhibit = true;
       };
@@ -85,6 +97,12 @@
         "pkill hypridle; hypridle"
         "pkill waybar; waybar"
         "pkill hyprpaper; hyprpaper"
+      ];
+
+      # --- Monitors ---
+      monitor = [
+        # This needs to be here so that hyprlock does not crash
+        "FALLBACK,1920x1080@60,auto,1"
       ];
 
       # --- Keyboard settings ---

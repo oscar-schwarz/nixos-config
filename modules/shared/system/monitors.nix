@@ -3,6 +3,8 @@
 {
   # All home manager specific options
   home-manager.sharedModules = [({ ... }: {
+
+      # Config for hyprland
       wayland.windowManager.hyprland.settings.monitor = let
         # Sometimes the portable monitor is listed under different names
         portableMonitorConfigs = map
