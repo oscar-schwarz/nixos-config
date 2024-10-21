@@ -73,6 +73,10 @@
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
           installation_mode = "force_installed";
         };
+        "{174b2d58-b983-4501-ab4b-07e71203cb43}" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/file/4367168/dark_mode_webextension-0.5.3.xpi";
+          installation_mode = "force_installed";
+        };
         # Time-to-Work
         "{c52a7349-0c5d-479d-9917-0155a0c58c0a}" = {
           install_url = "https://github.com/OsiPog/time-to-work/releases/download/v1.2.5/time-to-work-1.2.5.xpi";
