@@ -164,6 +164,11 @@
         
         # lock screen
         "$meta, L, exec, loginctl lock-session"
+        # lock screen and suspen
+        "$meta_CTRL, L, exec, ${pkgs.writeShellScript "" ''
+          loginctl lock-session
+          systemctl suspend
+        ''}"
         # toggle matcha idle inhibitor
         "$meta, I, exec, matcha-toggle"
 

@@ -58,6 +58,9 @@
           mysqli
         ]));
         extraConfig = ''
+          max_execution_time = 120
+          memory_limit = 256M
+
           [XDebug]
           xdebug.mode=debug
           xdebug.start_with_request=yes
@@ -285,6 +288,11 @@
             if $KILL_AFTERWARDS; then
               kill "$(cat ${mariadbConfig.pidFile})"
             fi
+
+
+            # Migrate and seed database with laravel
+            php artisan migrate
+            php artisan db:seed
           '';
         })
 
