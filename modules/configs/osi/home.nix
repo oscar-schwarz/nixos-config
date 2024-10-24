@@ -69,6 +69,7 @@ in {
     prismlauncher # Open Source Minecraft Launcher
     godot_4
     gource # Git history visualisation
+    qrcode # simple qr code tool
 
     # Tools
     wl-clipboard-rs # copy to clipboard from terminal
