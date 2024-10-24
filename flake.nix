@@ -11,15 +11,23 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # HYPRLAND - Wayland tiling window manager
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Hyprland plugin for touchscreen support
     hyprgrass = {
       url = "github:horriblename/hyprgrass";
+      inputs.hyprland.follows = "hyprland";
     };
 
     # Idle inhibitor
     matcha = {
       url = "git+https://codeberg.org/QuincePie/matcha";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.hyprland.follows = "hyprland";
     };
 
     # # Plasma manager a nice way to setup KDE declaratively
@@ -71,24 +79,44 @@
 
     with builtins;
     let
+      # --- FLAKE MODULE ---
+      # this module is shared among ALL configurations to ensure it uses the flake's inputs correctly
+      sharedModule = { inputs, ... }:
+        {
+          # Import all modules of the inputs 
+          imports = with inputs; [
+            home-manager.nixosModules.default
+            sops-nix.nixosModules.sops
+            stylix.nixosModules.stylix
+            flake-programs-sqlite.nixosModules.programs-sqlite
+            custom-udev-rules.nixosModule
+            hyprland.nixosModules.default
+          ];
+
+          # Import home manager modules to home manager
+          home-manager.sharedModules = with inputs; [
+            hyprland.homeManagerModules.default
+          ];
+
+          # Enable flakes
+          nix.settings.experimental-features = [
+            "nix-command"
+            "flakes"
+          ];
+
+          # Add packages of the flakes in an overlay
+          nixpkgs.overlays = [
+            (
+              final: prev: with inputs; {
+                matcha = matcha.packages.${prev.system}.default;
+                eduroam = eduroam.packages.${prev.system};
+              }
+            )
+          ];
+        };
+
       # --- FUNCTIONS, ALIASES ---
       lib = nixpkgs.lib;
-      forAllSystems =
-        f:
-        builtins.listToAttrs (
-          map
-            (name: {
-              inherit name;
-              value = f name;
-            })
-            [
-              "x86_64-linux"
-              "i686-linux"
-              "x86_64-darwin"
-              "aarch64-linux"
-              "aarch64-darwin"
-            ]
-        );
 
       # function to make a system
       # A modules list can be passed.
@@ -98,39 +126,8 @@
           specialArgs = {
             inherit inputs;
           };
-          modules = modules ++ [
-            # A shared module among all systems to reference this flake
-            (
-              { inputs, ... }:
-              {
-                # Import all modules of the inputs 
-                imports = with inputs; [
-                  # import home-manager
-                  home-manager.nixosModules.default
-                  sops-nix.nixosModules.sops
-                  stylix.nixosModules.stylix
-                  flake-programs-sqlite.nixosModules.programs-sqlite
-                  custom-udev-rules.nixosModule
-                ];
-
-                # Enable flakes
-                nix.settings.experimental-features = [
-                  "nix-command"
-                  "flakes"
-                ];
-
-                # Add packages of the flakes
-                nixpkgs.overlays = [
-                  (
-                    final: prev: with inputs; {
-                      matcha = matcha.packages.${prev.system}.default;
-                      eduroam = eduroam.packages.${prev.system};
-                    }
-                  )
-                ];
-              }
-            )
-          ];
+          # Make sure to add the shared module to the system
+          modules = modules ++ [sharedModule];
         };
 
       # Function to that takes a path and returns all directory names in that path
