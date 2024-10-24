@@ -77,7 +77,7 @@ in {
         enabled = "yes";
         focus_animation = "shrink";
         shrink = {
-          shrink_percentage = 1.01;
+          shrink_percentage = 1.2;
         };
       };
     };
