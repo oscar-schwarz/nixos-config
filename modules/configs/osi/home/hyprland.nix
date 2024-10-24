@@ -9,7 +9,7 @@
     ./waybar.nix
 
     # matcha idle inhibitor
-    ../../../shared/home/matcha.nix  
+    ../../../shared/home/matcha.nix
   ];
 
   home.packages = with pkgs; [
@@ -230,12 +230,23 @@
             loginctl lock-session
           fi
         '';
-      # Only enable these binds if hardware is a laptop
       in [
         # switch behaviour
         ", switch:on:Lid Switch, exec, ${closeLid}"
         ", switch:off:Lid Switch, exec, ${openLid}"
-      ]; 
+      ];
+
+
+      # --- Plugin settings ---
+      # plugins = with pkgs.hyprlandPlugins; [
+      #   hyprfocus
+      # ];
+
+      # --- PLUGIN: Hyprfocus
+      hyprfocus = {
+        enable = true;
+        focus_animation = "shrink";
+      };
     };
   };
 }

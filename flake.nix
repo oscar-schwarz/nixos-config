@@ -201,36 +201,8 @@
 
       # Add all systems as nixos configs
       nixosConfigurations = systemsFromHosts // interpolatedSystems;
-
-      # --- DEV SHELL ---
-      # Declare the shell environment for working with this flake
-      devShells = forAllSystems (
-        system:
-        let
-          pkgs = inputs.nixpkgs.legacyPackages.${system};
-        in
-        {
-          # Here starts the shell definition
-          default = pkgs.mkShell {
-            buildInputs = with pkgs; [
-              onefetch
-            ];
-
-            # Show a greeter on entering the shell
-            shellHook = ''
-              # onefetch
-            '';
-          };
-        }
-      );
-
-      # --- FORMATTER ---
-      # Flake feature that auto-formats nix files
-      formatter = forAllSystems (system: inputs.nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
     in
     {
       inherit nixosConfigurations;
-      inherit devShells;
-      inherit formatter;
     };
 }

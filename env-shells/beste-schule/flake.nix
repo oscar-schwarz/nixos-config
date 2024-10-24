@@ -309,7 +309,7 @@
 
             # Main process is vite, which can be stopped using CTRL+C
             set +e
-            npm run dev -- --port ${nodejsConfig.tcpPort} --mode development --debug
+            npm run dev -- --port ${nodejsConfig.tcpPort} --debug
 
             # After vite was stopped kill the processes
             echo "Stopping services..."
@@ -321,7 +321,7 @@
         (pkgs.writeShellApplication {
           name = "env-files-content";
           text = ''
-            OPTIONS=".env .pre-commit.yaml .git/info/exclude"
+            OPTIONS=".env .pre-commit-config.yaml .git/info/exclude"
 
             if [ "$*" = "" ]; then
               echo Please provide one of the following options:
@@ -336,7 +336,7 @@
                 cat ${writeDotEnv dotEnv}
               ;;
               
-              ".pre-commit.yaml")
+              ".pre-commit-config.yaml")
                 cat ${writeYaml gitConfig.pre-commit-config}
               ;;
 
