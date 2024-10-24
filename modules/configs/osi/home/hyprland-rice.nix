@@ -81,7 +81,7 @@ in {
         enabled = "yes";
         keyboard_focus_animation = "flash";
         flash = {
-          flash_opacity = 0.8;
+          flash_opacity = 0.9;
         };
       };
     };
