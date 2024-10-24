@@ -245,7 +245,7 @@
     };
 
     plugins = with pkgs.hyprlandPlugins; [
-      "${hyprfocus}/lib/libhyprfocus.so"
+      hyprfocus
     ];
   };
 }
