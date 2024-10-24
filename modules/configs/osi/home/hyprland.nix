@@ -238,15 +238,15 @@
 
 
       # --- Plugin settings ---
-      plugins = with pkgs.hyprlandPlugins; [
-        "${hyprfocus}"
-      ];
+      # plugins = with pkgs.hyprlandPlugins; [
+      #   "${hyprfocus}"
+      # ];
 
-      # --- PLUGIN: Hyprfocus
-      hyprfocus = {
-        enable = true;
-        focus_animation = "shrink";
-      };
+      # # --- PLUGIN: Hyprfocus
+      # hyprfocus = {
+      #   enable = true;
+      #   focus_animation = "shrink";
+      # };
     };
   };
 }
