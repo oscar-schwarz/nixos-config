@@ -23,11 +23,16 @@
       inputs.hyprland.follows = "hyprland";
     };
 
+    # Hyprland plugin for a window focused animation
+    hyprfocus = {
+      url = "github:pyt0xic/hyprfocus";
+      inputs.hyprland.follows = "hyprland";
+    };
+
     # Idle inhibitor
     matcha = {
       url = "git+https://codeberg.org/QuincePie/matcha";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.hyprland.follows = "hyprland";
     };
 
     # # Plasma manager a nice way to setup KDE declaratively
@@ -110,6 +115,10 @@
               final: prev: with inputs; {
                 matcha = matcha.packages.${prev.system}.default;
                 eduroam = eduroam.packages.${prev.system};
+                hyprlandPlugins = {
+                  hyprgrass = hyprgrass.packages.${prev.system}.default;
+                  hyprfocus = hyprfocus.packages.${prev.system}.default;
+                };
               }
             )
           ];
