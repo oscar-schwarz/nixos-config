@@ -239,7 +239,7 @@
 
       # --- PLUGIN: Hyprfocus
       hyprfocus = {
-        enable = true;
+        enabled = "yes";
         focus_animation = "shrink";
       };
     };
