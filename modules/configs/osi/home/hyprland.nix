@@ -236,6 +236,10 @@
         ", switch:off:Lid Switch, exec, ${openLid}"
       ];
 
+      # import plugins
+      plugins = with pkgs.hyprlandPlugins; [
+        "${hyprfocus}"
+      ];
 
       # --- PLUGIN: Hyprfocus
       hyprfocus = {
@@ -243,9 +247,5 @@
         focus_animation = "shrink";
       };
     };
-
-    plugins = with pkgs.hyprlandPlugins; [
-      hyprfocus
-    ];
   };
 }
