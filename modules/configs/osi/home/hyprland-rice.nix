@@ -1,4 +1,4 @@
-args@{ lib, ... }:
+args@{ lib, pkgs, ... }:
 
 let
   border = {
@@ -35,6 +35,10 @@ in {
 
   # Hyprland itself
   wayland.windowManager.hyprland = {
+    plugins = with pkgs.hyprlandPlugins; [
+      hyprfocus
+    ];
+
     settings = {
       # --- General ---
       general = {
@@ -68,6 +72,14 @@ in {
         "windows, 1, 3, fast-in, popin"
         "workspaces, 1, 5, default, slidevert"
       ];
+
+      # --- Plugins ---
+
+      # --- PLUGIN: Hyprfocus
+      "plugin:hyprfocus" = {
+        enabled = "yes";
+        focus_animation = "flash";
+      };
     };
   };
 }
