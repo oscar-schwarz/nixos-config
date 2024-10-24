@@ -79,9 +79,9 @@ in {
       # --- PLUGIN: Hyprfocus
       "plugin:hyprfocus" = {
         enabled = "yes";
-        focus_animation = "shrink";
-        shrink = {
-          shrink_percentage = 0.99;
+        focus_animation = "flash";
+        flash = {
+          flash_opacity = 0.8;
         };
       };
     };
