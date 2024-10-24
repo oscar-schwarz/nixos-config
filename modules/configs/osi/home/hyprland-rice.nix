@@ -79,7 +79,7 @@ in {
       # --- PLUGIN: Hyprfocus
       "plugin:hyprfocus" = {
         enabled = "yes";
-        keyboard_focus_animation = "flash";
+        keyboard_focus_animation = "shrink";
         flash = {
           flash_opacity = 0.95;
         };
