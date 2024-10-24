@@ -53,9 +53,6 @@ in {
       };
 
       decoration = {
-        dim_inactive = true;
-        dim_strength = 1 - brightness-inactive;
-
         rounding = border.radius;
 
         blur = {
@@ -78,7 +75,10 @@ in {
       # --- PLUGIN: Hyprfocus
       "plugin:hyprfocus" = {
         enabled = "yes";
-        focus_animation = "flash";
+        focus_animation = "shrink";
+        shrink = {
+          shrink_percentage = -0.1;
+        };
       };
     };
   };
