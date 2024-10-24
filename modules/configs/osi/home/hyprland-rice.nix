@@ -60,6 +60,9 @@ in {
         };
       };
 
+      cursor = {
+        hide_on_kmy_press = true;
+      };
 
       # --- Animations ---
       bezier = [
