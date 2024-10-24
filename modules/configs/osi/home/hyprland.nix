@@ -88,6 +88,7 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
+
     settings = {
       
       # --- Autostart ---
@@ -236,17 +237,15 @@
         ", switch:off:Lid Switch, exec, ${openLid}"
       ];
 
-
-      # --- Plugin settings ---
-      plugins = with pkgs.hyprlandPlugins; [
-        "${hyprfocus}"
-      ];
-
       # --- PLUGIN: Hyprfocus
       hyprfocus = {
         enable = true;
         focus_animation = "shrink";
       };
     };
+
+    plugins = with pkgs.hyprlandPlugins; [
+      hyprfocus
+    ];
   };
 }
