@@ -80,9 +80,9 @@ in {
       "plugin:hyprfocus" = {
         enabled = "yes";
         keyboard_focus_animation = "shrink";
-        flash = {
-          flash_opacity = 0.95;
-        };
+        # flash = {
+        #   flash_opacity = 0.95;
+        # };
       };
     };
   };
