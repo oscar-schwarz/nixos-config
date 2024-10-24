@@ -81,7 +81,7 @@ in {
         enabled = "yes";
         focus_animation = "shrink";
         shrink = {
-          shrink_percentage = 0.99;
+          shrink_percentage = 0.999;
         };
       };
     };
