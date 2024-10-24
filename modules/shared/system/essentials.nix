@@ -49,7 +49,7 @@
   environment.variables = { 
     # Fix for electron apps to use wayland
     NIXOS_OZONE_WL = "1";
-    OZONE_PLATFORM_HINT = "auto";
+    ELECTRON_OZONE_PLATFORM_HINT = "auto";
   };
 
   # Setup home-manager
