@@ -62,7 +62,7 @@ in {
 
       cursor = {
         hide_on_key_press = true;
-        inactive_timeout = 0.01;
+        inactive_timeout = 1;
       };
 
       # --- Animations ---
