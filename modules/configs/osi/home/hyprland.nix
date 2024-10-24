@@ -235,17 +235,16 @@
         ", switch:on:Lid Switch, exec, ${closeLid}"
         ", switch:off:Lid Switch, exec, ${openLid}"
       ];
-
-
-      plugin = with pkgs.hyprlandPlugins; [
-        "${hyprfocus}/lib/libhyprfocus.so"
-      ];
       
       # --- PLUGIN: Hyprfocus
-      hyprfocus = {
+      "plugin:hyprfocus" = {
         enabled = "yes";
         focus_animation = "shrink";
       };
     };
+
+    plugins = with pkgs.hyprlandPlugins; [
+      hyprfocus
+    ];
   };
 }
