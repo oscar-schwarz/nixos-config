@@ -51,6 +51,7 @@ in {
           "clock#time"
         ];
         modules-right = [
+          "custom/hypr-toggle-laptop-kb"
           "battery"
           "backlight"
           "network"
