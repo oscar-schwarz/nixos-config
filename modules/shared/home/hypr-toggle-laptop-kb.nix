@@ -96,7 +96,7 @@ in
           fi
         '';
         interval = 1;
-        # hide_empty_text = true;
+        hide_empty_text = true;
       };
     };
   };  
