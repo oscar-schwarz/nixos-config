@@ -1,7 +1,7 @@
 { pkgs, lib, config, ... }:
 
 let
-  statusFilePath = ''STATUS_FILE="$XDG_RUNTIME_DIR/keyboard.status"'';
+  statusFilePath = ''"$XDG_RUNTIME_DIR/keyboard.status"'';
 
   isEnabled = pkgs.writeShellApplication {
     name = "hypr-toggle-laptop-kb-check";
