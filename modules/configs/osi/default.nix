@@ -27,6 +27,7 @@
       openAiKey = mkSecretOption;
       publicPgpKey = mkSecretOption;
       osiPasswordHash = mkSecretOption;
+      nixAccessTokens = mkSecretOption;
     };
   };
 
@@ -43,12 +44,15 @@
     in {
       ${openAiKey} = common;
       ${publicPgpKey} = common;
+      ${nixAccessTokens} = common;
       ${osiPasswordHash}.neededForUsers = true;
     };
 
     # Set hashed password for osi
     users.users.osi.hashedPasswordFile = config.sops.secrets.${config.osi.secrets.osiPasswordHash}.path;
 
+    # Add github token to github calls
+    nix.extraOptions = "!include " + config.sops.secrets.${config.osi.secrets.nixAccessTokens}.path;
 
     # Allow some unfree packages
     nixpkgs.config.allowUnfreePredicate = pkg:
