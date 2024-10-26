@@ -89,7 +89,14 @@ in
     programs.waybar.settings = lib.mkIf config.hypr-toggle-laptop-kb.waybarIntegration.enable {
       "custom/${config.hypr-toggle-laptop-kb.waybarIntegration.moduleName}" = {
         on-click = lib.getExe toggleKB;
+        # Runs every second to update the icon
+        exec = pkgs.writeShellScript "" ''
+          if ! ${isEnabled}; then
+            echo &#xf109; &#xf11c; disabled
+          fi
+        '';
         interval = 1;
+        hide_empty_text = true;
       };
     };
   };  
