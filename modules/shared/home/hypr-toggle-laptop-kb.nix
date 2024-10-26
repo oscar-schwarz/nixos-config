@@ -18,16 +18,14 @@ let
   toggleKB = pkgs.writeShellApplication {
     name = "hypr-toggle-laptop-kb";
     text = ''
-      export 
-
       enable_keyboard() {
-          printf "true" >${statusFilePath}
+          echo "true" >${statusFilePath}
           # notify-send -u normal "Enabling Keyboard"
           hyprctl keyword "\$LAPTOP_KB_ENABLED" "true" -r
       }
 
       disable_keyboard() {
-          printf "false" >${statusFilePath}
+          echo "false" >${statusFilePath}
           # notify-send -u normal "Disabling Keyboard"
           hyprctl keyword "\$LAPTOP_KB_ENABLED" "false" -r
       }
