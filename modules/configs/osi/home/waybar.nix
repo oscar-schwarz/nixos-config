@@ -23,6 +23,13 @@ let
   # get html unicode escape sequence for font awesome icon name
   fa = name: "&#x" + fa-icons.${name} + ";";
 in {
+  imports = [
+    ../../../shared/home/hypr-toggle-laptop-kb.nix
+  ];
+
+  # Options for my hypr-toggle-laptop-kb module
+  hypr-toggle-laptop-kb.enable = true;
+
   # Allow installation of fonts through home.packages
   fonts.fontconfig.enable =  true;
 
