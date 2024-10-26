@@ -10,7 +10,9 @@ let
         exit 1
       elif [ """$(cat ${statusFilePath})""" = "true" ]; then
         exit 0
-      elif [ """$(cat ${statusFilePath})""" = "true" ]; then
+      elif [ """$(cat ${statusFilePath})""" = "false" ]; then
+        exit 1
+      else
         exit 1
       fi
     '';
