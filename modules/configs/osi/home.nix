@@ -70,7 +70,6 @@ in {
     godot_4
     gource # Git history visualisation
     qrcode # simple qr code tool
-    devenv # Devenlopment enviroments defined by a nix file
 
     # Tools
     wl-clipboard-rs # copy to clipboard from terminal
