@@ -48,13 +48,12 @@ in {
 
         # Module placement
         modules-left = [
-
+          "custom/hypr-toggle-laptop-kb"
         ];
         modules-center = [
           "clock#time"
         ];
         modules-right = [
-          "custom/hypr-toggle-laptop-kb"
           "battery"
           "backlight"
           "network"
