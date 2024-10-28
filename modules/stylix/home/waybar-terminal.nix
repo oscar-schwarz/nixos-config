@@ -43,7 +43,7 @@ in {
         /* `otf-font-awesome` is required to be installed for icons */
         font-family: "${fonts.monospace.name}";
         font-weight: 500;
-        font-size: ${str (fonts.sizes.terminal*0.75)}pt;
+        font-size: ${str (fonts.sizes.terminal*0.8)}pt;
       }
 
 
