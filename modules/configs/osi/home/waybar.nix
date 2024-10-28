@@ -42,7 +42,7 @@ in {
   # Options for matcha idle inhibitor module
   hypr-rotate-current-screen = {
     enable = true;
-    # waybarIntegration.enable = true;
+    waybarIntegration.enable = true;
   };
 
   # Allow installation of fonts through home.packages
@@ -62,6 +62,7 @@ in {
         modules-left = [
           "custom/hypr-toggle-laptop-kb"
           "custom/matcha"
+          "custom/hypr-rotate-current-screen"
         ];
         modules-center = [
           "clock#time"

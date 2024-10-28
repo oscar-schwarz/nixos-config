@@ -3,6 +3,15 @@
 {
   options.hypr-rotate-current-screen = with lib; {
     enable = mkEnableOption "Script that rotates the focused screen.";
+    waybarIntegration = {
+      enable = mkEnableOption "Integrate hypr-rotate-current-screen into waybar as a custom button";
+      moduleName = mkOption {
+        default = "hypr-rotate-current-screen";
+        description = ''
+          The name of the waybar module (without the "custom/" prefix)
+        '';
+      };
+    };
   };
 
   config = lib.mkIf config.hypr-rotate-current-screen.enable {
@@ -27,5 +36,13 @@
         '';
       })
     ];
+
+    programs.waybar.settings.mainBar = lib.mkIf config.hypr-rotate-current-screen.waybarIntegration.enable {
+      "custom/${config.hypr-rotate-current-screen.waybarIntegration.moduleName}" = {
+        on-click = "hypr-rotate-current-screen";
+        format = "&#xf26c; &#xf2ea;";
+        tooltip-format = "Rotate Current Monitor";
+      };
+    };
   };
 }

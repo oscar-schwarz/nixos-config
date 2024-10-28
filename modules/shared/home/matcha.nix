@@ -34,9 +34,9 @@
         # Checks whether match is running
         statusCheck = pkgs.writeShellScript "" ''
           if pidof matcha>/dev/null; then
-            echo -e '&#xe163; &#xf7b6;\nIdle Inhibitor Enabled'
+            echo -e '&#xf109; &#xf7b6;\nIdle Inhibitor Enabled'
           else
-            echo -e '&#xe163; &#xf186;\nIdle Inhibitor Disabled'
+            echo -e '&#xf109; &#xf186;\nIdle Inhibitor Disabled'
           fi
         '';
       in {
