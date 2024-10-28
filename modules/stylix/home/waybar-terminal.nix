@@ -27,7 +27,7 @@ in {
   stylix.targets.waybar.enable = false; # turn off stylix ricing that style.css can be changed
   programs.waybar = {
     settings.mainBar = {
-      height = 35;
+      height = 30;
     };
     style = with colors.withHashtag;''
       /* STYLIX COLORS */
