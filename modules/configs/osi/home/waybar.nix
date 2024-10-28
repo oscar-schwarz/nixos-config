@@ -26,6 +26,7 @@ in {
   imports = [
     ../../../shared/home/hypr-toggle-laptop-kb.nix
     ../../../shared/home/matcha.nix
+    ../../../shared/home/hypr-rotate-current-screen.nix
   ];
 
   # Options for my hypr-toggle-laptop-kb module
@@ -37,6 +38,11 @@ in {
   matcha = {
     enable = true;
     waybarIntegration.enable = true;
+  };
+  # Options for matcha idle inhibitor module
+  hypr-rotate-current-screen = {
+    enable = true;
+    # waybarIntegration.enable = true;
   };
 
   # Allow installation of fonts through home.packages
@@ -51,7 +57,7 @@ in {
     settings = {
       mainBar = {
         layer = "top";
-        
+
         # Module placement
         modules-left = [
           "custom/hypr-toggle-laptop-kb"
