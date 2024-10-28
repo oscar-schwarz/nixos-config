@@ -7,7 +7,7 @@ let
     name = "hypr-toggle-laptop-kb-check";
     text = ''
       if ! [ -f ${statusFilePath} ]; then
-        exit 1
+        exit 0
       elif [ """$(cat ${statusFilePath})""" = "true" ]; then
         exit 0
       elif [ """$(cat ${statusFilePath})""" = "false" ]; then
@@ -90,9 +90,9 @@ in
         # Runs every second to update the icon
         exec = pkgs.writeShellScript "" ''
           if ${lib.getExe isEnabled}; then
-            echo '&#xf109; &#xf11c; enabled'
+            echo -e '&#xf11c; &#xf00c; \nLaptop keyboard enabled'
           else
-            echo '&#xf109; &#xf11c; disabled'
+            echo -e '&#xf11c; &#xf00d;\nLaptop keyboard disabled'
           fi
         '';
         interval = 1;
