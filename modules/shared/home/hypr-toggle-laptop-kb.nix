@@ -89,7 +89,9 @@ in
         on-click = lib.getExe toggleKB;
         # Runs every second to update the icon
         exec = pkgs.writeShellScript "" ''
-          if ! ${isEnabled}; then
+          if ${lib.getExe isEnabled}; then
+            echo &#xf109; &#xf11c; enabled
+          else
             echo &#xf109; &#xf11c; disabled
           fi
         '';
