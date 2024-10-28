@@ -86,6 +86,7 @@ in {
     defaultApplications = {
       "video/mp4" = [ "vlc.desktop" ];
       "image/jpeg" = [ "org.gnome.Loupe.desktop" ];
+      "image/png" = [ "org.gnome.Loupe.desktop" ];
     };
   };
 
