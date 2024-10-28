@@ -84,8 +84,8 @@ in
     };
 
     # Make a waybar module
-    programs.waybar.settings = lib.mkIf config.hypr-toggle-laptop-kb.waybarIntegration.enable {
-      "custom/${config.hypr-toggle-laptop-kb.waybarIntegration.moduleName}" = {
+    programs.waybar.settings = {
+      "custom/${config.hypr-toggle-laptop-kb.waybarIntegration.moduleName}" = lib.mkIf config.hypr-toggle-laptop-kb.waybarIntegration.enable {
         on-click = lib.getExe toggleKB;
         # Runs every second to update the icon
         exec = pkgs.writeShellScript "" ''
