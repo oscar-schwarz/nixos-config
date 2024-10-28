@@ -18,6 +18,10 @@
 
           NEW_ROTATION=$((ROTATION + 1))
 
+          if [ "$NEW_ROTATION" = "4" ]; then
+            NEW_ROTATION=0
+          fi
+
           # Apply new rotation
           hyprctl keyword monitor "$MONITOR, preffered, auto, auto, transform, $NEW_ROTATION"
         '';
