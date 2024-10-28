@@ -28,7 +28,10 @@ in {
   ];
 
   # Options for my hypr-toggle-laptop-kb module
-  hypr-toggle-laptop-kb.enable = true;
+  hypr-toggle-laptop-kb = {
+    enable = true;
+    waybarIntegration.enable = true;
+  };
 
   # Allow installation of fonts through home.packages
   fonts.fontconfig.enable =  true;

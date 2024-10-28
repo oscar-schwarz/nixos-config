@@ -65,8 +65,6 @@ in
   };
 
   config = lib.mkIf config.hypr-toggle-laptop-kb.enable {
-    # Some defaults
-    hypr-toggle-laptop-kb.waybarIntegration.enable = lib.mkDefault true;
     
     # Add it for use
     home.packages = [
