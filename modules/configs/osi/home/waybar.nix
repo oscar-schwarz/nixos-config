@@ -51,8 +51,7 @@ in {
     settings = {
       mainBar = {
         layer = "top";
-        height = 40;
-
+        
         # Module placement
         modules-left = [
           "custom/hypr-toggle-laptop-kb"
