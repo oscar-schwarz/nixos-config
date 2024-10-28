@@ -25,10 +25,16 @@ let
 in {
   imports = [
     ../../../shared/home/hypr-toggle-laptop-kb.nix
+    ../../../shared/home/matcha.nix
   ];
 
   # Options for my hypr-toggle-laptop-kb module
   hypr-toggle-laptop-kb = {
+    enable = true;
+    waybarIntegration.enable = true;
+  };
+  # Options for matcha idle inhibitor module
+  matcha = {
     enable = true;
     waybarIntegration.enable = true;
   };
@@ -45,10 +51,12 @@ in {
     settings = {
       mainBar = {
         layer = "top";
+        height = 40;
 
         # Module placement
         modules-left = [
           "custom/hypr-toggle-laptop-kb"
+          "custom/matcha"
         ];
         modules-center = [
           "clock#time"

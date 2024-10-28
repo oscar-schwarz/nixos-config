@@ -7,9 +7,6 @@
 
     # shared waybar module
     ./waybar.nix
-
-    # matcha idle inhibitor
-    ../../../shared/home/matcha.nix
   ];
 
   home.packages = with pkgs; [
