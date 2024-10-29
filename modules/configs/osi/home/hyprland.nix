@@ -15,6 +15,7 @@
     hypridle
     brightnessctl
     hyprpaper
+    wvkbd
   ];
 
   programs.kitty = {
@@ -244,17 +245,20 @@
       "plugin:touch-gestures" = {
         sensitivity = 4.0;
         workspace_swipe_fingers = 3;
-        workspace_swipe_edge = "disable";
+        workspace_swipe_edge = "false";
 
         # Mouse binds
         hyprgrass-bindm = [
           ", longpress:2, movewindow"
           ", longpress:3, resizewindow"
+          ", longpress:4, rofi -show drun"
         ];
 
         hyprgrass-bind = [
           ", swipe:4:u, movetoworkspace, r-1"
           ", swipe:4:d, movetoworkspace, r+1"
+          ", edge:d:u, exec, 'pkill wvkbd-mobintl || wvkbd --landscape-layers simple,nav -o -L 300'"
+
         ];
       };
 
