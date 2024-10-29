@@ -246,7 +246,8 @@
         workspace_swipe_fingers = 3;
         workspace_swipe_edge = "disable";
 
-        hyprgrass-bind = [
+        # Mouse binds
+        hyprgrass-bindm = [
           ",tap:4,movewindow"
         ];
       };
