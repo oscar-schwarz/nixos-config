@@ -257,7 +257,7 @@
           ", swipe:4:u, movetoworkspace, r-1"
           ", swipe:4:d, movetoworkspace, r+1"
           ", edge:d:u, exec, wvkbd-mobintl --landscape-layers simple,nav -o -L 300"
-          ", tap:4, rofi -show drun"
+          ", edge:u:d, rofi -show drun"
         ];
       };
 
