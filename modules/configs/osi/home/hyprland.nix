@@ -248,7 +248,7 @@
 
         # Mouse binds
         hyprgrass-bindm = [
-          ",tap:4,movewindow"
+          ", longpress:2, movewindow"
         ];
       };
 
