@@ -58,7 +58,7 @@
       };
     };
   };
-  
+
 
   services.hypridle = {
     enable = true;
@@ -68,32 +68,33 @@
         ignore_systemd_inhibit = true;
         ignore_dbus_inhibit = true;
       };
-      listener = let 
-        MinsToSecs = mins: builtins.floor (mins*60);
-      in [
-        {
-          timeout = MinsToSecs 5;
-          on-timeout = "systemctl suspend";
-        }
-        {
-          timeout = MinsToSecs 3;
-          on-timeout = "loginctl lock-session";
-        }
-      ];
+      listener =
+        let
+          MinsToSecs = mins: builtins.floor (mins * 60);
+        in
+        [
+          {
+            timeout = MinsToSecs 5;
+            on-timeout = "systemctl suspend";
+          }
+          {
+            timeout = MinsToSecs 3;
+            on-timeout = "loginctl lock-session";
+          }
+        ];
     };
   };
 
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
-      
+
       # --- Autostart ---
       exec-once = [
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-      
+
         "pkill hypridle; hypridle"
         "pkill waybar; waybar"
-        "pkill hyprpaper; hyprpaper"
       ];
 
       # --- Monitors ---
@@ -113,35 +114,36 @@
       # --- Keybindings ---
       "$meta" = "SUPER";
 
-      bind = let
-        directions = [ "u" "d" "l" "r" ];
+      bind =
+        let
+          directions = [ "u" "d" "l" "r" ];
 
-        arrowsByDirection = {
-          u = "Up";
-          d = "Down";
-          l = "Left";
-          r = "Right";
-        };
+          arrowsByDirection = {
+            u = "Up";
+            d = "Down";
+            l = "Left";
+            r = "Right";
+          };
 
-        lettersByDirection = {
-          u = "F";
-          d = "S";
-          l = "R";
-          r = "T";
-        };
+          lettersByDirection = {
+            u = "F";
+            d = "S";
+            l = "R";
+            r = "T";
+          };
 
-        perDirection = keyByDirection: f: builtins.map (x: f x (keyByDirection."${x}")) directions;
-        perDirectionLetter = perDirection lettersByDirection;  
-        perDirectionArrow = perDirection arrowsByDirection; 
-      in 
-      (perDirectionLetter (dir: key: "$meta, ${key}, movefocus, ${dir}")) ++
-      (perDirectionLetter (dir: key: "$meta_CTRL, ${key}, movewindow, ${dir}")) ++
-      [
-        # application shortcuts
+          perDirection = keyByDirection: f: builtins.map (x: f x (keyByDirection."${x}")) directions;
+          perDirectionLetter = perDirection lettersByDirection;
+          perDirectionArrow = perDirection arrowsByDirection;
+        in
+        (perDirectionLetter (dir: key: "$meta, ${key}, movefocus, ${dir}")) ++
+        (perDirectionLetter (dir: key: "$meta_CTRL, ${key}, movewindow, ${dir}")) ++
+        [
+          # application shortcuts
           # Terminal
-        "$meta, N, exec, kitty"
+          "$meta, N, exec, kitty"
           # Firefox (or LibreWolf?)
-        "$meta, E, exec, ${pkgs.writeShellScript "" ''
+          "$meta, E, exec, ${pkgs.writeShellScript "" ''
           # Test if librewolf is installed, if so run it
           if which librewolf; then
             librewolf
@@ -150,88 +152,104 @@
             firefox
           fi
         ''}"
-        
-        # Rofi menus
+
+          # Rofi menus
           # launcher
-        "$meta, O, exec, pidof rofi || rofi -show drun"
+          "$meta, O, exec, pidof ro    plugins = with pkgs.hyprlandPlugins; [
+      hyprfocus
+    ];fi || rofi -show drun"
           # emoji
-        "$meta, U, exec, pidof rofi || rofi -show emoji"
+          "$meta, U, exec, pidof rofi || rofi -show emoji"
           # Pass
-        "$meta, P, exec, pidof rofi || rofi-pass"
-        
-        # lock screen
-        "$meta, L, exec, loginctl lock-session"
-        # lock screen and suspen
-        "$meta_CTRL, L, exec, ${pkgs.writeShellScript "" ''
+          "$meta, P, exec, pidof rofi || rofi-pass"
+
+          # lock screen
+          "$meta, L, exec, loginctl lock-session"
+          # lock screen and suspen
+          "$meta_CTRL, L, exec, ${pkgs.writeShellScript "" ''
           loginctl lock-session
           systemctl suspend
         ''}"
-        # toggle matcha idle inhibitor
-        "$meta, I, exec, matcha-toggle"
+          # toggle matcha idle inhibitor
+          "$meta, I, exec, matcha-toggle"
 
-        # window management
-        "$meta, W, killactive"
-        "$meta, M, fullscreen, 1"
-        "$meta_CTRL, M, fullscreen"
-        "$meta, K, togglefloating"
+          # window management
+          "$meta, W, killactive"
+          "$meta, M, fullscreen, 1"
+          "$meta_CTRL, M, fullscreen"
+          "$meta, K, togglefloating"
 
-        # switch workspaces
-        "$meta, J, workspace, r-1"
-        "$meta, H, workspace, r+1"
+          # switch workspaces
+          "$meta, J, workspace, r-1"
+          "$meta, H, workspace, r+1"
 
-        # move window to workspaces
-        "$meta_CTRL, J, movetoworkspace, r-1"
-        "$meta_CTRL, H, movetoworkspace, r+1"
+          # move window to workspaces
+          "$meta_CTRL, J, movetoworkspace, r-1"
+          "$meta_CTRL, H, movetoworkspace, r+1"
 
-        # Taking screenshots
-        "$meta, A, exec, hyprshot -m window -m active --clipboard-only"
-        "$meta_CTRL, A, exec, pidof hyprshot || hyprshot -m region --clipboard-only"
-        "$meta, Z, exec, hyprshot -m output --clipboard-only"
-      ];
+          # Taking screenshots
+          "$meta, A, exec, hyprshot -m window -m active --clipboard-only"
+          "$meta_CTRL, A, exec, pidof hyprshot || hyprshot -m region --clipboard-only"
+          "$meta, Z, exec, hyprshot -m output --clipboard-only"
+        ];
 
       # Binds here will be repeated on press
-      binde = let
-         resizeFactor = "50";
-      in [
-        # resize window
-        "$meta, G, resizeactive, -${resizeFactor} -${resizeFactor}"
-        "$meta, D, resizeactive, ${resizeFactor} ${resizeFactor}"
-        
-        # Brightness keys
-        ", code:233, exec, brightnessctl set +10%"
-        ", code:232, exec, brightnessctl set 10%-"
-      ];
+      binde =
+        let
+          resizeFactor = "50";
+        in
+        [
+          # resize window
+          "$meta, G, resizeactive, -${resizeFactor} -${resizeFactor}"
+          "$meta, D, resizeactive, ${resizeFactor} ${resizeFactor}"
+
+          # Brightness keys
+          ", code:233, exec, brightnessctl set +10%"
+          ", code:232, exec, brightnessctl set 10%-"
+        ];
 
       # locked, also works on a lockscreen
-      bindl = let
-        docked = pkgs.writeShellScript "" ''
-          [ $(hyprctl monitors | grep -c '(ID ') -ge 2 ]
-        '';
+      bindl =
+        let
+          docked = pkgs.writeShellScript "" ''
+            [ $(hyprctl monitors | grep -c '(ID ') -ge 2 ]
+          '';
 
-        closeLid = pkgs.writeShellScript "" ''
-          # disable monitor if it is not the only one
-          if ${docked}; then
-            hyprctl keyword monitor "eDP-1, disable"
-          # otherwise lock the screen
-          else
-            loginctl lock-session
-          fi
-        '';
+          closeLid = pkgs.writeShellScript "" ''
+            # disable monitor if it is not the only one
+            if ${docked}; then
+              hyprctl keyword monitor "eDP-1, disable"
+            # otherwise lock the screen
+            else
+              loginctl lock-session
+            fi
+          '';
 
-        openLid = pkgs.writeShellScript "" ''
-          # enable monitor
-          hyprctl keyword monitor "eDP-1"
+          openLid = pkgs.writeShellScript "" ''
+            # enable monitor
+            hyprctl keyword monitor "eDP-1"
 
-          # Run hyprlock if laptop is not docked
-          if ! ${docked}; then
-            loginctl lock-session
-          fi
-        '';
-      in [
-        # switch behaviour
-        ", switch:on:Lid Switch, exec, ${closeLid}"
-        ", switch:off:Lid Switch, exec, ${openLid}"
-      ];
+            # Run hyprlock if laptop is not docked
+            if ! ${docked}; then
+              loginctl lock-session
+            fi
+          '';
+        in
+        [
+          # switch behaviour
+          ", switch:on:Lid Switch, exec, ${closeLid}"
+          ", switch:off:Lid Switch, exec, ${openLid}"
+        ];
+
+
+      # --- HYPRGRASS PLUGIN
+      # "plugin:touch-gestures" = {
+      #   workspace_swipe_fingers = "3";
+      # };
     };
+
+    plugins = with pkgs.hyprlandPlugins; [
+      # hyprgrass
+    ];
   };
 }

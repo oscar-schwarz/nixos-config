@@ -291,7 +291,7 @@
           };
         };
 
-        # The actual shell config
+        # The actual config
         devShells.default = pkgs.mkShell {
           # The packages exposed to the shell
           buildInputs = with pkgs;
