@@ -242,7 +242,17 @@
 
       # --- HYPRGRASS PLUGIN
       "plugin:touch-gestures" = {
-        workspace_swipe_fingers = "3";
+        sensitivity = 4.0;
+        workspace_swipe_fingers = 3;
+        workspace_swipe_edge = [
+          "d"
+          "u"
+        ];
+      };
+
+      gestures = {
+        workspace_swipe = true;
+        workspace_swipe_cancel_ratio = 0.15;
       };
     };
 
