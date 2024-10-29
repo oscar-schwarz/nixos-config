@@ -116,7 +116,7 @@
                 matcha = matcha.packages.${prev.system}.default;
                 eduroam = eduroam.packages.${prev.system};
                 hyprlandPlugins = {
-                  # hyprgrass = hyprgrass.packages.${prev.system}.default;
+                  hyprgrass = hyprgrass.packages.${prev.system}.default;
                   hyprfocus = hyprfocus.packages.${prev.system}.default;
                 };
               }

@@ -243,13 +243,13 @@
 
 
       # --- HYPRGRASS PLUGIN
-      # "plugin:touch-gestures" = {
-      #   workspace_swipe_fingers = "3";
-      # };
+      "plugin:touch-gestures" = {
+        workspace_swipe_fingers = "3";
+      };
     };
 
     plugins = with pkgs.hyprlandPlugins; [
-      # hyprgrass
+      hyprgrass
     ];
   };
 }
