@@ -155,9 +155,7 @@
 
           # Rofi menus
           # launcher
-          "$meta, O, exec, pidof ro    plugins = with pkgs.hyprlandPlugins; [
-      hyprfocus
-    ];fi || rofi -show drun"
+          "$meta, O, exec, pidof rofi || rofi -show drun"
           # emoji
           "$meta, U, exec, pidof rofi || rofi -show emoji"
           # Pass
