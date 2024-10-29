@@ -245,7 +245,7 @@
       "plugin:touch-gestures" = {
         sensitivity = 4.0;
         workspace_swipe_fingers = 3;
-        workspace_swipe_edge = "false";
+        workspace_swipe_edge = "u";
 
         # Mouse binds
         hyprgrass-bindm = [
@@ -256,8 +256,8 @@
         hyprgrass-bind = [
           ", swipe:4:u, movetoworkspace, r-1"
           ", swipe:4:d, movetoworkspace, r+1"
-          ", edge:d:u, exec, wvkbd --landscape-layers simple,nav -o -L 300"
-          ", longpress:4, rofi -show drun"
+          ", edge:d:u, exec, wvkbd-mobintl --landscape-layers simple,nav -o -L 300"
+          ", tap:4, rofi -show drun"
         ];
       };
 
