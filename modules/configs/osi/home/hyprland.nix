@@ -252,8 +252,8 @@
         ];
 
         hyprgrass-bind = [
-          ", swipe:4:u, movetoworkspace, r-1"
-          ", swipe:4:d, movetoworkspace, r+1"
+          ", swipe:4:d, movetoworkspace, r-1"
+          ", swipe:4:u, movetoworkspace, r+1"
         ];
       };
 
