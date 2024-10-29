@@ -244,9 +244,10 @@
       "plugin:touch-gestures" = {
         sensitivity = 4.0;
         workspace_swipe_fingers = 3;
-        workspace_swipe_edge = [
-          "d"
-          "u"
+        workspace_swipe_edge = "disable";
+
+        hyprgrass-bind = [
+          ",tap:4,movewindow"
         ];
       };
 
