@@ -249,11 +249,12 @@
         # Mouse binds
         hyprgrass-bindm = [
           ", longpress:2, movewindow"
+          ", longpress:3, resizewindow"
         ];
 
         hyprgrass-bind = [
-          ", swipe:4:d, movetoworkspace, r-1"
-          ", swipe:4:u, movetoworkspace, r+1"
+          ", swipe:4:u, movetoworkspace, r-1"
+          ", swipe:4:d, movetoworkspace, r+1"
         ];
       };
 
