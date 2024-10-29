@@ -257,8 +257,8 @@
         hyprgrass-bind = [
           ", swipe:4:u, movetoworkspace, r-1"
           ", swipe:4:d, movetoworkspace, r+1"
-          ", edge:d:u, exec, wvkbd-mobintl --landscape-layers simple,nav -o -L 300"
-          ", edge:u:d, rofi -show drun"
+          ", edge:u:d, exec, pkill wvkbd-mobintl || wvkbd-mobintl --landscape-layers simple,nav -o -L 300"
+          ", edge:r:l, rofi -show drun"
         ];
       };
 
