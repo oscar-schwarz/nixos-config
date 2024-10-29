@@ -245,7 +245,8 @@
       "plugin:touch-gestures" = {
         sensitivity = 4.0;
         workspace_swipe_fingers = 3;
-        workspace_swipe_edge = "u";
+        workspace_swipe_edge = 10;
+        edge_margin = 50;
 
         # Mouse binds
         hyprgrass-bindm = [
