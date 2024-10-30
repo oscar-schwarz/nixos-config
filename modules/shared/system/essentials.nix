@@ -109,4 +109,7 @@
 
   # Configure console keymap
   console.keyMap = "colemak";
+
+  # Disable generation of man caches
+  documentation.man.generateCaches = false;
 }
