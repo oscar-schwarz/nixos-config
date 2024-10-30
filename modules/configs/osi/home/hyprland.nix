@@ -95,8 +95,14 @@
       exec-once = [
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
 
-        "pkill hypridle; hypridle"
-        "pkill waybar; waybar"
+        (pkgs.writeShellScript "" ''
+          pkill hypridle
+          hypridle
+        '')
+        (pkgs.writeShellScript "" ''
+          pkill waybar
+          waybar
+        '')
       ];
 
       # --- Monitors ---
