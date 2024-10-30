@@ -25,6 +25,7 @@
     };
   };
 
+  # Highly supported runner
   programs.rofi = {
     enable = true;
     package = pkgs.rofi-wayland;

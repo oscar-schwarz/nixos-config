@@ -178,12 +178,17 @@ in {
         when = "inDebugMode";
       }
       { # Add a watch expression
-        key = "ctrl+o a";
+        key = "shift+enter";
         command = "workbench.debug.viewlet.action.addWatchExpression";
       }
       { # Remove a watched expression
         key = "shift+backspace";
         command = "debug.removeWatchExpression";
+        when = "watchExpressionsFocused";
+      }
+      { # Edit a watched expression
+        key = "enter";
+        command = "debug.renameWatchExpression";
         when = "watchExpressionsFocused";
       }
       { # Toggle breakpoint
