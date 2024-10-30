@@ -180,6 +180,7 @@ in {
       { # Add a watch expression
         key = "shift+enter";
         command = "workbench.debug.viewlet.action.addWatchExpression";
+        when = "watchExpressionsFocused";
       }
       { # Remove a watched expression
         key = "shift+backspace";
