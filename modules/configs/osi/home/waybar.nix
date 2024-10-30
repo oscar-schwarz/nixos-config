@@ -65,12 +65,13 @@ in {
           "custom/hypr-rotate-current-screen"
         ];
         modules-center = [
-          "clock#time"
+          "hyprland/window"
         ];
         modules-right = [
           "battery"
           "backlight"
           "network"
+          "clock#time"
         ];
 
 
@@ -116,6 +117,10 @@ in {
           format-ethernet = (fa "network-wired");
           format-wifi = (fa "wifi") + " {essid}";
           tooltip-format = ''${fa "download"} {bandwidthDownBits}  ${fa "upload"} {bandwidthUpBits}'';
+        };
+
+        "hyprland/window" = {
+          
         };
       };
     };
