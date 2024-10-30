@@ -60,6 +60,17 @@
   };
   boot.initrd.verbose = false;
 
+  services.fprintd = {
+    enable = true;
+    package = pkgs.fprintd-tod;
+    tod = {
+      enable = true;
+      driver = pkgs.libfprint-2-tod1-goodix;
+    };
+  };
+
+  nixpkgs.config.allowUnfree = true;
+
   # Enable bluetooth
   hardware.bluetooth.enable = true;
 
