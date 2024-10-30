@@ -18,7 +18,11 @@ let
     battery-three-quarters = "f241";
     battery-half = "f242";
     battery-quarter = "f243";
-    battery-empty = "f244";    
+    battery-empty = "f244";
+
+    firefox-browser = "e007";
+    terminal = "f120";
+    code = "f121";
   };
   # get html unicode escape sequence for font awesome icon name
   fa = name: "&#x" + fa-icons.${name} + ";";
@@ -120,7 +124,11 @@ in {
         };
 
         "hyprland/window" = {
-          
+          format = "{initialTitle}";
+          hide_empty_text = true;
+          rewrite = {
+            "(Librewolf)" = (fa "firefox-browser") + "$1";
+          };
         };
       };
     };
