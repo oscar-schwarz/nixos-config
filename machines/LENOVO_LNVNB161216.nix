@@ -60,9 +60,12 @@
   };
   boot.initrd.verbose = false;
 
+  environment.systemPackages = with pkgs; [
+    libfprint-tod
+  ];
   services.fprintd = {
     enable = true;
-    # package = pkgs.fprintd-tod;
+    package = pkgs.fprintd-tod;
     tod = {
       enable = true;
       driver = pkgs.libfprint-2-tod1-goodix;
