@@ -126,6 +126,7 @@ in {
         "hyprland/window" = {
           format = "{initialTitle}";
           icon = true;
+          icon-size = 16;
         };
       };
     };
