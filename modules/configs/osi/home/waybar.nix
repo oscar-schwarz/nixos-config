@@ -125,10 +125,7 @@ in {
 
         "hyprland/window" = {
           format = "{initialTitle}";
-          hide_empty_text = true;
-          rewrite = {
-            "(Librewolf)" = (fa "firefox-browser") + "$1";
-          };
+          icon = true;
         };
       };
     };
