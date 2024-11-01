@@ -137,7 +137,7 @@ in {
         #battery:not(.charging):not(.discharging),
         #backlight.maximum,
 
-        /* No window is focused (hyprland)
+        /* No window is focused (hyprland) */
         #waybar.empty #window
       {
         transition: all 0.3s ease;
