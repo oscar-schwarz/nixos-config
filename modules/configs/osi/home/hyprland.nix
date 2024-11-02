@@ -256,16 +256,15 @@
         edge_margin = 50;
 
         # Mouse binds
-        hyprgrass-bindm = [
-          ", longpress:2, movewindow"
-          ", longpress:3, resizewindow"
+        hyprgrass-bindm= [
+          ", longpress:3, movewindow"
+          ", longpress:4, resizewindow"
         ];
 
         hyprgrass-bind = [
           ", swipe:4:u, movetoworkspace, r-1"
           ", swipe:4:d, movetoworkspace, r+1"
           ", edge:u:d, exec, pkill wvkbd-mobintl || wvkbd-mobintl --landscape-layers simple,nav -o -L 300"
-          ", edge:r:l, rofi -show drun"
         ];
       };
 
