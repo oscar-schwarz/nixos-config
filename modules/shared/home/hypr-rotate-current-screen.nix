@@ -32,7 +32,7 @@
           fi
 
           # Apply new rotation
-          hyprctl keyword monitor "$MONITOR, preffered, auto, auto, transform, $NEW_ROTATION"        
+          hyprctl keyword monitor "$MONITOR, preffered, auto, auto, transform, $NEW_ROTATION"
         '';
       })
     ];
