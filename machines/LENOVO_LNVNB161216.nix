@@ -63,6 +63,10 @@
   # Enable bluetooth
   hardware.bluetooth.enable = true;
 
+  services.fprintd = {
+    enable = true;
+  };
+
   # Power management using auto-cpufreq
   powerManagement.enable = true; # basic NixOS powermanagement
   services.auto-cpufreq.enable = true;
