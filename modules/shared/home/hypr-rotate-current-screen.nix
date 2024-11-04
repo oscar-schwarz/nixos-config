@@ -25,6 +25,9 @@
           # Find current rotation of that monitor
           ROTATION="$(hyprctl monitors | grep -B 1 'focused: yes' | grep 'transform' | awk '{print $2}')"
 
+          # Find the scale
+          SCALE="$(hyprctl monitors | grep -B 2 'focused: yes' | grep 'scale' | awk '{print $2}')"
+
           NEW_ROTATION=$((ROTATION + 1))
 
           if [ "$NEW_ROTATION" = "4" ]; then
@@ -32,7 +35,13 @@
           fi
 
           # Apply new rotation
-          hyprctl keyword monitor "$MONITOR, preffered, auto, auto, transform, $NEW_ROTATION"
+          hyprctl keyword monitor "$MONITOR, preffered, auto, $SCALE, transform, $NEW_ROTATION"
+        
+          # Little hack to also rotate touchscreens when laptop built-in screen is focused
+          if [ "$MONITOR" = "eDP-1" ]; then
+            hyprctl keyword input:touchdevice:transform $NEW_ROTATION            
+            hyprctl keyword input:tablet:transform $NEW_ROTATION            
+          fi
         '';
       })
     ];
