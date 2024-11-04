@@ -220,7 +220,6 @@ in {
 
       # --- GODOT ENGINE ---
       geequlim.godot-tools
-      geequlim.godot-tools
     ];
   };
 

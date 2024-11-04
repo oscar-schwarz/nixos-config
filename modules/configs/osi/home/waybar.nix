@@ -126,6 +126,9 @@ in {
         "hyprland/window" = {
           icon = true;
           icon-size = 18;
+          rewrite = {
+            "^(.{48}).+ (?:([-—] .+?)|.*)$" = "$1... $2";
+          };
         };
       };
     };
