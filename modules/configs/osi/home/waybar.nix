@@ -127,7 +127,7 @@ in {
           icon = true;
           icon-size = 18;
           rewrite = {
-            "^(.{48}).+ ((?:[-—] .+?)|(?:[^-—\n]*))$" = "$1... $2";
+            "^(.{48}).*" = "$1"; # Shorten too long titles
           };
         };
       };
