@@ -65,7 +65,13 @@
 
   services.fprintd = {
     enable = true;
+    tod = {
+      enable = true;
+      driver = pkgs.libfprint-2-tod1-goodix;
+    };
   };
+
+  nixpkgs.config.allowUnfree = true;
 
   # Power management using auto-cpufreq
   powerManagement.enable = true; # basic NixOS powermanagement
