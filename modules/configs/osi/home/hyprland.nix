@@ -116,8 +116,6 @@
         kb_layout = "us";
         kb_variant = "colemak";
         kb_options = "ctrl:swap_rwin_rctl";
-
-        sensitivity = 0.5;
       };
 
 
