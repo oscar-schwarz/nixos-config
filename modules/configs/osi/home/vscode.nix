@@ -24,6 +24,8 @@ in {
       "workbench.editor.showTabs" = "none";
       "window.menuBarVisibility" = "toggle"; # hide menu bar unless alt is pressed
       "workbench.startupEditor" = "none"; # no welcome page
+      "workbench.editor.editorActionsLocation" = "hidden";
+
 
       # Activity bar at the bottom
       "workbench.sideBar.location" = "bottom";
