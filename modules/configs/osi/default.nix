@@ -118,7 +118,7 @@
     users.users.osi = {
       isNormalUser = true;
       description = "Osi";
-      extraGroups = [ "networkmanager" "wheel" "adbusers" ];
+      extraGroups = [ "networkmanager" "wheel" "adbusers" "syncthing" ];
     };
 
     home-manager = {
