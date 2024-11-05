@@ -2,8 +2,7 @@
 
 with lib;
 
-
-{
+let cfg = config.programs.todo-txt-cli; in {
   options.programs.todo-txt-cli = {
     enable = mkEnableOption "todo-txt-cli";
     package = mkOption {
@@ -51,8 +50,8 @@ with lib;
     };
   };
 
-  config = let cfg = config.programs.todo-txt-cli; in {
-    home.packages =  [ cfg.package ];
+  config = mkIf cfg.enable {
+    home.packages = [ cfg.package ];
 
     home.file.".todo/config".text = cfg.extraConfig;
   };

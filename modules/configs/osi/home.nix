@@ -130,6 +130,11 @@ in {
     };
   };
 
+  # todo app
+  programs.todo-txt-cli = {
+    enable = true;
+  };
+
   programs.chromium = {
     enable = true;
     # relatively simple (vivaldi is overkill for my usecase of "this page doesnt in firefox") with an ad-blocker
