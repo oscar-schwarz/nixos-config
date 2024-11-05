@@ -22,6 +22,9 @@
       c = "codium";
     };
     functions = {
+      # Nix stuff
+      ns = "nix-shell -p";
+      nsc = "nix-shell -p $argv --command $argv";
       ask = ''
         heygpt --model "gpt-4o" """$argv""" | ${lib.getExe pkgs.glow}
       '';

@@ -47,6 +47,9 @@ in {
   
     # Firefox settings
     ./home/firefox.nix
+    
+    # Taskwarrior
+    ./home/taskwarrior.nix
   ];
 
   # Home Manager needs a bit of tinformation about you and the paths it should
