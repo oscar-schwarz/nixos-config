@@ -63,12 +63,6 @@
     # Enable adb
     programs.adb.enable = true;
 
-    # Connect to phone
-    programs.kdeconnect = {
-      enable = true;
-      package = pkgs.gnomeExtensions.gsconnect;
-    };
-
     programs.ssh.extraConfig = ''
       Host github.com
         HostName github.com
