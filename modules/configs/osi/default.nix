@@ -72,6 +72,20 @@
     services.syncthing = {
       enable = true;
       openDefaultPorts = true;
+      settings = {
+        folders = {
+          "todo" = {
+            enable = true;
+            path = "/home/osi/files/local/todo";
+
+          };
+        };
+        devices = {
+          "phone" = {
+            id = "4QPQX3G-WOEEQUD-QJASCBF-DJN6D4H-SXDXHHR-NCP4D4P-2YEIESD-BMXVYAS";
+          };
+        };
+      };
     };
 
     programs.ssh.extraConfig = ''

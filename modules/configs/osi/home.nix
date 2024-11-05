@@ -133,6 +133,10 @@ in {
   # todo app
   programs.todo-txt-cli = {
     enable = true;
+    extraConfig = ''
+      TODO_FILE=/home/osi/files/local/todo/todo.txt
+      DONE_FILE=/home/osi/files/local/todo/done.txt
+    '';
   };
 
   programs.chromium = {
