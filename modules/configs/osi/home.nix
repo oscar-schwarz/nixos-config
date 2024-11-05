@@ -49,7 +49,7 @@ in {
     ./home/firefox.nix
     
     # Everything todo
-    ./home/todo-txt-cli.nix
+    ./home/todo.nix
   ];
 
   # Home Manager needs a bit of tinformation about you and the paths it should
@@ -128,15 +128,6 @@ in {
       # Using the theme provided by the terminal
       force_tty = "False";
     };
-  };
-
-  # todo app
-  programs.todo-txt-cli = {
-    enable = true;
-    extraConfig = ''
-      TODO_FILE=/home/osi/files/local/todo/todo.txt
-      DONE_FILE=/home/osi/files/local/todo/done.txt
-    '';
   };
 
   programs.chromium = {
