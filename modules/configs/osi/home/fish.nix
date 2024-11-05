@@ -23,7 +23,7 @@
     };
     functions = {
       # Nix stuff
-      ns = "nix-shell -p";
+      ns = "nix-shell -p $argv";
       nsc = "nix-shell -p $argv --command $argv";
       ask = ''
         heygpt --model "gpt-4o" """$argv""" | ${lib.getExe pkgs.glow}
