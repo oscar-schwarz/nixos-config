@@ -13,7 +13,7 @@
 
   programs.fish = {
     interactiveShellInit = ''
-      topydo list
+      topydo ls
     '';
     shellAliases.t = "topydo";
   };
