@@ -72,6 +72,9 @@
     services.syncthing = {
       enable = true;
       openDefaultPorts = true;
+      user = "osi";
+      configDir = "/home/osi/.config/syncthing";
+      dataDir = "/home/osi/files/local";
       settings = {
         folders = {
           "todo" = {
@@ -118,7 +121,7 @@
     users.users.osi = {
       isNormalUser = true;
       description = "Osi";
-      extraGroups = [ "networkmanager" "wheel" "adbusers" "syncthing" ];
+      extraGroups = [ "networkmanager" "wheel" "adbusers" ];
     };
 
     home-manager = {
