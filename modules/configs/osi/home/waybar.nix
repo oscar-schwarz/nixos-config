@@ -131,6 +131,7 @@ in {
           rewrite = {
             ".*(codium).*" = "$1";
             ".*(xournalpp).*" = "$1";
+            ".*(kdeconnect).*" = "$1";
           };
         };
       };

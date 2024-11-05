@@ -43,8 +43,12 @@
           URL = "https://duckduckgo.com/";
         }
         {
-          Title = "Moodle";
+          Title = "Moodle Uni Leipzig";
           URL = "https://moodle2.uni-leipzig.de/my/courses.php";
+        }
+        {
+          Title = "GitLab Uni Leipzig";
+          URL = "https://git.informatik.uni-leipzig.de/";
         }
       ];
       SanitizeOnShutdown = {
