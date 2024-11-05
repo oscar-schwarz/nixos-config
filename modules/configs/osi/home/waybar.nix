@@ -134,7 +134,19 @@ in {
             ".*(kdeconnect).*" = "$1";
           };
           on-click = pkgs.writeShellScript "" ''
-            rofi
+            CHOICE="$(echo -e 'Maximize\nFullscreen\nClose' | rofi -dmenu -p 'Window Action')"
+
+            case "$CHOICE" in
+              "Maximize")
+                hyprctl dispatch fullscreen 1
+                ;;
+              "Fullscreen")
+                hyprctl dispatch fullscreen 0
+                ;;
+              "Close")
+                hyprctl dispatch killactive
+                ;;
+            esac 
           '';
         };
       };
