@@ -48,8 +48,8 @@ in {
     # Firefox settings
     ./home/firefox.nix
     
-    # Taskwarrior
-    ./home/taskwarrior.nix
+    # Everything todo
+    ./home/todo-txt.nix
   ];
 
   # Home Manager needs a bit of tinformation about you and the paths it should
