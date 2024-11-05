@@ -13,8 +13,7 @@
 
   programs.fish = {
     interactiveShellInit = ''
-      echo '# TODO' | ${pkgs.glow}/bin/glow
-      t ls -F "- %s" -g due | ${pkgs.glow}/bin/glow
+      topydo ls -F "- %s" -g due | ${pkgs.glow}/bin/glow
     '';
     shellAliases.t = "topydo";
   };
