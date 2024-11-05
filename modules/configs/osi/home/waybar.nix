@@ -133,6 +133,9 @@ in {
             ".*(xournalpp).*" = "$1";
             ".*(kdeconnect).*" = "$1";
           };
+          on-click = pkgs.writeShellScript "" ''
+            rofi
+          '';
         };
       };
     };
