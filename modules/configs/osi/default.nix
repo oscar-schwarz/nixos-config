@@ -68,6 +68,12 @@
       enable = true;
     };
 
+    # Syncthing
+    services.syncthing = {
+      enable = true;
+      openDefaultPorts = true;
+    };
+
     programs.ssh.extraConfig = ''
       Host github.com
         HostName github.com
