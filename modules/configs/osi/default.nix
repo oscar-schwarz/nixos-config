@@ -80,7 +80,7 @@
           "todo" = {
             enable = true;
             path = "/home/osi/files/local/todo";
-
+            devices = [ "phone" ];
           };
         };
         devices = {
