@@ -127,8 +127,10 @@ in {
           format = "{class}";
           icon = true;
           icon-size = 18;
+          seperate-outputs = true;
           rewrite = {
-            "(codium).*" = "$1";
+            ".*(codium).*" = "$1";
+            ".*(xournalpp).*" = "$1";
           };
         };
       };

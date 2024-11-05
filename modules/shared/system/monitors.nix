@@ -21,10 +21,10 @@
         # I have two 1080p monitors one landscape and one portrait 
         
         # Main landscape monitor
-        "desc:Samsung Electric Company U28H75x HTPK700051, preferred, 0x420, 1"
+        "desc:Samsung Electric Company U28H75x HTPK700051, 1920x1080, 0x420, 1"
 
         # external portrait monitor
-        "desc:LG Electronics 27EA53 312NDNU32431, preferred, 1920x0, 1, transform, 1"
+        "desc:LG Electronics 27EA53 312NDNU32431, 1920x1080, 1920x0, 1, transform, 1"
       ];
     })];
 }
