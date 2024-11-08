@@ -21,7 +21,8 @@
         # I have two 1080p monitors one landscape and one portrait 
         
         # Main landscape monitor
-        "desc:LG Electronics E2711 111NDBP2U853, 1920x1080, 0x420, 1"
+        # "desc:LG Electronics E2711 111NDBP2U853, 1920x1080, 0x420, 1"
+        "desc:ViewSonic Corporation VA3209-QHD WYM241340384, 2560x1440, 0x240, 1"
 
         # external portrait monitor
         "desc:LG Electronics 27EA53 312NDNU32431, 1920x1080, 1920x0, 1, transform, 1"
