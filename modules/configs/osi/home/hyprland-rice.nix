@@ -61,7 +61,7 @@ in {
       # inner_color = "rgb(${colors.base00})";
       # font_color = "rgb(${colors.base05})"; 
       # fail_color = "rgb(${colors.base08})";
-      # check_color = "rgb(${colors.base0D})";
+      check_color = lib.mkForce "rgb(${colors.base0D})";
 
       fade_on_empty = true;
 
