@@ -44,8 +44,7 @@
 
     # Stylix, theming made easy peasy
     stylix = {
-      # url = "github:danth/stylix?rev=762c07ee10b381bc8e085be5b6c2ec43139f13b0";
-      url = "/home/osi/Downloads/stylix";
+      url = "github:danth/stylix?rev=762c07ee10b381bc8e085be5b6c2ec43139f13b0";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
