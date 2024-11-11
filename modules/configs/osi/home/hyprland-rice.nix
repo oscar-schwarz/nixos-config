@@ -44,7 +44,7 @@ in {
     };
     input-field = {
       monitor = "";
-      size = "20%, 5%";
+      size = "200, 50";
       outline_thickness = 3;
       inner_color = "rgba(0, 0, 0, 0.0)"; # no fill
 
