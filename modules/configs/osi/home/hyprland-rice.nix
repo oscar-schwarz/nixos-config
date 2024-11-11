@@ -53,20 +53,22 @@ in {
     };
     input-field = {
       monitor = "";
-      size = "200, 50";
-      position = "0,0";
 
       outline_thickness = border.width;
       rounding = border.radius;
 
-      outer_color = "rgb(${colors.base03})";
-      inner_color = ''rgba(${rgbString "base00"}, ${toString opacity.terminal})'';
+      outer_color = "rgb(${colors.base0D})";
+      inner_color = "rgb(${colors.base00})";
       font_color = "rgb(${colors.base05})"; 
+      fail_color = "rgb(${colors.base08})";
+      check_color = "rgb(${colors.base0D})";
 
       fade_on_empty = true;
 
-      halign = "center";
-      valign = "center";
+      placeholder_text = "";
+      fail_text = "";
+
+      fail_timeout = 500;
     };
   };
 
