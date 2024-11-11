@@ -77,11 +77,11 @@
         in
         [
           {
-            timeout = MinsToSecs 5;
+            timeout = 20;
             on-timeout = "systemctl suspend";
           }
           {
-            timeout = MinsToSecs 3;
+            timeout = 10;
             on-timeout = "loginctl lock-session";
           }
         ];
