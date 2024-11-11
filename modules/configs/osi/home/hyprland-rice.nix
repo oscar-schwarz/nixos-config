@@ -44,7 +44,6 @@ in {
     };
     input_field = {
       monitor = "";
-      hide_input = false;
     };
   };
 
