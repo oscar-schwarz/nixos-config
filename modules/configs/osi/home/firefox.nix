@@ -139,7 +139,7 @@
         isDefault = true;
         settings = {
           "browser.urlbar.suggest.searches" = false;
-          "browser.startup.homepage" = "about:blank";
+          "browser.startup.homepage" = "https://duckduckgo.com";
         
           "privacy.resistFingerprinting.letterboxing" = true;
         };
