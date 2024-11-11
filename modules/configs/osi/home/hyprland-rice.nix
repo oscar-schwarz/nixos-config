@@ -54,6 +54,7 @@ in {
     input-field = {
       monitor = "";
       size = "200, 50";
+      position = "0,0";
 
       outline_thickness = border.width;
       rounding = border.radius;
