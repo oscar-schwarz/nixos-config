@@ -151,8 +151,16 @@
           # application shortcuts
           # Terminal
           "$meta, N, exec, kitty"
-          # Run the program that lives in env var DEFAULT_BROWSER
-          "$meta, E, exec, ${pkgs.writeShellScript "run-default-browser" "$DEFAULT_BROWSER"}"
+          # Firefox (or LibreWolf?)
+          "$meta, E, exec, ${pkgs.writeShellScript "" ''
+          # Test if librewolf is installed, if so run it
+          if which librewolf; then
+            librewolf
+          # Fallback to firefox
+          else
+            firefox
+          fi
+        ''}"
 
           # Rofi menus
           # launcher
