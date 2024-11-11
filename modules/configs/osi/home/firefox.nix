@@ -20,7 +20,7 @@
   # Install firefox.
   programs.firefox = {
     enable = true;
-    package = pkgs.librewolf-wayland;
+    package = pkgs.librewolf;
 
     # Some installation-wide settings and extensions
     # https://mozilla.github.io/policy-templates/
