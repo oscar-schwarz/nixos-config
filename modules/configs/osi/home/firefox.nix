@@ -140,8 +140,6 @@
         settings = {
           "browser.urlbar.suggest.searches" = false;
           "browser.startup.homepage" = "about:blank";
-        
-          "privacy.resistFingerprinting.letterboxing" = true;
         };
       };
     };
