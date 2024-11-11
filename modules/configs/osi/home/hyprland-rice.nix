@@ -42,7 +42,7 @@ in {
       blur_passes = 4;
       blur_size = 10;
     };
-    input_field = {
+    input-field = {
       monitor = "";
     };
   };
