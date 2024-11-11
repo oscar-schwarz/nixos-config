@@ -47,7 +47,7 @@ in {
     };
     background = {
       monitor = "";
-      # path = "screenshot";
+      path = lib.mkForce "screenshot";
       blur_passes = 4;
       blur_size = 10;
     };
