@@ -57,7 +57,7 @@ in {
       outline_thickness = border.width;
       rounding = border.radius;
 
-      outer_color = "rgb(${colors.base0D})";
+      outer_color = "rgb(${colors.base03})";
       inner_color = "rgb(${colors.base00})";
       font_color = "rgb(${colors.base05})"; 
       fail_color = "rgb(${colors.base08})";
