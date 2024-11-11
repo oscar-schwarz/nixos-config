@@ -152,7 +152,7 @@
           # Terminal
           "$meta, N, exec, kitty"
           # Run the program that lives in env var DEFAULT_BROWSER
-          "$meta, E, exec, ${pkgs.writeShellScript "" "$DEFAULT_BROWSER"}"
+          "$meta, E, exec, ${pkgs.writeShellScript "run-default-browser" "$DEFAULT_BROWSER"}"
 
           # Rofi menus
           # launcher
