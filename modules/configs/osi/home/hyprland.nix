@@ -49,15 +49,8 @@
     enable = true;
     settings = {
       general = {
-        hide_cursor = true;
         ignore_empty_input = true;
         grace = 10;
-      };
-      background = {
-        monitor = "";
-        path = "screenshot";
-        blur_passes = 4;
-        blur_size = 10;
       };
     };
   };

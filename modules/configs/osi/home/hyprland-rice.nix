@@ -26,10 +26,25 @@ in {
   programs.rofi.theme = lib.mkForce "material"; # Force because of stylix
 
   # Terminal
-  programs.kitty = {
-    settings = {
-      # Text is moved a bit inwards, like that its not so close to the border
-      window_padding_width = terminal-padding;
+  programs.kitty.settings = {
+    # Text is moved a bit inwards, like that its not so close to the border
+    window_padding_width = terminal-padding;
+  };
+
+  # Hyprlock
+  programs.hyprlock.settings = {
+    general = {
+      hide_cursor = true;
+    };
+    background = {
+      monitor = "";
+      path = "screenshot";
+      blur_passes = 4;
+      blur_size = 10;
+    };
+    input_field = {
+      monitor = "";
+      hide_input = false;
     };
   };
 
