@@ -28,6 +28,36 @@
       Cookies = {
         Behavior = "reject-foreign";
       };
+			AppAutoUpdate = false; # Disable automatic application update
+			BackgroundAppUpdate = false; # Disable automatic application update in the background, when the application is not running.
+
+			DisableFirefoxStudies = true;
+			DisableFirefoxAccounts = true; # Disable Firefox Sync
+			DisableFirefoxScreenshots = true; # No screenshots?
+
+			DisableForgetButton = true; # Thing that can wipe history for X time, handled differently
+
+			DisableProfileImport = true; # Purity enforcement: Only allow nix-defined profiles
+			DisableProfileRefresh = true; # Disable the Refresh Firefox button on about:support and support.mozilla.org
+
+			DisableSetDesktopBackground = true; # Remove the “Set As Desktop Background…” menuitem when right clicking on an image, because Nix is the only thing that can manage the backgroud
+
+			DisplayMenuBar = "default-off";
+			DisablePocket = true;
+			DisableTelemetry = true;
+			DisableFormHistory = true;
+			DisablePasswordReveal = true;
+			DontCheckDefaultBrowser = true;
+			OfferToSaveLogins = true;
+
+			EnableTrackingProtection = {
+				Value = true;
+				Locked = true;
+				Cryptomining = true;
+				Fingerprinting = true;
+				EmailTracking = true;
+				# Exceptions = ["https://example.com"]
+			};
 
       Bookmarks = [
         {
@@ -57,7 +87,6 @@
       };
 
       DisplayBookmarksToolbar = "never"; # alternatives: "always" or "newtab"
-      DisplayMenuBar = "default-off"; # alternatives: "always", "never" or "default-on"
       SearchBar = "unified"; # alternative: "separate"
       TranslateEnabled = false;
 
@@ -65,11 +94,7 @@
       OverrideFirstRunPage = "";
       OverridePostUpdatePage = "";
 
-      DontCheckDefaultBrowser = true;
-
       NewTabPage = false;
-
-      OfferToSaveLogins = true;
 
       ExtensionSettings = {
         # uBlock Origin
