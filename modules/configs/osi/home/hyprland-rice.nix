@@ -1,4 +1,4 @@
-args@{ lib, pkgs, ... }:
+args@{ lib, pkgs, config, ... }:
 
 let
   border = {
@@ -9,6 +9,15 @@ let
   terminal-padding = 7;
 
   brightness-inactive = 0.7;
+
+  fonts = config.stylix.fonts;
+  colors = config.lib.stylix.colors;
+  opacity = config.stylix.opacity;
+
+  rgbString = colorID:
+      builtins.concatStringsSep ","
+        (map (x: config.lib.stylix.colors."${colorID}-${x}") ["rgb-r" "rgb-g" "rgb-b"]);
+
 in {
 
   imports = [
@@ -45,18 +54,16 @@ in {
     input-field = {
       monitor = "";
       size = "200, 50";
-      outline_thickness = 3;
-      inner_color = "rgba(0, 0, 0, 0.0)"; # no fill
 
-      outer_color = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-      check_color= "rgba(00ff99ee) rgba(ff6633ee) 120deg";
-      fail_color= "rgba(ff6633ee) rgba(ff0066ee) 40deg";
+      outline_thickness = border.width;
+      rounding = border.radius;
 
-      font_color = "rgb(143, 143, 143)";
-      fade_on_empty = false;
-      rounding = 15;
+      outer_color = "rgb(${colors.base03})";
+      inner_color = ''rgba(${rgbString "base00"}, ${toString opacity.terminal})'';
+      font_color = "rgb(${colors.base05})"; 
 
-      position = "0, -20";
+      fade_on_empty = true;
+
       halign = "center";
       valign = "center";
     };
