@@ -103,7 +103,7 @@
           installation_mode = "force_installed";
         };
         # Dark Mode for every website
-        "{addon@darkreader.org}" = {
+        "addon@darkreader.org" = {
           install_url = "https://addons.mozilla.org/firefox/downloads/file/4359254/darkreader-4.9.94.xpi";
           installation_mode = "force_installed";
         };
