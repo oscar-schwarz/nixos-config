@@ -68,6 +68,11 @@
       enable = true;
     };
 
+    # Gitlab runner 
+    services.gitlab-runner = {
+      enable = true;
+    };
+
     # Syncthing
     services.syncthing = {
       enable = true;
