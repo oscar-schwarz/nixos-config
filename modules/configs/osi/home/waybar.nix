@@ -37,6 +37,7 @@ in {
   hypr-toggle-laptop-kb = {
     enable = true;
     waybarIntegration.enable = true;
+    toggleOnLidSwitch.enable = true;
   };
   # Options for matcha idle inhibitor module
   matcha = {

@@ -1,6 +1,8 @@
 { pkgs, lib, config, ... }:
 
 let
+  cfg = config.hypr-toggle-laptop-kb;
+
   statusFilePath = ''"$XDG_RUNTIME_DIR/keyboard.status"'';
 
   isEnabled = pkgs.writeShellApplication {
@@ -46,16 +48,30 @@ in
       hypr-toggle-laptop-kb is a script that toggles the laptop keyboard.
     '';
     hyprDeviceName = mkOption {
+      type = types.str;
       default = "at-translated-set-2-keyboard";
       description = ''
         The device name of the laptop keyboard shown in `hyprctl devices`
       '';
+    };
+    toggleOnLidSwitch = {
+      enable = mkEnableOption ''
+        Toggle the keyboard when lid is closed and opened.
+      '';
+      switchName = mkOption {
+        type = types.str;
+        default = "Lid Switch";
+        description = ''
+           The name of the switch.
+        '';
+      };
     };
     waybarIntegration = {
       enable = mkEnableOption ''
         Integrate hypr-toggle-laptop-kb into waybar as a custom button
       '';
       moduleName = mkOption {
+        type = types.str;
         default = "hypr-toggle-laptop-kb";
         description = ''
           The name of the waybar module (without the "custom/" prefix)
@@ -64,7 +80,7 @@ in
     };
   };
 
-  config = lib.mkIf config.hypr-toggle-laptop-kb.enable {
+  config = lib.mkIf cfg.enable {
     
     # Add it for use
     home.packages = [
@@ -77,15 +93,20 @@ in
       "$LAPTOP_KB_ENABLED" = true;
       device = [
         {
-          "name" = config.hypr-toggle-laptop-kb.hyprDeviceName;
+          "name" = cfg.hyprDeviceName;
           "enabled" = "$LAPTOP_KB_ENABLED";
         }
+      ];
+
+      # Apply switch bind if wanted
+      bindl = lib.mkIf cfg.toggleOnLidSwitch.enable [
+        ", switch:${cfg.toggleOnLidSwitch.switchName}, exec, ${lib.getExe toggleKB}"
       ];
     };
 
     # Make a waybar module
-    programs.waybar.settings.mainBar = lib.mkIf config.hypr-toggle-laptop-kb.waybarIntegration.enable {
-      "custom/${config.hypr-toggle-laptop-kb.waybarIntegration.moduleName}" = {
+    programs.waybar.settings.mainBar = lib.mkIf cfg.waybarIntegration.enable {
+      "custom/${cfg.waybarIntegration.moduleName}" = {
         on-click = lib.getExe toggleKB;
         # Runs every second to update the icon
         exec = pkgs.writeShellScript "" ''
