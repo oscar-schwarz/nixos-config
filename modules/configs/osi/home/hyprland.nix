@@ -183,7 +183,6 @@
           "$meta, M, fullscreen, 1"
           "$meta_CTRL, M, fullscreen"
           "$meta, K, togglefloating"
-          "$meta, mouse:274, movewindow" # Move when super and middle click move with mouse
 
           # switch workspaces
           "$meta, J, workspace, r-1"
@@ -214,7 +213,7 @@
           ", code:232, exec, brightnessctl set 10%-"
         ];
 
-      # locked, also works on a lockscreen
+      # binds that also works on a lockscreen
       bindl =
         let
           docked = pkgs.writeShellScript "" ''
@@ -246,6 +245,11 @@
           ", switch:on:Lid Switch, exec, ${closeLid}"
           ", switch:off:Lid Switch, exec, ${openLid}"
         ];
+      
+      # The binds here are for the mouse
+      bindm = [
+        "$meta, mouse:272, movewindow" # Move when super and left click move with mouse
+      ];
 
 
       # --- HYPRGRASS PLUGIN
