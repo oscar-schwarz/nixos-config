@@ -85,6 +85,11 @@
     enable = true;
     settings = {
 
+      general = {
+        # Allow to resize windows with dragging the border
+        resize_on_border = true;
+      };
+
       # --- Autostart ---
       exec-once = [
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
@@ -178,6 +183,7 @@
           "$meta, M, fullscreen, 1"
           "$meta_CTRL, M, fullscreen"
           "$meta, K, togglefloating"
+          "$meta, mouse:274, movewindow" # Move when super and middle click move with mouse
 
           # switch workspaces
           "$meta, J, workspace, r-1"
