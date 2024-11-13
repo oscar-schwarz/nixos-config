@@ -248,7 +248,7 @@
       
       # The binds here are for the mouse
       bindms = [
-        ", mouse:272&mouse:273, movewindow" # Move when super and left click move with mouse
+        ", mouse:274, movewindow" # Move when super and left click move with mouse
       ];
 
 
