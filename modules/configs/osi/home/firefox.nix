@@ -80,6 +80,10 @@
           Title = "GitLab Uni Leipzig";
           URL = "https://git.informatik.uni-leipzig.de/";
         }
+        {
+          Title = "Syncthing Web GUI";
+          URL = "http://127.0.0.1:8384/";
+        }
       ];
       SanitizeOnShutdown = {
         Cache = true;
