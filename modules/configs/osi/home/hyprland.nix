@@ -115,6 +115,9 @@
         kb_layout = "us";
         kb_variant = "colemak";
         kb_options = "ctrl:swap_rwin_rctl";
+      
+        repeat_delay = 0;
+        repeat_rate = 60;
       };
 
 
@@ -201,7 +204,7 @@
       # Binds here will be repeated on press
       binde =
         let
-          resizeFactor = "50";
+          resizeFactor = "20";
         in
         [
           # resize window
