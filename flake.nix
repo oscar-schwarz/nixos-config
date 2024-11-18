@@ -56,7 +56,7 @@
     };
 
     # Flake programs.sqlite, fixes the command-not-found error on flake systems
-    flake-programs-sqlite = {
+    programs-sqlite = {
       url = "github:wamserma/flake-programs-sqlite";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -93,7 +93,7 @@
             home-manager.nixosModules.default
             sops-nix.nixosModules.sops
             stylix.nixosModules.stylix
-            flake-programs-sqlite.nixosModules.programs-sqlite
+            programs-sqlite.nixosModules.programs-sqlite
             custom-udev-rules.nixosModule
             hyprland.nixosModules.default
           ];

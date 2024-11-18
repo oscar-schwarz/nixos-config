@@ -82,11 +82,6 @@
       dataDir = "/home/osi/files/local";
       settings = {
         folders = {
-          "todo" = {
-            enable = true;
-            path = "/home/osi/files/local/todo";
-            devices = [ "phone" ];
-          };
           "written-mind" = {
             enable = true;
             path = "/home/osi/files/local/written-mind";
