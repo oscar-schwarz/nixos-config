@@ -270,8 +270,8 @@
         hyprgrass-bind = [
           ", swipe:4:u, movetoworkspace, r-1"
           ", swipe:4:d, movetoworkspace, r+1"
-          ", edge:r:l, exec, pidof hyprshot || hyprshot -m region --clipboard-only"
-          ", edge:l:r, exec, rofi -show drun"
+          ", edge:r:l, exec, pkill hyprshot || hyprshot -m region --clipboard-only"
+          ", edge:l:r, exec, pkill rofi || rofi -show drun"
           ", edge:u:d, exec, pkill wvkbd-mobintl || wvkbd-mobintl -H 300 -L 300"
         ];
       };
