@@ -144,7 +144,9 @@
           perDirectionArrow = perDirection arrowsByDirection;
         in
         (perDirectionLetter (dir: key: "$meta, ${key}, movefocus, ${dir}")) ++
+        (perDirectionArrow (dir: key: "$meta, ${key}, movefocus, ${dir}")) ++
         (perDirectionLetter (dir: key: "$meta_CTRL, ${key}, movewindow, ${dir}")) ++
+        (perDirectionArrow (dir: key: "$meta_CTRL, ${key}, movewindow, ${dir}")) ++
         [
           # application shortcuts
           # Terminal
@@ -193,8 +195,8 @@
           "$meta_CTRL, H, movetoworkspace, r+1"
 
           # Taking screenshots
-          "$meta, A, exec, hyprshot -m window -m active --clipboard-only"
-          "$meta_CTRL, A, exec, pidof hyprshot || hyprshot -m region --clipboard-only"
+          "$meta_CTRL, A, exec, hyprshot -m window -m active --clipboard-only"
+          "$meta, A, exec, pidof hyprshot || hyprshot -m region --clipboard-only"
           "$meta, Z, exec, hyprshot -m output --clipboard-only"
         ];
 
@@ -268,7 +270,9 @@
         hyprgrass-bind = [
           ", swipe:4:u, movetoworkspace, r-1"
           ", swipe:4:d, movetoworkspace, r+1"
-          ", edge:u:d, exec, pkill wvkbd-mobintl || wvkbd-mobintl --landscape-layers simple,nav -o -L 300"
+          ", edge:r:l, exec, pidof hyprshot || hyprshot -m region --clipboard-only"
+          ", edge:l:r, exec, rofi -show drun"
+          ", edge:u:d, exec, pkill wvkbd-mobintl || wvkbd-mobintl -H 300 -L 300"
         ];
       };
 
