@@ -58,10 +58,13 @@
     nixpkgs.config.allowUnfreePredicate = pkg:
       builtins.elem (lib.getName pkg) [
         "obsidian"
+        "steam"
       ];
 
     # Enable adb
     programs.adb.enable = true;
+
+    programs.steam.enable = true;
 
     # Connect to phone
     programs.kdeconnect = {
