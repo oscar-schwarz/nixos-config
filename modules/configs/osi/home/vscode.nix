@@ -219,7 +219,7 @@ in {
 
       # --- NODE ---
       vue.volar # vue language features 
-      lllllllqw.jsdoc # jsdoc
+      oouo-diogo-perdigao.docthis # jsdoc
     
       # --- JAVA ---
       redhat.java # language features
