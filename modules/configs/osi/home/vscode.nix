@@ -150,7 +150,7 @@ in {
       }
       { # JSDoc
         key = "ctrl+enter";
-        command = "jsdoc.generateJSDoc";
+        command = "docthis.documentThis";
         when = "editorLangId =~ /vue|js|ts|jsx|tsx/";
       }
 
