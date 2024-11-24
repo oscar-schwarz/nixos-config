@@ -148,6 +148,11 @@ in {
         command = "phpdoc-generator.generatePHPDoc";
         when = "editorLangId == php";
       }
+      { # JSDoc
+        key = "ctrl+enter";
+        command = "jsdoc.generateJSDoc";
+        when = "editorLangId =~ /vue|js|ts|jsx|tsx/";
+      }
 
 
       # --- IMPORTS ---
