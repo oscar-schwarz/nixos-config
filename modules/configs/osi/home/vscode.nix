@@ -214,6 +214,7 @@ in {
 
       # --- NODE ---
       vue.volar # vue language features 
+      lllllllqw.jsdoc # jsdoc
     
       # --- JAVA ---
       redhat.java # language features
