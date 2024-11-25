@@ -25,8 +25,8 @@
         "desc:ViewSonic Corporation VA3209-QHD WYM241340384, 2560x1440, 0x240, 1"
 
         # external portrait monitor
-        "desc:LG Electronics 27EA53 312NDNU32431, 1920x1080, 2560x0, 1, transform, 1"
-        "desc:LG Electronics 27EA53 0x01010101, 1920x1080, 2560x0, 1, transform, 1"
+        "desc:LG Electronics 27EA53 312NDNU32431, 1920x1080@50, 2560x0, 1, transform, 1"
+        "desc:LG Electronics 27EA53 0x01010101, 1920x1080@50, 2560x0, 1, transform, 1"
       ];
     })];
 }
