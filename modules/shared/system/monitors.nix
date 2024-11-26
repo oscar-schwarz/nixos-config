@@ -26,7 +26,7 @@
         # external portrait monitor
         "desc:LG Electronics 27EA53 312NDNU32431, 1920x1080@50, 2560x0, 1, transform, 1"
         "desc:LG Electronics 27EA53 0x01010101, 1920x1080@50, 2560x0, 1, transform, 1"
-        "desc:LG Electronics E2711 111NDBP2U853, 1920x1080, 2560x0, transform, 1"
+        "desc:LG Electronics E2711 111NDBP2U853, 1920x1080, 2560x0, 1, transform, 1"
       ];
     })];
 }
