@@ -1,32 +1,49 @@
 { ... }: 
 
-{
+let 
+  monitors = [
+    { # Portable monitor
+      resolution = "1920x1080";
+      position = "auto";
+      scale = 1;
+      additional = "transform, 3";
+      names = [
+        "RGT 0x5211 0x00000401"
+        "DZX EVP-304 000000000000"
+      ];
+    }
+    { # Landscape desktop monitor
+      resolution = "2560x1440";
+      position = "0x240";
+      scale = 1;
+      additional = "";
+      names = [
+        "ViewSonic Corporation VA3209-QHD WYM241340384"
+      ];
+    }
+    { # Portrait desktop monitor
+      resolution = "1920x1080";
+      position = "2560x0";
+      scale = 1;
+      additional = "transform, 1";
+      names = [
+        "LG Electronics 27EA53 312NDNU32431"
+        "LG Electronics 27EA53 0x01010101"
+        "Invalid Vendor Codename - RTK 0x1D1A 0x01010101"
+      ];
+    }
+  ];
+in {
   # All home manager specific options
   home-manager.sharedModules = [({ ... }: {
 
       # Config for hyprland
-      wayland.windowManager.hyprland.settings.monitor = let
-        # Sometimes the portable monitor is listed under different names
-        portableMonitorConfigs = map
-          (desc: "desc:${desc}, preferred, auto, 1, transform, 3")
-          # here are all the different names the monitor might have 
-          ["RGT 0x5211 0x00000401" "DZX EVP-304 000000000000"];
-
-      in
-      portableMonitorConfigs ++ [
-        # Laptop built-in
-        "eDP-1,preferred,auto,1"
-
-        # Desk monitors
-        # I have two 1080p monitors one landscape and one portrait 
-        
-        # Main landscape monitor
-        "desc:ViewSonic Corporation VA3209-QHD WYM241340384, 2560x1440, 0x240, 1"
-
-        # external portrait monitor
-        "desc:LG Electronics 27EA53 312NDNU32431, 1920x1080@60, 2560x0, 1, transform, 1"
-        "desc:LG Electronics 27EA53 0x01010101, 1920x1080@60, 2560x0, 1, transform, 1"
-        "desc:LG Electronics E2711 111NDBP2U853, 1920x1080, 2560x0, 1, transform, 1"
-      ];
+      wayland.windowManager.hyprland.settings.monitor = builtins.concatLists (
+        map (monitor: 
+          map (name:
+            "desc:${name}, ${monitor.resolution}, ${monitor.position}, ${builtins.toString monitor.scale}, ${monitor.additional}" 
+          ) monitor.names
+        ) monitors
+      );
     })];
 }
