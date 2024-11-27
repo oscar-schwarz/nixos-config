@@ -21,17 +21,17 @@ let
         "ViewSonic Corporation VA3209-QHD WYM241340384"
       ];
     }
-    # { # Portrait desktop monitor
-    #   resolution = "1920x1080";
-    #   position = "2560x0";
-    #   scale = 1;
-    #   additional = "transform, 1";
-    #   names = [
-    #     "LG Electronics 27EA53 312NDNU32431"
-    #     "LG Electronics 27EA53 0x01010101"
-    #     "Invalid Vendor Codename - RTK 0x1D1A 0x01010101"
-    #   ];
-    # }
+    { # Portrait desktop monitor
+      resolution = "1920x1080";
+      position = "2560x0";
+      scale = 1;
+      additional = "transform, 1";
+      names = [
+        "LG Electronics 27EA53 312NDNU32431"
+        "LG Electronics 27EA53 0x01010101"
+        "Invalid Vendor Codename - RTK 0x1D1A 0x01010101"
+      ];
+    }
   ];
 in {
   # All home manager specific options
