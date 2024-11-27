@@ -108,6 +108,9 @@
       monitor = [
         # This needs to be here so that hyprlock does not crash
         "FALLBACK,1920x1080@60,auto,1"
+
+        # Mirror new monitors to laptop monitor
+        ", preffered, auto, 1, mirror, eDP-1"
       ];
 
       # --- Keyboard settings ---
