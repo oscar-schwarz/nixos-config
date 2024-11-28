@@ -22,6 +22,9 @@
     (pkgs.writeShellApplication {
       name = "hypr-fix-screens";
       text = ''
+        # Enable eDP-1 (will crash if not enabled)
+        hyprctl keyword monitor "eDP-1"
+
         # Get all connected monitors, (except eDP-1, the internal screen) and disable all of them
         hyprctl monitors \
         | grep Monitor \
@@ -34,6 +37,9 @@
         
         # Reload config -> re-enables all configured monitors
         hyprctl reload
+
+        # Disable eDP-1
+        hyprctl keyword monitor "eDP-1, disable"
       '';
     })  
   ];
