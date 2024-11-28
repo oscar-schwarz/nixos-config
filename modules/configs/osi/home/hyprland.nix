@@ -16,6 +16,26 @@
     brightnessctl
     hyprpaper
     wvkbd
+
+    # Sometimes, when I would connect the laptop to the docking station, not all screens work.
+    # This script disables all external screens at once and turns them on again (and this works lol)
+    (pkgs.writeShellApplication {
+      name = "hypr-fix-screens";
+      text = ''
+        # Get all connected monitors, (except eDP-1, the internal screen) and disable all of them
+        hyprctl monitors \
+        | grep Monitor \
+        | awk '{print $2}' \
+        | grep -v "eDP-1" \
+        | xargs -I {} hyprctl keyword monitor "{}, disable"
+        
+        # Wait 2 seconds
+        sleep 2
+        
+        # Reload config -> re-enables all configured monitors
+        hyprctl reload
+      '';
+    })  
   ];
 
   programs.kitty = {
