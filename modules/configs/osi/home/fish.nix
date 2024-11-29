@@ -20,7 +20,6 @@
       lg = "lazygit";
       logout = "hyprctl dispatch exit 1";
       c = "codium";
-      ssh = ''TERM=xterm-256color ssh $argv'';
     };
     functions = {
       # Nix stuff
@@ -79,6 +78,7 @@
         # detach from terminal
         disown
       '';
+      ssh = "TERM=xterm-256color ${lib.getExe pkgs.openssh} $argv";
     };
   };
 
