@@ -28,6 +28,7 @@
 
     openconnect.interfaces = {
       uni-leipzig-vpn = {
+        autoStart = false;
         gateway = "vpn.uni-leipzig.de";
         protocol = "anyconnect";
         user = "zu66owol@uni-leipzig.de";
