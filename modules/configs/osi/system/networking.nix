@@ -32,7 +32,7 @@
         gateway = "vpn.uni-leipzig.de";
         protocol = "anyconnect";
         user = "zu66owol@uni-leipzig.de";
-        passwordFile = config.osi.getSecret "uniLeipzigVPNAuth";
+        passwordFile = config.osi.getSecretFile "uniLeipzigVPNAuth";
       };
     };
   };

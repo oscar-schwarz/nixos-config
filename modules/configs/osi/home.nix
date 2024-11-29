@@ -8,7 +8,7 @@ let
     name = "heygpt";
     text = ''
       OPENAI_API_BASE="https://api.openai.com/v1" \
-      OPENAI_API_KEY=$(cat ${nixosConfig.sops.secrets.${nixosConfig.osi.secrets.openAiKey}.path}) \
+      OPENAI_API_KEY=$(cat ${nixosConfig.osi.getSecretFile "openAiKey"}) \
       ${lib.getExe pkgs.heygpt} "$@"
     '';
   };
@@ -110,7 +110,7 @@ in {
     publicKeys = [
       {
         trust = 5;
-        source = nixosConfig.sops.secrets.${nixosConfig.osi.secrets.publicPgpKey}.path;
+        source = nixosConfig.osi.getSecretFile "publicPgpKey";
       }
     ];
   };

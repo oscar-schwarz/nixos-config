@@ -32,7 +32,7 @@
     };
 
     # A function to quickly get the secret
-    getSecret = mkOption {
+    getSecretFile = mkOption {
       default = name: config.sops.secrets.${config.osi.secrets.${name}}.path;
     };
   };
@@ -56,10 +56,10 @@
     };
 
     # Set hashed password for osi
-    users.users.osi.hashedPasswordFile = config.sops.secrets.${config.osi.secrets.osiPasswordHash}.path;
+    users.users.osi.hashedPasswordFile = config.osi.getSecretFile "osiPasswordHash";
 
     # Add github token to github calls
-    nix.extraOptions = "!include " + config.sops.secrets.${config.osi.secrets.nixAccessTokens}.path;
+    nix.extraOptions = "!include " + config.osi.getSecretFile "nixAccessTokens";
 
     # Allow some unfree packages
     nixpkgs.config.allowUnfreePredicate = pkg:

@@ -78,6 +78,7 @@
         # detach from terminal
         disown
       '';
+      ssh = "TERM=xterm-256color shh";
     };
   };
 
