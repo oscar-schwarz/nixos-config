@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   environment.systemPackages = with pkgs; [
@@ -24,6 +24,15 @@
         { from = 4000; to = 4007; }
         { from = 8000; to = 8010; }
       ];
+    };
+
+    openconnect.interfaces = {
+      uni-leipzig-vpn = {
+        gateway = "vpn.uni-leipzig.de";
+        protocol = "anyconnect";
+        user = "zu66owol@uni-leipzig.de";
+        passwordFile = config.osi.getSecret "uniLeipzigVPNAuth";
+      };
     };
   };
 }

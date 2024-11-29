@@ -28,6 +28,12 @@
       publicPgpKey = mkSecretOption;
       osiPasswordHash = mkSecretOption;
       nixAccessTokens = mkSecretOption;
+      uniLeipzigVPNAuth = mkSecretOption;
+    };
+
+    # A function to quickly get the secret
+    getSecret = mkOption {
+      default = name: config.sops.secrets.${config.osi.secrets.${name}}.path;
     };
   };
 
@@ -45,6 +51,7 @@
       ${openAiKey} = common;
       ${publicPgpKey} = common;
       ${nixAccessTokens} = common;
+      ${uniLeipzigVPNAuth} = common;
       ${osiPasswordHash}.neededForUsers = true;
     };
 
