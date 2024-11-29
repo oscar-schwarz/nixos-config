@@ -1,9 +1,11 @@
 { pkgs, ... }:
 
 {
-  environment.systemPackages = [
+  environment.systemPackages = with pkgs; [
     # Script to install the cert for eduroam uni leipzig
-    pkgs.eduroam.install-eduroam-leipzig
+    eduroam.install-eduroam-leipzig
+
+    openconnect
   ];
   networking = {
     networkmanager = {
