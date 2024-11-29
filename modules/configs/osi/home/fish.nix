@@ -78,7 +78,7 @@
         # detach from terminal
         disown
       '';
-      ssh = "TERM=xterm-256color shh";
+      ssh = "TERM=xterm-256color ${lib.getExe pkgs.openssh}";
     };
   };
 
