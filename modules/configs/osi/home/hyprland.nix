@@ -107,7 +107,11 @@
     };
   };
 
-  wayland.windowManager.hyprland = {
+  wayland.windowManager.hyprland = let 
+    workspaceCommand = command: direction: pkgs.writeShellScript "" ''
+
+    '';
+  in {
     enable = true;
     settings = {
 
@@ -217,8 +221,8 @@
           "$meta, K, togglefloating"
 
           # switch workspaces
-          "$meta, J, workspace, r-1"
-          "$meta, H, workspace, r+1"
+          "$meta, J, workspace, -1"
+          "$meta, H, workspace, +1"
 
           # move window to workspaces
           "$meta_CTRL, J, movetoworkspace, r-1"
@@ -321,7 +325,6 @@
         showEmptyWorkspace = false;
         hideTopLayers = true;
         hideBackgroundLayers = true;
-        
         overrideGaps = false;
       };
     };
