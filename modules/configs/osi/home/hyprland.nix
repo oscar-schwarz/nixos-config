@@ -320,6 +320,7 @@
         showNewWorkspace = false;
         onBottom = true;
         hideTopLayers = false;
+        hideBackgroundLayers = false;
       };
     };
 
