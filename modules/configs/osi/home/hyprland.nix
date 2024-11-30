@@ -117,7 +117,7 @@
         COMPARATOR="<"
       fi
 
-      $NEXT=$(hyprctl workspaces | grep "workspace ID" | grep $MONITOR | awk "\$3 > $WORKSPACE_ID")
+      $NEXT=$(hyprctl workspaces | grep "workspace ID" | grep "$MONITOR" | awk "\$3 > $WORKSPACE_ID")
 
       if [ "$NEXT" == "" ]; then
         hyprctl dispatch ${command} ${plusOrMinus}${num}
