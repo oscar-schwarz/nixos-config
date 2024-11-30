@@ -228,7 +228,7 @@
           "$meta_CTRL, H, movetoworkspace, r+1"
 
           # workspace overview through hyprspace
-          "$meta, O, hyprexpo:expo"
+          "$meta, O, hyprexpo:expo, toggle"
 
           # Taking screenshots
           "$meta_CTRL, A, exec, hyprshot -m window -m active --clipboard-only"
@@ -315,6 +315,11 @@
       gestures = {
         workspace_swipe = false;
         workspace_swipe_cancel_ratio = 0.15;
+      };
+
+
+      "plugin:hyprexpo" = {
+        workspace_method = "center current";
       };
     };
 
