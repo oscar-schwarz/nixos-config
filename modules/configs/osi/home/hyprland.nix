@@ -228,7 +228,7 @@
           "$meta_CTRL, H, movetoworkspace, r+1"
 
           # workspace overview through hyprspace
-          "$meta, O, overview:toggle"
+          "$meta, O, hyprexpo:expo"
 
           # Taking screenshots
           "$meta_CTRL, A, exec, hyprshot -m window -m active --clipboard-only"
@@ -316,18 +316,11 @@
         workspace_swipe = false;
         workspace_swipe_cancel_ratio = 0.15;
       };
-
-      # --- HYPRSPACE PLUGIN
-      "plugin:overview" = {
-        showEmptyWorkspaces = false;
-        showNewWorkspace = false;
-        panelHeight = 100;
-      };
     };
 
     plugins = with pkgs.hyprlandPlugins; [
       hyprgrass
-      Hyprspace
+      hyprexpo
     ];
   };
 }
