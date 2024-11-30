@@ -313,12 +313,17 @@
         workspace_swipe = false;
         workspace_swipe_cancel_ratio = 0.15;
       };
+
+      # --- HYPRSPACE PLUGIN
+      "plugin:overview" = {
+        showEmptyWorkspaces = false;
+        panelHeight = 50;
+      };
     };
 
     plugins = with pkgs.hyprlandPlugins; [
       hyprgrass
       Hyprspace
-      hyprexpo
     ];
   };
 }
