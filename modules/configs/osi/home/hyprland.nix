@@ -197,7 +197,7 @@
 
           # Rofi menus
           # launcher
-          "$meta, , exec, pidof rofi || rofi -show drun"
+          "$meta, O, exec, pidof rofi || rofi -show drun"
           # emoji
           "$meta, U, exec, pidof rofi || rofi -show emoji"
           # Pass
@@ -228,7 +228,7 @@
           "$meta_CTRL, H, movetoworkspace, r+1"
 
           # workspace overview through hyprspace
-          "$meta, O, hyprexpo:expo, toggle"
+          "$meta, V, overview:toggle"
 
           # Taking screenshots
           "$meta_CTRL, A, exec, hyprshot -m window -m active --clipboard-only"
@@ -318,16 +318,14 @@
       };
 
 
-      "plugin:hyprexpo" = {
-        columns = 1;
-        gap_size = 50;
-        workspace_method = "center m+1";
+      "plugin:overview" = {
+        panelHeight = 200;
       };
     };
 
     plugins = with pkgs.hyprlandPlugins; [
       hyprgrass
-      hyprexpo
+      Hyprspace
     ];
   };
 }
