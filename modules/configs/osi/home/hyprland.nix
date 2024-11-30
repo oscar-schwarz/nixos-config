@@ -108,8 +108,22 @@
   };
 
   wayland.windowManager.hyprland = let 
-    workspaceCommand = command: direction: pkgs.writeShellScript "" ''
+    workspaceCommand = command: plusOrMinus: num: pkgs.writeShellScript "" ''
+      WORKSPACE_ID=$(hyprctl activeworkspace | grep 'workspace ID' | awk '{ print $3 }')
+      MONITOR=$(hyprctl activeworkspace | grep 'workspace ID' | awk '{ print $7 }')
+      
+      COMPARATOR=">"
+      if [ "${plusOrMinus}" = "-" ]; then
+        COMPARATOR="<"
+      fi
 
+      $NEXT=$(hyprctl workspaces | grep "workspace ID" | grep $MONITOR | awk "\$3 > $WORKSPACE_ID")
+
+      if [ "$NEXT" == "" ]; then
+        hyprctl dispatch ${command} ${plusOrMinus}${num}
+      else
+        hyprctl dispatch ${command} e${plusOrMinus}${num}
+      fi
     '';
   in {
     enable = true;
@@ -221,8 +235,8 @@
           "$meta, K, togglefloating"
 
           # switch workspaces
-          "$meta, J, workspace, e-1"
-          "$meta, H, workspace, e+1"
+          "$meta, J, exec, ${workspaceCommand "workspace" "-" "1"}"
+          "$meta, H, exec, ${workspaceCommand "workspace" "+" "1"}"
 
           # move window to workspaces
           "$meta_CTRL, J, movetoworkspace, r-1"
