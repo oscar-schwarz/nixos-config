@@ -221,8 +221,8 @@
           "$meta, K, togglefloating"
 
           # switch workspaces
-          "$meta, J, workspace, -1"
-          "$meta, H, workspace, +1"
+          "$meta, J, workspace, e-1"
+          "$meta, H, workspace, e+1"
 
           # move window to workspaces
           "$meta_CTRL, J, movetoworkspace, r-1"
