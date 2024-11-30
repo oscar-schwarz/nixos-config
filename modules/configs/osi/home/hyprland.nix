@@ -319,7 +319,7 @@
 
 
       "plugin:hyprexpo" = {
-        workspace_method = "center current";
+        workspace_method = "center center";
       };
     };
 
