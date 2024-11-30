@@ -317,6 +317,8 @@
 
       "plugin:overview" = {
         panelHeight = 200;
+        showNewWorkspace = false;
+        onBottom = true;
       };
     };
 
