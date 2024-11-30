@@ -319,7 +319,9 @@
 
 
       "plugin:hyprexpo" = {
-        workspace_method = "center center";
+        columns = 1;
+        gap_size = 50;
+        workspace_method = "center m+1";
       };
     };
 
