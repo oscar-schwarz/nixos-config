@@ -28,6 +28,7 @@
 
     openconnect.interfaces = {
       uni-leipzig-vpn = {
+        # Start with `sudo systemctl start openconnect-uni-leipzig-vpn`
         autoStart = false;
         gateway = "vpn.uni-leipzig.de";
         protocol = "anyconnect";
