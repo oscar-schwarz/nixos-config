@@ -114,7 +114,7 @@ in {
       ];
       animation = [
         "windows, 1, 3, fast-in, popin"
-        # "workspaces, 1, 5, default, slidevert"
+        "workspaces, 1, 5, default, slidevert"
       ];
 
       # --- Plugins ---
