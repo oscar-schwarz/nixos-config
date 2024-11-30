@@ -321,6 +321,7 @@
         showEmptyWorkspace = false;
         hideTopLayers = true;
         hideBackgroundLayers = true;
+        drawActiveWorkspace = false;
       };
     };
 
