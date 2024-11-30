@@ -318,7 +318,7 @@
       "plugin:overview" = {
         panelHeight = 200;
         showNewWorkspace = false;
-        onBottom = true;
+        showEmptyWorkspace = false;
         hideTopLayers = true;
         hideBackgroundLayers = true;
       };
