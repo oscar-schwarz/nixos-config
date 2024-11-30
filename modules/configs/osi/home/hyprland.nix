@@ -319,6 +319,7 @@
         panelHeight = 200;
         showNewWorkspace = false;
         onBottom = true;
+        hideTopLayers = false;
       };
     };
 
