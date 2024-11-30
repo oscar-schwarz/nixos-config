@@ -320,6 +320,7 @@
       # --- HYPRSPACE PLUGIN
       "plugin:overview" = {
         showEmptyWorkspaces = false;
+        showNewWorkspace = false;
         panelHeight = 100;
       };
     };
