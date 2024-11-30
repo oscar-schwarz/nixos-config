@@ -129,9 +129,6 @@
           pkill waybar
           waybar
         '')
-
-        # Allow creation of workspaces before first
-        "hyprctl dispatch workspace 50"
       ];
 
       # --- Monitors ---
