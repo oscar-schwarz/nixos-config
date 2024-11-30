@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   imports = [
@@ -321,7 +321,8 @@
         showEmptyWorkspace = false;
         hideTopLayers = true;
         hideBackgroundLayers = true;
-        hideRealLayers = true;
+        
+        overrideGaps = false;
       };
     };
 
