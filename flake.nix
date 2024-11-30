@@ -29,6 +29,12 @@
       inputs.hyprland.follows = "hyprland";
     };
 
+    # Hyprland plugin for workspace overview
+    Hyprspace = {
+      url = "github:KZDKM/Hyprspace";
+      inputs.hyprland.follows = "hyprland";
+    };
+
     # Idle inhibitor
     matcha = {
       url = "git+https://codeberg.org/QuincePie/matcha";
@@ -118,6 +124,7 @@
                 hyprlandPlugins = {
                   hyprgrass = hyprgrass.packages.${prev.system}.default;
                   hyprfocus = hyprfocus.packages.${prev.system}.default;
+                  Hyprspace = Hyprspace.packages.${prev.system}.Hyprspace;
                 };
               }
             )

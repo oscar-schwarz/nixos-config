@@ -311,8 +311,9 @@
       };
     };
 
-    plugins = [
-      pkgs.hyprlandPlugins.hyprgrass
+    plugins = with pkgs.hyprlandPlugins; [
+      hyprgrass
+      Hyprspace
     ];
   };
 }
