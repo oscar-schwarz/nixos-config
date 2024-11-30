@@ -287,27 +287,27 @@
       ];
 
 
-      # --- HYPRGRASS PLUGIN
-      "plugin:touch-gestures" = {
-        sensitivity = 4.0;
-        workspace_swipe_fingers = 3;
-        workspace_swipe_edge = "l";
-        edge_margin = 50;
+      # # --- HYPRGRASS PLUGIN
+      # "plugin:touch-gestures" = {
+      #   sensitivity = 4.0;
+      #   workspace_swipe_fingers = 3;
+      #   workspace_swipe_edge = "l";
+      #   edge_margin = 50;
 
-        # Mouse binds
-        hyprgrass-bindm= [
-          ", longpress:3, movewindow"
-          ", longpress:4, resizewindow"
-        ];
+      #   # Mouse binds
+      #   hyprgrass-bindm= [
+      #     ", longpress:3, movewindow"
+      #     ", longpress:4, resizewindow"
+      #   ];
 
-        hyprgrass-bind = [
-          ", swipe:4:u, movetoworkspace, r-1"
-          ", swipe:4:d, movetoworkspace, r+1"
-          ", edge:r:l, exec, pkill hyprshot || hyprshot -m region --clipboard-only"
-          ", edge:l:r, exec, pkill rofi || rofi -show drun"
-          ", edge:u:d, exec, pkill wvkbd-mobintl || wvkbd-mobintl -H 300 -L 300"
-        ];
-      };
+      #   hyprgrass-bind = [
+      #     ", swipe:4:u, movetoworkspace, r-1"
+      #     ", swipe:4:d, movetoworkspace, r+1"
+      #     ", edge:r:l, exec, pkill hyprshot || hyprshot -m region --clipboard-only"
+      #     ", edge:l:r, exec, pkill rofi || rofi -show drun"
+      #     ", edge:u:d, exec, pkill wvkbd-mobintl || wvkbd-mobintl -H 300 -L 300"
+      #   ];
+      # };
 
       gestures = {
         workspace_swipe = false;
@@ -316,7 +316,7 @@
     };
 
     plugins = with pkgs.hyprlandPlugins; [
-      hyprgrass
+      # hyprgrass
       Hyprspace
     ];
   };
