@@ -118,6 +118,7 @@
 
       # --- Autostart ---
       exec-once = [
+        # does something
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
 
         (pkgs.writeShellScript "" ''
@@ -128,6 +129,9 @@
           pkill waybar
           waybar
         '')
+
+        # Allow creation of workspaces before first
+        "hyprctl dispatch workspace 50"
       ];
 
       # --- Monitors ---
@@ -182,14 +186,14 @@
           "$meta, N, exec, kitty"
           # Firefox (or LibreWolf?)
           "$meta, E, exec, ${pkgs.writeShellScript "" ''
-          # Test if librewolf is installed, if so run it
-          if which librewolf; then
-            librewolf
-          # Fallback to firefox
-          else
-            firefox
-          fi
-        ''}"
+            # Test if librewolf is installed, if so run it
+            if which librewolf; then
+              librewolf
+            # Fallback to firefox
+            else
+              firefox
+            fi
+          ''}"
 
           # Rofi menus
           # launcher
@@ -306,7 +310,7 @@
       };
 
       gestures = {
-        workspace_swipe = true;
+        workspace_swipe = false;
         workspace_swipe_cancel_ratio = 0.15;
       };
     };
