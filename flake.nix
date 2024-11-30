@@ -17,6 +17,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # A collection of hyprland plugins
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
+
     # Hyprland plugin for touchscreen support
     hyprgrass = {
       url = "github:horriblename/hyprgrass";
@@ -125,7 +131,7 @@
                   hyprgrass = hyprgrass.packages.${prev.system}.default;
                   hyprfocus = hyprfocus.packages.${prev.system}.default;
                   Hyprspace = Hyprspace.packages.${prev.system}.Hyprspace;
-                };
+                } // hyprland-plugins.packages.${prev.system};
               }
             )
           ];

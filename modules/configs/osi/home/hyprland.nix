@@ -220,8 +220,8 @@
           "$meta, K, togglefloating"
 
           # switch workspaces
-          "$meta, J, workspace, e-1"
-          "$meta, H, workspace, e+1"
+          "$meta, J, workspace, r-1"
+          "$meta, H, workspace, r+1"
 
           # move window to workspaces
           "$meta_CTRL, J, movetoworkspace, r-1"
@@ -318,6 +318,7 @@
     plugins = with pkgs.hyprlandPlugins; [
       hyprgrass
       Hyprspace
+      hyprexpo
     ];
   };
 }
