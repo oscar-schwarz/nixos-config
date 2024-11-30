@@ -197,7 +197,7 @@
 
           # Rofi menus
           # launcher
-          "$meta, O, exec, pidof rofi || rofi -show drun"
+          "$meta, , exec, pidof rofi || rofi -show drun"
           # emoji
           "$meta, U, exec, pidof rofi || rofi -show emoji"
           # Pass
@@ -226,6 +226,9 @@
           # move window to workspaces
           "$meta_CTRL, J, movetoworkspace, r-1"
           "$meta_CTRL, H, movetoworkspace, r+1"
+
+          # workspace overview through hyprspace
+          "$meta, O, overview:toggle"
 
           # Taking screenshots
           "$meta_CTRL, A, exec, hyprshot -m window -m active --clipboard-only"
@@ -317,7 +320,7 @@
       # --- HYPRSPACE PLUGIN
       "plugin:overview" = {
         showEmptyWorkspaces = false;
-        panelHeight = 50;
+        panelHeight = 100;
       };
     };
 
