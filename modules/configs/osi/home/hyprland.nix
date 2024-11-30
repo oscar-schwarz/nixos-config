@@ -220,8 +220,8 @@
           "$meta, H, workspace, r+1"
 
           # move window to workspaces
-          "$meta_CTRL, J, movetoworkspace, r-1"
-          "$meta_CTRL, H, movetoworkspace, r+1"
+          "$meta_CTRL, J, movetoworkspace, e-1"
+          "$meta_CTRL, H, movetoworkspace, e+1"
 
           # Taking screenshots
           "$meta_CTRL, A, exec, hyprshot -m window -m active --clipboard-only"
