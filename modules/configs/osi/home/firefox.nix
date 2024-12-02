@@ -136,6 +136,10 @@
           install_url = "https://addons.mozilla.org/firefox/downloads/file/4325805/duckduckgo_for_firefox-2024.7.24.xpi";
           installation_mode = "force_installed";
         };
+        "{b1d62f2f-9e58-4608-8e2a-c8300e04e983}" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/file/4302961/tweak_extension-8.3.0.xpi";
+          installation_mode = "force_installed";
+        };
       };
     };
     profiles = {
