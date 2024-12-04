@@ -228,6 +228,9 @@ in {
 
       # --- GODOT ENGINE ---
       geequlim.godot-tools
+
+      # --- SQL ---
+      adpyke.vscode-sql-formatter
     ];
   };
 
