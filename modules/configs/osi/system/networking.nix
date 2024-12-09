@@ -19,6 +19,7 @@
         3000
         5173
         80
+        443
       ];
       allowedUDPPortRanges = [
         { from = 4000; to = 4007; }
