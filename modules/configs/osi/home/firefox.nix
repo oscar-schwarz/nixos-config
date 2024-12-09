@@ -13,7 +13,7 @@
     # Open PDF Files with firefox
     "application/pdf"
 
-  ] (type: "librewolf.desktop");
+  ] (type: "firefox.desktop");
   home.sessionVariables.DEFAULT_BROWSER = lib.getExe config.programs.firefox.package;
 
 
