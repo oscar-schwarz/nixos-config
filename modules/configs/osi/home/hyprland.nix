@@ -142,9 +142,9 @@
 
       # --- Keyboard settings ---
       input = {
-        kb_layout = "us";
-        kb_variant = "colemak";
-        kb_options = "ctrl:swap_rwin_rctl";
+        kb_layout = "us,us";
+        kb_variant = "colemak,";
+        kb_options = "ctrl:swap_rwin_rctl,grp:win_space_toggle";
       };
 
 
