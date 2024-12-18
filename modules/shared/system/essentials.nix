@@ -105,7 +105,7 @@
     # Configure keymap in X11.
 		xkb.layout = "us,us";
 		xkb.variant = "colemak,";
-    xkbOptions = "grp:win_space_toggle";
+    xkb.options = "grp:win_space_toggle";
   };
 
   # Configure console keymap
