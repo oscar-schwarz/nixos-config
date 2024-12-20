@@ -16,6 +16,7 @@
     brightnessctl
     hyprpaper
     wvkbd
+    hyprpolkitagent
 
     # Sometimes, when I would connect the laptop to the docking station, not all screens work.
     # This script disables all external screens at once and turns them on again (and this works lol)
@@ -129,6 +130,9 @@
           pkill waybar
           waybar
         '')
+
+        # Auth agent for gui apps
+        "systemctl --user start hyprpolkitagent"
       ];
 
       # --- Monitors ---
