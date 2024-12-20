@@ -74,7 +74,8 @@ in {
     gource # Git history visualisation
     qrcode # simple qr code tool
     devenv # dev environments made easy
-    
+    gparted # format disks
+
     # Tools
     wl-clipboard-rs # copy to clipboard from terminal
     
