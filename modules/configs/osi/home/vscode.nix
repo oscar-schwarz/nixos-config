@@ -3,7 +3,28 @@
 let
   vscodeExts = inputs.nix-vscode-extensions.extensions.x86_64-linux;
 in {
-    # code editor
+
+  # Make codium default
+  xdg.mimeApps.defaultApplications = lib.attrsets.genAttrs [
+    "text/plain"
+    "text/x-c"
+    "text/x-c++src"
+    "text/x-java"
+    "text/x-python"
+    "text/x-shellscript"
+    "application/json"
+    "application/xml"
+    "application/javascript"
+    "text/html"
+    "text/css"
+    "text/x-markdown"
+    "text/x-yaml"
+    "application/x-php"
+    "application/x-ruby"
+    "application/x-perl"
+
+  ] (type: "codium.desktop");
+
   programs.vscode = {
     enable = true;
     package = pkgs.vscodium.overrideAttrs (prev: with builtins; with lib.strings; {
@@ -11,8 +32,8 @@ in {
       # unsupported parameter. This hack removes that parameter added by the environment variable.
       preFixup = concatStringsSep "\n" (
         # Filter out the line containing the parameter that causes the warning
-        filter 
-          (str: (match ".*ozone-platform-hint.*" str) == null) 
+        filter
+          (str: (match ".*ozone-platform-hint.*" str) == null)
           (splitString "\n" prev.preFixup)
       );
     });
@@ -100,7 +121,7 @@ in {
       # --- GODOT ---
       "godotTools.editorPath.godot4" = lib.getExe pkgs.godot_4;
 
-      
+
     };
     # Keybindings
     # `when` makes the keybind only available in certain contexts: more on that here
@@ -168,7 +189,7 @@ in {
         key = "ctrl+o e";
         command = "workbench.action.debug.start";
         when = "debuggersAvailable && !inDebugMode";
-      } 
+      }
       { # Stop debugger
         key = "ctrl+o e";
         command = "workbench.action.debug.stop";
@@ -206,21 +227,21 @@ in {
     ];
     extensions = with vscodeExts.vscode-marketplace; with vscodeExts.open-vsx-release; [
       # --- UTILITIES ---
-      davidlgoldberg.jumpy2 # jumping cursors with short letter combo 
+      davidlgoldberg.jumpy2 # jumping cursors with short letter combo
       eamodio.gitlens
 
       # --- PHP ---
       xdebug.php-debug # debugging php applications
       ronvanderheijden.phpdoc-generator # generate php doc comments
       mehedidracula.php-namespace-resolver # php everything namespace
-    
+
       # --- NIX ---
       jnoortheen.nix-ide # nix language features
 
       # --- NODE ---
-      vue.volar # vue language features 
+      vue.volar # vue language features
       oouo-diogo-perdigao.docthis # jsdoc
-    
+
       # --- JAVA ---
       redhat.java # language features
       vscjava.vscode-java-debug # debugger
