@@ -82,6 +82,9 @@ in {
     # Scripts
     pass-fetch # script for fetching password store repo
     heygptWrapper # terminal gpt integration
+
+    # Icons
+    adwaita-icon-theme
   ];
 
   # Default apps
