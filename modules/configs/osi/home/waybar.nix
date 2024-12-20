@@ -131,8 +131,7 @@ in {
           seperate-outputs = true;
           rewrite = {
             ".*(codium).*" = "$1";
-            ".*(xournalpp).*" = "$1";
-            ".*(kdeconnect).*" = "$1";
+            "^org\\..+?\\.(.+)$" = "$1";
           };
           on-click = pkgs.writeShellScript "" ''
             CHOICE="$(echo -e 'Maximize\nFullscreen\nClose' | rofi -dmenu -p 'Window Action')"
