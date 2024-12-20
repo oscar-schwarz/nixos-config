@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, lib, inputs, ... }:
 
 {
   # Bootloader setup
@@ -82,6 +82,9 @@
       };
 
       programs.bashmount.enable = true;
+
+      # little fix for gtk apps
+      gtk.iconTheme.name = lib.mkDefault "Adwaita";
     })];
   };
 
