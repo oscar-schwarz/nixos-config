@@ -130,8 +130,9 @@ in {
           icon-size = 18;
           seperate-outputs = true;
           rewrite = {
-            ".*(codium).*" = "$1";
-            "^org\\..+?\\.(.+)$" = "$1";
+            # sometimes window classes formed like: com.github.xournalpp.xournalpp
+            # this regex shows only the last string
+            "^(?:.+?\.)+(.+)$" = "$1";
           };
           on-click = pkgs.writeShellScript "" ''
             CHOICE="$(echo -e 'Maximize\nFullscreen\nClose' | rofi -dmenu -p 'Window Action')"
