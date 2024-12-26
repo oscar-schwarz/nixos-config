@@ -93,16 +93,21 @@
       };
       listener =
         let
-          minsToSecs = mins: builtins.floor (mins * 60);
+          minutes = mins: builtins.floor (mins * 60);
+          hours = h: builtins.floor (h * 3600);
         in
         [
           {
-            timeout = minsToSecs 4;
+            timeout = minutes 3;
+            on-timeout = "loginctl lock-session";
+          }
+          {
+            timeout = minutes 4;
             on-timeout = "systemctl suspend";
           }
           {
-            timeout = minsToSecs 3;
-            on-timeout = "loginctl lock-session";
+            timeout = hours 4;
+            on-timeout = "shutdown now";
           }
         ];
     };
