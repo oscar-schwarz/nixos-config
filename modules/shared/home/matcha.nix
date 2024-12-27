@@ -11,6 +11,18 @@
         '';
       };
     };
+    disableOnLidSwitch = {
+      enable = mkEnableOption ''
+        Disable when lid is closed.
+      '';
+      switchName = mkOption {
+        type = types.str;
+        default = "Lid Switch";
+        description = ''
+           The name of the switch.
+        '';
+      };
+    };
   };
 
   config = lib.mkIf config.matcha.enable {
@@ -47,5 +59,10 @@
         on-click = "matcha-toggle";
       };
     };
+
+    # Hyprland integration
+    wayland.windowManager.hyprland.settings.bindl = lib.mkIf config.matcha.disableOnLidSwitch.enable [
+      ", switch:${config.matcha.disableOnLidSwitch.switchName}, exec, pkill matcha"
+    ];
   };
 }
