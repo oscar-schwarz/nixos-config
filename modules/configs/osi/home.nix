@@ -75,6 +75,7 @@ in {
     qrcode # simple qr code tool
     devenv # dev environments made easy
     gnome-disk-utility # format disks
+    bluetuith # bluetooth tui
 
     # Tools
     wl-clipboard-rs # copy to clipboard from terminal
@@ -118,7 +119,6 @@ in {
       }
     ];
   };
-
   services.gpg-agent = {
     enable = true;
     enableScDaemon = true;
@@ -136,7 +136,7 @@ in {
 
   programs.chromium = {
     enable = true;
-    # relatively simple (vivaldi is overkill for my usecase of "this page doesnt in firefox") with an ad-blocker
+    # relatively simple (vivaldi is overkill for my usecase of "this page doesnt work in firefox") with an ad-blocker
     package = pkgs.brave; 
     extensions = [
       {
@@ -157,6 +157,11 @@ in {
     settings = {
       mouseEvents = false; # don't need no mouse
     };
+  };
+
+  # Youtube downloader
+  programs.yt-dlp = {
+    enable = true;
   };
 
   # -- DANGER ZONE -- 
