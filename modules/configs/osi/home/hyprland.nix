@@ -107,7 +107,7 @@
             on-timeout = "systemctl suspend";
           }
           {
-            timeout = seconds 5;
+            timeout = hours 4;
             on-timeout = "shutdown now";
           }
         ];
