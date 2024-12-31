@@ -134,6 +134,10 @@ in {
         command = "search.action.openInEditor";
         when = "hasSearchResult && searchViewletFocus";
       }
+      { # open sidebar
+        key = "ctrl+p";
+        command = "workbench.action.toggleSidebarVisibility";
+      }
 
 
       # --- GIT ---
