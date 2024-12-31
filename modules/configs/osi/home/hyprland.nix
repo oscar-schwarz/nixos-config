@@ -108,7 +108,7 @@
           }
           {
             timeout = seconds 5;
-            on-timeout = "echo hello";
+            on-timeout = "shutdown now";
           }
         ];
     };
