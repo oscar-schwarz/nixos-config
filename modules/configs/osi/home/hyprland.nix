@@ -93,6 +93,7 @@
       };
       listener =
         let
+          seconds = s: s;
           minutes = mins: builtins.floor (mins * 60);
           hours = h: builtins.floor (h * 3600);
         in
@@ -106,8 +107,8 @@
             on-timeout = "systemctl suspend";
           }
           {
-            timeout = hours 4;
-            on-timeout = "shutdown now";
+            timeout = seconds 5;
+            on-timeout = "echo hello";
           }
         ];
     };
