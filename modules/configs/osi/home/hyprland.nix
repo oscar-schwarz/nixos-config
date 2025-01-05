@@ -290,7 +290,7 @@
       # The binds here are for the mouse
       bindm = [
         "$meta, mouse:272, movewindow" # Move when super and left click
-        ", mouse:276, movewindow" # or with mouse 6 (upper side)
+        ", mouse:275, movewindow" # or with mouse 5 (lower side)
       ];
 
 
