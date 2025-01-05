@@ -129,10 +129,6 @@
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
 
         (pkgs.writeShellScript "" ''
-          pkill hypridle
-          hypridle
-        '')
-        (pkgs.writeShellScript "" ''
           pkill waybar
           waybar
         '')
@@ -293,7 +289,8 @@
       
       # The binds here are for the mouse
       bindm = [
-        ", mouse:274, movewindow" # Move when super and left click move with mouse
+        "$meta, mouse:272, movewindow" # Move when super and left click
+        ", mouse:276, movewindow" # or with mouse 6 (upper side)
       ];
 
 
