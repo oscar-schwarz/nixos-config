@@ -3,12 +3,16 @@ let
   literal = config.lib.formats.rasi.mkLiteral;
 in {
   programs.rofi.theme = with config.lib.stylix.colors.withHashtag; {
+    "*" = {
+      lightbg = lib.mkForce (literal base00);
+    };
+    
     mainbox = {
       padding = literal "20px 20px";
       
       border-color = literal base0D;
       border-radius = literal "20px";
-      border-width = literal "3px";
+      border = literal "3px";
 
       spacing = literal "5px";
       
