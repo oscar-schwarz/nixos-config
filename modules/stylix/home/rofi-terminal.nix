@@ -6,7 +6,7 @@ in {
     "*" = {
       lightbg = lib.mkForce (literal base00);
       lightfg = lib.mkForce (literal base03);
-      selected-active-foreground = lib.mkForce (literal base07);
+      selected-normal-text = lib.mkForce (literal base07);
     };
     
     mainbox = {
