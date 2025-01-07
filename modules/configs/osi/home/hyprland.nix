@@ -226,7 +226,7 @@
           "$meta, J, workspace, r-1"
           "$meta, H, workspace, r+1"
 
-          # move window to workspaces
+          # move window to workspaceso
           "$meta_CTRL, J, movetoworkspace, r-1"
           "$meta_CTRL, H, movetoworkspace, r+1"
 
@@ -335,6 +335,7 @@
     plugins = with pkgs.hyprlandPlugins; [
       hyprgrass
       Hyprspace
+      Hypr-DarkWindow
     ];
   };
 }

@@ -17,12 +17,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # A collection of hyprland plugins
-    hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland";
-    };
-
     # Hyprland plugin for touchscreen support
     hyprgrass = {
       url = "github:horriblename/hyprgrass";
@@ -38,6 +32,12 @@
     # Hyprland plugin for workspace overview
     Hyprspace = {
       url = "github:KZDKM/Hyprspace";
+      inputs.hyprland.follows = "hyprland";
+    };
+
+    # Hyprland plugin to add transparency to all windows
+    Hyprchroma = {
+      url = "github:alexhulbert/Hyprchroma";
       inputs.hyprland.follows = "hyprland";
     };
 
@@ -131,7 +131,8 @@
                   hyprgrass = hyprgrass.packages.${prev.system}.default;
                   hyprfocus = hyprfocus.packages.${prev.system}.default;
                   Hyprspace = Hyprspace.packages.${prev.system}.Hyprspace;
-                } // hyprland-plugins.packages.${prev.system};
+                  Hypr-DarkWindow = Hyprspace.packages.${prev.system}.default;
+                };
               }
             )
           ];
