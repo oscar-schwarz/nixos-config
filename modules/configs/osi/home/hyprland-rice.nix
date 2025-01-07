@@ -29,6 +29,9 @@ in {
         inherit terminal-padding;
       })
     )
+
+    # Rofi styling
+    ../../../stylix/home/rofi-terminal.nix
   ];
 
   # Rofi

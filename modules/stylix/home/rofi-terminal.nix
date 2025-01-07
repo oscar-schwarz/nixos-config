@@ -2,7 +2,7 @@
 let 
   literal = config.lib.formats.rasi.mkLiteral;
 in {
-  stylix.targets.waybar.enable = true; # turn off stylix ricing that theme can be changed
+  stylix.targets.rofi.enable = true; # turn off stylix ricing that theme can be changed
 
   programs.rofi.theme = with config.lib.stylix.colors.withHashtag; {
     "*" = {
