@@ -29,6 +29,7 @@
       osiPasswordHash = mkSecretOption;
       nixAccessTokens = mkSecretOption;
       uniLeipzigVPNAuth = mkSecretOption;
+      wireguardPrivateKey = mkSecretOption;
     };
 
     # A function to quickly get the secret
@@ -52,6 +53,7 @@
       ${publicPgpKey} = common;
       ${nixAccessTokens} = common;
       ${uniLeipzigVPNAuth} = common;
+      ${wireguardPrivateKey} = common;
       ${osiPasswordHash}.neededForUsers = true;
     };
 

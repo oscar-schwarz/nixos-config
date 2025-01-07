@@ -31,6 +31,7 @@
       osiPasswordHash = "pass-hashes/osi";
       nixAccessTokens = "api-keys/nix-access-tokens";
       uniLeipzigVPNAuth = "other/uni-leipzig-vpn-auth";
+      wireguardPrivateKey = "wireguard/biome-fest";
     };
   };
 

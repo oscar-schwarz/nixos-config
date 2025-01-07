@@ -214,9 +214,9 @@ in {
         command = "workbench.debug.viewlet.action.addWatchExpression";
         when = "watchExpressionsFocused";
       }
-      { # Remove a watched expression
-        key = "shift+backspace";
-        command = "debug.removeWatchExpression";
+      { # Remove all watch expressions (removing one by one is really tedious through keyboard)
+        key = "shift+backspace"; 
+        command = "workbench.debug.viewlet.action.removeAllWatchExpressions";
         when = "watchExpressionsFocused";
       }
       { # Edit a watched expression
