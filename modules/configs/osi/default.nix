@@ -128,7 +128,7 @@
         IdentitiesOnly yes
 
       Host local.server
-        HostName 101.201.4.69
+        HostName 101.201.4.22
         User user
         IdentityFile /home/osi/.ssh/id_blind-spots_user
         IdentitiesOnly yes
