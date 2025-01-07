@@ -1,14 +1,8 @@
-{ config, ... }: 
+{ config, lib, ... }: 
 let 
   literal = config.lib.formats.rasi.mkLiteral;
 in {
-  stylix.targets.rofi.enable = false; # turn off stylix ricing that theme can be changed
-
   programs.rofi.theme = with config.lib.stylix.colors.withHashtag; {
-    "*" = {
-      background-color = literal base00;
-    };
-
     mainbox = {
       padding = literal "20px 20px";
       
@@ -31,12 +25,8 @@ in {
       expand = false;
       
       str = ">";
-      text-color = literal base0C;
+      text-color = lib.mkForce ( literal base0C );
     };
-    entry = {
-      text-color = literal base0B;
-    };
-
     listview = {
       scrollable = false;
     };
@@ -44,18 +34,6 @@ in {
       highlight = literal "bold underline";
       spacing = literal "5px";
       children = map literal [ "element-icon" "element-text" ];
-    };
-    "element .normal" = {
-      text-color = literal base07;
-    };
-    "element .urgent" = {
-      text-color = literal base0F;
-    };
-    "element .active" = {
-      text-color = literal base0B;
-    };
-    "element selected" = {
-      background-color = literal base03;
     };
     element-text = {
       background-color = literal "inherit";
@@ -74,8 +52,7 @@ in {
       margin = literal "20px 5px 0px 5px";
     };
     textbox = {
-      background-color = literal base00;
-      text-color = literal base03;
+      background-color = lib.mkForce ( literal base00 );
     };
   };
 }
