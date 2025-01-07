@@ -8,15 +8,15 @@
         "nix-filter": "nix-filter"
       },
       "locked": {
-        "lastModified": 1734474277,
-        "narHash": "sha256-s240WKP3in9tuYnwJWmCKKaNBNXXX/Fi6eDSEfsLIyU=",
-        "owner": "alexhulbert",
+        "lastModified": 1732223998,
+        "narHash": "sha256-ikhQis8pqaKExqa/2gkHNxZ2+ULI0wHf456w/q1noOE=",
+        "owner": "akselander",
         "repo": "Hyprchroma",
-        "rev": "5c905273d0a0de128539eb1b74fea0c2d2bebf46",
+        "rev": "590f7878b3ced72e7d2251291d4a4c96a8fcad3a",
         "type": "github"
       },
       "original": {
-        "owner": "alexhulbert",
+        "owner": "akselander",
         "repo": "Hyprchroma",
         "type": "github"
       }
