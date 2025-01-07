@@ -37,7 +37,7 @@
 
     # Hyprland plugin to add transparency to all windows
     Hyprchroma = {
-      url = "github:alexhulbert/Hyprchroma";
+      url = "github:akselander/Hyprchroma";
       inputs.hyprland.follows = "hyprland";
     };
 
@@ -131,7 +131,7 @@
                   hyprgrass = hyprgrass.packages.${prev.system}.default;
                   hyprfocus = hyprfocus.packages.${prev.system}.default;
                   Hyprspace = Hyprspace.packages.${prev.system}.Hyprspace;
-                  Hypr-DarkWindow = Hyprspace.packages.${prev.system}.default;
+                  Hypr-DarkWindow = Hyprchroma.packages.${prev.system}.default;
                 };
               }
             )
