@@ -34,9 +34,6 @@ in {
     ../../../stylix/home/rofi-terminal.nix
   ];
 
-  # Rofi
-  programs.rofi.theme = lib.mkForce "material"; # Force because of stylix
-
   # Terminal
   programs.kitty.settings = {
     # Text is moved a bit inwards, like that its not so close to the border
