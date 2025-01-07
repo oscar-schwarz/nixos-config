@@ -38,7 +38,7 @@ in {
     };
     element = {
       highlight = literal "bold underline";
-      spacing = literal "5px";
+      padding = literal "5px";
       children = map literal [ "element-icon" "element-text" ];
     };
     element-text = {
