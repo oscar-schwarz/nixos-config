@@ -15,7 +15,7 @@ in {
 
     opacity = {
       desktop = 1.0;
-      terminal = 0.9;
+      terminal = 1.0;
     };
 
     cursor = {
