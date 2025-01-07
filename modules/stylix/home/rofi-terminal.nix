@@ -33,6 +33,10 @@ in {
       str = ">";
       text-color = lib.mkForce ( literal base0C );
     };
+    entry = {
+      text-color = lib.mkForce ( literal base0B );
+    };
+
     listview = {
       scrollable = false;
     };
