@@ -5,6 +5,7 @@ in {
   programs.rofi.theme = with config.lib.stylix.colors.withHashtag; {
     "*" = {
       lightbg = lib.mkForce (literal base00);
+      lightfg = lib.mkForce (literal base03);
     };
     
     mainbox = {
