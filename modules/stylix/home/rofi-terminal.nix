@@ -26,7 +26,7 @@ in {
       children = map literal [ "textbox-prompt-colon" "entry" ];
     };
     textbox-prompt-colon = {
-      margin = literal "2px 6px 0px 0px";
+      margin = literal "2px 7px 0px 0px";
       
       expand = false;
       
