@@ -26,7 +26,7 @@
       ns = "nix-shell -p $argv";
       nsc = "nix-shell -p $argv --command $argv";
       ask = ''
-        heygpt --model "gpt-4o" """$argv""" | ${lib.getExe pkgs.glow}
+        heygpt --model "gpt-4o-mini" """$argv""" | ${lib.getExe pkgs.glow}
       '';
       rebuild = ''
         # Delete all backup files (not necessary anymore)
@@ -57,7 +57,7 @@
       '';
       gptcommit = ''
         set message $(\
-          heygpt --model "gpt-4o" \
+          heygpt --model "gpt-4o-mini" \
             --system="You are a git commit generator. When given a certain diff you will reply with \
             ONLY ONE commit message following the conventional commits specification. Make sure to use scopes. \
             The allowed commit types are feat, fix, chore and refactor. \
