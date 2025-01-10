@@ -11,16 +11,14 @@ in {
 
     window = {
       transparency = "real";
-      background = literal "rgba(0,0,0,0)";
+      background-color = lib.mkForce (literal "transparent");
+      border-color = literal base0D;
+      border-radius = literal "20px";
+      border = literal "3px";
     };
     
     mainbox = {
       padding = literal "20px 20px";
-      
-      border-color = literal base0D;
-      border-radius = literal "20px";
-      border = literal "3px";
-
       spacing = literal "5px";
       
       children = map literal [ "inputbar" "listview" "message" ];
