@@ -8,6 +8,11 @@ in {
       lightfg = lib.mkForce (literal base03);
       selected-normal-text = lib.mkForce (literal base07);
     };
+
+    window = {
+      transparency = "real";
+      background = literal "rgba(0,0,0,0)";
+    };
     
     mainbox = {
       padding = literal "20px 20px";
