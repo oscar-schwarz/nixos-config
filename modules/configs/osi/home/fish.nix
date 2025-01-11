@@ -26,7 +26,11 @@
       ns = "nix-shell -p $argv";
       nsc = "nix-shell -p $argv --command $argv";
       ask = ''
-        heygpt --model "gpt-4o-mini" """$argv""" | ${lib.getExe pkgs.glow}
+        if test (count $argv) -eq 0
+          heygpt --model "gpt-4o-mini" --stream
+        else
+          heygpt --model "gpt-4o-mini" --stream """$argv"""
+        end
       '';
       rebuild = ''
         # Delete all backup files (not necessary anymore)
