@@ -1,6 +1,10 @@
 { pkgs, lib, ... }:
 
 {
+  home.packages = with pkgs; [
+    glow
+  ];
+
   # terminal that makes me wet
   programs.fish = {
     enable = true;
@@ -29,7 +33,7 @@
         if test (count $argv) -eq 0
           heygpt --model "gpt-4o-mini" --stream
         else
-          heygpt --model "gpt-4o-mini" --stream """$argv"""
+          heygpt --model "gpt-4o-mini" """$argv""" | glow
         end
       '';
       rebuild = ''
