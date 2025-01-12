@@ -114,6 +114,7 @@ in {
       ];
       animation = [
         "windows, 1, 3, fast-in, popin"
+        "layersIn, 1, 3, fast-in, slide"
         "workspaces, 1, 5, default, slidevert"
       ];
 
