@@ -7,7 +7,9 @@
 
     openconnect
   ];
-  networking = {
+  networking = let 
+    wireguardPort = 4500;
+  in {
     networkmanager = {
       enable = true;
     };
@@ -20,7 +22,7 @@
         5173
       ];
       allowedUDPPorts = [
-        51820
+        wireguardPort
       ];
       allowedUDPPortRanges = [
         { from = 4000; to = 4007; }
@@ -42,7 +44,7 @@
     wireguard.interfaces = {
       sculk = {
         ips = [ "101.201.4.201/24" ]; # IP address and subnet of tunnel interface
-        listenPort = 4500; # matching allowedUDPPorts above, if not specified it would be random
+        listenPort = wireguardPort; # if not specified it would be random
 
         privateKeyFile = config.osi.getSecretFile "wireguardPrivateKey";
 
