@@ -41,8 +41,8 @@
 
     wireguard.interfaces = {
       sculk = {
-        ips = [ "101.201.4.201/32" ]; # IP address and subnet of tunnel interface
-        listenPort = 51820; # matching allowedUDPPorts above, if not specified it would be random
+        ips = [ "101.201.4.201/24" ]; # IP address and subnet of tunnel interface
+        listenPort = 4500; # matching allowedUDPPorts above, if not specified it would be random
 
         privateKeyFile = config.osi.getSecretFile "wireguardPrivateKey";
 
