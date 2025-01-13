@@ -596,11 +596,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1704517827,
-        "narHash": "sha256-WhpLwINCuXYxa9y8o4bcFsryvD/VcGi/9VimwJmbobw=",
+        "lastModified": 1734143910,
+        "narHash": "sha256-pqa2rdGIaj5v92Tw1aCjKgZAM8KPo3Qk7raL5N6N2tg=",
         "ref": "refs/heads/main",
-        "rev": "438da25cacd014b99460de76a59a9fecec04f48a",
-        "revCount": 18,
+        "rev": "410d01c3d5e67922c8794e04b9683f2e180a4adf",
+        "revCount": 26,
         "type": "git",
         "url": "https://codeberg.org/QuincePie/matcha"
       },
