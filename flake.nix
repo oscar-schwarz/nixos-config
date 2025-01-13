@@ -15,12 +15,6 @@
     hyprland = {
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.hyprlang.follows = "hyprlang";
-    };
-
-    hyprlang = {
-      url = "github:hyprwm/hyprlang?rev=9995f54eddb20de2123bc45c020ac124654c1111";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Hyprland plugin for touchscreen support
@@ -122,6 +116,7 @@
           ];
 
           nixpkgs.overlays = with inputs; [
+
             # Add packages of the flakes in an overlay
             (
               final: prev: {
