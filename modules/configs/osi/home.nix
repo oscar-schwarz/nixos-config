@@ -49,7 +49,7 @@ in {
     ./home/firefox.nix
     
     # Everything todo
-    ./home/todo.nix
+    # ./home/todo.nix
   ];
 
   # Home Manager needs a bit of tinformation about you and the paths it should
