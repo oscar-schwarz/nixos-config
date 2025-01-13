@@ -43,7 +43,6 @@ in {
   matcha = {
     enable = true;
     waybarIntegration.enable = true;
-    disableOnLidSwitch.enable = true;
   };
   # Options for matcha idle inhibitor module
   hypr-rotate-current-screen = {

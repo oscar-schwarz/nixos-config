@@ -335,7 +335,6 @@
     plugins = with pkgs.hyprlandPlugins; [
       hyprgrass
       Hyprspace
-      Hypr-DarkWindow
     ];
   };
 }

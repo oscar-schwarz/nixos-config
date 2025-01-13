@@ -1,26 +1,5 @@
 {
   "nodes": {
-    "Hyprchroma": {
-      "inputs": {
-        "hyprland": [
-          "hyprland"
-        ],
-        "nix-filter": "nix-filter"
-      },
-      "locked": {
-        "lastModified": 1732223998,
-        "narHash": "sha256-ikhQis8pqaKExqa/2gkHNxZ2+ULI0wHf456w/q1noOE=",
-        "owner": "akselander",
-        "repo": "Hyprchroma",
-        "rev": "590f7878b3ced72e7d2251291d4a4c96a8fcad3a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "akselander",
-        "repo": "Hyprchroma",
-        "type": "github"
-      }
-    },
     "Hyprspace": {
       "inputs": {
         "hyprland": [
@@ -372,7 +351,7 @@
         "hyprland": [
           "hyprland"
         ],
-        "nix-filter": "nix-filter_2"
+        "nix-filter": "nix-filter"
       },
       "locked": {
         "lastModified": 1731147414,
@@ -563,21 +542,6 @@
     },
     "nix-filter": {
       "locked": {
-        "lastModified": 1731533336,
-        "narHash": "sha256-oRam5PS1vcrr5UPgALW0eo1m/5/pls27Z/pabHNy2Ms=",
-        "owner": "numtide",
-        "repo": "nix-filter",
-        "rev": "f7653272fd234696ae94229839a99b73c9ab7de0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "nix-filter",
-        "type": "github"
-      }
-    },
-    "nix-filter_2": {
-      "locked": {
         "lastModified": 1694857738,
         "narHash": "sha256-bxxNyLHjhu0N8T3REINXQ2ZkJco0ABFPn6PIe2QUfqo=",
         "owner": "numtide",
@@ -692,7 +656,6 @@
     },
     "root": {
       "inputs": {
-        "Hyprchroma": "Hyprchroma",
         "Hyprspace": "Hyprspace",
         "custom-udev-rules": "custom-udev-rules",
         "eduroam": "eduroam",

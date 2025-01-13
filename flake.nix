@@ -35,12 +35,6 @@
       inputs.hyprland.follows = "hyprland";
     };
 
-    # Hyprland plugin to add transparency to all windows
-    Hyprchroma = {
-      url = "github:akselander/Hyprchroma";
-      inputs.hyprland.follows = "hyprland";
-    };
-
     # Idle inhibitor
     matcha = {
       url = "git+https://codeberg.org/QuincePie/matcha";
@@ -131,7 +125,6 @@
                   hyprgrass = hyprgrass.packages.${prev.system}.default;
                   hyprfocus = hyprfocus.packages.${prev.system}.default;
                   Hyprspace = Hyprspace.packages.${prev.system}.Hyprspace;
-                  Hypr-DarkWindow = Hyprchroma.packages.${prev.system}.default;
                 };
               }
             )
