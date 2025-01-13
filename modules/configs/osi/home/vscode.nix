@@ -247,7 +247,7 @@ in {
       oouo-diogo-perdigao.docthis # jsdoc
 
       # --- JAVA ---
-      redhat.java # language features
+      # redhat.java # language features, download errors
       vscjava.vscode-java-debug # debugger
       vscjava.vscode-java-dependency # project manager
 

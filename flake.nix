@@ -115,10 +115,10 @@
             "flakes"
           ];
 
-          # Add packages of the flakes in an overlay
-          nixpkgs.overlays = [
+          nixpkgs.overlays = with inputs; [
+            # Add packages of the flakes in an overlay
             (
-              final: prev: with inputs; {
+              final: prev: {
                 matcha = matcha.packages.${prev.system}.default;
                 eduroam = eduroam.packages.${prev.system};
                 hyprlandPlugins = {
