@@ -115,6 +115,13 @@ in {
       animation = [
         "windows, 1, 3, fast-in, popin"
         "workspaces, 1, 5, default, slidevert"
+        "layersIn, 1, 3, fast-in"
+      ];
+
+      # --- Layerrules
+      layerrule = [
+        "animation popin, rofi"
+        "dimaround, rofi"
       ];
 
       # --- Plugins ---

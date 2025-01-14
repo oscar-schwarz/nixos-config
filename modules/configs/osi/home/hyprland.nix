@@ -124,14 +124,12 @@
       };
 
       # --- Autostart ---
-      exec-once = [
+      exec = [
         # does something
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
 
-        (pkgs.writeShellScript "" ''
-          pkill waybar
-          waybar
-        '')
+        # waybar
+        "pkill waybar \\; waybar"
 
         # Auth agent for gui apps
         "systemctl --user start hyprpolkitagent"
@@ -293,6 +291,12 @@
         ", mouse:275, movewindow" # or with mouse 5 (lower side)
       ];
 
+
+      # --- WINDOW RULES
+      windowrulev2 = [
+        "stayfocused, title:^Hyprland Polkit Agent$"
+        "dimaround, title:^Hyprland Polkit Agent$"
+      ];
 
       # --- HYPRGRASS PLUGIN
       "plugin:touch-gestures" = {
