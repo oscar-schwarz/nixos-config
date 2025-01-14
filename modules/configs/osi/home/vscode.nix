@@ -84,7 +84,7 @@ in {
       "nix.serverSettings" = {
         nixd =  {
           formatting = {
-            command = ["${lib.getExe pkgs.nixpkgs-fmt}"];
+            command = ["${lib.getExe pkgs.alejandra}"];
           };
           options = {
             nixos = {
