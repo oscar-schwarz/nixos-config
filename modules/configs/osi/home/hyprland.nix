@@ -129,7 +129,7 @@
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
 
         # waybar
-        "waybar"
+        "pidof waybar || waybar"
 
         # Auth agent for gui apps
         "systemctl --user start hyprpolkitagent"
