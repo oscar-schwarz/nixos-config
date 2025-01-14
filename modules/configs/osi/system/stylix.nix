@@ -37,7 +37,7 @@ in {
         popups = 18;
         desktop = 16;
         terminal = 12;
-        applications = 14;
+        applications = 12;
       };
     };
   };
