@@ -7,5 +7,5 @@ with config.stylix.fonts;
     "markdown.preview.fontSize" = lib.mkForce sizes.terminal;
     "terminal.integrated.fontSize" = lib.mkForce sizes.terminal;
     "chat.editor.fontSize" = lib.mkForce sizes.terminal;
-  }
+  };
 }
