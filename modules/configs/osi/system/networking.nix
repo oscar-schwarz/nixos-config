@@ -8,7 +8,7 @@
     openconnect
   ];
   networking = let 
-    wireguardPort = 4500;
+    wireguardPort = 51820;
   in {
     networkmanager = {
       enable = true;
