@@ -7,6 +7,7 @@
 
     openconnect
   ];
+
   networking = let 
     wireguardPort = 51820;
   in {
@@ -37,7 +38,7 @@
         gateway = "vpn.uni-leipzig.de";
         protocol = "anyconnect";
         user = "zu66owol@uni-leipzig.de";
-        passwordFile = config.osi.getSecretFile "uniLeipzigVPNAuth";
+        passwordFile = config.getSopsFile "other/uni-leipzig-vpn-auth";
       };
     };
 
@@ -46,7 +47,7 @@
         ips = [ "101.201.4.201/24" ]; # IP address and subnet of tunnel interface
         listenPort = wireguardPort; # if not specified it would be random
 
-        privateKeyFile = config.osi.getSecretFile "wireguardPrivateKey";
+        privateKeyFile = config.getSopsFile "wireguard/biome-fest";
 
         peers = [{
           name = "fritzbox";

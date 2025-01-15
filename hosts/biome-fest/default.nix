@@ -12,32 +12,8 @@
 
   networking.hostName = "biome-fest";
 
-  sops.age = {
-    generateKey = true;
-
-    # Key to be generated
-    keyFile = "/home/osi/.age-key.txt";
-
-    # From which key to generate it
-    sshKeyPaths = [ "/home/osi/.ssh/id_ed25519_sops" ];  
-  };
-
-  # Osi options
-  osi = {
-    # sops paths
-    secrets = {
-      openAiKey = "api-keys/open-ai";
-      publicPgpKey = "pgp-keys/id-0x675D2CB5013E8731/public";
-      osiPasswordHash = "pass-hashes/osi";
-      nixAccessTokens = "api-keys/nix-access-tokens";
-      uniLeipzigVPNAuth = "other/uni-leipzig-vpn-auth";
-      wireguardPrivateKey = "wireguard/biome-fest";
-    };
-  };
-
-
   # Automount the bid hdd which is not always connected
-  sops.secrets."drives/speicherfresser" = {owner = "osi"; mode = "0440";};
+  sops.secrets."drives/speicherfresser" = {};
   environment.etc.crypttab.text = ''
     speicherfresser UUID=9debc741-b5d9-4721-a2bc-971008511283 ${config.sops.secrets."drives/speicherfresser".path} noauto
   '';

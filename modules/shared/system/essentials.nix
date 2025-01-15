@@ -22,10 +22,6 @@
     atool # Extract any archive
   ];
 
-  # Secrets
-  sops.defaultSopsFile = ../../../secrets/secrets.yaml;
-  sops.defaultSopsFormat = "yaml";
-
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
 

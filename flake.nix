@@ -94,14 +94,17 @@
       # this module is shared among ALL configurations to ensure it uses the flake's inputs correctly
       sharedModule = { inputs, ... }:
         {
-          # Import all modules of the inputs 
           imports = with inputs; [
+            # Import all modules of the inputs 
             home-manager.nixosModules.default
             sops-nix.nixosModules.sops
             stylix.nixosModules.stylix
             programs-sqlite.nixosModules.programs-sqlite
             custom-udev-rules.nixosModule
             hyprland.nixosModules.default
+          
+            # Secret management needs to be done for every configuration
+            ./secrets
           ];
 
           # Import home manager modules to home manager

@@ -1,14 +1,11 @@
-{ nixosConfig, pkgs, lib, ... }:
+{ config, nixosConfig, pkgs, lib, ... }:
 
 let
-  username = "osi";
-  homeDir = "/home/" + username; 
-
   heygptWrapper = pkgs.writeShellApplication {
     name = "heygpt";
     text = ''
       OPENAI_API_BASE="https://api.openai.com/v1" \
-      OPENAI_API_KEY=$(cat ${nixosConfig.osi.getSecretFile "openAiKey"}) \
+      OPENAI_API_KEY=$(cat ${nixosConfig.getSopsFile "api-keys/open-ai"}) \
       ${lib.getExe pkgs.heygpt} "$@"
     '';
   };
@@ -18,7 +15,7 @@ let
     name = "pass-fetch";
     text = ''
       REPO_URL="git@github.com:OsiPog/pass.git"
-      DEST_DIR="${homeDir}/.password-store"
+      DEST_DIR="${config.home.homeDirectory}/.password-store"
 
       if [ ! -d "$DEST_DIR" ]; then
         git clone "$REPO_URL" "$DEST_DIR"
@@ -52,10 +49,10 @@ in {
     # ./home/todo.nix
   ];
 
-  # Home Manager needs a bit of tinformation about you and the paths it should
+  # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = username;
-  home.homeDirectory = homeDir;
+  home.username = "osi";
+  home.homeDirectory = "/home/osi";
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -120,7 +117,7 @@ in {
     publicKeys = [
       {
         trust = 5;
-        source = nixosConfig.osi.getSecretFile "publicPgpKey";
+        source = nixosConfig.getSopsFile "pgp-keys/id-0x675D2CB5013E8731/public";
       }
     ];
   };
