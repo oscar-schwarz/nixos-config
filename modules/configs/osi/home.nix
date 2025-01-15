@@ -60,22 +60,23 @@ in {
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages  = with pkgs; [
-    signal-desktop # secure messaging
-    xournalpp # stylus note taking app
-    obsidian # markdown note taking app
-    libreoffice # office suite
-    ncpamixer # Pulse Audio mixer utility
-    restic
-    nautilus # File Browser
-    loupe # Image Viewer
-    vlc # Media Player
-    prismlauncher # Open Source Minecraft Launcher
-    godot_4
-    gource # Git history visualisation
-    qrcode # simple qr code tool
+    bluetuith # bluetooth tui
     devenv # dev environments made easy
     gnome-disk-utility # format disks
-    bluetuith # bluetooth tui
+    godot_4
+    gource # Git history visualisation
+    libreoffice # office suite
+    loupe # Image Viewer
+    mc # terminal file manager
+    nautilus # File Browser
+    ncpamixer # Pulse Audio mixer utility
+    obsidian # markdown note taking app
+    prismlauncher # Open Source Minecraft Launcher
+    qrcode # simple qr code tool
+    restic
+    signal-desktop # secure messaging
+    vlc # Media Player
+    xournalpp # stylus note taking app
 
     # Tools
     wl-clipboard-rs # copy to clipboard from terminal
