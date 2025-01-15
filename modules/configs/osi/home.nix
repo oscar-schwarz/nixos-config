@@ -1,12 +1,16 @@
-{ config, nixosConfig, pkgs, lib, ... }:
-
-let
+{
+  config,
+  nixosConfig,
+  pkgs,
+  lib,
+  ...
+}: let
   heygptWrapper = pkgs.writeShellApplication {
     name = "heygpt";
     text = ''
       OPENAI_API_BASE="https://api.openai.com/v1" \
       OPENAI_API_KEY=$(cat ${nixosConfig.getSopsFile "api-keys/open-ai"}) \
-      ${lib.getExe pkgs.heygpt} --model "''${HEYGPT_MODEL:-gpt-4o}" "$@" 
+      ${lib.getExe pkgs.heygpt} --model "''${HEYGPT_MODEL:-gpt-4o}" "$@"
     '';
   };
 
@@ -26,7 +30,6 @@ let
     '';
   };
 in {
-
   # Import modules
   imports = [
     # KDE setup (disabled for now as I switched to hyprland)
@@ -41,10 +44,10 @@ in {
 
     # Shell
     ./home/fish.nix
-  
+
     # Firefox settings
     ./home/firefox.nix
-    
+
     # Everything todo
     # ./home/todo.nix
   ];
@@ -56,7 +59,7 @@ in {
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages  = with pkgs; [
+  home.packages = with pkgs; [
     bluetuith # bluetooth tui
     devenv # dev environments made easy
     gnome-disk-utility # format disks
@@ -77,7 +80,7 @@ in {
 
     # Tools
     wl-clipboard-rs # copy to clipboard from terminal
-    
+
     # Scripts
     pass-fetch # script for fetching password store repo
     heygptWrapper # terminal gpt integration
@@ -94,9 +97,9 @@ in {
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
-      "video/mp4" = [ "vlc.desktop" ];
-      "image/jpeg" = [ "org.gnome.Loupe.desktop" ];
-      "image/png" = [ "org.gnome.Loupe.desktop" ];
+      "video/mp4" = ["vlc.desktop"];
+      "image/jpeg" = ["org.gnome.Loupe.desktop"];
+      "image/png" = ["org.gnome.Loupe.desktop"];
     };
   };
 
@@ -107,7 +110,7 @@ in {
       exts.pass-otp
     ]);
     settings = {
-      PASSWORD_STORE_DIR="$HOME/.password-store";
+      PASSWORD_STORE_DIR = "$HOME/.password-store";
     };
   };
 
@@ -139,7 +142,7 @@ in {
   programs.chromium = {
     enable = true;
     # relatively simple (vivaldi is overkill for my usecase of "this page doesnt work in firefox") with an ad-blocker
-    package = pkgs.brave; 
+    package = pkgs.brave;
     extensions = [
       {
         # Vimium
@@ -149,9 +152,8 @@ in {
         # Vue Devtools
         id = "nhdogjmejiglipccpnnnanhbledajbpd";
       }
-    ]
-    ;
-  };  
+    ];
+  };
 
   # nice cli git experience
   programs.lazygit = {
@@ -170,7 +172,7 @@ in {
     enable = true;
   };
 
-  # -- DANGER ZONE -- 
+  # -- DANGER ZONE --
   # You should not change this value, even if you update Home Manager. If you do
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
