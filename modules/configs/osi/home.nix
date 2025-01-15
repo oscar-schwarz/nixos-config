@@ -6,7 +6,7 @@ let
     text = ''
       OPENAI_API_BASE="https://api.openai.com/v1" \
       OPENAI_API_KEY=$(cat ${nixosConfig.getSopsFile "api-keys/open-ai"}) \
-      ${lib.getExe pkgs.heygpt} "$@"
+      ${lib.getExe pkgs.heygpt} --model "''${HEYGPT_MODEL:-gpt-4o}" "$@" 
     '';
   };
 
