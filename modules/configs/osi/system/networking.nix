@@ -16,18 +16,18 @@
 
     firewall = {
       enable = true;
-      allowedTCPPorts = [
-        9003
-        3000
-        5173
-      ];
+      # allowedTCPPorts = [
+      #   9003
+      #   3000
+      #   5173
+      # ];
       allowedUDPPorts = [
         wireguardPort
       ];
-      allowedUDPPortRanges = [
-        { from = 4000; to = 4007; }
-        { from = 8000; to = 8010; }
-      ];
+      # allowedUDPPortRanges = [
+      #   { from = 4000; to = 4007; }
+      #   { from = 8000; to = 8010; }
+      # ];
     };
 
     openconnect.interfaces = {
@@ -49,11 +49,13 @@
         privateKeyFile = config.osi.getSecretFile "wireguardPrivateKey";
 
         peers = [{
+          name = "fritzbox";
           publicKey = "Gvopl/jY8K+xHpUTntg9R4CG++RXyJ2hV1QsNcyVUBE=";
           presharedKey = "kHMEmT/Pr1suWRAZaA2zKGKp+dKeDJnLql2W/V3wGpk=";
           allowedIPs = [ "101.201.4.0/24" "0.0.0.0/0" ]; # route all traffic through vpn
           endpoint = "h8wkgwwxnvy0ut4t.myfritz.net:56491";
-          persistentKeepalive = 5;
+          persistentKeepalive = 25;
+          # dynamicEndpointRefreshSeconds = 5;
         }];
       };
     };

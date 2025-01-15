@@ -59,6 +59,7 @@
 
     # Set hashed password for osi
     users.users.osi.hashedPasswordFile = config.osi.getSecretFile "osiPasswordHash";
+    users.users.root.hashedPasswordFile = config.osi.getSecretFile "osiPasswordHash";
 
     # Add github token to github calls
     nix.extraOptions = "!include " + config.osi.getSecretFile "nixAccessTokens";
