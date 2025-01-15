@@ -150,76 +150,25 @@
           modules = modules ++ [sharedModule];
         };
 
-      # Function to that takes a path and returns all directory names in that path
-      readDirDirNames =
-        path_:
-        let
-          dirContent = readDir path_;
-        in
-        filter (x: (getAttr x dirContent) == "directory") (attrNames dirContent);
-
       # --- SYSTEMS --- 
-      # Declare all systems found in ./hosts
+      # Declare all systems found in ./hosts.nix
 
-      # Path to hosts
-      hostsPath = ./hosts;
-
-      # filter all items in hostsPath to be only folders
-      hostNames = readDirDirNames hostsPath;
-
-      systemsFromHosts = lib.attrsets.genAttrs hostNames (name: mkSystem [ (hostsPath + "/${name}") ]);
-
-      # --- INTERPOLATED SYSTEMS ---
-      # Interpolate systems with doing a combination from all configs from `configsPath` with all machines in
-      # `machinesPath`
+      # Paths
       configsPath = ./modules/configs;
       machinesPath = ./machines;
 
-      configNames = readDirDirNames configsPath;
-      # only machine names without .nix
-      machineNames = map (lib.strings.removeSuffix ".nix") (attrNames (readDir machinesPath));
-
-      # All configs connected to machine names in the form { interpolatedName = { machine; config }; ...}
-      connections = lib.lists.foldr (a: b: a // b) { } (
-        concatLists (
-          map (
-            config:
-            map (machine: {
-              # interpolated name is just `configName--machineName`
-              "${config}--${machine}" = {
-                inherit config;
-                inherit machine;
-              };
-            }) machineNames
-          ) configNames
-        )
-      );
-
-      interpolatedSystems = lib.attrsets.genAttrs (attrNames connections) (
-        name:
-        let
-          connection = connections.${name};
-        in
-        mkSystem [
-          # Include configs
-          (configsPath + "/${connection.config}")
-          # Include machine
-          (machinesPath + "/${connection.machine}.nix")
-
-          # Some interpolation specific settings
-          (
-            { ... }:
-            {
-              networking.hostName = name;
-            }
-          )
-        ]
-      );
-
-      # Add all systems as nixos configs
-      nixosConfigurations = systemsFromHosts // interpolatedSystems;
+      # Definitions are in a seperate file
+      hostDefinitions = import ./hosts.nix; 
     in
     {
-      inherit nixosConfigurations;
+      nixosConfigurations = lib.attrsets.mapAttrs (hostName: host: mkSystem [ (
+        {...}: {
+          networking.hostName = hostName;
+          imports = [
+            (configsPath + ("/" + host.config))
+            (machinesPath + ("/" + host.machine) + ".nix")
+          ];
+        }
+      )]) hostDefinitions;
     };
 }

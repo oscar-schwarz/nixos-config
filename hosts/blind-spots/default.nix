@@ -11,6 +11,4 @@
     ];
 
   networking.hostName = "blind-spots";
-
-  # Secrets
 }
