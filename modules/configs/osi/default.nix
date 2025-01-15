@@ -1,6 +1,9 @@
-{ lib, pkgs, config, ... }:
-
 {
+  lib,
+  pkgs,
+  config,
+  ...
+}: {
   imports = [
     # Essential stuff needed on every system
     ../../shared/system/essentials.nix
@@ -13,18 +16,17 @@
     # Theme of everything
     ./system/stylix.nix
     # Settings specific to my monitor setup
-    ../../shared/system/monitors.nix    
+    ../../shared/system/monitors.nix
   ];
 
   sops.secrets = {
-    "pass-hashes/osi" = { neededForUsers = true; };
+    "pass-hashes/osi" = {neededForUsers = true;};
     "api-keys/nix-access-tokens" = {};
-    "api-keys/open-ai" = { owner = "osi"; };
+    "api-keys/open-ai" = {owner = "osi";};
     "other/uni-leipzig-vpn-auth" = {};
     "wireguard/biome-fest" = {};
-    "pgp-keys/id-0x675D2CB5013E8731/public" = { owner = "osi"; };
+    "pgp-keys/id-0x675D2CB5013E8731/public" = {owner = "osi";};
   };
-
 
   # Add github token to github calls
   nix.extraOptions = "!include " + config.getSopsFile "api-keys/nix-access-tokens";
@@ -46,7 +48,7 @@
     enable = true;
   };
 
-  # Gitlab runner 
+  # Gitlab runner
   services.gitlab-runner = {
     enable = true;
   };
@@ -63,7 +65,7 @@
         "written-mind" = {
           enable = true;
           path = "/home/osi/files/local/written-mind";
-          devices = [ "phone" ];
+          devices = ["phone"];
         };
       };
       devices = {
@@ -86,7 +88,7 @@
       User git
       IdentityFile /home/osi/.ssh/id_rsa_github_os
       IdentitiesOnly yes
-      
+
     Host git.informatik.uni-leipzig.de
       HostName git.informatik.uni-leipzig.de
       User git
@@ -106,18 +108,18 @@
       isNormalUser = true;
       description = "Osi";
       hashedPasswordFile = config.getSopsFile "pass-hashes/osi";
-      extraGroups = [ "networkmanager" "wheel" "adbusers" ];
+      extraGroups = ["networkmanager" "wheel" "adbusers"];
     };
-    root.hashedPasswordFile = config.getSopsFile "pass-hashes/osi"; 
+    root.hashedPasswordFile = config.getSopsFile "pass-hashes/osi";
   };
 
   home-manager = {
-      users = {
-        "osi" = import ./home.nix;
-      };
-      # files with this extension should be deleted regulary 
-      backupFileExtension = "homeManagerBackupFileExtension";
+    users = {
+      "osi" = import ./home.nix;
     };
+    # files with this extension should be deleted regulary
+    backupFileExtension = "homeManagerBackupFileExtension";
+  };
 
   # CUSTOM USB DEVICE
   services.udev = {
@@ -129,7 +131,7 @@
         name = "50-kaleidoscope";
         rules = ''
           SUBSYSTEMS=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="2303", SYMLINK+="Atreus",  ENV{ID_MM_DEVICE_IGNORE}="1", ENV{ID_MM_CANDIDATE}="0", TAG+="uaccess", TAG+="seat"
-          SUBSYSTEMS=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="2302", SYMLINK+="Atreus",  ENV{ID_MM_DEVICE_IGNORE}="1", ENV{ID_MM_CANDIDATE}="0", TAG+="uaccess", TAG+="seat"  
+          SUBSYSTEMS=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="2302", SYMLINK+="Atreus",  ENV{ID_MM_DEVICE_IGNORE}="1", ENV{ID_MM_CANDIDATE}="0", TAG+="uaccess", TAG+="seat"
         '';
       }
     ];
