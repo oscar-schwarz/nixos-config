@@ -53,7 +53,7 @@
           presharedKey = "kHMEmT/Pr1suWRAZaA2zKGKp+dKeDJnLql2W/V3wGpk=";
           allowedIPs = [ "101.201.4.0/24" "0.0.0.0/0" ]; # route all traffic through vpn
           endpoint = "h8wkgwwxnvy0ut4t.myfritz.net:56491";
-          persistentKeepalive = 25;
+          persistentKeepalive = 5;
         }];
       };
     };
