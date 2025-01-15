@@ -23,7 +23,7 @@
   ];
 
   # Secrets
-  sops.defaultSopsFile = ../../../secrets.yaml;
+  sops.defaultSopsFile = ../../../secrets/secrets.yaml;
   sops.defaultSopsFormat = "yaml";
 
   # Set your time zone.

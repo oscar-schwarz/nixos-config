@@ -89,6 +89,10 @@ in {
     adwaita-icon-theme
   ];
 
+  home.sessionVariables = {
+    "EDITOR" = "hx";
+  };
+
   # Default apps
   xdg.mimeApps = {
     enable = true;
@@ -162,6 +166,10 @@ in {
 
   # Youtube downloader
   programs.yt-dlp = {
+    enable = true;
+  };
+
+  programs.helix = {
     enable = true;
   };
 
