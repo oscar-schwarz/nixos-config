@@ -67,8 +67,8 @@ in {
     gource # Git history visualisation
     libreoffice # office suite
     loupe # Image Viewer
-    mc # terminal file manager
     nautilus # File Browser
+    nnn # terminal file manager
     ncpamixer # Pulse Audio mixer utility
     obsidian # markdown note taking app
     prismlauncher # Open Source Minecraft Launcher
