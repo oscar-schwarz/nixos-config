@@ -85,90 +85,87 @@
     };
   };
 
-  outputs =
-    { nixpkgs, ... }@inputs:
+  outputs = {nixpkgs, ...} @ inputs: let
+    # --- FLAKE MODULE ---
+    # this module is shared among ALL configurations to ensure it uses the flake's inputs correctly
+    sharedModule = {inputs, ...}: {
+      imports = with inputs; [
+        # Import all modules of the inputs
+        home-manager.nixosModules.default
+        sops-nix.nixosModules.sops
+        stylix.nixosModules.stylix
+        programs-sqlite.nixosModules.programs-sqlite
+        custom-udev-rules.nixosModule
+        hyprland.nixosModules.default
 
-    with builtins;
-    let
-      # --- FLAKE MODULE ---
-      # this module is shared among ALL configurations to ensure it uses the flake's inputs correctly
-      sharedModule = { inputs, ... }:
-        {
-          imports = with inputs; [
-            # Import all modules of the inputs 
-            home-manager.nixosModules.default
-            sops-nix.nixosModules.sops
-            stylix.nixosModules.stylix
-            programs-sqlite.nixosModules.programs-sqlite
-            custom-udev-rules.nixosModule
-            hyprland.nixosModules.default
-          
-            # Secret management needs to be done for every configuration
-            ./secrets
-          ];
+        # Secret management needs to be done for every configuration
+        ./secrets
+      ];
 
-          # Import home manager modules to home manager
-          home-manager.sharedModules = with inputs; [
-            hyprland.homeManagerModules.default
-          ];
+      # Import home manager modules to home manager
+      home-manager.sharedModules = with inputs; [
+        hyprland.homeManagerModules.default
+      ];
 
-          # Enable flakes
-          nix.settings.experimental-features = [
-            "nix-command"
-            "flakes"
-          ];
+      # Enable flakes
+      nix.settings.experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
 
-          nixpkgs.overlays = with inputs; [
-
-            # Add packages of the flakes in an overlay
-            (
-              final: prev: {
-                matcha = matcha.packages.${prev.system}.default;
-                eduroam = eduroam.packages.${prev.system};
-                hyprlandPlugins = {
-                  hyprgrass = hyprgrass.packages.${prev.system}.default;
-                  hyprfocus = hyprfocus.packages.${prev.system}.default;
-                  Hyprspace = Hyprspace.packages.${prev.system}.Hyprspace;
-                };
-              }
-            )
-          ];
-        };
-
-      # --- FUNCTIONS, ALIASES ---
-      lib = nixpkgs.lib;
-
-      # function to make a system
-      # A modules list can be passed.
-      mkSystem =
-        modules:
-        lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
-          };
-          # Make sure to add the shared module to the system
-          modules = modules ++ [sharedModule];
-        };
-
-      # --- SYSTEMS --- 
-      # Declare all systems found in ./hosts.nix
-
-      # Paths
-      configsPath = ./modules/configs;
-      machinesPath = ./machines;
-
-      # Definitions are in a seperate file
-      hostDefinitions = import ./hosts.nix; 
-    in
-    {
-      nixosConfigurations = lib.attrsets.mapAttrs (hostName: host: mkSystem [ (
-        {...}: {
-          networking.hostName = hostName;
-          imports = [
-            (configsPath + ("/" + host.config))
-            (machinesPath + ("/" + host.machine) + ".nix")
-          ];
-        }
-      )]) hostDefinitions;
+      nixpkgs.overlays = with inputs; [
+        # Add packages of the flakes in an overlay
+        (
+          final: prev: {
+            matcha = matcha.packages.${prev.system}.default;
+            eduroam = eduroam.packages.${prev.system};
+            hyprlandPlugins = {
+              hyprgrass = hyprgrass.packages.${prev.system}.default;
+              hyprfocus = hyprfocus.packages.${prev.system}.default;
+              Hyprspace = Hyprspace.packages.${prev.system}.Hyprspace;
+            };
+          }
+        )
+      ];
     };
+
+    # --- FUNCTIONS, ALIASES ---
+    lib = nixpkgs.lib;
+
+    # function to make a system
+    # A modules list can be passed.
+    mkSystem = modules:
+      lib.nixosSystem {
+        specialArgs = {
+          inherit inputs;
+        };
+        # Make sure to add the shared module to the system
+        modules = modules ++ [sharedModule];
+      };
+
+    # --- SYSTEMS ---
+    # Declare all systems found in ./hosts.nix
+
+    # Paths
+    configsPath = ./modules/configs;
+    machinesPath = ./machines;
+
+    # Definitions are in a seperate file
+    hostDefinitions = import ./hosts.nix;
+
+    perDefinedHost = hostName: host:
+      mkSystem [
+        (
+          {...}: {
+            networking.hostName = hostName;
+            imports = [
+              (configsPath + ("/" + host.config))
+              (machinesPath + ("/" + host.machine) + ".nix")
+            ];
+          }
+        )
+      ];
+  in {
+    nixosConfigurations = lib.attrsets.mapAttrs perDefinedHost hostDefinitions;
+  };
 }
