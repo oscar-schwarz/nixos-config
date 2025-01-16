@@ -11,11 +11,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # HYPRLAND - Wayland tiling window manager
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # # HYPRLAND - Wayland tiling window manager
+    # hyprland = {
+    #   url = "github:hyprwm/Hyprland";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     # Idle inhibitor
     matcha = {
@@ -78,7 +78,7 @@
         stylix.nixosModules.stylix
         programs-sqlite.nixosModules.programs-sqlite
         custom-udev-rules.nixosModule
-        hyprland.nixosModules.default
+        # hyprland.nixosModules.default
 
         # Secret management needs to be done for every configuration
         ./secrets
@@ -86,7 +86,7 @@
 
       # Import home manager modules to home manager
       home-manager.sharedModules = with inputs; [
-        hyprland.homeManagerModules.default
+        # hyprland.homeManagerModules.default
       ];
 
       # Enable flakes
