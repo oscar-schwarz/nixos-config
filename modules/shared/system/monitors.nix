@@ -2,6 +2,15 @@
 
 let 
   monitors = [
+    { # Laptop monitor
+      resolution = "1920x1200";
+      position = "auto";
+      scale = 1.25;
+      additional = "";
+      names = [
+        "Chimei Innolux Corporation 0x143F"
+      ];
+    }
     { # Portable monitor
       resolution = "1920x1080";
       position = "auto";
