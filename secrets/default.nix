@@ -9,9 +9,8 @@
     description = "A helper function to get the path to a sops secret."; 
   };
   config = {
-    # Make sure I don't accidentally override the function
-    getSopsFile = lib.mkForce (name: config.sops.secrets.${name}.path);
-
+    getSopsFile = name: config.sops.secrets.${name}.path;
+    
     environment.systemPackages = with pkgs; [
       sops
     ];
@@ -31,7 +30,5 @@
       # This only needs to be present on the machine that executes 'nixos-rebuild'
       sshKeyPaths = ["/root/.ssh/id_ed25519_sops"];
     };
-
-    # Define all secrets
   };
 }

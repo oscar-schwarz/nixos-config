@@ -61,82 +61,74 @@
     };
   };
 
-  outputs = {nixpkgs, ...} @ inputs: let
-    # --- FLAKE MODULE ---
-    # this module is shared among ALL configurations to ensure it uses the flake's inputs correctly
-    sharedModule = {inputs, ...}: {
-      imports = with inputs; [
-        # Import all modules of the inputs
-        home-manager.nixosModules.default
-        sops-nix.nixosModules.sops
-        stylix.nixosModules.stylix
-        programs-sqlite.nixosModules.programs-sqlite
-        custom-udev-rules.nixosModule
-
-        # Secret management needs to be done for every configuration
-        ./secrets
-      ];
-
-      # Import home manager modules to home manager
-      home-manager.sharedModules = with inputs; [
-
-      ];
-
-      # Enable flakes
-      nix.settings.experimental-features = [
-        "nix-command"
-        "flakes"
-        "pipe-operators"
-      ];
-
-      nixpkgs.overlays = with inputs; [
-        # Add packages of the flakes in an overlay
-        (
-          final: prev: {
-            matcha = matcha.packages.${prev.system}.default;
-            eduroam = eduroam.packages.${prev.system};
-          }
-        )
-      ];
-    };
-
-    # --- FUNCTIONS, ALIASES ---
-    lib = nixpkgs.lib;
-
-    # function to make a system
-    # A modules list can be passed.
-    mkSystem = modules:
-      lib.nixosSystem {
-        specialArgs = {
-          inherit inputs;
-        };
-        # Make sure to add the shared module to the system
-        modules = modules ++ [sharedModule];
-      };
-
-    # --- SYSTEMS ---
-    # Declare all systems found in ./hosts.nix
-
-    # Paths
-    configsPath = ./modules/configs;
-    machinesPath = ./machines;
-
-    # Definitions are in a seperate file
+  outputs = {nixpkgs, ...} @ inputs: with nixpkgs.lib; with builtins; let
+    # Definitions are in a seperate file next to this flake.nix
     hostDefinitions = import ./hosts.nix;
 
-    perDefinedHost = hostName: host:
-      mkSystem [
-        (
-          {...}: {
-            networking.hostName = hostName;
-            imports = [
-              (configsPath + ("/" + host.config))
-              (machinesPath + ("/" + host.machine) + ".nix")
+    # Create a nixos configuration for each defined hosts in hosts.nix
+    nixosConfigurations = hostDefinitions |> attrsets.mapAttrs (hostName: host: 
+      nixosSystem {
+        specialArgs = { inherit inputs; };
+        
+        modules = with inputs; [
+          # --- FLAKE INPUTS MODULES ---
+          home-manager.nixosModules.default
+          sops-nix.nixosModules.sops
+          stylix.nixosModules.stylix
+          programs-sqlite.nixosModules.programs-sqlite
+          custom-udev-rules.nixosModule
+
+          # --- FLAKE MODULE ---
+          # flake specific settings
+          ({inputs, ...}: {
+
+            # Enable flakes and pipe operators
+            nix.settings.experimental-features = [
+              "nix-command"
+              "flakes"
+              "pipe-operators"
             ];
-          }
-        )
-      ];
+
+            # Import home manager modules to home manager
+            # home-manager.sharedModules = with inputs; [ ];
+
+            nixpkgs.overlays = with inputs; [
+              # Add packages of the flakes in an overlay
+              (
+                final: prev: {
+                  matcha = matcha.packages.${prev.system}.default;
+                  eduroam = eduroam.packages.${prev.system};
+                }
+              )
+            ];
+          })
+
+          # --- HOSTS MODULE ---
+          # All host specific settings are imported
+          ({ ... }: {
+            imports = [
+              # Import based on current machine
+              (./machines + "/${host.machine}.nix")
+              (./modules/configs + "/${host.config}")
+
+              # Defines the used options below
+              ./modules/shared/system/hosts.nix
+            ];
+
+            # Tell the hosts module all definitions
+            hosts.all = hostDefinitions;
+
+            # Set the host name to the current host
+            networking.hostName = hostName;
+          })
+
+          # --- SOPS MODULE ---
+          # all hosts should have access to their respective secrets
+          ./secrets
+        ];
+      }
+    );
   in {
-    nixosConfigurations = lib.attrsets.mapAttrs perDefinedHost hostDefinitions;
+    inherit nixosConfigurations;
   };
 }
