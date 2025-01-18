@@ -271,7 +271,7 @@
 
           openLid = pkgs.writeShellScript "" ''
             # enable monitor
-            hyprctl keyword monitor "eDP-1"
+            hyprctl reload
 
             # Run hyprlock if laptop is not docked
             if ! ${docked}; then

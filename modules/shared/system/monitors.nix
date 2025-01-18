@@ -5,7 +5,7 @@ let
     { # Laptop monitor
       resolution = "1920x1200";
       position = "auto";
-      scale = 1.25;
+      scale = 1.2;
       additional = "";
       names = [
         "Chimei Innolux Corporation 0x143F"
