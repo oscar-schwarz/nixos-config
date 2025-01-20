@@ -53,7 +53,11 @@
           name = "fritzbox";
           publicKey = "Gvopl/jY8K+xHpUTntg9R4CG++RXyJ2hV1QsNcyVUBE=";
           presharedKey = "kHMEmT/Pr1suWRAZaA2zKGKp+dKeDJnLql2W/V3wGpk=";
-          allowedIPs = [ "101.201.4.0/24" ];#"0.0.0.0/0" ]; # route all traffic through vpn
+          # Route all traffic in the specific subnet through the tunnel
+          allowedIPs = [ "101.201.4.0/24" ];
+          # this here would route ALL traffic through the tunnel
+          # Problem: if the tunnel is blocked, no internet access at all is possible
+          # allowedIPs = [ "101.201.4.0/24" "0.0.0.0/0" ]; 
           endpoint = "h8wkgwwxnvy0ut4t.myfritz.net:56491";
           persistentKeepalive = 25;
           # dynamicEndpointRefreshSeconds = 5;
