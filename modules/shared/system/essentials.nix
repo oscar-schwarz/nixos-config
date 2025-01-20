@@ -16,10 +16,10 @@
   # needed packages
   environment.systemPackages = with pkgs; [
     fastfetch # System info
-    sops # Nix secret management
     tree # File tree
     bat # Better cat
     atool # Extract any archive
+    jq # tool to parse json
   ];
 
   # Set your time zone.
