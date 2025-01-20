@@ -59,6 +59,11 @@
       url = "github:MayNiklas/eduroam-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    hyprpolkitagent = {
+      url = "github:hyprwm/hyprpolkitagent";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {nixpkgs, ...} @ inputs: with nixpkgs.lib; with builtins; let
@@ -98,6 +103,7 @@
                 final: prev: {
                   matcha = matcha.packages.${prev.system}.default;
                   eduroam = eduroam.packages.${prev.system};
+                  hyprpolkitagent = hyprpolkitagent.packages.${prev.system}.default;
                 }
               )
             ];
