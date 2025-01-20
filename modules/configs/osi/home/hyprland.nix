@@ -302,7 +302,7 @@
       "plugin:touch-gestures" = {
         sensitivity = 4.0;
         workspace_swipe_fingers = 3;
-        workspace_swipe_edge = "l";
+        workspace_swipe_edge = false;
         edge_margin = 50;
 
         # Mouse binds
