@@ -18,6 +18,7 @@ in {
     "application/json"
     "application/xml"
     "application/javascript"
+    "application/x-typescript"
     "text/html"
     "text/css"
     "text/x-markdown"
