@@ -237,7 +237,7 @@ in {
       # --- UTILITIES ---
       davidlgoldberg.jumpy2 # jumping cursors with short letter combo
       eamodio.gitlens # useful for git blame inline
-      # flexpilot.flexpilot-vscode-extension # inline llm help
+      # continue.continue # inline llm help
 
       # --- PHP ---
       xdebug.php-debug # debugging php applications
