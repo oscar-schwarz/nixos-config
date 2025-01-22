@@ -21,7 +21,7 @@
       }
     ];
     interactiveShellInit = ''
-      ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
+      ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-left | source
     '';
     shellAliases = {
       lg = "lazygit";
