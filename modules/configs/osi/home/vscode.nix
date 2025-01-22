@@ -236,7 +236,8 @@ in {
     extensions = with vscodeExts.vscode-marketplace; with vscodeExts.open-vsx-release; [
       # --- UTILITIES ---
       davidlgoldberg.jumpy2 # jumping cursors with short letter combo
-      eamodio.gitlens
+      eamodio.gitlens # useful for git blame inline
+      codeium.codeium # inline llm help
 
       # --- PHP ---
       xdebug.php-debug # debugging php applications
