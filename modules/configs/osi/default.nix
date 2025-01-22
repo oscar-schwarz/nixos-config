@@ -24,7 +24,7 @@
     "api-keys/nix-access-tokens" = {};
     "api-keys/open-ai" = {owner = "osi";};
     "other/uni-leipzig-vpn-auth" = {};
-    "wireguard/biome-fest" = {};
+    # "wireguard/biome-fest" = {};
     "pgp-keys/id-0x675D2CB5013E8731/public" = {owner = "osi";};
   };
 

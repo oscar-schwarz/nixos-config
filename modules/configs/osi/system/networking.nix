@@ -42,27 +42,27 @@
       };
     };
 
-    wireguard.interfaces = {
-      sculk = {
-        ips = [ "101.201.4.201/24" ]; # IP address and subnet of tunnel interface
-        listenPort = wireguardPort; # if not specified it would be random
+    # wireguard.interfaces = {
+    #   sculk = {
+    #     ips = [ "101.201.4.201/24" ]; # IP address and subnet of tunnel interface
+    #     listenPort = wireguardPort; # if not specified it would be random
 
-        privateKeyFile = config.getSopsFile "wireguard/biome-fest";
+    #     privateKeyFile = config.getSopsFile "wireguard/biome-fest";
 
-        peers = [{
-          name = "fritzbox";
-          publicKey = "Gvopl/jY8K+xHpUTntg9R4CG++RXyJ2hV1QsNcyVUBE=";
-          presharedKey = "kHMEmT/Pr1suWRAZaA2zKGKp+dKeDJnLql2W/V3wGpk=";
-          # Route all traffic in the specific subnet through the tunnel
-          allowedIPs = [ "101.201.4.0/24" ];
-          # this here would route ALL traffic through the tunnel
-          # Problem: if the tunnel is blocked, no internet access at all is possible
-          # allowedIPs = [ "101.201.4.0/24" "0.0.0.0/0" ]; 
-          endpoint = "h8wkgwwxnvy0ut4t.myfritz.net:56491";
-          persistentKeepalive = 25;
-          # dynamicEndpointRefreshSeconds = 5;
-        }];
-      };
-    };
+    #     peers = [{
+    #       name = "fritzbox";
+    #       publicKey = "Gvopl/jY8K+xHpUTntg9R4CG++RXyJ2hV1QsNcyVUBE=";
+    #       presharedKey = "kHMEmT/Pr1suWRAZaA2zKGKp+dKeDJnLql2W/V3wGpk=";
+    #       # Route all traffic in the specific subnet through the tunnel
+    #       allowedIPs = [ "101.201.4.0/24" ];
+    #       # this here would route ALL traffic through the tunnel
+    #       # Problem: if the tunnel is blocked, no internet access at all is possible
+    #       # allowedIPs = [ "101.201.4.0/24" "0.0.0.0/0" ]; 
+    #       endpoint = "h8wkgwwxnvy0ut4t.myfritz.net:56491";
+    #       persistentKeepalive = 25;
+    #       # dynamicEndpointRefreshSeconds = 5;
+    #     }];
+    #   };
+    # };
   };
 }
