@@ -237,7 +237,7 @@ in {
       # --- UTILITIES ---
       davidlgoldberg.jumpy2 # jumping cursors with short letter combo
       eamodio.gitlens # useful for git blame inline
-      # continue.continue # inline llm help
+      danielsanmedium.dscodegpt # inline llm help
 
       # --- PHP ---
       xdebug.php-debug # debugging php applications
