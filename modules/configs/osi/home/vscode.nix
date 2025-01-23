@@ -1,4 +1,4 @@
-{ pkgs, lib, inputs, ... }:
+{ pkgs, lib, inputs, config, ... }:
 
 let
   vscodeExts = inputs.nix-vscode-extensions.extensions.x86_64-linux;
@@ -226,11 +226,14 @@ in {
         command = "editor.debug.action.toggleBreakpoint";
       }
     ];
-    extensions = with vscodeExts; let market = vscode-marketplace; op-vsx = open-vsx; in [
+    extensions = with (vscodeExts.forVSCodeVersion config.programs.vscode.package.version); let
+      market = vscode-marketplace;
+      op-vsx = open-vsx;
+    in [
       # --- UTILITIES ---
       market.davidlgoldberg.jumpy2 # jumping cursors with short letter combo
       market.eamodio.gitlens # useful for git blame inline
-      op-vsx.danielsanmedium.dscodegpt # inline llm help
+      market.danielsanmedium.dscodegpt # inline llm help
 
       # --- PHP ---
       market.xdebug.php-debug # debugging php applications
