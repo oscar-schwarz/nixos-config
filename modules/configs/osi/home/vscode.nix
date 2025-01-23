@@ -51,6 +51,7 @@ in {
       "workbench.startupEditor" = "none"; # no welcome page
       "workbench.editor.editorActionsLocation" = "hidden"; # hide some buttons on the native title ba
       "security.workspace.trust.enabled" = false; # Trust all workspaces
+      "workspace.sideBar.location" = "right";
       # minimap
       "editor.minimap.maxColumn" = 100;
       "editor.minimap.showSlider" = "always";
@@ -66,9 +67,6 @@ in {
       "zenMode.hideLineNumbers" = false;
       "zenMode.fullScreen" = false;
       "zenMode.centerLayout" = false;
-
-      # --- CODEGPT EXTENSION ---
-      "CodeGPT.apiKey" = "OpenAI";
 
       # --- PHP ---
       "php.debug.executablePath" = lib.getExe pkgs.php83;
@@ -233,7 +231,7 @@ in {
       # --- UTILITIES ---
       market.davidlgoldberg.jumpy2 # jumping cursors with short letter combo
       market.eamodio.gitlens # useful for git blame inline
-      market.danielsanmedium.dscodegpt # inline llm help
+      # market.flexpilot.flexpilot-vscode-extension # inline llm help
 
       # --- PHP ---
       market.xdebug.php-debug # debugging php applications
