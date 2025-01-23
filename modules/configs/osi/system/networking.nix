@@ -17,11 +17,9 @@
 
     firewall = {
       enable = true;
-      # allowedTCPPorts = [
-      #   9003
-      #   3000
-      #   5173
-      # ];
+      allowedTCPPorts = [
+        54112 # Vscode extension services
+      ];
       allowedUDPPorts = [
         wireguardPort
       ];
