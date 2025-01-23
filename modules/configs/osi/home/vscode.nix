@@ -49,25 +49,16 @@ in {
       "workbench.editor.showTabs" = "none";
       "window.menuBarVisibility" = "toggle"; # hide menu bar unless alt is pressed
       "workbench.startupEditor" = "none"; # no welcome page
-      "workbench.editor.editorActionsLocation" = "hidden"; # hide some buttons on the native title bar
-
-
-      # Activity bar at the bottom
-      "workbench.sideBar.location" = "bottom";
-
-      # Trust all workspaces
-      "security.workspace.trust.enabled" = false;
-
+      "workbench.editor.editorActionsLocation" = "hidden"; # hide some buttons on the native title ba
+      "security.workspace.trust.enabled" = false; # Trust all workspaces
       # minimap
       "editor.minimap.maxColumn" = 100;
       "editor.minimap.showSlider" = "always";
       "editor.minimap.renderCharacters" = false;
-
       # Include git files in file tree and file search
       "files.exclude" = {
         "**/.git" = false;
       };
-
       # zen mode settings
       "zenMode.restore" = true;
       "zenMode.hideStatusBar" = true;
@@ -76,6 +67,8 @@ in {
       "zenMode.fullScreen" = false;
       "zenMode.centerLayout" = false;
 
+      # --- CODEGPT EXTENSION ---
+      "CodeGPT.apiKey" = "OpenAI";
 
       # --- PHP ---
       "php.debug.executablePath" = lib.getExe pkgs.php83;
