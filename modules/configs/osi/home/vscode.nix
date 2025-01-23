@@ -226,34 +226,34 @@ in {
         command = "editor.debug.action.toggleBreakpoint";
       }
     ];
-    extensions = with vscodeExts.vscode-marketplace; with vscodeExts.open-vsx-release; [
+    extensions = with vscodeExts; let market = vscode-marketplace; op-vsx = open-vsx; in [
       # --- UTILITIES ---
-      davidlgoldberg.jumpy2 # jumping cursors with short letter combo
-      eamodio.gitlens # useful for git blame inline
-      danielsanmedium.dscodegpt # inline llm help
+      market.davidlgoldberg.jumpy2 # jumping cursors with short letter combo
+      market.eamodio.gitlens # useful for git blame inline
+      op-vsx.danielsanmedium.dscodegpt # inline llm help
 
       # --- PHP ---
-      xdebug.php-debug # debugging php applications
-      ronvanderheijden.phpdoc-generator # generate php doc comments
-      mehedidracula.php-namespace-resolver # php everything namespace
+      market.xdebug.php-debug # debugging php applications
+      market.ronvanderheijden.phpdoc-generator # generate php doc comments
+      market.mehedidracula.php-namespace-resolver # php everything namespace
 
       # --- NIX ---
-      jnoortheen.nix-ide # nix language features
+      market.jnoortheen.nix-ide # nix language features
 
       # --- NODE ---
-      vue.volar # vue language features
-      oouo-diogo-perdigao.docthis # jsdoc
+      market.vue.volar # vue language features
+      market.oouo-diogo-perdigao.docthis # jsdoc
 
       # --- JAVA ---
       # redhat.java # language features, download errors
-      vscjava.vscode-java-debug # debugger
-      vscjava.vscode-java-dependency # project manager
+      market.vscjava.vscode-java-debug # debugger
+      market.vscjava.vscode-java-dependency # project manager
 
       # --- GODOT ENGINE ---
-      geequlim.godot-tools
+      market.geequlim.godot-tools
 
       # --- SQL ---
-      adpyke.vscode-sql-formatter
+      market.adpyke.vscode-sql-formatter
     ];
   };
 
