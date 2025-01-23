@@ -18,7 +18,7 @@
     firewall = {
       enable = true;
       allowedTCPPorts = [
-        54112 # Vscode extension services
+
       ];
       allowedUDPPorts = [
         wireguardPort
@@ -46,6 +46,8 @@
         listenPort = wireguardPort; # if not specified it would be random
 
         privateKeyFile = config.getSopsFile "wireguard/biome-fest/private-key";
+
+        mtu = 500;
 
         peers = [{
           name = "fritzbox";
