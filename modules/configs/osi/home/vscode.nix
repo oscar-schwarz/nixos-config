@@ -51,7 +51,7 @@ in {
       "workbench.startupEditor" = "none"; # no welcome page
       "workbench.editor.editorActionsLocation" = "hidden"; # hide some buttons on the native title ba
       "security.workspace.trust.enabled" = false; # Trust all workspaces
-      "workspace.sideBar.location" = "right";
+      "workbench.sideBar.location" = "right";
       # minimap
       "editor.minimap.maxColumn" = 100;
       "editor.minimap.showSlider" = "always";
