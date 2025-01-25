@@ -18,7 +18,7 @@
     firewall = {
       enable = true;
       allowedTCPPorts = [
-
+        8000
       ];
       allowedUDPPorts = [
         wireguardPort
