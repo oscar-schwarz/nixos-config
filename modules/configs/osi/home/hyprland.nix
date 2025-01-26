@@ -146,7 +146,7 @@
 
       # --- Keyboard settings ---
       input = {
-        kb_layout = "us,us";
+        kb_layout = "us,de";
         kb_variant = "colemak,";
         kb_options = "ctrl:swap_rwin_rctl,grp:win_space_toggle";
       };
