@@ -232,6 +232,7 @@ in {
       market.davidlgoldberg.jumpy2 # jumping cursors with short letter combo
       market.eamodio.gitlens # useful for git blame inline
       # market.flexpilot.flexpilot-vscode-extension # inline llm help, currently tries to manipulate nix store
+      market.feiskyer.chatgpt-copilot
 
       # --- PHP ---
       market.xdebug.php-debug # debugging php applications
