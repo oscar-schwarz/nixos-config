@@ -29,6 +29,17 @@
       fi
     '';
   };
+  obsidianWrapper = pkgs.writeShellApplication {
+    name = "obsidian";
+    runtimeInputs = [ pkgs.obsidian ];
+    text = ''
+      function xdg-open() {
+        ${pkgs.xdg-utils}/bin/xdg-open "$@" &
+      }
+
+      obsidian
+    '';
+  };
 in {
   # Import modules
   imports = [
@@ -70,7 +81,7 @@ in {
     nautilus # File Browser
     nnn # terminal file manager
     ncpamixer # Pulse Audio mixer utility
-    obsidian # markdown note taking app
+    obsidianWrapper # markdown note taking app
     prismlauncher # Open Source Minecraft Launcher
     qrcode # simple qr code tool
     restic
