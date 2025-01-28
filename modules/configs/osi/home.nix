@@ -29,13 +29,15 @@
       fi
     '';
   };
+  # A fix for obsidian to properly open attachments:
+  # basically making electron think its on gnome so
+  # that is uses "gio" (from glib) to open programs
+  # https://forum.obsidian.md/t/obsidian-freezes-entirely-when-an-attachment-is-open-with-an-external-program/78861
   obsidianWrapper = pkgs.writeShellApplication {
     name = "obsidian";
-    runtimeInputs = with pkgs; [ obsidian screen ];
+    runtimeInputs = with pkgs; [ obsidian glib ];
     text = ''
-      alias xdg-open="screen -dm ${pkgs.xdg-utils}/bin/xdg-open"
-
-      obsidian "$@"
+      XDG_CURRENT_DESKTOP=GNOME obsidian "$@"
     '';
   };
 in {
