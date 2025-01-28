@@ -224,9 +224,6 @@ in {
         command = "editor.debug.action.toggleBreakpoint";
       }
     ];
-    # --- EXTENSIONS
-    mutableExtensionsDir = true; # allow the extensions the mutate their folders (needed for some extensions)
-
     extensions = with vscodeExts; let
       market = vscode-marketplace;
       op-vsx = open-vsx;
@@ -234,7 +231,7 @@ in {
       # --- UTILITIES ---
       market.davidlgoldberg.jumpy2 # jumping cursors with short letter combo
       market.eamodio.gitlens # useful for git blame inline
-      # market.flexpilot.flexpilot-vscode-extension # inline llm help, currently has to be installed manually
+      # market.flexpilot.flexpilot-vscode-extension # inline llm help, currently tries to manipulate nix store
 
       # --- PHP ---
       market.xdebug.php-debug # debugging php applications
@@ -249,7 +246,7 @@ in {
       market.oouo-diogo-perdigao.docthis # jsdoc
 
       # --- JAVA ---
-      # redhat.java # language features, download errors
+      market.redhat.java # language features
       market.vscjava.vscode-java-debug # debugger
       market.vscjava.vscode-java-dependency # project manager
 
