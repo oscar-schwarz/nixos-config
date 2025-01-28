@@ -234,7 +234,7 @@ in {
       # --- UTILITIES ---
       market.davidlgoldberg.jumpy2 # jumping cursors with short letter combo
       market.eamodio.gitlens # useful for git blame inline
-      market.flexpilot.flexpilot-vscode-extension # inline llm help
+      # market.flexpilot.flexpilot-vscode-extension # inline llm help, currently has to be installed manually
 
       # --- PHP ---
       market.xdebug.php-debug # debugging php applications
