@@ -34,18 +34,10 @@
   # https://forum.obsidian.md/t/obsidian-freezes-entirely-when-an-attachment-is-open-with-an-external-program/78861
   obsidianOverride = pkgs.obsidian.overrideAttrs (prev: with builtins; with lib.lists; with lib.strings; {
     buildInputs = [ pkgs.glib ];
-    installPhase = prev.installPhase 
-      # Get all lines of previous installPhase
-      |> splitString "\n" 
-      # Concatenate again and insert a line
-      |> foldl (res: line: 
-        res + "\n" + line + (
-          if (line |> match ".*makeWrapper.*") != null then
-            "--set XDG_DESKTOP_SESSION \"gnome\" \\"
-          else
-            ""
-        )
-      ) "";
+    installPhase = prev.installPhase + ''
+      makeWrapper $out/bin/obsidian $out/bin/obsidian \
+        --set XDG_CURRENT_DESKTOP "gnome"
+    '';
   });
   
   
