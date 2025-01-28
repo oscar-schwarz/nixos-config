@@ -30,16 +30,32 @@
     '';
   };
   # A fix for obsidian to properly open attachments:
-  # basically making electron think its on gnome so
-  # that is uses "gio" (from glib) to open programs
+  # basically making electron think its on gnome so that is uses "gio" (from glib) to open programs
   # https://forum.obsidian.md/t/obsidian-freezes-entirely-when-an-attachment-is-open-with-an-external-program/78861
-  obsidianWrapper = pkgs.writeShellApplication {
-    name = "obsidian";
-    runtimeInputs = with pkgs; [ obsidian glib ];
-    text = ''
-      XDG_CURRENT_DESKTOP=GNOME obsidian "$@"
-    '';
-  };
+  obsidianOverride = pkgs.obsidian.overrideAttrs (prev: with builtins; with lib.lists; with lib.strings; {
+    buildInputs = [ pkgs.glib ];
+    installPhase = prev.installPhase 
+      # Get all lines of previous installPhase
+      |> splitString "\n" 
+      # Concatenate again and insert a line
+      |> foldl (res: line: 
+        res + "\n" + line + (
+          if (line |> match ".*makeWrapper.*") != null then
+            "--set XDG_DESKTOP_SESSION \"gnome\" \\"
+          else
+            ""
+        )
+      ) "";
+  });
+  
+  
+  # Wrapper = pkgs.writeShellApplication {
+  #   name = "obsidian";
+  #   runtimeInputs = with pkgs; [ obsidian glib ];
+  #   text = ''
+  #     XDG_CURRENT_DESKTOP=GNOME obsidian "$@"
+  #   '';
+  # };
 in {
   # Import modules
   imports = [
@@ -81,7 +97,7 @@ in {
     nautilus # File Browser
     nnn # terminal file manager
     ncpamixer # Pulse Audio mixer utility
-    obsidianWrapper # markdown note taking app
+    obsidianOverride # markdown note taking app
     prismlauncher # Open Source Minecraft Launcher
     qrcode # simple qr code tool
     restic
