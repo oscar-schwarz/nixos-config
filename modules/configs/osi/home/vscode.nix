@@ -224,14 +224,14 @@ in {
         command = "editor.debug.action.toggleBreakpoint";
       }
     ];
-    extensions = with (vscodeExts.forVSCodeVersion config.programs.vscode.package.version); let
+    extensions = with vscodeExts; let
       market = vscode-marketplace;
       op-vsx = open-vsx;
     in [
       # --- UTILITIES ---
       market.davidlgoldberg.jumpy2 # jumping cursors with short letter combo
       market.eamodio.gitlens # useful for git blame inline
-      # market.flexpilot.flexpilot-vscode-extension # inline llm help
+      market.flexpilot.flexpilot-vscode-extension # inline llm help
 
       # --- PHP ---
       market.xdebug.php-debug # debugging php applications
