@@ -31,13 +31,11 @@
   };
   obsidianWrapper = pkgs.writeShellApplication {
     name = "obsidian";
-    runtimeInputs = [ pkgs.obsidian ];
+    runtimeInputs = with pkgs; [ obsidian screen ];
     text = ''
-      function xdg-open() {
-        ${pkgs.xdg-utils}/bin/xdg-open "$@" &
-      }
+      alias xdg-open="screen -dm ${pkgs.xdg-utils}/bin/xdg-open"
 
-      obsidian
+      obsidian "$@"
     '';
   };
 in {
