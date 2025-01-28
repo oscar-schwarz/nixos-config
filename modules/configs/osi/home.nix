@@ -41,7 +41,7 @@
       |> foldl (res: line: 
         res + "\n" + line + (
           if (line |> match ".*makeWrapper.*") != null then
-            "--set XDG_CURRENT_DESKTOP \"gnome\" \\"
+            "--set XDG_CURRENT_DESKTOP \"GNOME\" \\"
           else
             ""
         )
