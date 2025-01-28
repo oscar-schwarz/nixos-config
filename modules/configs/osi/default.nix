@@ -52,7 +52,6 @@
   # Enable CUPS to print documents.
   services.printing = {
     enable = true;
-    defaultShared = true;
     drivers = with pkgs; [ 
       gutenprint 
       # epsonscan2 
@@ -62,6 +61,7 @@
   # and avahi for bonjour
   services.avahi = {
     enable = true;
+    nssmdns4 = true;
   };
 
   # Syncthing
