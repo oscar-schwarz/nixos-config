@@ -224,6 +224,9 @@ in {
         command = "editor.debug.action.toggleBreakpoint";
       }
     ];
+    # --- EXTENSIONS
+    mutableExtensionsDir = true; # allow the extensions the mutate their folders (needed for some extensions)
+
     extensions = with vscodeExts; let
       market = vscode-marketplace;
       op-vsx = open-vsx;
