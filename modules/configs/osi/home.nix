@@ -77,6 +77,7 @@ in {
     signal-desktop # secure messaging
     vlc # Media Player
     xournalpp # stylus note taking app
+    gimp # image editor
 
     # Tools
     wl-clipboard-rs # copy to clipboard from terminal
