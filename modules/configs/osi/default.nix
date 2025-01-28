@@ -49,8 +49,17 @@
     enable = true;
   };
 
-  # Gitlab runner
-  services.gitlab-runner = {
+  # Enable CUPS to print documents.
+  services.printing = {
+    enable = true;
+    drivers = with pkgs; [ 
+      gutenprint 
+      # epsonscan2 
+    ];
+  };
+
+  # and avahi for bonjour
+  services.avahi = {
     enable = true;
   };
 

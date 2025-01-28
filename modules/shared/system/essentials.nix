@@ -7,15 +7,6 @@
     configurationLimit = 42;
   };
 
-  # Enable CUPS to print documents.
-  services.printing = {
-    enable = true;
-    drivers = with pkgs; [ 
-      gutenprint 
-      # epsonscan2 
-    ];
-  };
-
   # needed packages
   environment.systemPackages = with pkgs; [
     fastfetch # System info
