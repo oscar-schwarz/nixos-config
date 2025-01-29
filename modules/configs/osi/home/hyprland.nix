@@ -232,8 +232,8 @@
           "$meta, V, overview:toggle"
 
           # Taking screenshots
-          "$meta_CTRL, A, exec, hyprshot -m window -m active --clipboard-only"
-          "$meta, A, exec, pidof hyprshot || hyprshot -m region --clipboard-only"
+          "$meta_CTRL, A, exec, hyprshot -m window -m active --clipboard-only --freeze"
+          "$meta, A, exec, pidof hyprshot || hyprshot -m region --clipboard-only --freeze"
           "$meta, Z, exec, hyprshot -m output --clipboard-only"
         ];
 
