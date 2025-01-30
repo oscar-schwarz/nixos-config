@@ -52,6 +52,7 @@ in {
       "workbench.editor.editorActionsLocation" = "hidden"; # hide some buttons on the native title ba
       "security.workspace.trust.enabled" = false; # Trust all workspaces
       "workbench.sideBar.location" = "right";
+      "window.confirmSaveUntitledWorkspace" = false;
       # minimap
       "editor.minimap.maxColumn" = 100;
       "editor.minimap.showSlider" = "always";
@@ -168,6 +169,10 @@ in {
       {
         key = "ctrl+k c";
         command = "merge-conflict.accept.current";
+      }
+      {
+        key = "ctrl+k t";
+        command = "diffEditor.revert";
       }
 
 

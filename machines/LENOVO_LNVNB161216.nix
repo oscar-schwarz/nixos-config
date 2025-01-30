@@ -6,6 +6,7 @@
 {
   imports =
     [ (modulesPath + "/installer/scan/not-detected.nix")
+      ../modules/shared/system/speicherfresser.nix
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "uas" "usb_storage" "usbhid" "sd_mod" "sdhci_pci" "i915" ];
