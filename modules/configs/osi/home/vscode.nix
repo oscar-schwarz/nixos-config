@@ -145,6 +145,7 @@ in {
         # Go to definition (Godot tools)
         key = "ctrl+k g";
         command = "godotTools.scenePreview.goToDefinition";
+        when = "editorLangId == gdscript";
       }
       {
         # Find all references of a symbol
