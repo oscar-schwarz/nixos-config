@@ -70,12 +70,12 @@
   services.auto-cpufreq.enable = true;
   services.tlp.enable = false; # Wiki says so to avoid conflicts
   services.auto-cpufreq.settings = {
+    # battery = {
+    #   governor = "powersave";
+    #   turbo = "never";
+    #   scaling_max_freq = 8800000; # I'd rather wait a bit than have battery drain
+    # };
     battery = {
-      governor = "powersave";
-      turbo = "never";
-      scaling_max_freq = 800000; # I'd rather wait a bit than have battery drain
-    };
-    charger = {
       governor = "performance";
       turbo = "always"; # Turbo should be used on charger
     };
