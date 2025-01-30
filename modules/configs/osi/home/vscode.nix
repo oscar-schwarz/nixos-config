@@ -224,38 +224,38 @@ in {
         command = "editor.debug.action.toggleBreakpoint";
       }
     ];
-    extensions = with vscodeExts; let
-      market = vscode-marketplace;
+    extensions = with vscodeExts; with vscode-marketplace; let
       op-vsx = open-vsx;
     in [
       # --- UTILITIES ---
-      market.davidlgoldberg.jumpy2 # jumping cursors with short letter combo
-      market.eamodio.gitlens # useful for git blame inline
-      # market.flexpilot.flexpilot-vscode-extension # inline llm help, currently tries to manipulate nix store
-      market.feiskyer.chatgpt-copilot
+      davidlgoldberg.jumpy2 # jumping cursors with short letter combo
+      eamodio.gitlens # useful for git blame inline
+      # flexpilot.flexpilot-vscode-extension # inline llm help, currently tries to manipulate nix store
+      feiskyer.chatgpt-copilot
 
       # --- PHP ---
-      market.xdebug.php-debug # debugging php applications
-      market.ronvanderheijden.phpdoc-generator # generate php doc comments
-      market.mehedidracula.php-namespace-resolver # php everything namespace
+      zobo.php-intellisense # intellisense
+      xdebug.php-debug # debugging php applications
+      ronvanderheijden.phpdoc-generator # generate php doc comments
+      mehedidracula.php-namespace-resolver # php everything namespace
 
       # --- NIX ---
-      market.jnoortheen.nix-ide # nix language features
+      jnoortheen.nix-ide # nix language features
 
       # --- NODE ---
-      market.vue.volar # vue language features
-      market.oouo-diogo-perdigao.docthis # jsdoc
+      vue.volar # vue language features
+      oouo-diogo-perdigao.docthis # jsdoc
 
       # --- JAVA ---
-      market.redhat.java # language features
-      market.vscjava.vscode-java-debug # debugger
-      market.vscjava.vscode-java-dependency # project manager
+      redhat.java # language features
+      vscjava.vscode-java-debug # debugger
+      vscjava.vscode-java-dependency # project manager
 
       # --- GODOT ENGINE ---
-      market.geequlim.godot-tools
+      geequlim.godot-tools
 
       # --- SQL ---
-      market.adpyke.vscode-sql-formatter
+      adpyke.vscode-sql-formatter
     ];
   };
 
