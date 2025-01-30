@@ -134,6 +134,25 @@ in {
         command = "workbench.action.toggleSidebarVisibility";
       }
 
+      # --- CODE NAVIGATION ---
+      {
+        # Go to definition
+        key = "ctrl+k g";
+        command = "editor.action.revealDefinition";
+        when = "editorHasDefinitionProvider && editorTextFocus";
+      }
+      {
+        # Go to definition (Godot tools)
+        key = "ctrl+k g";
+        command = "godotTools.scenePreview.goToDefinition";
+      }
+      {
+        # Find all references of a symbol
+        key = "ctrl+k j";
+        command = "references-view.findReferences";
+        when = "editorHasReferenceProvider";
+      }
+
 
       # --- GIT ---
       # Merge conflicts accept
