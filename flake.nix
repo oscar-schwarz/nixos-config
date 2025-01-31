@@ -131,6 +131,9 @@
           # --- SOPS MODULE ---
           # all hosts should have access to their respective secrets
           ./secrets
+
+          # --- FIX FOR UNFREE PREDICATE ---
+          ./modules/shared/system/allowed-unfree.nix
         ];
       }
     );

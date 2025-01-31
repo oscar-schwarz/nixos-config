@@ -64,7 +64,17 @@
   # Enable bluetooth
   hardware.bluetooth.enable = true;
 
-  nixpkgs.config.allowUnfree = true;
+  # The laptop has a fingerprint sensor, enabling it here
+  # Make sure to patch the firmware: https://github.com/goodix-fp-linux-dev/goodix-fp-dump
+  services.fprintd = {
+    enable = true;
+    tod = {
+      enable = true;
+      driver = pkgs.libfprint-2-tod1-goodix;
+    };
+  };
+
+  allowedUnfree = ["libfprint-2-tod1-goodix"];
 
   # Power management using auto-cpufreq
   powerManagement.enable = true; # basic NixOS powermanagement

@@ -33,11 +33,11 @@
   nix.extraOptions = "!include " + config.getSopsFile "api-keys/nix-access-tokens";
 
   # Allow some unfree packages
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [
-      "obsidian"
-      "steam"
-    ];
+  allowedUnfree = [
+    "obsidian"
+    "steam-unwrapped"
+    "steam"
+  ];
 
   # Enable adb
   programs.adb.enable = true;

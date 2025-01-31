@@ -14,6 +14,7 @@
     bat # Better cat
     atool # Extract any archive
     jq # tool to parse json
+    usbutils # for lsusb and such
   ];
 
   # Set your time zone.
