@@ -70,11 +70,11 @@
     enable = true;
     tod = {
       enable = true;
-      driver = pkgs.libfprint-2-tod1-goodix;
+      driver = pkgs.libfprint-2-tod1-goodix-550a;
     };
   };
 
-  allowedUnfree = ["libfprint-2-tod1-goodix"];
+  allowedUnfree = ["libfprint-2-tod1-goodix-550a"];
 
   # Power management using auto-cpufreq
   powerManagement.enable = true; # basic NixOS powermanagement
@@ -84,7 +84,7 @@
     battery = {
       governor = "powersave";
       turbo = "never";
-      scaling_max_freq = 8800000; # I'd rather wait a bit than have battery drain
+      scaling_max_freq = 800000; # I'd rather wait a bit than have battery drain
     };
     charger = {
       governor = "performance";
