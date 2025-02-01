@@ -67,6 +67,13 @@
   };
 
   outputs = {nixpkgs, ...} @ inputs: with nixpkgs.lib; with builtins; let
+
+    # --- PACKAGES ---
+    packages.x86_64-linux.libfprint-goodixtls-55x4 = import ./pkgs/libfprint-goodixtls-55x4.nix nixpkgs.legacyPackages.x86_64-linux;
+
+
+    # --- NIXOS CONFIGURATIONS ---
+
     # Definitions are in a seperate file next to this flake.nix
     hostDefinitions = import ./hosts.nix;
 
@@ -139,5 +146,6 @@
     );
   in {
     inherit nixosConfigurations;
+    inherit packages;
   };
 }
