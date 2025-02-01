@@ -77,7 +77,7 @@
     settings = {
       general = {
         ignore_empty_input = true;
-        grace = 10;
+        # grace = 10;
       };
       auth = {
         fingerprint.enabled = true;
