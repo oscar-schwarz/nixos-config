@@ -68,7 +68,14 @@
   # Make sure to patch the firmware: https://github.com/goodix-fp-linux-dev/goodix-fp-dump
   services.fprintd = {
     package = pkgs.fprintd.overrideAttrs (prev: {
-      buildInputs = prev.buildInputs ++ [ (import ../pkgs/libfprint-goodixtls-55x4.nix pkgs) ];
+      buildInputs = with pkgs; [
+        glib
+        polkit
+        nss
+        pam
+        systemd
+        (import ../pkgs/libfprint-goodixtls-55x4.nix pkgs) 
+      ];
     });
     enable = true;
   };

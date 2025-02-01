@@ -47,6 +47,8 @@ stdenv.mkDerivation (finalAttrs: {
       tests/virtual-image.py \
       tests/umockdev-test.py \
       tests/test-generated-hwdb.sh
+    mkdir -p $out/include/libfprint-2
+    cp -r libfprint/sigfm $out/include/libfprint-2
   '';
 
   nativeBuildInputs = [
@@ -81,13 +83,7 @@ stdenv.mkDerivation (finalAttrs: {
     "-Dudev_hwdb_dir=${placeholder "out"}/lib/udev/hwdb.d"
   ];
 
-  nativeInstallCheckInputs = [
-    (python3.withPackages (p: with p; [ pygobject3 ]))
-  ];
-
   doCheck = false;
-
-  doInstallCheck = false;
 
   meta = {
     description = "Fork of libfprint for Goodix TLS 55x4 devices support";
