@@ -235,7 +235,7 @@
           "$meta, V, overview:toggle"
 
           # Taking screenshots
-          "$meta_CTRL, A, exec, hyprshot --region --freeze -- ${lib.getExe pkgs.annotator}"
+          "$meta_CTRL, A, exec, hyprshot -m region --freeze -- ${lib.getExe pkgs.annotator}"
           "$meta, A, exec, pidof hyprshot || hyprshot -m region --clipboard-only --freeze"
           "$meta, Z, exec, hyprshot -m output --clipboard-only"
         ];
