@@ -300,6 +300,7 @@
         "stayfocused, title:^Hyprland Polkit Agent$"
         "dimaround, title:^Hyprland Polkit Agent$"
         "xray, title:.*is sharing your screen.$"
+        "move 0 0-w, title:.*is sharing your screen.$"
       ];
 
       # --- HYPRGRASS PLUGIN
