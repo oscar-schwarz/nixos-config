@@ -299,6 +299,7 @@
       windowrulev2 = [
         "stayfocused, title:^Hyprland Polkit Agent$"
         "dimaround, title:^Hyprland Polkit Agent$"
+        "xray, title:.*is sharing your screen.$"
       ];
 
       # --- HYPRGRASS PLUGIN
