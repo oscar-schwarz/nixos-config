@@ -299,7 +299,7 @@
       windowrulev2 = [
         "stayfocused, title:^Hyprland Polkit Agent$"
         "dimaround, title:^Hyprland Polkit Agent$"
-        "move 0 100%-w, title:.*is sharing your screen.$"
+        "move 0 100%-w-, title:.*is sharing your screen.$"
       ];
 
       # --- HYPRGRASS PLUGIN
