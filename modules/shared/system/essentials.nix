@@ -16,6 +16,7 @@
     jq # tool to parse json
     usbutils # for lsusb and such
     fzf
+    ripgrep
   ];
 
   # Set your time zone.
