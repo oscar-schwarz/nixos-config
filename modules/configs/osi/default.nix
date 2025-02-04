@@ -68,8 +68,10 @@
 
   # enable fprintd but disable the pam sudo module
   services.fprintd.enable = true;
-  security.pam.services.sudo.fprintAuth = false;
-
+  security.pam.services = {
+    sudo.fprintAuth = false;
+    polkit-1.fprintAuth = false;
+  };
   # Syncthing
   services.syncthing = {
     enable = true;
