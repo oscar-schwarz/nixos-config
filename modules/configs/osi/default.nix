@@ -62,7 +62,7 @@
   services.avahi = {
     enable = true;
     # nssmdns4 = true;
-    nssmdns6 = true;
+    nssmdns6 = true; # ipv6 for the win, who cares if it doesn't work in some networks
     openFirewall = true;
   };
 
