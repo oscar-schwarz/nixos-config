@@ -66,7 +66,9 @@
       package = pkgs.rofi-pass-wayland;
     };
   };
-  services.gpg-agent.pinentryPackage = pkgs.pinentry-rofi;
+  services.gpg-agent.pinentryPackage = pkgs.pinentry-rofi.override {
+    rofi = pkgs.rofi-wayland;
+  };
 
   programs.waybar = {
     enable = true;
@@ -299,7 +301,6 @@
       windowrulev2 = [
         "stayfocused, title:^Hyprland Polkit Agent$"
         "dimaround, title:^Hyprland Polkit Agent$"
-        "move 0 100%-w-, title:.*is sharing your screen.$"
       ];
 
       # --- HYPRGRASS PLUGIN

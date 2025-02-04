@@ -67,16 +67,9 @@
   # The laptop has a fingerprint sensor, enabling it here
   # Make sure to patch the firmware: https://github.com/goodix-fp-linux-dev/goodix-fp-dump
   services.fprintd = {
-    package = pkgs.fprintd.overrideAttrs (prev: {
-      buildInputs = with pkgs; [
-        glib
-        polkit
-        nss
-        pam
-        systemd
-        (import ../pkgs/libfprint-goodixtls-55x4.nix pkgs) 
-      ];
-    });
+    package = pkgs.fprintd.override {
+      libfprint = (import ../pkgs/libfprint-goodixtls-55x4.nix pkgs);
+    };
     enable = true;
   };
 
