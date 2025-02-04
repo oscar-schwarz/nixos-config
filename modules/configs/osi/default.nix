@@ -61,7 +61,8 @@
   # and avahi for bonjour
   services.avahi = {
     enable = true;
-    nssmdns4 = true;
+    # nssmdns4 = true;
+    nssmdns6 = true;
     openFirewall = true;
   };
 
