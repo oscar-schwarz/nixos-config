@@ -54,7 +54,7 @@
           publicKey = "9NEq+5caoXWXidnDeizGKaii0/1RZ1Ho0qICRybSIQE=";
           presharedKeyFile = config.getSopsFile "wireguard/biome-fest/psk";
           # Route all traffic in the specific subnet through the tunnel
-          allowedIPs = [ "10.12.21.0/24" ];
+          allowedIPs = [ "10.12.21.0/32" ];
           # this here would route ALL traffic through the tunnel
           # Problem: if the tunnel is blocked, no internet access at all is possible
           # allowedIPs = [ "10.12.21.0/24" "0.0.0.0/0" ]; 
