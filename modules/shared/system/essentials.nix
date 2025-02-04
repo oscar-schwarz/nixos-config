@@ -15,6 +15,7 @@
     atool # Extract any archive
     jq # tool to parse json
     usbutils # for lsusb and such
+    fzf
   ];
 
   # Set your time zone.

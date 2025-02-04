@@ -70,7 +70,6 @@
     package = pkgs.fprintd.override {
       libfprint = (import ../pkgs/libfprint-goodixtls-55x4.nix pkgs);
     };
-    enable = true;
   };
 
   # Power management using auto-cpufreq

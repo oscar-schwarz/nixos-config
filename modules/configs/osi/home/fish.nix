@@ -29,16 +29,9 @@
       c = "codium";
     };
     functions = {
-      # Nix stuff
+      # --- NIX
       ns = "nix-shell -p $argv";
       nsc = "nix-shell -p $argv --command $argv";
-      ask = ''
-        if test (count $argv) -eq 0
-          heygpt --stream
-        else
-          heygpt  """$argv""" | glow
-        end
-      '';
       rebuild = ''
         # Delete all backup files (not necessary anymore)
         # find ~ -type f -name "*.homeManagerBackupFileExtension" -delete 2>/dev/null
@@ -65,6 +58,27 @@
 
         # Go back to previous cwd
         cd "$PREV_PWD"
+      '';
+
+      # --- HEYGPT
+      ask = ''
+        if test (count $argv) -eq 0
+          heygpt --stream
+        else
+          heygpt  """$argv""" | glow
+        end
+      '';
+      # todo
+      ask-agent = let 
+        agents = [
+          {
+            name = "Examtester (taking notes from clipboard)";
+            system = "";
+          }
+        ];
+      in ''
+        set options \
+          "Klausur"
       '';
       gptcommit = ''
         set message $(\
