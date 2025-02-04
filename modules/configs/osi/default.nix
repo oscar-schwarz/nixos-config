@@ -63,7 +63,6 @@
     enable = true;
     nssmdns4 = true;
     openFirewall = true;
-    allowPointToPoint = true;
   };
 
   # enable fprintd but disable the pam sudo module
@@ -71,6 +70,7 @@
   security.pam.services = {
     sudo.fprintAuth = false;
     polkit-1.fprintAuth = false;
+    cups.fprintAuth = false;
   };
   # Syncthing
   services.syncthing = {
