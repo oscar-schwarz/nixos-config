@@ -80,6 +80,7 @@ in {
   wayland.windowManager.hyprland = {
     plugins = with pkgs.hyprlandPlugins; [
       hyprfocus
+      hypr-dynamic-cursors
     ];
 
     settings = {
@@ -125,13 +126,19 @@ in {
       ];
 
       # --- Plugins ---
-
-      # --- PLUGIN: Hyprfocus
-      "plugin:hyprfocus" = {
-        enabled = "yes";
-        focus_animation = "flash";
-        flash = {
-          flash_opacity = 0.8;
+      plugins = {
+        # --- Hyprfocus, flash aniomation on focus change
+        hyprfocus = {
+          enabled = "yes";
+          focus_animation = "flash";
+          flash = {
+            flash_opacity = 0.8;
+          };
+        };
+        # --- dynamic cursors, a nice smooth cursor animation
+        dynamic-cursors = {
+          enabled = true;
+          mode = "tilt";
         };
       };
     };
