@@ -128,7 +128,7 @@ in {
       plugins = {
         # --- Hyprfocus, flash aniomation on focus change
         hyprfocus = {
-          enabled = "yes";
+          enabled = true;
           focus_animation = "flash";
           flash = {
             flash_opacity = 0.8;
