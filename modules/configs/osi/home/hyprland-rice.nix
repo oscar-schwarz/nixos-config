@@ -135,9 +135,10 @@ in {
             flash_opacity = 0.8;
           };
         };
+        # --- Hyprland mouse effects
         dynamic-cursors = {
           enabled = true;
-          mode = "rotate";
+          mode = "tilt";
           shake.enabled = false;
         };
       };
