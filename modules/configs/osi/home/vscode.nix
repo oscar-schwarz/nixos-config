@@ -134,6 +134,10 @@ in {
         key = "ctrl+p";
         command = "workbench.action.toggleSidebarVisibility";
       }
+      {
+        key = "ctrl+shift-t";
+        command = "workbench.action.toggleZenMode";
+      }
 
       # --- CODE NAVIGATION ---
       {
@@ -245,7 +249,7 @@ in {
         when = "watchExpressionsFocused";
       }
       { # Toggle breakpoint
-        key = "ctrl+shift+t";
+        key = "ctrl+o t";
         command = "editor.debug.action.toggleBreakpoint";
       }
     ];

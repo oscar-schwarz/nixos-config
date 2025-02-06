@@ -80,6 +80,7 @@ in {
   wayland.windowManager.hyprland = {
     plugins = with pkgs.hyprlandPlugins; [
       hyprfocus
+      hypr-dynamic-cursors
     ];
 
     settings = {
@@ -133,6 +134,11 @@ in {
           flash = {
             flash_opacity = 0.8;
           };
+        };
+        dynamic-cursors = {
+          enabled = true;
+          mode = "rotate";
+          shake.enabled = false;
         };
       };
     };

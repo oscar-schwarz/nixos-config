@@ -154,6 +154,7 @@
         '';
       }
       {
+        # TODO: this doesnt work, as hyprctl cannot be called with superuser
         name = "98-atreus-toggle-hypr-laptop-kb";
         rules = ''
           ACTION=="add", SUBSYSTEMS=="usb" ATTRS{idVendor}=="1209", ATTRS{idProduct}=="2303", RUN+="${pkgs.writeShellScript "" ''
