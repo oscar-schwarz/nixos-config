@@ -151,7 +151,17 @@
         name = "50-kaleidoscope";
         rules = ''
           SUBSYSTEMS=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="2303", SYMLINK+="Atreus",  ENV{ID_MM_DEVICE_IGNORE}="1", ENV{ID_MM_CANDIDATE}="0", TAG+="uaccess", TAG+="seat"
-          SUBSYSTEMS=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="2302", SYMLINK+="Atreus",  ENV{ID_MM_DEVICE_IGNORE}="1", ENV{ID_MM_CANDIDATE}="0", TAG+="uaccess", TAG+="seat"
+        '';
+      }
+      {
+        name = "98-atreus-toggle-hypr-laptop-kb";
+        rules = ''
+          ACTION=="add", SUBSYSTEMS=="usb" ATTRS{idVendor}=="1209", ATTRS{idProduct}=="2303", RUN+="${pkgs.writeShellScript "" ''
+            echo "atreus connected" >> /home/osi/test
+          ''}"
+          ACTION=="remove", SUBSYSTEMS=="usb" ATTRS{idVendor}=="1209", ATTRS{idProduct}=="2303", RUN+="${pkgs.writeShellScript "" ''
+            echo "atreus disconnected" >> /home/osi/test
+          ''}"
         '';
       }
     ];
