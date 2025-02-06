@@ -191,7 +191,7 @@
           # Terminal
           "$meta, N, exec, kitty"
           # Firefox (or LibreWolf?)
-          "$meta, E, exec, ${pkgs.writeShellScript "" ''
+          "$meta, I, exec, ${pkgs.writeShellScript "" ''
             # Test if librewolf is installed, if so run it
             if which librewolf; then
               librewolf
@@ -204,6 +204,8 @@
           # Rofi menus
           # launcher
           "$meta, O, exec, pidof rofi || rofi -show drun"
+          # window selector
+          "$meta, E, exec, pidof rofi || rofi -show window"
           # emoji
           "$meta, U, exec, pidof rofi || rofi -show emoji"
           # Pass
