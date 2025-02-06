@@ -79,7 +79,7 @@ in {
   # Hyprland itself
   wayland.windowManager.hyprland = {
     plugins = with pkgs.hyprlandPlugins; [
-      # hyprfocus
+      hyprfocus
     ];
 
     settings = {
@@ -125,10 +125,10 @@ in {
       ];
 
       # --- Plugins ---
-      plugins = {
+      plugin = {
         # --- Hyprfocus, flash aniomation on focus change
         hyprfocus = {
-          enabled = true;
+          enabled = "yes";
           focus_animation = "flash";
           flash = {
             flash_opacity = 0.8;

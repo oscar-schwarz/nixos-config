@@ -157,10 +157,10 @@
         name = "98-atreus-toggle-hypr-laptop-kb";
         rules = ''
           ACTION=="add", SUBSYSTEMS=="usb" ATTRS{idVendor}=="1209", ATTRS{idProduct}=="2303", RUN+="${pkgs.writeShellScript "" ''
-            hyprctl keyword device[at-translated-set-2-keyboard]:enabled false
+            hyprctl keyword device[at-translated-set-2-keyboard]:enabled false | tee /home/osi/test
           ''}"
           ACTION=="remove", SUBSYSTEMS=="usb" ATTRS{idVendor}=="1209", ATTRS{idProduct}=="2303", RUN+="${pkgs.writeShellScript "" ''
-            hyprctl keyword device[at-translated-set-2-keyboard]:enabled true
+            hyprctl keyword device[at-translated-set-2-keyboard]:enabled true | tee /home/osi/test
           ''}"
         '';
       }
