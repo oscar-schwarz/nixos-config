@@ -138,7 +138,8 @@ in {
         # --- dynamic cursors, a nice smooth cursor animation
         dynamic-cursors = {
           enabled = true;
-          mode = "tilt";
+          mode = "rotate";
+          shake.enabled = false;
         };
       };
     };
