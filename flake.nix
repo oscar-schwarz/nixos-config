@@ -60,8 +60,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Working version of the hyprpolkitagent
     hyprpolkitagent = {
       url = "github:hyprwm/hyprpolkitagent";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Customized build of libfprint to make my laptops fingerpint reader work
+    libfprint-goodix-55b4 = {
+      url = "github:oscar-schwarz/libfprint-goodix-55b4";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

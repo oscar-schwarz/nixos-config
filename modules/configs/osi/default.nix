@@ -72,6 +72,7 @@
     sudo.fprintAuth = false;
     polkit-1.fprintAuth = false;
     cups.fprintAuth = false;
+    greetd.fprintAuth = false;
   };
   # Syncthing
   services.syncthing = {
