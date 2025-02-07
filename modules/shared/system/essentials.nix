@@ -109,4 +109,10 @@
 
   # Disable generation of man caches
   documentation.man.generateCaches = false;
+
+  # Automatic garbage collection
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+  };
 }
