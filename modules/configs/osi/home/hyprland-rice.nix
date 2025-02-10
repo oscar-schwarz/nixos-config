@@ -121,7 +121,7 @@ in {
       # --- Layerrules
       layerrule = [
         "animation popin, rofi"
-        "dimaround, rofi"
+        # "dimaround, rofi"
       ];
 
       # --- Plugins ---

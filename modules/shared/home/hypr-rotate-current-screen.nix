@@ -36,6 +36,9 @@
           # Find the scale
           SCALE="$(hyprctl monitors | grep -B 2 'focused: yes' | grep 'scale' | awk '{print $2}')"
 
+          # Find the resolution
+          RES=$(hyprctl monitors | grep eDP-1 -A 1 | grep @ | awk '{ print $1 }')
+          
           NEW_ROTATION=$((ROTATION + 1))
 
           if [ "$NEW_ROTATION" = "4" ]; then
@@ -43,7 +46,7 @@
           fi
 
           # Apply new rotation
-          hyprctl keyword monitor "$MONITOR, preffered, auto, $SCALE, transform, $NEW_ROTATION"
+          hyprctl keyword monitor "$MONITOR, $RES, auto, $SCALE, transform, $NEW_ROTATION"
         
           # Little hack to also rotate touchscreens when laptop built-in screen is focused
           if [ "$MONITOR" = "eDP-1" ]; then

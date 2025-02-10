@@ -10,9 +10,12 @@ let
     battery-three-quarters = "f241";
     bluetooth-b = "f294"; 
     bolt = "f0e7";
+    camera = "f030";
     display = "e163";
     download = "f019";
+    ellipsis = "f141";
     expand = "f065";
+    keyboard = "f11c";
     laptop = "f109";
     lightbulb = "f0eb";
     moon = "f186";
@@ -57,7 +60,9 @@ in {
   home.packages = with pkgs; [  
     # font-awesome # for waybar icons
     font-awesome
-  ];
+
+    wvkbd # on-screen keyboard
+    ];
 
   programs.waybar = {
     settings = {
@@ -67,9 +72,9 @@ in {
 
         # Module placement
         modules-left = [
-          "custom/hypr-window-close"
+          "custom/rofi-drun"
           "hyprland/window"
-          "custom/hypr-window-maximize"
+          "custom/hypr-window-close"
         ];
         modules-center = [
           "clock#time"
@@ -130,17 +135,28 @@ in {
             # this regex shows only the last string
             "^(?:.+?\\.)+(.+)$" = "$1";
           };
+          on-click = pkgs.writeShellScript "" ''
+            hyprctl dispatch fullscreen 1
+          '';
         };
         "custom/hypr-window-close" = {
-          format = fa "xmark";
-          onclick = pkgs.writeShellScript "" ''
+          exec = pkgs.writeShellScript "" ''
+            if [ "$(hyprctl activewindow)" != "Invalid" ]; then
+              echo ${fa "xmark"}
+            fi
+          '';
+          interval = 1;
+          hide-empty-text = true;
+
+          on-click = pkgs.writeShellScript "" ''
             hyprctl dispatch killactive
           '';
         };
-        "custom/hypr-window-maximize" = {
-          format = fa "expand";
-          onclick = pkgs.writeShellScript "" ''
-            hyprctl dispatch fullscreen 1
+
+        "custom/rofi-drun" = {
+          format = fa "ellipsis";
+          on-click = pkgs.writeShellScript "" ''
+            pkill rofi || rofi -show drun 
           '';
         };
       };
@@ -154,9 +170,11 @@ in {
         ];
 
         modules-center = [
+          "custom/wvkbd-mobintl"
           "custom/hypr-toggle-laptop-kb"
           "idle_inhibitor"
           "custom/hypr-rotate-current-screen"
+          "custom/hyprshot"
         ];
 
         modules-right = [
@@ -182,6 +200,20 @@ in {
             deactivated = fa "moon";
             activated = fa "mug-hot";
           };
+        };
+
+        "custom/wvkbd-mobintl" = {
+          format = fa "keyboard";
+          on-click = pkgs.writeShellScript "" ''
+            wvkbd-mobintl || wvkbd-mobintl -H 300 -L 300
+          '';
+        };
+
+        "custom/hyprshot" = {
+          format = (fa "camera") + " " + (fa "display"); 
+          on-click = pkgs.writeShellScript "" ''
+            pkill hyprshot || hyprshot -m region --clipboard-only --freeze
+          '';
         };
       };
     };

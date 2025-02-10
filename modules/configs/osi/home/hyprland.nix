@@ -15,7 +15,6 @@
     hypridle
     brightnessctl
     hyprpaper
-    wvkbd
     hyprpolkitagent
 
     # Sometimes, when I would connect the laptop to the docking station, not all screens work.
@@ -255,6 +254,8 @@
           # Brightness keys
           ", code:233, exec, brightnessctl set +10%"
           ", code:232, exec, brightnessctl set 10%-"
+          ", XF86AudioRaiseVolume, exec, pactl set-sink-volume 0 +10%"
+          ", XF86AudioLowerVolume, exec, pactl set-sink-volume 0 -10%"
         ];
 
       # binds that also works on a lockscreen
@@ -300,7 +301,7 @@
       # --- WINDOW RULES
       windowrulev2 = [
         "stayfocused, title:^Hyprland Polkit Agent$"
-        "dimaround, title:^Hyprland Polkit Agent$"
+        # "dimaround, title:^Hyprland Polkit Agent$"
       ];
 
       # --- HYPRGRASS PLUGIN
@@ -319,9 +320,9 @@
         hyprgrass-bind = [
           ", swipe:4:u, movetoworkspace, r-1"
           ", swipe:4:d, movetoworkspace, r+1"
-          ", edge:r:l, exec, pkill hyprshot || hyprshot -m region --clipboard-only"
-          ", edge:l:r, exec, pkill rofi || rofi -show drun"
-          ", edge:u:d, exec, pkill wvkbd-mobintl || wvkbd-mobintl -H 300 -L 300"
+          ", edge:r:l, exec, pkill hyprshot || hyprshot -m region --clipboard-only --freeze"
+          # ", edge:l:r, exec, " # swipe from left to right
+          # ", edge:u:d, exec, " # swipe from top to bottom
         ];
       };
 

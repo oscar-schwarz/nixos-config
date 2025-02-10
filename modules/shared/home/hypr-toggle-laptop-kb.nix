@@ -119,9 +119,9 @@ in
         # Runs every second to update the icon
         exec = pkgs.writeShellScript "" ''
           if ${lib.getExe isEnabled}; then
-            echo -e '&#xf11c; &#xf00c; \nLaptop keyboard enabled'
+            echo -e '&#xf109; &#xf11c; &#xf00c; \nLaptop keyboard enabled'
           else
-            echo -e '&#xf11c; &#xf00d;\nLaptop keyboard disabled'
+            echo -e '&#xf109; &#xf11c; &#xf00d;\nLaptop keyboard disabled'
           fi
         '';
         interval = 1;
