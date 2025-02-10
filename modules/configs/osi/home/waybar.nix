@@ -72,6 +72,7 @@ in {
 
         # Module placement
         modules-left = [
+          "custom/auto-closer"
           "battery"
           "network"
         ];
@@ -85,6 +86,14 @@ in {
           "custom/rofi-drun"
         ];
 
+        # This is a hidden module which will close the waybar after 10 seconds again
+        "custom/auto-closer" = {
+          hide-empty-text = true;
+          exec = pkgs.writeShellScript "" ''
+            sleep 10
+            pkill waybar
+          '';
+        };
 
         # Module settings
         battery = {
@@ -140,14 +149,7 @@ in {
           '';
         };
         "custom/hypr-window-close" = {
-          exec = pkgs.writeShellScript "" ''
-            if [ "$(hyprctl activewindow)" != "Invalid" ]; then
-              echo '${fa "xmark"}'
-            fi
-          '';
-          interval = 1;
-          hide-empty-text = true;
-
+          format = fa "xmark";
           on-click = pkgs.writeShellScript "" ''
             hyprctl dispatch killactive
           '';

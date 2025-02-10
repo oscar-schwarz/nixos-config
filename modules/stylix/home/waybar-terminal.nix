@@ -133,17 +133,17 @@ in {
       )}
 
       /* SLIDERS */
-        #pulseaudio-slider, #backlight-slider  {
-          min-width: 10rem;
-          min-height: 1rem;
-          padding-bottom: 0.2rem;
-          padding-right: 0.8rem;
-          padding-left: 0.8rem;
-        }
-        slider {
-          min-height: 0.5rem;
-          min-width: 0.5rem;
-        }
+      #pulseaudio-slider, #backlight-slider  {
+        min-width: 10rem;
+        min-height: 1rem;
+        padding-bottom: 0.2rem;
+        padding-right: 0.8rem;
+        padding-left: 0.8rem;
+      }
+      slider {
+        min-height: 0.5rem;
+        min-width: 0.5rem;
+      }
 
       /* HIDE MODULES IN CERTAIN STATES */
         /* Battery is full and plugged in */
