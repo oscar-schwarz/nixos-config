@@ -86,7 +86,7 @@ in {
           "custom/auto-close"
         ];
 
-        # Kills waybar after X Seconds of the mouse not being on the waybar
+        # Kills waybar after THRESHOLD seconds of the mouse not being on the waybar
         "custom/auto-close" = {
           hide-empty-text = true;
           exec = pkgs.writeShellScript "" ''
