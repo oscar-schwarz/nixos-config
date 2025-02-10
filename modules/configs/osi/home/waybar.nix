@@ -205,7 +205,7 @@ in {
         "custom/wvkbd-mobintl" = {
           format = fa "keyboard";
           on-click = pkgs.writeShellScript "" ''
-            wvkbd-mobintl || wvkbd-mobintl -H 300 -L 300
+            pkill wvkbd-mobintl || wvkbd-mobintl -H 300 -L 300
           '';
         };
 
