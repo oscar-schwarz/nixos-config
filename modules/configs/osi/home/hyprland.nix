@@ -132,9 +132,6 @@
         # does something
         # "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
 
-        # waybar
-        "pidof waybar || waybar"
-
         # Auth agent for gui apps
         "systemctl --user start hyprpolkitagent"
       ];
@@ -322,7 +319,7 @@
           ", swipe:4:d, movetoworkspace, r+1"
           ", edge:r:l, exec, pkill hyprshot || hyprshot -m region --clipboard-only --freeze"
           # ", edge:l:r, exec, " # swipe from left to right
-          # ", edge:u:d, exec, " # swipe from top to bottom
+          ", edge:u:d, exec, pkill waybar || waybar" # swipe from top to bottom
         ];
       };
 
