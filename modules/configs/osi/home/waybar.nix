@@ -70,7 +70,8 @@ in {
         ];
 
         "backlight/slider" = {
-          min = 5;
+          min = 1;
+          format = "test";
         };
       };
       mainBar = {
