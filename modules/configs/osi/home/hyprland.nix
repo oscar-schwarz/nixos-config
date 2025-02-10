@@ -157,6 +157,11 @@
         resize_on_border = true;
       };
 
+      binds = {
+        # To be able to move focus to another monitor even when maximized on current
+        movefocus_cycles_fullscreen = false;
+      };
+
       # --- Autostart ---
       exec = [
         # does something
