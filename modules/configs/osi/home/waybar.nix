@@ -60,34 +60,9 @@ in {
 
   programs.waybar = {
     settings = {
-      bottomBar = {
-        layer = "top";
-        position = "bottom";
-        
-        modules-left = [
-          "pulseaudio"
-          "pulseaudio/slider"
-        ];
-
-        modules-right = [
-          "backlight"
-          "backlight/slider"
-        ];
-
-        "backlight" = {
-          format = fa "lightbulb";
-        };
-        "backlight/slider" = {
-          min = 2;
-        };
-
-        "pulseaudio" = {
-          format = fa "volume-high";
-          format-bluetooth = (fa "bluetooth-b") + " " + (fa "volume-high");
-        };
-      };
       mainBar = {
         layer = "top";
+        position = "top";
 
         # Module placement
         modules-left = [
@@ -155,6 +130,32 @@ in {
             # this regex shows only the last string
             "^(?:.+?\\.)+(.+)$" = "$1";
           };
+        };
+      };
+      bottomBar = {
+        layer = "top";
+        position = "bottom";
+        
+        modules-left = [
+          "pulseaudio"
+          "pulseaudio/slider"
+        ];
+
+        modules-right = [
+          "backlight"
+          "backlight/slider"
+        ];
+
+        "backlight" = {
+          format = fa "lightbulb";
+        };
+        "backlight/slider" = {
+          min = 2;
+        };
+
+        "pulseaudio" = {
+          format = fa "volume-high";
+          format-bluetooth = (fa "bluetooth-b") + " " + (fa "volume-high");
         };
       };
     };
