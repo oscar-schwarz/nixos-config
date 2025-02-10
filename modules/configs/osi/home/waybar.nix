@@ -113,8 +113,8 @@ in {
               low_limit=50
               high_limit=$((screen_height - 50))
 
-              # Check if the cursor y-position is outside the critical range.
-              if (( cursor_y < low_limit || cursor_y > high_limit )); then
+              # Check if the cursor y-position not on the waybar
+              if (( cursor_y > low_limit && cursor_y < high_limit )); then
                 # Increment the counter since the cursor is out of bounds.
                 ((counter++))
 
