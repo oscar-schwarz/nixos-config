@@ -66,9 +66,8 @@ in {
 
         # Module placement
         modules-left = [
-          "custom/hypr-toggle-laptop-kb"
-          "custom/matcha"
-          "custom/hypr-rotate-current-screen"
+          "custom/hypr-window-close"
+          "hyprland/window"
         ];
         modules-center = [
           "clock#time"
@@ -77,7 +76,6 @@ in {
         modules-right = [
           "battery"
           "network"
-          "hyprland/window"
         ];
 
 
@@ -139,6 +137,12 @@ in {
         modules-left = [
           "pulseaudio"
           "pulseaudio/slider"
+        ];
+
+        modules-center = [
+          "custom/hypr-toggle-laptop-kb"
+          "custom/matcha"
+          "custom/hypr-rotate-current-screen"
         ];
 
         modules-right = [
