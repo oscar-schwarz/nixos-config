@@ -94,7 +94,7 @@ in {
             INTERVAL=1
 
             # The threshold for the counter after which the specified command is executed.
-            THRESHOLD=5
+            THRESHOLD=10
 
             # Initialize the counter.
             counter=0
