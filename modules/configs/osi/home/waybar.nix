@@ -61,12 +61,17 @@ in {
   programs.waybar = {
     settings = {
       bottomBar = {
-        layer = "bottom";
+        layer = "top";
+        position = "bottom";
         
         modules-center = [
           "backlight/slider"
           "pulseaudio/slider"
         ];
+
+        "backlight/slider" = {
+          min = 5;
+        };
       };
       mainBar = {
         layer = "top";
@@ -137,21 +142,6 @@ in {
             # this regex shows only the last string
             "^(?:.+?\\.)+(.+)$" = "$1";
           };
-          on-click = pkgs.writeShellScript "" ''
-            CHOICE="$(echo -e 'Maximize\nFullscreen\nClose' | rofi -dmenu -p 'Window Action')"
-
-            case "$CHOICE" in
-              "Maximize")
-                hyprctl dispatch fullscreen 1
-                ;;
-              "Fullscreen")
-                hyprctl dispatch fullscreen 0
-                ;;
-              "Close")
-                hyprctl dispatch killactive
-                ;;
-            esac 
-          '';
         };
       };
     };
