@@ -60,6 +60,14 @@ in {
 
   programs.waybar = {
     settings = {
+      bottomBar = {
+        layer = "bottom";
+        
+        modules-center = [
+          "backlight/slider"
+          "pulseaudio/slider"
+        ];
+      };
       mainBar = {
         layer = "top";
 
@@ -70,13 +78,13 @@ in {
           "custom/hypr-rotate-current-screen"
         ];
         modules-center = [
-          "hyprland/window"
+          "clock#time"
+          "clock#date"
         ];
         modules-right = [
           "battery"
-          "backlight"
           "network"
-          "clock#time"
+          "hyprland/window"
         ];
 
 
@@ -108,14 +116,9 @@ in {
 
         "clock#time" = {
           format = "{:%H:%M}";
-          tooltip-format = "{:%A, %d. %B %Y}";
         };
-
-        "backlight" = {
-          format = (fa "lightbulb") + " {percent} %";
-          states = {
-            maximum = 100;
-          };
+        "clock#date" = {
+          format = "{:%A, %d. %B %Y}";
         };
 
         "network" = {
