@@ -72,17 +72,17 @@ in {
 
         # Module placement
         modules-left = [
-          "custom/rofi-drun"
-          "hyprland/window"
-          "custom/hypr-window-close"
+          "battery"
+          "network"
         ];
         modules-center = [
           "clock#time"
           "clock#date"
         ];
         modules-right = [
-          "battery"
-          "network"
+          "custom/hypr-window-close"
+          "hyprland/window"
+          "custom/rofi-drun"
         ];
 
 
@@ -142,7 +142,7 @@ in {
         "custom/hypr-window-close" = {
           exec = pkgs.writeShellScript "" ''
             if [ "$(hyprctl activewindow)" != "Invalid" ]; then
-              echo ${fa "xmark"}
+              echo '${fa "xmark"}'
             fi
           '';
           interval = 1;
