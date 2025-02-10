@@ -54,7 +54,7 @@
       map ctrl+shift+e launch --type=overlay --allow-remote-control ${pkgs.writeShellScript "" ''
 
         # Get all tabs, including their ids and focused status
-        tab_info=$(kitty @ ls | /opt/homebrew/bin/jq -r '.[].tabs[] | "\(.id)|\(.is_focused)|\(.title)"')
+        tab_info=$(kitty @ ls | ${pkgs.jq}/bin/jq -r '.[].tabs[] | "\(.id)|\(.is_focused)|\(.title)"')
 
         # Filter out the focused tab and prepare the list for fzf
         # Format: "last_directory (id: tab_id) | full_path | tab_id"
@@ -66,7 +66,7 @@
         }')
 
         # Use fzf to fuzzy search the tab titles
-        selected=$(echo "$tab_titles" | /opt/homebrew/bin/fzf --prompt="Select tab: " \
+        selected=$(echo "$tab_titles" | ${pkgs.fzf}/bin/fzf --prompt="Select tab: " \
             --height=60% \
             --layout=reverse \
             --border=rounded \
