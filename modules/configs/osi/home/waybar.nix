@@ -69,7 +69,6 @@ in {
         modules-left = [
           "custom/hypr-window-close"
           "hyprland/window"
-          "custom/hypr-window-maximize"
         ];
         modules-center = [
           "clock#time"
@@ -130,17 +129,15 @@ in {
             # this regex shows only the last string
             "^(?:.+?\\.)+(.+)$" = "$1";
           };
+          onclick = pkgs.writeShellScript "" ''
+            hyprctl dispatch fullscreen 1
+          '';
+          tooltip = "Click to maximize";
         };
         "custom/hypr-window-close" = {
           format = fa "xmark";
           onclick = pkgs.writeShellScript "" ''
             hyprctl dispatch killactive
-          '';
-        };
-        "custom/hypr-window-maximize" = {
-          format = fa "expand";
-          onclick = pkgs.writeShellScript "" ''
-            hyprctl dispatch fullscreen 1
           '';
         };
       };
