@@ -86,11 +86,11 @@ in {
           "custom/rofi-drun"
         ];
 
-        # This is a hidden module which will close the waybar after 10 seconds again
+        # This is a hidden module which will close the waybar after X seconds
         "custom/auto-closer" = {
           hide-empty-text = true;
           exec = pkgs.writeShellScript "" ''
-            sleep 10
+            sleep 5
             pkill waybar
           '';
         };

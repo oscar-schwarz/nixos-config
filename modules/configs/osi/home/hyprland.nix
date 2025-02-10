@@ -232,6 +232,9 @@
           # workspace overview through hyprspace
           "$meta, V, overview:toggle"
 
+          # toggle waybar
+          "$meta, B, exec, pkill waybar || waybar"
+
           # Taking screenshots
           "$meta_CTRL, A, exec, hyprshot -m region --freeze -- ${lib.getExe pkgs.annotator}"
           "$meta, A, exec, pidof hyprshot || hyprshot -m region --clipboard-only --freeze"
