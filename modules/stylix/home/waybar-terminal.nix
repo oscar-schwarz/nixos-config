@@ -132,6 +132,11 @@ in {
         ]
       )}
 
+      /* SLIDERS */
+      slider {
+        min-width: 10rem;
+      }
+
       /* HIDE MODULES IN CERTAIN STATES */
         /* Battery is full and plugged in */
         #battery:not(.charging):not(.discharging),
