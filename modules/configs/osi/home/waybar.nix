@@ -3,51 +3,52 @@
 let
   # Set of font awesome name and unicode code
   fa-icons = {
-    bolt = "f0e7";
-    mug-saucer = "f0f4";
-    mug-hot = "f7b6";
-    display = "e163";
-    moon = "f186";
-    lightbulb = "f0eb";
-    network-wired = "f6ff";
-    wifi = "f1eb";
-    download = "f019";
-    upload = "f093";
-
+    battery-empty = "f244";
     battery-full = "f240";
-    battery-three-quarters = "f241";
     battery-half = "f242";
     battery-quarter = "f243";
-    battery-empty = "f244";
-
+    battery-three-quarters = "f241";
+    bluetooth-b = "f294"; 
+    bolt = "f0e7";
+    display = "e163";
+    download = "f019";
+    expand = "f065";
+    laptop = "f109";
+    lightbulb = "f0eb";
+    moon = "f186";
+    mug-hot = "f7b6";
+    mug-saucer = "f0f4";
+    network-wired = "f6ff";
+    upload = "f093";
     volume-high = "f028";
     volume-xmark = "f6a9";
-    bluetooth-b = "f294"; 
+    wifi = "f1eb";
+    xmark = "f00d";
   };
   # get html unicode escape sequence for font awesome icon name
   fa = name: "&#x" + fa-icons.${name} + ";";
 in {
   imports = [
     ../../../shared/home/hypr-toggle-laptop-kb.nix
-    ../../../shared/home/matcha.nix
     ../../../shared/home/hypr-rotate-current-screen.nix
   ];
 
   # Options for my hypr-toggle-laptop-kb module
   hypr-toggle-laptop-kb = {
     enable = true;
-    waybarIntegration.enable = true;
+    waybarIntegration = {
+      enable = true;
+      barName = "bottomBar";
+    };
     toggleOnLidSwitch.enable = true;
-  };
-  # Options for matcha idle inhibitor module
-  matcha = {
-    enable = true;
-    waybarIntegration.enable = true;
   };
   # Options for matcha idle inhibitor module
   hypr-rotate-current-screen = {
     enable = true;
-    waybarIntegration.enable = true;
+    waybarIntegration = {
+      enable = true;
+      barName = "bottomBar";
+    };
   };
 
   # Allow installation of fonts through home.packages
@@ -68,6 +69,7 @@ in {
         modules-left = [
           "custom/hypr-window-close"
           "hyprland/window"
+          "custom/hypr-window-maximize"
         ];
         modules-center = [
           "clock#time"
@@ -129,6 +131,18 @@ in {
             "^(?:.+?\\.)+(.+)$" = "$1";
           };
         };
+        "custom/hypr-window-close" = {
+          format = fa "xmark";
+          onclick = pkgs.writeShellScript "" ''
+            hyprctl dispatch killactive
+          '';
+        };
+        "custom/hypr-window-maximize" = {
+          format = fa "xmark";
+          onclick = pkgs.writeShellScript "" ''
+            hyprctl dispatch fullscreen 1
+          '';
+        };
       };
       bottomBar = {
         layer = "top";
@@ -141,7 +155,7 @@ in {
 
         modules-center = [
           "custom/hypr-toggle-laptop-kb"
-          "custom/matcha"
+          "idle_inhibitor"
           "custom/hypr-rotate-current-screen"
         ];
 
@@ -160,6 +174,14 @@ in {
         "pulseaudio" = {
           format = fa "volume-high";
           format-bluetooth = (fa "bluetooth-b") + " " + (fa "volume-high");
+        };
+
+        "idle_inhibitor" = {
+          format = (fa "laptop") + " {icon}";
+          icons = {
+            deactivated = fa "moon";
+            activated = fa "mug-hot";
+          };
         };
       };
     };

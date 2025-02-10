@@ -218,8 +218,6 @@
             loginctl lock-session
             systemctl suspend
           ''}"
-          # toggle matcha idle inhibitor
-          "$meta, I, exec, matcha-toggle"
 
           # window management
           "$meta, W, killactive"
