@@ -72,7 +72,6 @@ in {
 
         # Module placement
         modules-left = [
-          "custom/auto-closer"
           "battery"
           "network"
         ];
@@ -85,15 +84,6 @@ in {
           "hyprland/window"
           "custom/rofi-drun"
         ];
-
-        # This is a hidden module which will close the waybar after X seconds
-        "custom/auto-closer" = {
-          hide-empty-text = true;
-          exec = pkgs.writeShellScript "" ''
-            sleep 5
-            pkill waybar
-          '';
-        };
 
         # Module settings
         battery = {
