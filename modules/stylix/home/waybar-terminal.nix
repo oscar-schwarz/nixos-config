@@ -134,7 +134,7 @@ in {
 
       /* SLIDERS */
       slider {
-        min-width: 10rem;
+        width: max-content;
       }
 
       /* HIDE MODULES IN CERTAIN STATES */
