@@ -210,7 +210,7 @@ in {
         };
 
         "custom/hyprshot" = {
-          format = (fa "camera") + " " + (fa "display"); 
+          format = (fa "display") + " " + (fa "camera"); 
           on-click = pkgs.writeShellScript "" ''
             pkill hyprshot || hyprshot -m region --clipboard-only --freeze
           '';
