@@ -66,17 +66,7 @@
         }')
 
         # Use fzf to fuzzy search the tab titles
-        selected=$(echo "$tab_titles" | ${pkgs.fzf}/bin/fzf --prompt="Select tab: " \
-            --height=60% \
-            --layout=reverse \
-            --border=rounded \
-            --margin=10%,10% \
-            --padding=1 \
-            --with-nth=1 \
-            --delimiter=' | ' \
-            --preview='echo {2}' \
-            --preview-window=up:1 \
-            --color='bg:237,bg+:235,border:240')
+        selected=$(echo "$tab_titles" | ${pkgs.fzf}/bin/fzf --prompt="Select tab: ")
 
         # If a tab was selected, focus on that tab using its ID
         if [ -n "$selected" ]; then
