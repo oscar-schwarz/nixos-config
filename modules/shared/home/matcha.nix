@@ -10,6 +10,14 @@
           The name of the waybar module (without the "custom/" prefix)
         '';
       };
+      barName = mkOption {
+        type = types.str;
+        default = "mainBar";
+        description = ''
+          The name of the bar this module will be appended. This does NOT add the module to a modules array
+          it just puts the custom module settings to the correct bar object.
+        '';
+      };
     };
     disableOnLidSwitch = {
       enable = mkEnableOption ''
@@ -39,7 +47,7 @@
     ];
 
     # Waybar integration
-    programs.waybar.settings.mainBar = lib.mkIf config.matcha.waybarIntegration.enable {
+    programs.waybar.settings.${config.matcha.waybarIntegration.barName} = lib.mkIf config.matcha.waybarIntegration.enable {
       "custom/${config.matcha.waybarIntegration.moduleName}" = let 
         # Toggles matcha, kill if running, start if not running
         

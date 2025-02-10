@@ -77,6 +77,14 @@ in
           The name of the waybar module (without the "custom/" prefix)
         '';
       };
+      barName = mkOption {
+        type = types.str;
+        default = "mainBar";
+        description = ''
+          The name of the bar this module will be appended. This does NOT add the module to a modules array
+          it just puts the custom module settings to the correct bar object.
+        '';
+      };
     };
   };
 
@@ -105,7 +113,7 @@ in
     };
 
     # Make a waybar module
-    programs.waybar.settings.mainBar = lib.mkIf cfg.waybarIntegration.enable {
+    programs.waybar.settings.${cfg.waybarIntegration.barName} = lib.mkIf cfg.waybarIntegration.enable {
       "custom/${cfg.waybarIntegration.moduleName}" = {
         on-click = lib.getExe toggleKB;
         # Runs every second to update the icon

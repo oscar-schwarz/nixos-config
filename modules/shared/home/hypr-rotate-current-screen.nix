@@ -11,6 +11,14 @@
           The name of the waybar module (without the "custom/" prefix)
         '';
       };
+      barName = mkOption {
+        type = types.str;
+        default = "mainBar";
+        description = ''
+          The name of the bar this module will be appended. This does NOT add the module to a modules array
+          it just puts the custom module settings to the correct bar object.
+        '';
+      };
     };
   };
 
@@ -46,7 +54,7 @@
       })
     ];
 
-    programs.waybar.settings.mainBar = lib.mkIf config.hypr-rotate-current-screen.waybarIntegration.enable {
+    programs.waybar.settings.${config.hypr-rotate-current-screen.waybarIntegration.barName} = lib.mkIf config.hypr-rotate-current-screen.waybarIntegration.enable {
       "custom/${config.hypr-rotate-current-screen.waybarIntegration.moduleName}" = {
         on-click = "hypr-rotate-current-screen";
         format = "&#xf26c; &#xf2ea;";
