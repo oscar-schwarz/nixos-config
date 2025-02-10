@@ -159,19 +159,16 @@ in {
         modules-left = [
           "pulseaudio"
           "pulseaudio/slider"
-        ];
-
-        modules-center = [
-          "custom/wvkbd-mobintl"
-          "custom/hypr-toggle-laptop-kb"
-          "idle_inhibitor"
-          "custom/hypr-rotate-current-screen"
-          "custom/hyprshot"
+          "backlight"
+          "backlight/slider"
         ];
 
         modules-right = [
-          "backlight"
-          "backlight/slider"
+          "custom/hypr-rotate-current-screen"
+          "custom/hypr-toggle-laptop-kb"
+          "idle_inhibitor"
+          "custom/hyprshot"
+          "custom/wvkbd-mobintl"
         ];
 
         "backlight" = {
