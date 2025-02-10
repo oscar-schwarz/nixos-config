@@ -78,7 +78,7 @@ in {
           format = fa "lightbulb";
         };
         "backlight/slider" = {
-          min = 2;
+          # min = 2;
         };
 
         "pulseaudio" = {
