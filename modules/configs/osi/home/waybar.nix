@@ -138,7 +138,7 @@ in {
           '';
         };
         "custom/hypr-window-maximize" = {
-          format = fa "xmark";
+          format = fa "expand";
           onclick = pkgs.writeShellScript "" ''
             hyprctl dispatch fullscreen 1
           '';
@@ -178,7 +178,7 @@ in {
 
         "idle_inhibitor" = {
           format = (fa "laptop") + " {icon}";
-          icons = {
+          format-icons = {
             deactivated = fa "moon";
             activated = fa "mug-hot";
           };
