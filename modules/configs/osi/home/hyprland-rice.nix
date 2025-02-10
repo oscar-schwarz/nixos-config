@@ -106,6 +106,7 @@ in {
       cursor = {
         hide_on_key_press = true;
         inactive_timeout = 1;
+        no_hardware_cursors = true;
       };
 
       # --- Animations ---

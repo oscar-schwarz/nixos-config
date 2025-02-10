@@ -145,6 +145,12 @@
         ", preffered, auto, 1, mirror, eDP-1"
       ];
 
+
+      # --- Mouse settings ---
+      cursor = {
+        enable_hyprcursor = true;
+      };
+
       # --- Keyboard settings ---
       input = {
         kb_layout = "us,de";
