@@ -20,9 +20,9 @@ let
     battery-quarter = "f243";
     battery-empty = "f244";
 
-    firefox-browser = "e007";
-    terminal = "f120";
-    code = "f121";
+    volume-high = "f028";
+    volume-xmark = "f6a9";
+    bluetooth-b = "f294"; 
   };
   # get html unicode escape sequence for font awesome icon name
   fa = name: "&#x" + fa-icons.${name} + ";";
@@ -64,14 +64,26 @@ in {
         layer = "top";
         position = "bottom";
         
-        modules-center = [
-          "backlight/slider"
+        modules-left = [
+          "pulseaudio"
           "pulseaudio/slider"
         ];
 
+        modules-right = [
+          "backlight"
+          "backlight/slider"
+        ];
+
+        "backlight" = {
+          format = fa "lightbulb";
+        };
         "backlight/slider" = {
           min = 1;
-          format = "test";
+        };
+
+        "pulseaudio" = {
+          format = fa "volume-high";
+          format-bluetooth = (fa "bluetooth-b") + " " + (fa "volume-high");
         };
       };
       mainBar = {

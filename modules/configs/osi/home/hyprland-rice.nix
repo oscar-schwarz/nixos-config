@@ -86,7 +86,7 @@ in {
       # --- General ---
       general = {
         border_size = border.width;
-        gaps_out = margin * 2; # screen edge margin is not a double margin
+        gaps_out = margin;
         gaps_in = margin;
       };
 
