@@ -41,7 +41,7 @@
           
           NEW_ROTATION=$((ROTATION + 1))
 
-          if [ "$NEW_ROTATION" = "4" ]; then
+          if [ "$NEW_ROTATION" = "2" ]; then
             NEW_ROTATION=0
           fi
 
