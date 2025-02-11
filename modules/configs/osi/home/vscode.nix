@@ -259,7 +259,7 @@ in {
       # --- UTILITIES ---
       davidlgoldberg.jumpy2 # jumping cursors with short letter combo
       eamodio.gitlens # useful for git blame inline
-      # flexpilot.flexpilot-vscode-extension # inline llm help, currently tries to manipulate nix store
+      saoudrizwan.claude-dev # llm help
       feiskyer.chatgpt-copilot
 
       # --- PHP ---
