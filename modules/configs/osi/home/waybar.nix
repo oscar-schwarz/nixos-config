@@ -103,6 +103,7 @@ in {
         # Check if the cursor is on the edge of the screen if so, activate the waybar        
         if (( cursor_y == high_activate || cursor_y == low_activate)); then
           pidof waybar || waybar & # only launch if not launched already
+          counter=0
         fi
 
 
