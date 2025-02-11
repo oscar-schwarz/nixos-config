@@ -72,11 +72,8 @@ in {
     wvkbd # on-screen keyboard
     ];
 
-  wayland.windowManager.hyprland.settings.exec = [
+  wayland.windowManager.hyprland.settings.exec-once = [
     (lib.getExe (pkgs.writeShellScriptBin "waybar-handler" ''
-      # allow only one
-      if [ $(pidof waybar-handler | grep -c ' ') != "0" ]; then exit; fi
-
       # The time interval (in miliseconds) for checking the cursor position.
       INTERVAL=200
 
