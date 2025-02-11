@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 let
   # Set of font awesome name and unicode code
@@ -72,8 +72,11 @@ in {
     wvkbd # on-screen keyboard
     ];
 
-  wayland.windowManager.hyprland.settings.exec = [
-    (pkgs.writeShellScript "waybar-handler" ''
+  wayland.windowManager.hyprland.settings.exec-once = [
+    (lib.getExe (pkgs.writeShellScriptBin "waybar-handler" ''
+      # allow only one
+      if pidof waybar-handler; then exit; fi
+
       # The time interval (in miliseconds) for checking the cursor position.
       INTERVAL=200
 
@@ -129,7 +132,7 @@ in {
         # Wait for the next interval.
         sleep $(awk -v ms="$INTERVAL" 'BEGIN {print ms / 1000}')
       done
-    '')
+    ''))
   ];
 
   programs.waybar = {
