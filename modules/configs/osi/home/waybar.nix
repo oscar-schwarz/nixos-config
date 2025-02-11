@@ -110,7 +110,7 @@ in {
 
         if pidof waybar; then
           # Check if the cursor y-position not on the waybar
-          if (( cursor_y > low_limit || cursor_y < high_limit )); then
+          if (( cursor_y < low_limit || cursor_y > high_limit )); then
             # Cursor is on the waybar then reset the counter
             counter=0
           else
