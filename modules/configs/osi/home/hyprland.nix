@@ -165,15 +165,12 @@
       # --- Autostart ---
       # run on every reload
       exec = [
-        # does something
-        # "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
 
-        # Auth agent for gui apps
-        "systemctl --user start hyprpolkitagent"
       ];
       # run every start
       exec-once = [
-
+        # Auth agent for gui apps
+        "systemctl --user start hyprpolkitagent"
       ];
 
       # --- Monitors ---

@@ -80,6 +80,8 @@ in {
       # How many miliseconds does the waybar stay on while the cursor is not on it
       THRESHOLD=8000
 
+      current_threshold=$THRESHOLD
+
       # Initialize the counter.
       counter=0
 
@@ -104,13 +106,13 @@ in {
         if (( cursor_y == high_activate || cursor_y == low_activate)); then
           pidof waybar || waybar & # only launch if not launched already
           # if triggered by the screen edge close the bar more quicker
-          counter=5000
+          current_threshold=200
         fi
 
 
         # Only close waybar when its running
 
-        if pidof waybar; then
+        if pidof waybar ; then
           # Check if the cursor y-position not on the waybar
           if (( cursor_y < low_limit || cursor_y > high_limit )); then
             # Cursor is on the waybar then reset the counter
@@ -120,8 +122,9 @@ in {
             ((counter = counter + INTERVAL))
 
             # Check if the counter has reached the threshold kill the waybar
-            if (( counter >= THRESHOLD )); then
+            if (( counter >= current_threshold )); then
               pkill waybar
+              current_threshold=$THRESHOLD
             fi
           fi
         else

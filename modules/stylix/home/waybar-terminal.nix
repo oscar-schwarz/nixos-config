@@ -91,6 +91,8 @@ in {
       }
 
       /* SHORT BORDER CHANGE ON UPDATE */
+      /*
+      currently disabled
       ${builtins.concatStringsSep "\n" (
         map (selector: 
         let 
@@ -131,6 +133,7 @@ in {
           "#battery.discharging"
         ]
       )}
+      */
 
       /* SLIDERS */
       #pulseaudio-slider, #backlight-slider  {
