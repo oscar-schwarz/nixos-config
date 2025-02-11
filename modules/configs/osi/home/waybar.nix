@@ -104,7 +104,7 @@ in {
 
         # Check if the cursor is on the edge of the screen if so, activate the waybar        
         if (( cursor_y == high_activate || cursor_y == low_activate)); then
-          pidof waybar || waybar & # only launch if not launched already
+          pidof waybar || (waybar &) # only launch if not launched already
           # if triggered by the screen edge close the bar more quicker
           current_threshold=200
         fi
@@ -112,7 +112,7 @@ in {
 
         # Only close waybar when its running
 
-        if pidof waybar ; then
+        if pidof waybar; then
           # Check if the cursor y-position not on the waybar
           if (( cursor_y < low_limit || cursor_y > high_limit )); then
             # Cursor is on the waybar then reset the counter
