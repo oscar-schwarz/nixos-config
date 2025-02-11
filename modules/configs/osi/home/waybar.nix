@@ -75,7 +75,7 @@ in {
   wayland.windowManager.hyprland.settings.exec = [
     (lib.getExe (pkgs.writeShellScriptBin "waybar-handler" ''
       # allow only one
-      if pidof waybar-handler; then exit; fi
+      if [ $(pidof waybar-handler | grep -c ' ') != "0" ]; then exit; fi
 
       # The time interval (in miliseconds) for checking the cursor position.
       INTERVAL=200
