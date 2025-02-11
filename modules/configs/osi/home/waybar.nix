@@ -72,7 +72,7 @@ in {
     wvkbd # on-screen keyboard
     ];
 
-  wayland.windowManager.hyprland.settings.exec-once = [
+  wayland.windowManager.hyprland.settings.exec = [
     (lib.getExe (pkgs.writeShellScriptBin "waybar-handler" ''
       # allow only one
       if pidof waybar-handler; then exit; fi
