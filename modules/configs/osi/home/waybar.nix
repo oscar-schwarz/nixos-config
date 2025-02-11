@@ -103,7 +103,6 @@ in {
         # Check if the cursor is on the edge of the screen if so, activate the waybar        
         if (( cursor_y == high_activate || cursor_y == low_activate)); then
           pidof waybar || waybar & # only launch if not launched already
-          counter=0
         fi
 
 
@@ -111,7 +110,7 @@ in {
 
         if pidof waybar; then
           # Check if the cursor y-position not on the waybar
-          if (( cursor_y < low_limit || cursor_y > high_limit )); then
+          if (( cursor_y > low_limit || cursor_y < high_limit )); then
             # Cursor is on the waybar then reset the counter
             counter=0
           else
@@ -123,6 +122,8 @@ in {
               pkill waybar
             fi
           fi
+        else
+          counter=0
         fi
 
         # Wait for the next interval.
