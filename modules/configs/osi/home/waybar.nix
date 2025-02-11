@@ -34,6 +34,7 @@ in {
   imports = [
     ../../../shared/home/hypr-toggle-laptop-kb.nix
     ../../../shared/home/hypr-rotate-current-screen.nix
+    ../../../shared/home/matcha.nix
   ];
 
   # Options for my hypr-toggle-laptop-kb module
@@ -46,6 +47,13 @@ in {
     toggleOnLidSwitch.enable = true;
   };
   # Options for matcha idle inhibitor module
+  matcha = {
+    enable = true;
+    waybarIntegration = {
+      enable = true;
+      barName = "bottomBar";
+    };
+  };
   hypr-rotate-current-screen = {
     enable = true;
     waybarIntegration = {
@@ -224,7 +232,7 @@ in {
         modules-right = [
           "custom/hypr-rotate-current-screen"
           "custom/hypr-toggle-laptop-kb"
-          "idle_inhibitor"
+          "custom/matcha"
           "custom/hyprshot"
           "custom/wvkbd-mobintl"
         ];
@@ -239,14 +247,6 @@ in {
         "pulseaudio" = {
           format = fa "volume-high";
           format-bluetooth = (fa "bluetooth-b") + " " + (fa "volume-high");
-        };
-
-        "idle_inhibitor" = {
-          format = (fa "laptop") + " {icon}";
-          format-icons = {
-            deactivated = fa "moon";
-            activated = fa "mug-hot";
-          };
         };
 
         "custom/wvkbd-mobintl" = {
