@@ -66,7 +66,7 @@
         }')
 
         # Use fzf to fuzzy search the tab titles
-        selected=$(echo "$tab_titles" | /opt/homebrew/bin/fzf --prompt="Select tab: " \
+        selected=$(echo "$tab_titles" | ${pkgs.fzf}/bin/fzf --prompt="Select tab: " \
             --height=60% \
             --layout=reverse \
             --border=rounded \
