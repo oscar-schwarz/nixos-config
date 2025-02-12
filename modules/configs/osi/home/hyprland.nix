@@ -58,7 +58,7 @@
 
         # Filter out the focused tab and prepare the list for fzf
         # Format: "last_directory (id: tab_id) | full_path | tab_id"
-        tab_titles=$(echo "$tab_info" | awk -F'|' '$2 == "false" {
+        tab_titles=$(echo "$tab_info" | awk '{
             split($3, path, "/")
             last_dir = path[length(path)]
             if (last_dir == "") last_dir = "/"
