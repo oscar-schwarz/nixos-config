@@ -121,7 +121,7 @@
     enable = true;
     settings = {
       general = {
-        lock_cmd = "pidof hyprlock || hyprlock";
+        lock_cmd = "pidof hyprlock || hyprlock --immediate --no-fade-in";
         ignore_systemd_inhibit = true;
         ignore_dbus_inhibit = true;
       };
@@ -134,7 +134,7 @@
         [
           {
             timeout = minutes 3;
-            on-timeout = "loginctl lock-session";
+            on-timeout = "hyprlock"; # not using loginctl lock-session, because it adds it is without grace and animation
           }
           {
             timeout = minutes 4;
