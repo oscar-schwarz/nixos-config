@@ -84,8 +84,6 @@
         else
             echo "No tab selected or operation cancelled."
         fi
-
-        kitty @ close-window
       ''}
     '';
   };
