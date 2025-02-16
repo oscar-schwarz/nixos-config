@@ -23,6 +23,7 @@
     luks.devices."luks-ff0fdffe-9e8d-4956-92ef-ce2317629a32" = {
       device = "/dev/disk/by-uuid/ff0fdffe-9e8d-4956-92ef-ce2317629a32";
       # About key enrolling: https://nixos.org/manual/nixos/stable/#sec-luks-file-systems-fido2
+      # sudo systemd-cryptenroll --fido2-device=auto --fido2-with-user-presence=false --fido2-with-user-verification=true /dev/disk/by-uuid/ff0fdffe-9e8d-4956-92ef-ce2317629a32
       crypttabExtraOpts = [ "fido2-device=auto" ];
     };
     systemd.enable = true;

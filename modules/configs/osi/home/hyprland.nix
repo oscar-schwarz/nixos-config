@@ -169,6 +169,10 @@
         movefocus_cycles_fullscreen = false;
       };
 
+      touchpad = {
+        clickfinger_behavior = true;
+      };
+
       # --- Autostart ---
       # run on every reload
       exec = [
