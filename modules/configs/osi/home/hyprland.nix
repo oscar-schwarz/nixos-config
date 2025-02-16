@@ -1,4 +1,4 @@
-{ pkgs, config, lib, ... }:
+{ pkgs, config, lib, nixosConfig, ... }:
 
 {
   imports = [
@@ -169,10 +169,6 @@
         movefocus_cycles_fullscreen = false;
       };
 
-      touchpad = {
-        clickfinger_behavior = true;
-      };
-
       # --- Autostart ---
       # run on every reload
       exec = [
@@ -200,10 +196,14 @@
       };
 
       # --- Keyboard settings ---
-      input = {
-        kb_layout = "us,de";
-        kb_variant = "colemak,";
-        kb_options = "ctrl:swap_rwin_rctl,grp:win_space_toggle";
+      input = let xkb = nixosConfig.services.xserver.xkb; in {
+        kb_layout = xkb.layout;
+        kb_variant = xkb.variant;
+        kb_options = xkb.options;
+
+        touchpad = {
+          clickfinger_behavior = true;
+        };
       };
 
 

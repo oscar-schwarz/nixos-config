@@ -99,7 +99,7 @@
   # xserver keymap
   services.xserver = {
     # Configure keymap in X11.
-		xkb.layout = "us,us";
+		xkb.layout = "us,de";
 		xkb.variant = "colemak,";
     xkb.options = "grp:win_space_toggle";
   };
