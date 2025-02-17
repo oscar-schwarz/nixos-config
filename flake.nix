@@ -71,6 +71,12 @@
       url = "github:oscar-schwarz/libfprint-goodix-55b4";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # An extension for firefox to handle streaming of system audio
+    pipewire-screenaudio = {
+      url = "github:IceDBorn/pipewire-screenaudio";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {nixpkgs, ...} @ inputs: with nixpkgs.lib; with builtins; let

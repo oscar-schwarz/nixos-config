@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }: 
+{ pkgs, lib, config, inputs, ... }: 
 
 {
   # Make firefox default
@@ -20,7 +20,9 @@
   # Install firefox.
   programs.firefox = {
     enable = true;
-    package = pkgs.firefox;
+    package = pkgs.firefox.override {
+      nativeMessagingHosts = [ inputs.pipewire-screenaudio.packages.${pkgs.system}.default ];
+    };
 
     # Some installation-wide settings and extensions
     # https://mozilla.github.io/policy-templates/

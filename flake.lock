@@ -441,6 +441,26 @@
         "type": "github"
       }
     },
+    "pipewire-screenaudio": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1720719825,
+        "narHash": "sha256-+StN4RWwuVHmGFHeDr815t8lTWmRNC16uGTx8jEffPw=",
+        "owner": "IceDBorn",
+        "repo": "pipewire-screenaudio",
+        "rev": "bd404d0ee4b32fb797f2dcdeee3b6e773c06455c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "IceDBorn",
+        "repo": "pipewire-screenaudio",
+        "type": "github"
+      }
+    },
     "programs-sqlite": {
       "inputs": {
         "nixpkgs": [
@@ -472,6 +492,7 @@
         "matcha": "matcha",
         "nix-vscode-extensions": "nix-vscode-extensions",
         "nixpkgs": "nixpkgs",
+        "pipewire-screenaudio": "pipewire-screenaudio",
         "programs-sqlite": "programs-sqlite",
         "sops-nix": "sops-nix",
         "stylix": "stylix"
