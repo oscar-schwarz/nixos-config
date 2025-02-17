@@ -73,68 +73,68 @@ in {
     ];
 
   wayland.windowManager.hyprland.settings.exec-once = [
-    (lib.getExe (pkgs.writeShellScriptBin "bar-handler" ''
-      # The time interval (in miliseconds) for checking the cursor position.
-      INTERVAL=200
+    # (lib.getExe (pkgs.writeShellScriptBin "bar-handler" ''
+    #   # The time interval (in miliseconds) for checking the cursor position.
+    #   INTERVAL=200
 
-      # How many miliseconds does the waybar stay on while the cursor is not on it
-      THRESHOLD=8000
+    #   # How many miliseconds does the waybar stay on while the cursor is not on it
+    #   THRESHOLD=8000
 
-      current_threshold=$THRESHOLD
+    #   current_threshold=$THRESHOLD
 
-      # Initialize the counter.
-      counter=0
+    #   # Initialize the counter.
+    #   counter=0
 
-      while true; do
-        # Get the cursor position.
-        cursor_pos=$(hyprctl cursorpos)
-        cursor_x=$(echo $cursor_pos | cut -d, -f1)
-        cursor_y=$(echo $cursor_pos | cut -d, -f2)
+    #   while true; do
+    #     # Get the cursor position.
+    #     cursor_pos=$(hyprctl cursorpos)
+    #     cursor_x=$(echo $cursor_pos | cut -d, -f1)
+    #     cursor_y=$(echo $cursor_pos | cut -d, -f2)
 
-        # Get the current screen's dimensions for the focused monitor.
-        screen_info=$(hyprctl monitors | grep "focused: yes" -B 10 | grep @)
-        screen_height=$(echo $screen_info | sed 's/^.*x\([0-9]*\)@.*$/\1/')
+    #     # Get the current screen's dimensions for the focused monitor.
+    #     screen_info=$(hyprctl monitors | grep "focused: yes" -B 10 | grep @)
+    #     screen_height=$(echo $screen_info | sed 's/^.*x\([0-9]*\)@.*$/\1/')
 
-        # Calculate the critical y-range positions.
-        low_limit=50
-        high_limit=$((screen_height - 50))
+    #     # Calculate the critical y-range positions.
+    #     low_limit=50
+    #     high_limit=$((screen_height - 50))
 
-        low_activate=0
-        high_activate=$((screen_height - 1))
+    #     low_activate=0
+    #     high_activate=$((screen_height - 1))
 
-        # Check if the cursor is on the edge of the screen if so, activate the waybar        
-        if (( cursor_y == high_activate || cursor_y == low_activate)); then
-          pidof waybar || (waybar &) # only launch if not launched already
-          # if triggered by the screen edge close the bar more quicker
-          current_threshold=200
-        fi
+    #     # Check if the cursor is on the edge of the screen if so, activate the waybar        
+    #     if (( cursor_y == high_activate || cursor_y == low_activate)); then
+    #       pidof waybar || (waybar &) # only launch if not launched already
+    #       # if triggered by the screen edge close the bar more quicker
+    #       current_threshold=200
+    #     fi
 
 
-        # Only close waybar when its running
+    #     # Only close waybar when its running
 
-        if pidof waybar; then
-          # Check if the cursor y-position not on the waybar
-          if (( cursor_y < low_limit || cursor_y > high_limit )); then
-            # Cursor is on the waybar then reset the counter
-            counter=0
-          else
-            # Increment the counter since the cursor is not on the waybar
-            ((counter = counter + INTERVAL))
+    #     if pidof waybar; then
+    #       # Check if the cursor y-position not on the waybar
+    #       if (( cursor_y < low_limit || cursor_y > high_limit )); then
+    #         # Cursor is on the waybar then reset the counter
+    #         counter=0
+    #       else
+    #         # Increment the counter since the cursor is not on the waybar
+    #         ((counter = counter + INTERVAL))
 
-            # Check if the counter has reached the threshold kill the waybar
-            if (( counter >= current_threshold )); then
-              pkill waybar
-              current_threshold=$THRESHOLD
-            fi
-          fi
-        else
-          counter=0
-        fi
+    #         # Check if the counter has reached the threshold kill the waybar
+    #         if (( counter >= current_threshold )); then
+    #           pkill waybar
+    #           current_threshold=$THRESHOLD
+    #         fi
+    #       fi
+    #     else
+    #       counter=0
+    #     fi
 
-        # Wait for the next interval.
-        sleep $(awk -v ms="$INTERVAL" 'BEGIN {print ms / 1000}')
-      done
-    ''))
+    #     # Wait for the next interval.
+    #     sleep $(awk -v ms="$INTERVAL" 'BEGIN {print ms / 1000}')
+    #   done
+    # ''))
   ];
 
   programs.waybar = {

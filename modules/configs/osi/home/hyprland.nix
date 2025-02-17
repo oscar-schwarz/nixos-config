@@ -287,12 +287,12 @@
           "$meta, V, overview:toggle"
 
           # toggle waybar
-          "$meta, B, exec, pkill waybar || waybar"
+          "$meta, Z, exec, pkill waybar || waybar"
+          "$meta, grave, exec, pkill waybar || waybar"
 
           # Taking screenshots
           "$meta_CTRL, A, exec, hyprshot -m region --freeze -- ${lib.getExe pkgs.annotator}"
           "$meta, A, exec, pidof hyprshot || hyprshot -m region --clipboard-only --freeze"
-          "$meta, Z, exec, hyprshot -m output --clipboard-only"
         ];
 
       # Binds here will be repeated on press
