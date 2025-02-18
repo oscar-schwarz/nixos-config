@@ -79,7 +79,7 @@ in {
   # Hyprland itself
   wayland.windowManager.hyprland = {
     plugins = with pkgs.hyprlandPlugins; [
-      hyprfocus
+      # hyprfocus # currently broken
     ];
 
     settings = {
@@ -116,7 +116,7 @@ in {
       animation = [
         "windows, 1, 3, fast-in, popin"
         "workspaces, 1, 5, default, slidevert"
-        "layersIn, 1, 3, fast-in"
+        "layers, 1, 3, fast-in"
       ];
 
       # --- Layerrules
@@ -128,13 +128,13 @@ in {
       # --- Plugins ---
       plugin = {
         # --- Hyprfocus, flash aniomation on focus change
-        hyprfocus = {
-          enabled = "yes";
-          focus_animation = "flash";
-          flash = {
-            flash_opacity = 0.8;
-          };
-        };
+        # hyprfocus = {
+        #   enabled = "yes";
+        #   focus_animation = "flash";
+        #   flash = {
+        #     flash_opacity = 0.8;
+        #   };
+        # };
       };
     };
   };
