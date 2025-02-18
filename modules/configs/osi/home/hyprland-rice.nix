@@ -122,6 +122,7 @@ in {
       # --- Layerrules
       layerrule = [
         "animation popin, rofi"
+        "xray, rofi"
         # "dimaround, rofi"
       ];
 
