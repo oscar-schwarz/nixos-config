@@ -308,8 +308,8 @@
           # Brightness keys
           ", code:233, exec, brightnessctl set +10%"
           ", code:232, exec, brightnessctl set 10%-"
-          ", XF86AudioRaiseVolume, exec, pactl set-sink-volume 0 +10%"
-          ", XF86AudioLowerVolume, exec, pactl set-sink-volume 0 -10%"
+          ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_SINK@ 10%+"
+          ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_SINK@ 10%-"
         ];
 
       # binds that also works on a lockscreen
