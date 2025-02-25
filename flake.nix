@@ -72,10 +72,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # An extension for firefox to handle streaming of system audio
-    pipewire-screenaudio = {
-      url = "github:IceDBorn/pipewire-screenaudio";
-      inputs.nixpkgs.follows = "nixpkgs";
+    # Hyprland plugin (the version in nixpkgs is broken)
+    hyprfocus = {
+      url = "github:daxisunder/hyprfocus";
     };
   };
 
@@ -124,6 +123,9 @@
                   matcha = matcha.packages.${prev.system}.default;
                   eduroam = eduroam.packages.${prev.system};
                   hyprpolkitagent = hyprpolkitagent.packages.${prev.system}.default;
+                  hyprlandPlugins = prev.hyprlandPlugins // {
+                    hyprfocus = hyprfocus.packages.${prev.system}.default;
+                  };
                 }
               )
             ];

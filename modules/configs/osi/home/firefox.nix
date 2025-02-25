@@ -20,9 +20,7 @@
   # Install firefox.
   programs.firefox = {
     enable = true;
-    package = pkgs.firefox.override {
-      nativeMessagingHosts = [ inputs.pipewire-screenaudio.packages.${pkgs.system}.default ];
-    };
+    package = pkgs.firefox;
 
     # Some installation-wide settings and extensions
     # https://mozilla.github.io/policy-templates/
