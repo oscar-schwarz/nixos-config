@@ -55,7 +55,7 @@
       map ctrl+shift+e launch --type=overlay --allow-remote-control ${pkgs.writeShellScript "" ''
 
         # Get all tabs, including their ids and focused status
-        tab_inf#o=$(kitty @ ls | ${pkgs.jq}/bin/jq -r '.[].tabs[] | "\(.id)|\(.is_focused)|\(.title)"')
+        tab_info=$(kitty @ ls | ${pkgs.jq}/bin/jq -r '.[].tabs[] | "\(.id)|\(.is_focused)|\(.title)"')
 
         # Filter out the focused tab and prepare the list for fzf
         # Format: "last_directory (id: tab_id) | full_path | tab_id"
