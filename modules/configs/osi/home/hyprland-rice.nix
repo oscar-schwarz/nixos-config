@@ -79,7 +79,7 @@ in {
   # Hyprland itself
   wayland.windowManager.hyprland = {
     plugins = with pkgs.hyprlandPlugins; [
-      # hyprfocus # currently broken
+      # hyprfocus # currently broken in nixpkgs
     ];
 
     settings = {

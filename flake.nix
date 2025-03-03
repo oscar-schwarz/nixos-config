@@ -71,11 +71,6 @@
       url = "github:oscar-schwarz/libfprint-goodix-55b4";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # Hyprland plugin (the version in nixpkgs is broken)
-    hyprfocus = {
-      url = "github:daxisunder/hyprfocus";
-    };
   };
 
   outputs = {nixpkgs, ...} @ inputs: with nixpkgs.lib; with builtins; let
@@ -123,9 +118,6 @@
                   matcha = matcha.packages.${prev.system}.default;
                   eduroam = eduroam.packages.${prev.system};
                   hyprpolkitagent = hyprpolkitagent.packages.${prev.system}.default;
-                  hyprlandPlugins = prev.hyprlandPlugins // {
-                    hyprfocus = hyprfocus.packages.${prev.system}.default;
-                  };
                 }
               )
             ];
