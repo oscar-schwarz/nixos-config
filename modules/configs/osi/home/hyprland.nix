@@ -69,11 +69,7 @@
             --layout=reverse \
             --border=rounded \
             --margin=10%,10% \
-            --padding=1 \
-            --with-nth=1 \
-            --delimiter=' | ' \
-            --preview='echo {2}' \
-            --preview-window=up:1)
+            --padding=1)
 
         # If a tab was selected, focus on that tab using its ID
         if [ -n "$selected" ]; then
