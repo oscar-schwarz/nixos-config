@@ -48,8 +48,7 @@
     enable = true;
     settings = {
       enable_audio_bell = "no";
-      enable_remote_control = "yes";
-      enable_remote_control_from = "localhost";
+      allow_remote_control = "yes";
     };
     extraConfig = ''
       # Thanks a lot to https://github.com/kovidgoyal/kitty-fosshack2024/issues/1
