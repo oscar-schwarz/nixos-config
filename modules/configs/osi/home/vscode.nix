@@ -1,4 +1,4 @@
-{ pkgs, lib, inputs, config, ... }:
+{ pkgs, lib, inputs, config, nixosConfig, ... }:
 
 let
   vscodeExts = inputs.nix-vscode-extensions.extensions.x86_64-linux;
@@ -87,10 +87,10 @@ in {
           };
           options = {
             nixos = {
-                expr = ''(builtins.getFlake "/home/osi/nixos").nixosConfigurations.default.options'';
+                expr = ''(builtins.getFlake "${./.}").nixosConfigurations.${nixosConfig.networking.hostName}.options'';
             };
             home-manager = {
-                expr = ''(builtins.getFlake "/home/osi/nixos").homeConfigurations.default.options'';
+                expr = ''(builtins.getFlake "${./.}").nixosConfigurations.${nixosConfig.networking.hostName}.options.home-manager.${config.home.username}'';
             };
           };
         };
@@ -261,7 +261,6 @@ in {
       davidlgoldberg.jumpy2 # jumping cursors with short letter combo
       eamodio.gitlens # useful for git blame inline
       saoudrizwan.claude-dev # llm help
-      feiskyer.chatgpt-copilot
 
       # --- PHP ---
       zobo.php-intellisense # intellisense
