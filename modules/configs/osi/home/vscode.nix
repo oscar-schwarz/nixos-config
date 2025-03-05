@@ -69,6 +69,9 @@ in {
       "zenMode.fullScreen" = false;
       "zenMode.centerLayout" = false;
 
+      # --- CLINE Assistant ---
+      "cline.chromeExecutablePath" = lib.getExe config.programs.chromium.package;
+
       # --- PHP ---
       "php.debug.executablePath" = lib.getExe pkgs.php83;
       "namespaceResolver.autoSort" = false;
@@ -116,8 +119,6 @@ in {
 
       # --- GODOT ---
       "godotTools.editorPath.godot4" = lib.getExe pkgs.godot_4;
-
-
     };
     # Keybindings
     # `when` makes the keybind only available in certain contexts: more on that here
