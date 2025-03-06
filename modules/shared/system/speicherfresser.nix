@@ -21,8 +21,9 @@
       "defaults"
       "noatime"
       "x-systemd.automount"
-      "x-systemd.device-timeout=5"
+      "x-systemd.device-timeout=1"
       "noauto"
+      "nofail"
     ];
   }
   ;
