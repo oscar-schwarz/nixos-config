@@ -76,7 +76,9 @@
   outputs = {nixpkgs, ...} @ inputs: with nixpkgs.lib; with builtins; let
 
     # --- PACKAGES ---
-    packages.x86_64-linux.libfprint-goodixtls-55x4 = import ./pkgs/libfprint-goodixtls-55x4.nix nixpkgs.legacyPackages.x86_64-linux;
+    packages.x86_64-linux = {
+      claude-code = nixpkgs.legacyPackages.x86_64-linux.callPackage ./pkgs/claude-code.nix {};
+    };
 
 
     # --- NIXOS CONFIGURATIONS ---

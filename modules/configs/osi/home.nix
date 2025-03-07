@@ -89,6 +89,8 @@ in {
     xournalpp # stylus note taking app
     gimp # image editor
 
+    # Add AI Tools here when available
+
     # Tools
     wl-clipboard-rs # copy to clipboard from terminal
 
