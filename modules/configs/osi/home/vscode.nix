@@ -41,251 +41,254 @@ in {
           (splitString "\n" prev.preFixup)
       );
     });
-    userSettings = {
-      # --- VSCODE ---
-      # extra stuff turned off
-      "window.commandCenter" = false;
-      "workbench.layoutControl.enabled" = false;
-      "workbench.editor.showTabs" = "none";
-      "window.menuBarVisibility" = "toggle"; # hide menu bar unless alt is pressed
-      "workbench.startupEditor" = "none"; # no welcome page
-      "workbench.editor.editorActionsLocation" = "hidden"; # hide some buttons on the native title ba
-      "security.workspace.trust.enabled" = false; # Trust all workspaces
-      "workbench.sideBar.location" = "right";
-      "window.confirmSaveUntitledWorkspace" = false;
-      # minimap
-      "editor.minimap.maxColumn" = 100;
-      "editor.minimap.showSlider" = "always";
-      "editor.minimap.renderCharacters" = false;
-      # Include git files in file tree and file search
-      "files.exclude" = {
-        "**/.git" = false;
-      };
-      # zen mode settings
-      "zenMode.restore" = true;
-      "zenMode.hideStatusBar" = true;
-      "zenMode.showTabs" = "none";
-      "zenMode.hideLineNumbers" = false;
-      "zenMode.fullScreen" = false;
-      "zenMode.centerLayout" = false;
+    profiles.default = {
+      userSettings = {
+        # --- VSCODE ---
+        # extra stuff turned off
+        "window.commandCenter" = false;
+        "workbench.layoutControl.enabled" = false;
+        "workbench.editor.showTabs" = "none";
+        "window.menuBarVisibility" = "toggle"; # hide menu bar unless alt is pressed
+        "workbench.startupEditor" = "none"; # no welcome page
+        "workbench.editor.editorActionsLocation" = "hidden"; # hide some buttons on the native title ba
+        "security.workspace.trust.enabled" = false; # Trust all workspaces
+        "workbench.sideBar.location" = "right";
+        "window.confirmSaveUntitledWorkspace" = false;
+        # minimap
+        "editor.minimap.maxColumn" = 100;
+        "editor.minimap.showSlider" = "always";
+        "editor.minimap.renderCharacters" = false;
+        # Include git files in file tree and file search
+        "files.exclude" = {
+          "**/.git" = false;
+        };
+        # zen mode settings
+        "zenMode.restore" = true;
+        "zenMode.hideStatusBar" = true;
+        "zenMode.showTabs" = "none";
+        "zenMode.hideLineNumbers" = false;
+        "zenMode.fullScreen" = false;
+        "zenMode.centerLayout" = false;
 
-      # --- CLINE Assistant ---
-      "cline.chromeExecutablePath" = lib.getExe config.programs.chromium.package;
+        # --- CLINE Assistant ---
+        "cline.chromeExecutablePath" = lib.getExe config.programs.chromium.package;
 
-      # --- PHP ---
-      "php.debug.executablePath" = lib.getExe pkgs.php83;
-      "namespaceResolver.autoSort" = false;
+        # --- PHP ---
+        "php.debug.executablePath" = lib.getExe pkgs.php83;
+        "namespaceResolver.autoSort" = false;
 
 
-      # --- NIX ---
-      "nix.enableLanguageServer" = true;
-      "nix.serverPath" = "${lib.getExe pkgs.nixd}";
-      "nix.serverSettings" = {
-        nixd =  {
-          formatting = {
-            command = ["${lib.getExe pkgs.alejandra}"];
-          };
-          options = {
-            nixos = {
-                expr = ''(builtins.getFlake "${./.}").nixosConfigurations.${nixosConfig.networking.hostName}.options'';
+        # --- NIX ---
+        "nix.enableLanguageServer" = true;
+        "nix.serverPath" = "${lib.getExe pkgs.nixd}";
+        "nix.serverSettings" = {
+          nixd =  {
+            formatting = {
+              command = ["${lib.getExe pkgs.alejandra}"];
             };
-            home-manager = {
-                expr = ''(builtins.getFlake "${./.}").nixosConfigurations.${nixosConfig.networking.hostName}.options.home-manager.${config.home.username}'';
+            options = {
+              nixos = {
+                  expr = ''(builtins.getFlake "${../../../..}").nixosConfigurations.${nixosConfig.networking.hostName}.options'';
+              };
+              home-manager = {
+                  # This is the closest i've got to a correct expression, but sadly it doesnt work yet
+                  expr = ''(builtins.getFlake "${../../../..}").nixosConfigurations.${nixosConfig.networking.hostName}.options.home-manager.users.type.nestedTypes.elemType.getSubOptions ["${config.home.username}"]'';
+              };
             };
           };
         };
+
+
+        # --- JAVA ---
+        # All JDKs used for compiling
+        "java.configuration.runtimes" = with pkgs; [
+          {
+            name = "JavaSE-11";
+            path = openjdk11 + "/lib/openjdk";
+          }
+          {
+            name = "JavaSE-17";
+            path = openjdk17 + "/lib/openjdk";
+          }
+          {
+            name = "JavaSE-21";
+            path = openjdk21  + "/lib/openjdk";
+          }
+        ];
+        "java.jdt.ls.java.home" = pkgs.openjdk + "/lib/openjdk"; # JDK used for the language server
+        "java.configuration.detectJdksAtStart" = false; # Do not try to detect JDKs
+
+
+        # --- GODOT ---
+        "godotTools.editorPath.godot4" = lib.getExe pkgs.godot_4;
       };
-
-
-      # --- JAVA ---
-      # All JDKs used for compiling
-      "java.configuration.runtimes" = with pkgs; [
+      # Keybindings
+      # `when` makes the keybind only available in certain contexts: more on that here
+      # https://code.visualstudio.com/api/references/when-clause-contexts
+      keybindings = [
+        # --- MISC ---
         {
-          name = "JavaSE-11";
-          path = openjdk11 + "/lib/openjdk";
+          # Open the search results as a text file in the editor
+          key = "ctrl+enter";
+          command = "search.action.openInEditor";
+          when = "hasSearchResult && searchViewletFocus";
+        }
+        { # open sidebar
+          key = "ctrl+p";
+          command = "workbench.action.toggleSidebarVisibility";
         }
         {
-          name = "JavaSE-17";
-          path = openjdk17 + "/lib/openjdk";
+          key = "ctrl+shift-t";
+          command = "workbench.action.toggleZenMode";
+        }
+
+        # --- CODE NAVIGATION ---
+        {
+          # Go to definition
+          key = "ctrl+k g";
+          command = "editor.action.revealDefinition";
+          when = "editorHasDefinitionProvider && editorTextFocus";
         }
         {
-          name = "JavaSE-21";
-          path = openjdk21  + "/lib/openjdk";
+          # Go to definition (Godot tools)
+          key = "ctrl+k g";
+          command = "godotTools.scenePreview.goToDefinition";
+          when = "editorLangId == gdscript";
+        }
+        {
+          # Find all references of a symbol
+          key = "ctrl+k j";
+          command = "references-view.findReferences";
+          when = "editorHasReferenceProvider";
+        }
+
+
+        # --- GIT ---
+        # Merge conflicts accept
+        {
+          key = "ctrl+k b";
+          command = "merge-conflict.accept.both";
+        }
+        {
+          key = "ctrl+k i";
+          command = "merge-conflict.accept.incoming";
+        }
+        {
+          key = "ctrl+k c";
+          command = "merge-conflict.accept.current";
+        }
+        {
+          key = "ctrl+k t";
+          command = "diffEditor.revert";
+        }
+
+
+        # --- COMMENTS ---
+        { # Line
+          key = "ctrl+/";
+          command = "editor.action.commentLine";
+          when = "editorTextFocus && !editorReadonly";
+        }
+        { # Block
+          key = "ctrl+shift+/";
+          command = "editor.action.blockComment";
+          when = "editorTextFocus && !editorReadonly";
+        }
+        # --- DOCBLOCK ---
+        { # phpDoc
+          key = "ctrl+enter";
+          command = "phpdoc-generator.generatePHPDoc";
+          when = "editorLangId == php";
+        }
+        { # JSDoc
+          key = "ctrl+enter";
+          command = "docthis.documentThis";
+          when = "editorLangId =~ /vue|js|ts|jsx|tsx/";
+        }
+
+
+        # --- IMPORTS ---
+        { # PHP Imports
+          key = "ctrl+o i";
+          command = "namespaceResolver.import";
+          when = "editorLangId == php";
+        }
+
+
+        # --- DEBUGGING ---
+        { # Start debugger
+          key = "ctrl+o e";
+          command = "workbench.action.debug.start";
+          when = "debuggersAvailable && !inDebugMode";
+        }
+        { # Stop debugger
+          key = "ctrl+o e";
+          command = "workbench.action.debug.stop";
+          when = "inDebugMode";
+        }
+        { # Contiune when stopped
+          key = "ctrl+shift+o";
+          command = "workbench.action.debug.continue";
+          when = "inDebugMode";
+        }
+        { # Open watch panel
+          key = "ctrl+o w";
+          command = "workbench.debug.action.focusWatchView";
+          when = "inDebugMode";
+        }
+        { # Add a watch expression
+          key = "shift+enter";
+          command = "workbench.debug.viewlet.action.addWatchExpression";
+          when = "watchExpressionsFocused";
+        }
+        { # Remove all watch expressions (removing one by one is really tedious through keyboard)
+          key = "shift+backspace"; 
+          command = "workbench.debug.viewlet.action.removeAllWatchExpressions";
+          when = "watchExpressionsFocused";
+        }
+        { # Edit a watched expression
+          key = "enter";
+          command = "debug.renameWatchExpression";
+          when = "watchExpressionsFocused";
+        }
+        { # Toggle breakpoint
+          key = "ctrl+o t";
+          command = "editor.debug.action.toggleBreakpoint";
         }
       ];
-      "java.jdt.ls.java.home" = pkgs.openjdk + "/lib/openjdk"; # JDK used for the language server
-      "java.configuration.detectJdksAtStart" = false; # Do not try to detect JDKs
+      extensions = with vscodeExts; with vscode-marketplace; let
+        op-vsx = open-vsx;
+      in [
+        # --- UTILITIES ---
+        davidlgoldberg.jumpy2 # jumping cursors with short letter combo
+        eamodio.gitlens # useful for git blame inline
+        saoudrizwan.claude-dev # llm help
 
+        # --- PHP ---
+        zobo.php-intellisense # intellisense
+        xdebug.php-debug # debugging php applications
+        ronvanderheijden.phpdoc-generator # generate php doc comments
+        mehedidracula.php-namespace-resolver # php everything namespace
 
-      # --- GODOT ---
-      "godotTools.editorPath.godot4" = lib.getExe pkgs.godot_4;
+        # --- NIX ---
+        jnoortheen.nix-ide # nix language features
+
+        # --- NODE ---
+        vue.volar # vue language features
+        oouo-diogo-perdigao.docthis # jsdoc
+
+        # --- JAVA ---
+        redhat.java # language features
+        vscjava.vscode-java-debug # debugger
+        vscjava.vscode-java-dependency # project manager
+
+        # --- GODOT ENGINE ---
+        geequlim.godot-tools
+
+        # --- SQL ---
+        adpyke.vscode-sql-formatter
+      ];
     };
-    # Keybindings
-    # `when` makes the keybind only available in certain contexts: more on that here
-    # https://code.visualstudio.com/api/references/when-clause-contexts
-    keybindings = [
-      # --- MISC ---
-      {
-        # Open the search results as a text file in the editor
-        key = "ctrl+enter";
-        command = "search.action.openInEditor";
-        when = "hasSearchResult && searchViewletFocus";
-      }
-      { # open sidebar
-        key = "ctrl+p";
-        command = "workbench.action.toggleSidebarVisibility";
-      }
-      {
-        key = "ctrl+shift-t";
-        command = "workbench.action.toggleZenMode";
-      }
-
-      # --- CODE NAVIGATION ---
-      {
-        # Go to definition
-        key = "ctrl+k g";
-        command = "editor.action.revealDefinition";
-        when = "editorHasDefinitionProvider && editorTextFocus";
-      }
-      {
-        # Go to definition (Godot tools)
-        key = "ctrl+k g";
-        command = "godotTools.scenePreview.goToDefinition";
-        when = "editorLangId == gdscript";
-      }
-      {
-        # Find all references of a symbol
-        key = "ctrl+k j";
-        command = "references-view.findReferences";
-        when = "editorHasReferenceProvider";
-      }
-
-
-      # --- GIT ---
-      # Merge conflicts accept
-      {
-        key = "ctrl+k b";
-        command = "merge-conflict.accept.both";
-      }
-      {
-        key = "ctrl+k i";
-        command = "merge-conflict.accept.incoming";
-      }
-      {
-        key = "ctrl+k c";
-        command = "merge-conflict.accept.current";
-      }
-      {
-        key = "ctrl+k t";
-        command = "diffEditor.revert";
-      }
-
-
-      # --- COMMENTS ---
-      { # Line
-        key = "ctrl+/";
-        command = "editor.action.commentLine";
-        when = "editorTextFocus && !editorReadonly";
-      }
-      { # Block
-        key = "ctrl+shift+/";
-        command = "editor.action.blockComment";
-        when = "editorTextFocus && !editorReadonly";
-      }
-      # --- DOCBLOCK ---
-      { # phpDoc
-        key = "ctrl+enter";
-        command = "phpdoc-generator.generatePHPDoc";
-        when = "editorLangId == php";
-      }
-      { # JSDoc
-        key = "ctrl+enter";
-        command = "docthis.documentThis";
-        when = "editorLangId =~ /vue|js|ts|jsx|tsx/";
-      }
-
-
-      # --- IMPORTS ---
-      { # PHP Imports
-        key = "ctrl+o i";
-        command = "namespaceResolver.import";
-        when = "editorLangId == php";
-      }
-
-
-      # --- DEBUGGING ---
-      { # Start debugger
-        key = "ctrl+o e";
-        command = "workbench.action.debug.start";
-        when = "debuggersAvailable && !inDebugMode";
-      }
-      { # Stop debugger
-        key = "ctrl+o e";
-        command = "workbench.action.debug.stop";
-        when = "inDebugMode";
-      }
-      { # Contiune when stopped
-        key = "ctrl+shift+o";
-        command = "workbench.action.debug.continue";
-        when = "inDebugMode";
-      }
-      { # Open watch panel
-        key = "ctrl+o w";
-        command = "workbench.debug.action.focusWatchView";
-        when = "inDebugMode";
-      }
-      { # Add a watch expression
-        key = "shift+enter";
-        command = "workbench.debug.viewlet.action.addWatchExpression";
-        when = "watchExpressionsFocused";
-      }
-      { # Remove all watch expressions (removing one by one is really tedious through keyboard)
-        key = "shift+backspace"; 
-        command = "workbench.debug.viewlet.action.removeAllWatchExpressions";
-        when = "watchExpressionsFocused";
-      }
-      { # Edit a watched expression
-        key = "enter";
-        command = "debug.renameWatchExpression";
-        when = "watchExpressionsFocused";
-      }
-      { # Toggle breakpoint
-        key = "ctrl+o t";
-        command = "editor.debug.action.toggleBreakpoint";
-      }
-    ];
-    extensions = with vscodeExts; with vscode-marketplace; let
-      op-vsx = open-vsx;
-    in [
-      # --- UTILITIES ---
-      davidlgoldberg.jumpy2 # jumping cursors with short letter combo
-      eamodio.gitlens # useful for git blame inline
-      saoudrizwan.claude-dev # llm help
-
-      # --- PHP ---
-      zobo.php-intellisense # intellisense
-      xdebug.php-debug # debugging php applications
-      ronvanderheijden.phpdoc-generator # generate php doc comments
-      mehedidracula.php-namespace-resolver # php everything namespace
-
-      # --- NIX ---
-      jnoortheen.nix-ide # nix language features
-
-      # --- NODE ---
-      vue.volar # vue language features
-      oouo-diogo-perdigao.docthis # jsdoc
-
-      # --- JAVA ---
-      redhat.java # language features
-      vscjava.vscode-java-debug # debugger
-      vscjava.vscode-java-dependency # project manager
-
-      # --- GODOT ENGINE ---
-      geequlim.godot-tools
-
-      # --- SQL ---
-      adpyke.vscode-sql-formatter
-    ];
   };
 
   # Set VSCodium to be git editor

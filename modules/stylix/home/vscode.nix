@@ -1,7 +1,7 @@
 { config, lib, ... }:
 with config.stylix.fonts;
 {
-  programs.vscode.userSettings = {
+  programs.vscode.profiles.default.userSettings = {
     "editor.fontSize" = lib.mkForce sizes.applications;
     "debug.console.fontSize" = lib.mkForce sizes.applications;
     "markdown.preview.fontSize" = lib.mkForce sizes.applications;

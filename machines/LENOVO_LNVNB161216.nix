@@ -10,7 +10,7 @@
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "uas" "usb_storage" "usbhid" "sd_mod" "sdhci_pci" "i915" ];
-  boot.initrd.kernelModules = [ ];
+  boot.initrd.kernelModules = [ "i915" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
@@ -24,24 +24,16 @@
       device = "/dev/disk/by-uuid/ff0fdffe-9e8d-4956-92ef-ce2317629a32";
       # About key enrolling: https://nixos.org/manual/nixos/stable/#sec-luks-file-systems-fido2
       # sudo systemd-cryptenroll --fido2-device=auto --fido2-with-user-presence=false --fido2-with-user-verification=true /dev/disk/by-uuid/ff0fdffe-9e8d-4956-92ef-ce2317629a32
-      crypttabExtraOpts = [ "fido2-device=auto" ];
+      crypttabExtraOpts = [ "fido2-device=auto" "token-timeout=2" ];
     };
     systemd.enable = true;
     luks.fido2Support = false; # because systemd
-    
-    # Add systemd timeout configuration for faster boot
-    systemd = {
-      extraConfig = ''
-        [Manager]
-        DefaultTimeoutStartSec=10s
-      '';
-    };
   };
 
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/8DFC-47EE";
       fsType = "vfat";
-      options = [ "fmask=0022" "dmask=0022" ];
+      options = [ "fmask=0022" "dmask=0022" "noatime" ];
     };
 
   swapDevices = [ {
@@ -63,13 +55,8 @@
       "rd.systemd.show_status=false"
       "rd.udev.log_level=3"
       "udev.log_priority=3"
-      # Disable serial console to prevent long timeouts
+      # Use only the primary console, disable serial console
       "console=tty0"
-      # Disable serial ports that cause long timeouts
-      "systemd.mask=serial-getty@ttyS0.service"
-      "systemd.mask=serial-getty@ttyS1.service" 
-      "systemd.mask=serial-getty@ttyS2.service"
-      "systemd.mask=serial-getty@ttyS3.service"
     ];
     # Hide the OS choice for bootloaders.
     # It's still possible to open the bootloader list by pressing any key
@@ -77,10 +64,6 @@
     loader.timeout = 0;
   };
   boot.initrd.verbose = false;
-
-  # Disable services that slow down boot time
-  systemd.services.NetworkManager-wait-online.enable = false;
-  systemd.services.systemd-udev-settle.enable = false;
 
   # Enable bluetooth
   hardware.bluetooth.enable = true;

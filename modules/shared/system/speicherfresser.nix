@@ -21,9 +21,10 @@
       "defaults"
       "noatime"
       "x-systemd.automount"
-      "x-systemd.device-timeout=1"
+      "x-systemd.device-timeout=0"
+      "x-systemd.idle-timeout=60"
       "noauto"
-      "nofail"
+      "x-systemd.requires=multi-user.target"
     ];
   }
   ;

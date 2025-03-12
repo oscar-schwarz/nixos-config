@@ -60,9 +60,13 @@
 			};
 
       Bookmarks = [
-        {
+        { # to search nixpkgs and options
           Title = "MyNixOS";
           URL = "https://mynixos.com";
+        }
+        { # to search nix functions
+          Title = "Noogle";
+          URL = "https://noogle.dev";
         }
         {
           Title = "Spotify";
