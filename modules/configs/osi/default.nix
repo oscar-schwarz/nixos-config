@@ -74,6 +74,7 @@
     cups.fprintAuth = false;
     greetd.fprintAuth = false;
   };
+
   # Syncthing
   services.syncthing = {
     enable = true;

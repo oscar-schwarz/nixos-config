@@ -262,7 +262,7 @@ in {
         # --- UTILITIES ---
         davidlgoldberg.jumpy2 # jumping cursors with short letter combo
         eamodio.gitlens # useful for git blame inline
-        saoudrizwan.claude-dev # llm help
+        saoudrizwan.claude-dev # llm coding agent
 
         # --- PHP ---
         zobo.php-intellisense # intellisense
