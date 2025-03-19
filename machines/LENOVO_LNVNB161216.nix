@@ -24,9 +24,17 @@
       device = "/dev/disk/by-uuid/ff0fdffe-9e8d-4956-92ef-ce2317629a32";
       # About key enrolling: https://nixos.org/manual/nixos/stable/#sec-luks-file-systems-fido2
       # sudo systemd-cryptenroll --fido2-device=auto --fido2-with-user-presence=false --fido2-with-user-verification=true /dev/disk/by-uuid/ff0fdffe-9e8d-4956-92ef-ce2317629a32
-      crypttabExtraOpts = [ "fido2-device=auto" "token-timeout=2" ];
+      crypttabExtraOpts = [ 
+        "fido2-device=auto"
+        "token-timeout=5"
+        # you can always just restart the machine and the counter will be reset, so I can also just give infinite tries
+        "tries=0" 
+      ];
     };
-    systemd.enable = true;
+    systemd = {
+      enable = true;
+      fido2.enable = true;
+    };
     luks.fido2Support = false; # because systemd
   };
 
@@ -51,6 +59,8 @@
       "quiet"
       "splash"
       "boot.shell_on_fail"
+      # Enable early KMS for external monitors during boot
+      "i915.modeset=1"
     ];
     # Hide the OS choice for bootloaders.
     # It's still possible to open the bootloader list by pressing any key
