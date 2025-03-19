@@ -59,9 +59,10 @@
       "quiet"
       "splash"
       "boot.shell_on_fail"
-      # Enable early KMS for external monitors during boot
-      "i915.modeset=1"
-      "i915.enable_guc=1"
+      "loglevel=3"
+      "rd.systemd.show_status=false"
+      "rd.udev.log_level=3"
+      "udev.log_priority=3"
     ];
     # Hide the OS choice for bootloaders.
     # It's still possible to open the bootloader list by pressing any key
