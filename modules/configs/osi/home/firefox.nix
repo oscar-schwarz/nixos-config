@@ -71,7 +71,7 @@ in {
         }
         {
           Title = "Spotify";
-          URL = "https://accounts.spotify.com/en/login?continue=https%3A%2F%2Fopen.spotify.com%2F";
+          URL = "https://open.spotify.com/";
         }
         {
           Title = "DuckDuckGo";
