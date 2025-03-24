@@ -147,7 +147,7 @@ in {
 
         # --- EXTENSIONS ---
         { # open cline (when not yet opened)
-          key = "ctrl+shift+c";
+          key = "ctrl+o c";
           command = "runCommands";
           when = "!multipleEditorGroups";
           args = {
@@ -167,7 +167,7 @@ in {
           };
         }
         { # close cline
-          key = "ctrl+shift+c";
+          key = "ctrl+o c";
           command = "runCommands";
           when = "multipleEditorGroups";
           args = {
