@@ -151,8 +151,16 @@ in {
           command = "runCommands";
           args = {
             commands = [
-            "cline.popoutButtonClicked"
-            "workbench.action.editorLayoutSingle" # enforce single editor layout because cline opens in new tab
+              "cline.openInNewTab" # opens the cline window in a tab
+              "workbench.action.moveActiveEditorGroupDown" # moves the tab below the actual code
+
+              # shrink the cline tab a couple of times
+              "workbench.action.decreaseViewHeight"
+              "workbench.action.decreaseViewHeight"
+              "workbench.action.decreaseViewHeight"
+              "workbench.action.decreaseViewHeight"
+              "workbench.action.decreaseViewHeight"
+              "workbench.action.decreaseViewHeight"  
             ];
           };
         }
