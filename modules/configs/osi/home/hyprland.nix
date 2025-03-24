@@ -343,7 +343,7 @@
       # --- WINDOW RULES
       windowrulev2 = [
         # by default tile all windows
-        "float"
+        # "float"
 
         "stayfocused, title:^Hyprland Polkit Agent$"
         # "dimaround, title:^Hyprland Polkit Agent$"
