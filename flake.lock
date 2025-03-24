@@ -282,11 +282,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1740432748,
-        "narHash": "sha256-BCeFtoJ/+LrZc03viRJWHfzAqqG8gPu/ikZeurv05xs=",
+        "lastModified": 1742771635,
+        "narHash": "sha256-HQHzQPrg+g22tb3/K/4tgJjPzM+/5jbaujCZd8s2Mls=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "c12dcc9b61429b2ad437a7d4974399ad8f910319",
+        "rev": "ad0614a1ec9cce3b13169e20ceb7e55dfaf2a818",
         "type": "github"
       },
       "original": {
@@ -451,11 +451,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1738448307,
-        "narHash": "sha256-jRmfa28gVEDyS7We881BJDpr6L1kla0AgpEWjZ04tZo=",
+        "lastModified": 1741141119,
+        "narHash": "sha256-ARBFpi7jAsRUvY+c/diTgV05FBbc2CWPPjr6ww34CaQ=",
         "ref": "refs/heads/main",
-        "rev": "90721110060e6b870839df847601d79f9a7a6461",
-        "revCount": 28,
+        "rev": "d01dc37aad63ee6e0ee1f1b50583ffb318f54afb",
+        "revCount": 29,
         "type": "git",
         "url": "https://codeberg.org/QuincePie/matcha"
       },
@@ -472,11 +472,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1741185283,
-        "narHash": "sha256-Wk+2uWk4WhtB1LtXt3smd0K2JZ5qeZj9LldGTmfEldo=",
+        "lastModified": 1742781383,
+        "narHash": "sha256-g+TAGMNkJ669vLl6nq4O0aHNa/KT4H2g8e3kzDmnssk=",
         "owner": "nix-community",
         "repo": "nix-vscode-extensions",
-        "rev": "c7a72aa0e5f72bc6a9d8dfaf33e4de013c960f7b",
+        "rev": "8d45d9226f50d7affbe1052d8b15591796445214",
         "type": "github"
       },
       "original": {
@@ -564,11 +564,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1740473538,
-        "narHash": "sha256-vxkedmFnOaTusauntx3xW9/5bzjxwAr0n3kGb1+xSH0=",
+        "lastModified": 1742805932,
+        "narHash": "sha256-WkhBaK/sY7mEcxjI3BuMhIJAimTSHWPdonKqrS5mX8s=",
         "owner": "wamserma",
         "repo": "flake-programs-sqlite",
-        "rev": "b3ba5d8905a3c029917be781bd64f28ae4d57bd9",
+        "rev": "e957e7d251f0cda91b22ad2e0e63832c08bc1284",
         "type": "github"
       },
       "original": {
@@ -600,11 +600,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1739262228,
-        "narHash": "sha256-7JAGezJ0Dn5qIyA2+T4Dt/xQgAbhCglh6lzCekTVMeU=",
+        "lastModified": 1742700801,
+        "narHash": "sha256-ZGlpUDsuBdeZeTNgoMv+aw0ByXT2J3wkYw9kJwkAS4M=",
         "owner": "Mic92",
         "repo": "sops-nix",
-        "rev": "07af005bb7d60c7f118d9d9f5530485da5d1e975",
+        "rev": "67566fe68a8bed2a7b1175fdfb0697ed22ae8852",
         "type": "github"
       },
       "original": {
