@@ -147,7 +147,7 @@ in {
 
         # --- EXTENSIONS ---
         { # open cline (when not yet opened)
-          key = "ctrl+o c";
+          key = "ctrl+shift+c";
           command = "runCommands";
           when = "!multipleEditorGroups";
           args = {
@@ -166,10 +166,16 @@ in {
             ];
           };
         }
-        { # focus cline (same command but already opened)
-          key = "ctrl+o c";
-          command = "workbench.action.focusLastEditorGroup";
+        { # close cline
+          key = "ctrl+shift+c";
+          command = "runCommands";
           when = "multipleEditorGroups";
+          args = {
+            commands = [
+              "workbench.action.editorLayoutSingle"
+              "workbench.action.closeActiveEditor"
+            ];
+          };
         }
 
         # --- CODE NAVIGATION ---
