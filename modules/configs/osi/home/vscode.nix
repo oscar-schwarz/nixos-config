@@ -54,6 +54,9 @@ in {
         "security.workspace.trust.enabled" = false; # Trust all workspaces
         "workbench.sideBar.location" = "right";
         "window.confirmSaveUntitledWorkspace" = false;
+        # hide title bar
+        "window.titleBarStyle" = "native";
+        "window.customTitleBarVisibility" = "never";
         # minimap
         "editor.minimap.maxColumn" = 100;
         "editor.minimap.showSlider" = "always";
