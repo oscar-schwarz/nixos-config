@@ -146,9 +146,10 @@ in {
         }
 
         # --- EXTENSIONS ---
-        { # open cline in new editor
+        { # open cline (when not yet opened)
           key = "ctrl+o c";
           command = "runCommands";
+          when = "!multipleEditorGroups";
           args = {
             commands = [
               "cline.openInNewTab" # opens the cline window in a tab
@@ -160,8 +161,15 @@ in {
               "workbench.action.decreaseViewHeight"
               "workbench.action.decreaseViewHeight"
               "workbench.action.decreaseViewHeight"
+              "workbench.action.decreaseViewHeight"
+              "workbench.action.decreaseViewHeight"
             ];
           };
+        }
+        { # focus cline (same command but already opened)
+          key = "ctrl+o c";
+          command = "workbench.action.focusLastEditorGroup";
+          when = "multipleEditorGroups";
         }
 
         # --- CODE NAVIGATION ---
