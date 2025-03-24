@@ -4,6 +4,7 @@
   inputs = {
     # Nix packages
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/release-24.11";
 
     # HOME MANAGER - for all user related stuff
     home-manager = {
@@ -116,7 +117,14 @@
             nixpkgs.overlays = with inputs; [
               # Add packages of the flakes in an overlay
               (
-                final: prev: {
+                final: prev: let stable = nixpkgs-stable.legacyPackages.${prev.system}; in {
+                  # to access stable packages
+                  inherit stable;
+
+                  # stable packages
+                  auto-cpufreq = stable.auto-cpufreq;
+
+                  # custom flake packages
                   matcha = matcha.packages.${prev.system}.default;
                   eduroam = eduroam.packages.${prev.system};
                   hyprpolkitagent = hyprpolkitagent.packages.${prev.system}.default;
