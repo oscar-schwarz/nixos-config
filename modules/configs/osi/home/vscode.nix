@@ -147,10 +147,6 @@ in {
           key = "ctrl+o c";
           command = "cline.popoutButtonClicked";
         }
-        { # enforce single editor layout (in addition to new tab in cline)
-          key = "ctrl+o c";
-          command = "workbench.action.editorLayoutSingle";
-        }
 
         # --- CODE NAVIGATION ---
         {
@@ -170,6 +166,11 @@ in {
           key = "ctrl+k j";
           command = "references-view.findReferences";
           when = "editorHasReferenceProvider";
+        }
+        {
+          # enforce single colmn layout
+          key = "ctrl+shift+c";
+          command = "workbench.action.editorLayoutSingle";
         }
 
 
