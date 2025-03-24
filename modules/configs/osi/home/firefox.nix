@@ -1,6 +1,8 @@
 { pkgs, lib, config, inputs, ... }: 
 
-{
+let 
+  packageName = "librewolf";
+in {
   # Make firefox default
   xdg.mimeApps.defaultApplications = lib.attrsets.genAttrs [
     
@@ -13,14 +15,14 @@
     # Open PDF Files with firefox
     "application/pdf"
 
-  ] (type: "firefox.desktop");
+  ] (type: "${packageName}.desktop");
   home.sessionVariables.DEFAULT_BROWSER = lib.getExe config.programs.firefox.package;
 
 
   # Install firefox.
   programs.firefox = {
     enable = true;
-    package = pkgs.firefox;
+    package = pkgs.${packageName};
 
     # Some installation-wide settings and extensions
     # https://mozilla.github.io/policy-templates/
@@ -56,7 +58,6 @@
 				Cryptomining = true;
 				Fingerprinting = true;
 				EmailTracking = true;
-				# Exceptions = ["https://example.com"]
 			};
 
       Bookmarks = [
@@ -87,6 +88,10 @@
         {
           Title = "Syncthing Web GUI";
           URL = "http://127.0.0.1:8384/";
+        }
+        {
+          Title = "Hyprland Wiki";
+          URL = "https://wiki.hyprland.org/";
         }
       ];
       SanitizeOnShutdown = {
@@ -138,10 +143,6 @@
         # DuckDuckGo, this extension sets the default search engine to ddg
         "jid1-ZAdIEUB7XOzOJw@jetpack" = {
           install_url = "https://addons.mozilla.org/firefox/downloads/file/4325805/duckduckgo_for_firefox-2024.7.24.xpi";
-          installation_mode = "force_installed";
-        };
-        "{b1d62f2f-9e58-4608-8e2a-c8300e04e983}" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/file/4302961/tweak_extension-8.3.0.xpi";
           installation_mode = "force_installed";
         };
       };

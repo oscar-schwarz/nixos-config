@@ -237,15 +237,7 @@
           # Terminal
           "$meta, N, exec, kitty"
           # Firefox (or LibreWolf?)
-          "$meta, I, exec, ${pkgs.writeShellScript "" ''
-            # Test if librewolf is installed, if so run it
-            if which librewolf; then
-              librewolf
-            # Fallback to firefox
-            else
-              firefox
-            fi
-          ''}"
+          "$meta, I, exec, ${config.programs.firefox.package}"
 
           # Rofi menus
           # launcher
@@ -350,6 +342,9 @@
 
       # --- WINDOW RULES
       windowrulev2 = [
+        # by default tile all windows
+        "float"
+
         "stayfocused, title:^Hyprland Polkit Agent$"
         # "dimaround, title:^Hyprland Polkit Agent$"
         "float, title:.*\\(DEBUG\\)$,class:Godot"
