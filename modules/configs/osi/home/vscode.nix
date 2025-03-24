@@ -154,13 +154,16 @@ in {
               "cline.openInNewTab" # opens the cline window in a tab
               "workbench.action.moveActiveEditorGroupDown" # moves the tab below the actual code
 
-              # shrink the cline tab a couple of times
+              # shrink the cline tab a couple of times to a reasonable size
               "workbench.action.decreaseViewHeight"
               "workbench.action.decreaseViewHeight"
               "workbench.action.decreaseViewHeight"
               "workbench.action.decreaseViewHeight"
               "workbench.action.decreaseViewHeight"
-              "workbench.action.decreaseViewHeight"  
+              "workbench.action.decreaseViewHeight"
+              "workbench.action.decreaseViewHeight"
+              "workbench.action.decreaseViewHeight"
+              "workbench.action.decreaseViewHeight"
             ];
           };
         }
