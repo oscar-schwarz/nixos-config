@@ -160,10 +160,6 @@ in {
               "workbench.action.decreaseViewHeight"
               "workbench.action.decreaseViewHeight"
               "workbench.action.decreaseViewHeight"
-              "workbench.action.decreaseViewHeight"
-              "workbench.action.decreaseViewHeight"
-              "workbench.action.decreaseViewHeight"
-              "workbench.action.decreaseViewHeight"
             ];
           };
         }
