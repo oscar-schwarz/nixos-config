@@ -352,6 +352,8 @@
       windowrulev2 = [
         "stayfocused, title:^Hyprland Polkit Agent$"
         # "dimaround, title:^Hyprland Polkit Agent$"
+        "float, title:.*\\(DEBUG\\)$,class:Godot"
+        "tile, title:.*Godot Engine$"
       ];
 
       # --- HYPRGRASS PLUGIN
