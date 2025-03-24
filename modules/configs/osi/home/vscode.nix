@@ -142,6 +142,16 @@ in {
           command = "workbench.action.toggleZenMode";
         }
 
+        # --- EXTENSIONS ---
+        { # open cline in new editor
+          key = "ctrl+o c";
+          command = "cline.popoutButtonClicked";
+        }
+        { # enforce single editor layout (in addition to new tab in cline)
+          key = "ctrl+o c";
+          command = "workbench.action.editorLayoutSingle";
+        }
+
         # --- CODE NAVIGATION ---
         {
           # Go to definition
