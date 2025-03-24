@@ -156,14 +156,7 @@ in {
               "workbench.action.moveActiveEditorGroupDown" # moves the tab below the actual code
 
               # shrink the cline tab a couple of times to a reasonable size
-              "workbench.action.decreaseViewHeight"
-              "workbench.action.decreaseViewHeight"
-              "workbench.action.decreaseViewHeight"
-              "workbench.action.decreaseViewHeight"
-              "workbench.action.decreaseViewHeight"
-              "workbench.action.decreaseViewHeight"
-              "workbench.action.decreaseViewHeight"
-            ];
+            ] ++ (lib.lists.replicate 7 "workbench.action.decreaseViewHeight");
           };
         }
         { # close cline
