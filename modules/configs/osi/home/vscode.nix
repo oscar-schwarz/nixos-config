@@ -145,7 +145,11 @@ in {
         # --- EXTENSIONS ---
         { # open cline in new editor
           key = "ctrl+o c";
-          command = "cline.popoutButtonClicked";
+          command = "runCommands";
+          args = [
+            "cline.popoutButtonClicked"
+            "workbench.action.editorLayoutSingle" # enforce single editor layout because cline opens in new tab
+          ];
         }
 
         # --- CODE NAVIGATION ---
