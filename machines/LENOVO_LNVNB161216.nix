@@ -76,11 +76,7 @@
 
   # The laptop has a fingerprint sensor, enabling it here
   # Make sure to patch the firmware: https://github.com/goodix-fp-linux-dev/goodix-fp-dump
-  services.fprintd = {
-    package = pkgs.fprintd.override {
-      libfprint = inputs.libfprint-goodix-55b4.packages.x86_64-linux.default;
-    };
-  };
+  services.fprintd.package = inputs.libfprint-goodix-55b4.packages.x86_64-linux.fprintd;
 
   # Power management using auto-cpufreq
   powerManagement.enable = true; # basic NixOS powermanagement
