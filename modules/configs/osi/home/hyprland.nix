@@ -202,7 +202,7 @@
         };
 
         tablet = {
-          output = "current";
+          output = "eDP-1";
         };
       };
 
