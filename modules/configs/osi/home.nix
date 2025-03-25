@@ -88,6 +88,7 @@ in {
     vlc # Media Player
     xournalpp # stylus note taking app
     gimp # image editor
+    obs-studio # screen capture goat
 
     # Add AI Tools here when available
 
