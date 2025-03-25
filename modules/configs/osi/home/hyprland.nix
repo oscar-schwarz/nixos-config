@@ -200,6 +200,10 @@
         touchpad = {
           clickfinger_behavior = true;
         };
+
+        tablet = {
+          output = "current";
+        };
       };
 
 
