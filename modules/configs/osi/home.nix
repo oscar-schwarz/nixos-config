@@ -89,6 +89,7 @@ in {
     xournalpp # stylus note taking app
     gimp # image editor
     obs-studio # screen capture goat
+    krita # best drawing
 
     # Add AI Tools here when available
 
