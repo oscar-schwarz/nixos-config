@@ -93,6 +93,7 @@ in {
         "uBlock0@raymondhill.net" = {
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
           installation_mode = "force_installed";
+          private_browsing = true;
         };
         # Dark Mode for every website
         "addon@darkreader.org" = {
@@ -113,6 +114,7 @@ in {
         "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = {
           install_url = "https://addons.mozilla.org/firefox/downloads/file/4259790/vimium_ff-2.1.2.xpi";
           installation_mode = "force_installed";
+          private_browsing = true;
         };
         # Vue.js Devtools
         "{5caff8cc-3d2e-4110-a88a-003cc85b3858}" = {
@@ -133,8 +135,10 @@ in {
         Locked = true; # only allow changing setting here
       };
       FirefoxSuggest = {
+        WebSuggestions = false;
         SponsoredSuggestions = false;
         ImproveSuggest = false;
+        Locked = true;
       };
       NewTabPage = false;
       NoDefaultBookmarks = true;
