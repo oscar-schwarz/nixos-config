@@ -165,7 +165,6 @@ in {
       PostQuantumKeyAgreementEnabled = true;
       Preferences = {
           "browser.startup.homepage" = "";
-          "keyword.enabled" = false; # disable google etc search with @google
       };
       PromptForDownloadLocation = false;
       SanitizeOnShutdown = {
@@ -174,7 +173,7 @@ in {
         # History = true;
         Locked = true;
       };
-      SearchBar = "unified"; # alternative: "separate"
+      SearchBar = "seperate"; # alternative: "separate"
       SearchSuggestEnabled = false;
       ShowHomeButton = false;
       TranslateEnabled = false;
