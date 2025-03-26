@@ -27,39 +27,8 @@ in {
     # Some installation-wide settings and extensions
     # https://mozilla.github.io/policy-templates/
     policies = {
-      Cookies = {
-        Behavior = "reject-foreign";
-      };
-			AppAutoUpdate = false; # Disable automatic application update
-			BackgroundAppUpdate = false; # Disable automatic application update in the background, when the application is not running.
-
-			DisableFirefoxStudies = true;
-			DisableFirefoxAccounts = true; # Disable Firefox Sync
-			DisableFirefoxScreenshots = true; # No screenshots?
-
-			DisableForgetButton = true; # Thing that can wipe history for X time, handled differently
-
-			DisableProfileImport = true; # Purity enforcement: Only allow nix-defined profiles
-			DisableProfileRefresh = true; # Disable the Refresh Firefox button on about:support and support.mozilla.org
-
-			DisableSetDesktopBackground = true; # Remove the “Set As Desktop Background…” menuitem when right clicking on an image, because Nix is the only thing that can manage the backgroud
-
-			DisplayMenuBar = "default-off";
-			DisablePocket = true;
-			DisableTelemetry = true;
-			DisableFormHistory = true;
-			DisablePasswordReveal = true;
-			DontCheckDefaultBrowser = true;
-			OfferToSaveLogins = true;
-
-			EnableTrackingProtection = {
-				Value = true;
-				Locked = true;
-				Cryptomining = true;
-				Fingerprinting = true;
-				EmailTracking = true;
-			};
-
+      AppAutoUpdate = false; # Disable automatic application update
+      BackgroundAppUpdate = false; # Disable automatic application update in the background, when the application is not running.
       Bookmarks = [
         { # to search nixpkgs and options
           Title = "MyNixOS";
@@ -94,21 +63,31 @@ in {
           URL = "https://wiki.hyprland.org/";
         }
       ];
-      SanitizeOnShutdown = {
-        Cache = true;
-        History = false;
+      Cookies = {
+        Behavior = "reject-foreign";
       };
-
+      DisableAccounts = true;
+      DisableFirefoxAccounts = true; # Disable Firefox Sync
+      DisableFirefoxScreenshots = true; # No screenshots
+      DisableFirefoxStudies = true;
+      DisableForgetButton = true; # Thing that can wipe history for X time, handled differently
+      DisableFormHistory = true;
+      DisablePasswordReveal = true;
+      DisablePocket = true;
+      DisableProfileImport = true; # Purity enforcement: Only allow nix-defined profiles
+      DisableProfileRefresh = true; # Disable the Refresh Firefox button on about:support and support.mozilla.org
+      DisableSetDesktopBackground = true; # Remove the “Set As Desktop Background…” menuitem when right clicking on an image, because Nix is the only thing that can manage the backgroud
+      DisableTelemetry = true;
+      DisplayMenuBar = "default-off";
       DisplayBookmarksToolbar = "never"; # alternatives: "always" or "newtab"
-      SearchBar = "unified"; # alternative: "separate"
-      TranslateEnabled = false;
-
-      # Disable first run page
-      OverrideFirstRunPage = "";
-      OverridePostUpdatePage = "";
-
-      NewTabPage = false;
-
+      DontCheckDefaultBrowser = true;
+      EnableTrackingProtection = {
+        Value = true;
+        Locked = true;
+        Cryptomining = true;
+        Fingerprinting = true;
+        EmailTracking = true;
+      };
       ExtensionSettings = {
         # uBlock Origin
         "uBlock0@raymondhill.net" = {
@@ -146,14 +125,59 @@ in {
           installation_mode = "force_installed";
         };
       };
-    };
-    profiles = {
-      default = {
-        isDefault = true;
-        settings = {
+      FirefoxHome = {
+        TopSites = false;
+        SponsoredTopSites = false;
+        Highlights = false;
+        Snippets = false;
+        Locked = true; # only allow changing setting here
+      };
+      FirefoxSuggest = {
+        SponsoredSuggestions = false;
+        ImproveSuggest = false;
+      };
+      NewTabPage = false;
+      OfferToSaveLogins = true;
+      # Disable first run page
+      OverrideFirstRunPage = "";
+      OverridePostUpdatePage = "";
+      Permissions = {
+        Location = {
+          BlockNewRequests = true;
+          Locked = true;
+        };
+        Notifications = {
+          BlockNewRequests = true;
+          Locked = true;
+        };
+        Autoplay = {
+          Default = "block-audio-video";
+          Locked = true;
+        };
+      };
+      PostQuantumKeyAgreementEnabled = true;
+      Preferences = {
           "browser.urlbar.suggest.searches" = false;
           "browser.startup.homepage" = "about:blank";
-        };
+      };
+      PromptForDownloadLocation = false;
+      SanitizeOnShutdown = {
+        Cache = true;
+        Sessions = true;
+        # History = true;
+        Locked = true;
+      };
+      SearchBar = "unified"; # alternative: "separate"
+      ShowHomeButton = false;
+      TranslateEnabled = false;
+      UserMessaging = {
+        ExtensionRecommendations = false;
+        FeatureRecommendations = false;
+        UrlbarInterventions = false;
+        SkipOnboarding = false;
+        MoreFromMozilla = false;
+        FirefoxLabs = false;
+        Locked = true;
       };
     };
   };
