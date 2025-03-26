@@ -136,7 +136,8 @@ in {
         SponsoredSuggestions = false;
         ImproveSuggest = false;
       };
-      NewTabPage = true;
+      NewTabPage = false;
+      NoDefaultBookmarks = true;
       OfferToSaveLogins = true;
       # Disable first run page
       OverrideFirstRunPage = "";
@@ -157,8 +158,7 @@ in {
       };
       PostQuantumKeyAgreementEnabled = true;
       Preferences = {
-          "browser.urlbar.suggest.searches" = false;
-          "browser.startup.homepage" = "https://duckduckgo.com";
+          "browser.startup.homepage" = "";
       };
       PromptForDownloadLocation = false;
       SanitizeOnShutdown = {
@@ -168,6 +168,7 @@ in {
         Locked = true;
       };
       SearchBar = "unified"; # alternative: "separate"
+      SearchSuggestEnabled = false;
       ShowHomeButton = false;
       TranslateEnabled = false;
       UserMessaging = {
