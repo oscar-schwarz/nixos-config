@@ -158,7 +158,7 @@ in {
       PostQuantumKeyAgreementEnabled = true;
       Preferences = {
           "browser.urlbar.suggest.searches" = false;
-          "browser.startup.homepage" = "about:blank";
+          "browser.startup.homepage" = "https://duckduckgo.com";
       };
       PromptForDownloadLocation = false;
       SanitizeOnShutdown = {
