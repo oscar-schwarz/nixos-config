@@ -136,7 +136,7 @@ in {
         SponsoredSuggestions = false;
         ImproveSuggest = false;
       };
-      NewTabPage = false;
+      NewTabPage = true;
       OfferToSaveLogins = true;
       # Disable first run page
       OverrideFirstRunPage = "";
