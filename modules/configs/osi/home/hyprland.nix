@@ -241,7 +241,7 @@
           # Terminal
           "$meta, N, exec, kitty"
           # Firefox (or LibreWolf?)
-          "$meta, I, exec, ${config.programs.firefox.package.name}"
+          "$meta, I, exec, ${config.programs.firefox.package.meta.mainProgram}"
 
           # Rofi menus
           # launcher
