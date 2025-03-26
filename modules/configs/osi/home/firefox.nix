@@ -1,7 +1,7 @@
 { pkgs, lib, config, inputs, ... }: 
 
 let 
-  packageName = "librewolf";
+  packageName = "floorp";
 in {
   # Make firefox default
   xdg.mimeApps.defaultApplications = lib.attrsets.genAttrs [
@@ -56,7 +56,7 @@ in {
 				Value = true;
 				Locked = true;
 				Cryptomining = true;
-				Fingerprinting = false;
+				Fingerprinting = true;
 				EmailTracking = true;
 			};
 
