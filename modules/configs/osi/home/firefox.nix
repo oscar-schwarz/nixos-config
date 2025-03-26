@@ -56,7 +56,7 @@ in {
 				Value = true;
 				Locked = true;
 				Cryptomining = true;
-				Fingerprinting = true;
+				Fingerprinting = false;
 				EmailTracking = true;
 			};
 
