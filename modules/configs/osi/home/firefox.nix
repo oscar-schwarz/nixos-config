@@ -132,6 +132,8 @@ in {
         SponsoredTopSites = false;
         Highlights = false;
         Snippets = false;
+        Pocket = false;
+        SponsoredPocket = false;
         Locked = true; # only allow changing setting here
       };
       FirefoxSuggest = {
@@ -163,6 +165,7 @@ in {
       PostQuantumKeyAgreementEnabled = true;
       Preferences = {
           "browser.startup.homepage" = "";
+          "keyword.enabled" = false; # disable google etc search with @google
       };
       PromptForDownloadLocation = false;
       SanitizeOnShutdown = {
