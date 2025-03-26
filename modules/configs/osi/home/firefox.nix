@@ -1,7 +1,7 @@
 { pkgs, lib, config, inputs, ... }: 
 
 let 
-  packageName = "floorp";
+  packageName = "firefox";
 in {
   # Make firefox default
   xdg.mimeApps.defaultApplications = lib.attrsets.genAttrs [
