@@ -89,12 +89,6 @@ in {
         EmailTracking = true;
       };
       ExtensionSettings = {
-        # uBlock Origin
-        "uBlock0@raymondhill.net" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
-          installation_mode = "force_installed";
-          private_browsing = true;
-        };
         # Dark Mode for every website
         "addon@darkreader.org" = {
           install_url = "https://addons.mozilla.org/firefox/downloads/file/4359254/darkreader-4.9.94.xpi";
@@ -109,6 +103,12 @@ in {
         "{3579f63b-d8ee-424f-bbb6-6d0ce3285e6a}" = {
           install_url = "https://addons.mozilla.org/firefox/downloads/file/4349329/chameleon_ext-0.22.65.1.xpi";
           installation_mode = "force_installed";
+        };
+        # uBlock Origin
+        "uBlock0@raymondhill.net" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
+          installation_mode = "force_installed";
+          private_browsing = true;
         };
         # Vimium, keyboard driven website navigation
         "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = {
