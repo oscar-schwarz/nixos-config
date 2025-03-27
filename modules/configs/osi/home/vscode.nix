@@ -192,7 +192,7 @@ in {
               "workbench.action.closePanel"
 
               # disable sidebar
-              "workbench.action.sidebar"
+              "workbench.action.closeSidebar"
 
               # close cline
               "workbench.action.editorLayoutSingle"
@@ -216,6 +216,9 @@ in {
               # enable panel
               "workbench.action.closePanel"
               "workbench.action.togglePanel"
+
+              # disable sidebar
+              "workbench.action.closeSidebar"
 
               # enable cline
               "cline.openInNewTab" # opens the cline window in a tab
