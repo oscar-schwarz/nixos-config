@@ -173,7 +173,7 @@ in {
         # History = true;
         Locked = true;
       };
-      SearchBar = "seperate"; # alternative: "unified"
+      SearchBar = "separate"; # alternative: "unified"
       SearchSuggestEnabled = false;
       ShowHomeButton = false;
       TranslateEnabled = false;
