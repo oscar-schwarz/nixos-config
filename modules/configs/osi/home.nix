@@ -60,6 +60,9 @@ in {
 
     # Everything todo
     # ./home/todo.nix
+
+    # mail client
+    ./home/mail.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
