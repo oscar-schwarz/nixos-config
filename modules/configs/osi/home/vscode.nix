@@ -73,6 +73,9 @@ in {
         "zenMode.fullScreen" = false;
         "zenMode.centerLayout" = false;
 
+        # --- Debug ---
+        "debug.openDebug" = "neverOpen"; # its really annoying that the debug window opens on breakpoint
+
         # --- CLINE Assistant ---
         "cline.chromeExecutablePath" = lib.getExe config.programs.chromium.package;
 
@@ -167,6 +170,61 @@ in {
             commands = [
               "workbench.action.editorLayoutSingle"
               "workbench.action.closeActiveEditor"
+            ];
+          };
+        }
+
+        # --- FOCUS AND TOOLS MODE ---
+        # in Focus-Mode, no additional windows and zen mode activated 
+
+        # Enable focus mode
+        {
+          key = "ctrl+shift+t";
+          command = "runCommands";
+          when = "multipleEditorGroups || panelVisible || sidebarVisible || (editorPartMultipleEditorGroups && multipleEditorGroups)";
+          args = {
+            commands = [
+              # enable zen mode
+              "workbench.action.exitZenMode"
+              "workbench.action.toggleZenMode"
+
+              # disable panel
+              "workbench.action.closePanel"
+
+              # disable sidebar
+              "workbench.action.sidebar"
+
+              # close cline
+              "workbench.action.editorLayoutSingle"
+              "workbench.action.closeActiveEditor"
+
+              # focus the code
+              "workbench.action.focusFirstEditorGroup"
+            ];
+          };
+        }
+        {
+          key = "ctrl+shift+t";
+          command = "runCommands";
+          when = "!multipleEditorGroups && !panelVisible && !sidebarVisible && !(editorPartMultipleEditorGroups && multipleEditorGroups)";
+          args = {
+            commands = [
+              # enable zen mode
+              "workbench.action.exitZenMode"
+              "workbench.action.toggleZenMode"
+
+              # enable panel
+              "workbench.action.closePanel"
+              "workbench.action.togglePanel"
+
+              # enable cline
+              "cline.openInNewTab" # opens the cline window in a tab
+              "workbench.action.moveActiveEditorGroupDown" # moves the tab below the actual code
+              # shrink the cline tab a couple of times to a reasonable size
+            ] ++ (lib.lists.replicate 7 "workbench.action.decreaseViewHeight") ++ [
+
+              # focus the code
+              "workbench.action.focusFirstEditorGroup"
             ];
           };
         }
