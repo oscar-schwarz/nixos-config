@@ -195,8 +195,9 @@ in {
               "workbench.action.closeSidebar"
 
               # close cline
-              "workbench.action.editorLayoutSingle"
+              "workbench.action.focusLastEditorGroup"
               "workbench.action.closeActiveEditor"
+              "workbench.action.editorLayoutSingle"
             ];
           };
         }
@@ -224,7 +225,7 @@ in {
             ] ++ (lib.lists.replicate 7 "workbench.action.decreaseViewHeight") ++ [
 
               # focus the code
-              "workbench.action.focusNextGroup"
+              "workbench.action.focusLastEditorGroup"
             ];
           };
         }
