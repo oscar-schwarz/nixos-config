@@ -1,7 +1,7 @@
 { pkgs, lib, config, inputs, ... }: 
 
 let 
-  packageName = "firefox";
+  packageName = "librewolf";
 in {
   # Make firefox default
   xdg.mimeApps.defaultApplications = lib.attrsets.genAttrs [
@@ -173,7 +173,7 @@ in {
         # History = true;
         Locked = true;
       };
-      SearchBar = "seperate"; # alternative: "separate"
+      SearchBar = "seperate"; # alternative: "unified"
       SearchSuggestEnabled = false;
       ShowHomeButton = false;
       TranslateEnabled = false;
