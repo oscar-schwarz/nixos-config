@@ -353,6 +353,10 @@
         # "dimaround, title:^Hyprland Polkit Agent$"
         "float, title:.*\\(DEBUG\\)$,class:Godot"
         "tile, title:.*Godot Engine$"
+        
+        # browser saving action
+        "float, title:^Save File$"
+        "float, title:.*wants to save$"
       ];
 
       # --- HYPRGRASS PLUGIN
