@@ -351,7 +351,7 @@
 
         "stayfocused, title:^Hyprland Polkit Agent$"
         # "dimaround, title:^Hyprland Polkit Agent$"
-        "float, title:.*\\(DEBUG\\)$,class:Godot"
+        "float, title:.*\\(DEBUG\\)$"
         "tile, title:.*Godot Engine$"
         
         # browser saving action
@@ -395,6 +395,7 @@
         hideTopLayers = true;
         hideBackgroundLayers = true;
         overrideGaps = false;
+        disableGestures = true;
       };
     };
 
