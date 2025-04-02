@@ -352,7 +352,7 @@
         "stayfocused, title:^Hyprland Polkit Agent$"
         # "dimaround, title:^Hyprland Polkit Agent$"
         "float, title:.*\\(DEBUG\\)$"
-        "tile, title:.*Godot Engine$"
+        "tile, title:.*Godot Engine$, title:^Godot Engine.*"
         
         # browser saving action
         "float, title:^Save File$"
