@@ -19,7 +19,6 @@
         # Window manager
         ./modules/shared/hm/hyprland # base config
         ./modules/shared/hm/hyprland/laptop.nix # for laptops
-        # ./modules/shared/hm/hyprland/touch.nix # for touchscreens
         ./modules/shared/hm/hyprland/waybar.nix # utility bar
         ./modules/shared/hm/hyprland/lockscreen.nix # lockscreen with auto enable on inactivity
         ./modules/shared/hm/hyprland/rofi.nix # Powerfull runner

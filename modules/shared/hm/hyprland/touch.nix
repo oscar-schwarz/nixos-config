@@ -11,7 +11,7 @@
     ];
 
     # settings for above plugin
-    plugin.touch-gestures = {
+    "plugin:touch-gestures" = {
       sensitivity = 4.0;
       workspace_swipe_fingers = 3;
       workspace_swipe_edge = false;

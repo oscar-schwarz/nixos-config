@@ -11,7 +11,7 @@
       hyprspace
     ];
 
-    plugin.overview = {
+    "plugin:overview" = {
       panelHeight = 200;
       showNewWorkspace = false;
       showEmptyWorkspace = true;
