@@ -1,5 +1,9 @@
-{ pkgs, lib, inputs, ... }:
-let
+{
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: let
   inherit (lib) mkDefault;
   inherit (lib.attrsets) mapAttrs;
 in {
@@ -41,7 +45,7 @@ in {
     silent = true;
   };
 
-  environment.variables = { 
+  environment.variables = {
     # Fix for electron apps to use wayland
     NIXOS_OZONE_WL = "1";
     ELECTRON_OZONE_PLATFORM_HINT = "auto";
@@ -51,33 +55,35 @@ in {
   home-manager = {
     extraSpecialArgs = {inherit inputs;};
     useGlobalPkgs = true;
-    
+
     # Home manager settings for every user
-    sharedModules = [({...}: {
-      # Let home manager manage itself
-      programs.home-manager.enable = true;
+    sharedModules = [
+      ({...}: {
+        # Let home manager manage itself
+        programs.home-manager.enable = true;
 
-      # better cd
-      programs.zoxide = {
-        enable = true;
-        enableFishIntegration = true;
-      };
-
-      # Git
-      programs.git = {
-        enable = true;
-        extraConfig = {
-          user = {
-            name = "Oscar Schwarz";
-            email = "121044740+oscar-schwarz@users.noreply.github.com";
-          };
-          init.defaultBranch = "main";
-          pull.rebase = true;
+        # better cd
+        programs.zoxide = {
+          enable = true;
+          enableFishIntegration = true;
         };
-      };
 
-      programs.bashmount.enable = true;
-    })];
+        # Git
+        programs.git = {
+          enable = true;
+          extraConfig = {
+            user = {
+              name = "Oscar Schwarz";
+              email = "121044740+oscar-schwarz@users.noreply.github.com";
+            };
+            init.defaultBranch = "main";
+            pull.rebase = true;
+          };
+        };
+
+        programs.bashmount.enable = true;
+      })
+    ];
   };
 
   # Mounts to /run/media/username
@@ -115,8 +121,8 @@ in {
   # xserver keymap
   services.xserver = {
     # Configure keymap in X11.
-		xkb.layout = "us,de";
-		xkb.variant = "colemak,";
+    xkb.layout = "us,de";
+    xkb.variant = "colemak,";
     xkb.options = "grp:win_space_toggle";
   };
 

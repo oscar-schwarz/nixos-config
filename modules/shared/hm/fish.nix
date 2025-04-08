@@ -1,6 +1,9 @@
-{ pkgs, nixosConfig, lib, ... }:
-
 {
+  pkgs,
+  nixosConfig,
+  lib,
+  ...
+}: {
   # terminal that makes me wet
   programs.fish = {
     enable = true;
@@ -20,7 +23,7 @@
         if test -f ~/.vscode-oss/extensions/.obsolete
           rm -f ~/.vscode-oss/extensions/.obsolete
         end
-        
+
         # add all new files to git, so that they are seen by nixos
         set PREV_PWD "$PWD"
         cd ~/nixos
@@ -74,5 +77,4 @@
       ssh = "TERM=xterm-256color ${lib.getExe pkgs.openssh} $argv";
     };
   };
-
 }

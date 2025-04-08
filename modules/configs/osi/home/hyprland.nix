@@ -1,6 +1,10 @@
-{ pkgs, config, lib, nixosConfig, ... }:
-
 {
+  pkgs,
+  config,
+  lib,
+  nixosConfig,
+  ...
+}: {
   imports = [
     # shared waybar module
     ./waybar.nix
@@ -28,17 +32,17 @@
         | awk '{print $2}' \
         | grep -v "eDP-1" \
         | xargs -I {} hyprctl keyword monitor "{}, disable"
-        
+
         # Wait 2 seconds
         sleep 2
-        
+
         # Reload config -> re-enables all configured monitors
         hyprctl reload
 
         # Disable eDP-1
         hyprctl keyword monitor "eDP-1, disable"
       '';
-    })  
+    })
   ];
 
   programs.kitty = {
@@ -112,7 +116,6 @@
     };
   };
 
-
   services.hypridle = {
     enable = true;
     settings = {
@@ -121,33 +124,30 @@
         ignore_systemd_inhibit = true;
         ignore_dbus_inhibit = true;
       };
-      listener =
-        let
-          seconds = s: s;
-          minutes = mins: builtins.floor (mins * 60);
-          hours = h: builtins.floor (h * 3600);
-        in
-        [
-          {
-            timeout = minutes 3;
-            on-timeout = "hyprlock"; # not using loginctl lock-session, because it adds it is without grace and animation
-          }
-          {
-            timeout = minutes 4;
-            on-timeout = "systemctl suspend";
-          }
-          {
-            timeout = hours 4;
-            on-timeout = "shutdown now";
-          }
-        ];
+      listener = let
+        seconds = s: s;
+        minutes = mins: builtins.floor (mins * 60);
+        hours = h: builtins.floor (h * 3600);
+      in [
+        {
+          timeout = minutes 3;
+          on-timeout = "hyprlock"; # not using loginctl lock-session, because it adds it is without grace and animation
+        }
+        {
+          timeout = minutes 4;
+          on-timeout = "systemctl suspend";
+        }
+        {
+          timeout = hours 4;
+          on-timeout = "shutdown now";
+        }
+      ];
     };
   };
 
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
-
       general = {
         # Allow to resize windows with dragging the border
         resize_on_border = true;
@@ -161,7 +161,6 @@
       # --- Autostart ---
       # run on every reload
       exec = [
-
       ];
       # run every start
       exec-once = [
@@ -178,14 +177,15 @@
         ", preffered, auto, 1, mirror, eDP-1"
       ];
 
-
       # --- Mouse settings ---
       cursor = {
         enable_hyprcursor = true;
       };
 
       # --- Keyboard settings ---
-      input = let xkb = nixosConfig.services.xserver.xkb; in {
+      input = let
+        xkb = nixosConfig.services.xserver.xkb;
+      in {
         kb_layout = xkb.layout;
         kb_variant = xkb.variant;
         kb_options = xkb.options;
@@ -199,37 +199,35 @@
         };
       };
 
-
       # --- Keybindings ---
       "$meta" = "SUPER";
 
-      bind =
-        let
-          directions = [ "u" "d" "l" "r" ];
+      bind = let
+        directions = ["u" "d" "l" "r"];
 
-          arrowsByDirection = {
-            u = "Up";
-            d = "Down";
-            l = "Left";
-            r = "Right";
-          };
+        arrowsByDirection = {
+          u = "Up";
+          d = "Down";
+          l = "Left";
+          r = "Right";
+        };
 
-          lettersByDirection = {
-            u = "F";
-            d = "S";
-            l = "R";
-            r = "T";
-          };
+        lettersByDirection = {
+          u = "F";
+          d = "S";
+          l = "R";
+          r = "T";
+        };
 
-          perDirection = keyByDirection: f: builtins.map (x: f x (keyByDirection."${x}")) directions;
-          perDirectionLetter = perDirection lettersByDirection;
-          perDirectionArrow = perDirection arrowsByDirection;
-        in
-        (perDirectionLetter (dir: key: "$meta, ${key}, movefocus, ${dir}")) ++
-        (perDirectionArrow (dir: key: "$meta, ${key}, movefocus, ${dir}")) ++
-        (perDirectionLetter (dir: key: "$meta_CTRL, ${key}, movewindow, ${dir}")) ++
-        (perDirectionArrow (dir: key: "$meta_CTRL, ${key}, movewindow, ${dir}")) ++
-        [
+        perDirection = keyByDirection: f: builtins.map (x: f x (keyByDirection."${x}")) directions;
+        perDirectionLetter = perDirection lettersByDirection;
+        perDirectionArrow = perDirection arrowsByDirection;
+      in
+        (perDirectionLetter (dir: key: "$meta, ${key}, movefocus, ${dir}"))
+        ++ (perDirectionArrow (dir: key: "$meta, ${key}, movefocus, ${dir}"))
+        ++ (perDirectionLetter (dir: key: "$meta_CTRL, ${key}, movewindow, ${dir}"))
+        ++ (perDirectionArrow (dir: key: "$meta_CTRL, ${key}, movewindow, ${dir}"))
+        ++ [
           # application shortcuts
           # Terminal
           "$meta, N, exec, kitty"
@@ -281,70 +279,65 @@
         ];
 
       # Binds here will be repeated on press
-      binde =
-        let
-          resizeFactor = "50";
-        in
-        [
-          # resize window
-          "$meta, G, resizeactive, -${resizeFactor} -${resizeFactor}"
-          "$meta, D, resizeactive, ${resizeFactor} ${resizeFactor}"
+      binde = let
+        resizeFactor = "50";
+      in [
+        # resize window
+        "$meta, G, resizeactive, -${resizeFactor} -${resizeFactor}"
+        "$meta, D, resizeactive, ${resizeFactor} ${resizeFactor}"
 
-          # Brightness keys
-          ", code:233, exec, brightnessctl set +10%"
-          ", code:232, exec, brightnessctl set 10%-"
-          ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_SINK@ 10%+"
-          ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_SINK@ 10%-"
-        ];
+        # Brightness keys
+        ", code:233, exec, brightnessctl set +10%"
+        ", code:232, exec, brightnessctl set 10%-"
+        ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_SINK@ 10%+"
+        ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_SINK@ 10%-"
+      ];
 
       # binds that also works on a lockscreen
-      bindl =
-        let
-          docked = pkgs.writeShellScript "" ''
-            [ $(hyprctl monitors | grep -c '(ID ') -ge 2 ]
-          '';
+      bindl = let
+        docked = pkgs.writeShellScript "" ''
+          [ $(hyprctl monitors | grep -c '(ID ') -ge 2 ]
+        '';
 
-          closeLid = pkgs.writeShellScript "" ''
-            # disable monitor if it is not the only one
-            if ${docked}; then
-              hyprctl keyword monitor "eDP-1, disable"
-            # otherwise lock the screen
-            else
-              loginctl lock-session
-            fi
-          '';
+        closeLid = pkgs.writeShellScript "" ''
+          # disable monitor if it is not the only one
+          if ${docked}; then
+            hyprctl keyword monitor "eDP-1, disable"
+          # otherwise lock the screen
+          else
+            loginctl lock-session
+          fi
+        '';
 
-          openLid = pkgs.writeShellScript "" ''
-            # enable monitor
-            hyprctl reload
+        openLid = pkgs.writeShellScript "" ''
+          # enable monitor
+          hyprctl reload
 
-            # Run hyprlock if laptop is not docked
-            if ! ${docked}; then
-              loginctl lock-session
-            fi
-          '';
-        in
-        [
-          # switch behaviour
-          ", switch:on:Lid Switch, exec, ${closeLid}"
-          ", switch:off:Lid Switch, exec, ${openLid}"
-        ];
-      
+          # Run hyprlock if laptop is not docked
+          if ! ${docked}; then
+            loginctl lock-session
+          fi
+        '';
+      in [
+        # switch behaviour
+        ", switch:on:Lid Switch, exec, ${closeLid}"
+        ", switch:off:Lid Switch, exec, ${openLid}"
+      ];
+
       # The binds here are for the mouse
       bindm = [
         "$meta, mouse:272, movewindow" # Move when super and left click
         ", mouse:275, movewindow" # or with mouse 5 (lower side)
       ];
 
-
       # --- WINDOW RULES
       windowrulev2 = [
-        # by default tile all 
+        # by default tile all
         # "float"
 
         "stayfocused, title:^Hyprland Polkit Agent$"
         # "dimaround, title:^Hyprland Polkit Agent$"
-        
+
         # browser saving action
         "float, title:^Save File$"
         "float, title:.*wants to save$"
@@ -358,7 +351,7 @@
         edge_margin = 50;
 
         # Mouse binds
-        hyprgrass-bindm= [
+        hyprgrass-bindm = [
           ", longpress:3, movewindow"
           ", longpress:4, resizewindow"
         ];
@@ -377,7 +370,6 @@
         workspace_swipe = false;
         workspace_swipe_cancel_ratio = 0.15;
       };
-
 
       "plugin:overview" = {
         panelHeight = 200;

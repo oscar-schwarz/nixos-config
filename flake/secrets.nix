@@ -3,14 +3,13 @@
   config,
   lib,
   ...
-}:
-{
+}: {
   options.getSopsFile = lib.mkOption {
     description = "A helper function to get the path to a sops secret.";
   };
   config = {
     getSopsFile = name: config.sops.secrets.${name}.path;
-    
+
     environment.systemPackages = with pkgs; [
       sops
     ];

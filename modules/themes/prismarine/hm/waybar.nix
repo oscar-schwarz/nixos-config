@@ -1,6 +1,9 @@
-{ config, lib, nixosConfig, ... }:
-
-let
+{
+  config,
+  lib,
+  nixosConfig,
+  ...
+}: let
   # Defined by stylix somewhere else
   fonts = config.stylix.fonts;
   colors = config.lib.stylix.colors;
@@ -10,8 +13,8 @@ let
   str = builtins.toString; # need that a lot
   # Function that takes a base16 color id (like 0A) and outputs a string with rgb values (like "129,89,199)
   rgbString = colorID:
-      builtins.concatStringsSep ","
-        (map (x: config.lib.stylix.colors."${colorID}-${x}") ["rgb-r" "rgb-g" "rgb-b"]);
+    builtins.concatStringsSep ","
+    (map (x: config.lib.stylix.colors."${colorID}-${x}") ["rgb-r" "rgb-g" "rgb-b"]);
 
   filterStr = str: cs: builtins.concatStringsSep "" (lib.filter (c: ! builtins.elem c cs) (lib.splitString "" str));
 
@@ -23,11 +26,10 @@ let
   };
   margin = themeCfg.margin;
   terminal-padding = themeCfg.padding;
-  
 in {
   stylix.targets.waybar.enable = false; # turn off stylix ricing that style.css can be changed
   programs.waybar = lib.mkIf config.programs.waybar.enable {
-    style = with colors.withHashtag;''
+    style = with colors.withHashtag; ''
       /* STYLIX COLORS */
       @define-color base00 ${base00}; @define-color base01 ${base01}; @define-color base02 ${base02}; @define-color base03 ${base03};
       @define-color base04 ${base04}; @define-color base05 ${base05}; @define-color base06 ${base06}; @define-color base07 ${base07};
@@ -41,7 +43,7 @@ in {
         /* `otf-font-awesome` is required to be installed for icons */
         font-family: "${fonts.monospace.name}";
         font-weight: 500;
-        font-size: ${str (fonts.sizes.terminal*0.8)}pt;
+        font-size: ${str (fonts.sizes.terminal * 0.8)}pt;
       }
 
 
@@ -73,8 +75,8 @@ in {
 
         padding-left: ${str terminal-padding}px;
         padding-right: ${str terminal-padding}px;
-        padding-top: ${str (terminal-padding*0.7)}px;
-        padding-bottom: ${str (terminal-padding*0.4)}px;
+        padding-top: ${str (terminal-padding * 0.7)}px;
+        padding-bottom: ${str (terminal-padding * 0.4)}px;
 
         background-color: rgba(${rgbString "base00"}, ${str (opacity.terminal * 0.9)});
 
@@ -92,12 +94,11 @@ in {
       /*
       currently disabled
       ${builtins.concatStringsSep "\n" (
-        map (selector: 
-        let 
-          animationName = "notifyChange" + (filterStr selector ["#" "."]); 
-        
+        map (selector: let
+          animationName = "notifyChange" + (filterStr selector ["#" "."]);
+
           defaultStyle = ''
-            border-color: @base03;          
+            border-color: @base03;
             min-width: 2rem;
           '';
 
@@ -124,9 +125,9 @@ in {
           ${selector} {
             animation: ${animationName} 2s ease;
             animation-play-state: running;
-          } 
+          }
         '') [
-          "#battery.charging" 
+          "#battery.charging"
           "#battery.not_charging"
           "#battery.discharging"
         ]

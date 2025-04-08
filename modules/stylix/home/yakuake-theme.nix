@@ -1,14 +1,18 @@
-{ config, pkgs, lib, inputs, ...}:
-
-let 
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: let
   # File names that are reused throughout this module
   themeName = "stylix";
   colorschemeName = "stylix-colors";
 
   # Function that takes a base16 color id (like 0A) and outputs a string with rgb values (like "129,89,199)
   rgbString = colorID:
-      builtins.concatStringsSep ","
-        (map (x: config.lib.stylix.colors."${colorID}-${x}") ["rgb-r" "rgb-g" "rgb-b"]);
+    builtins.concatStringsSep ","
+    (map (x: config.lib.stylix.colors."${colorID}-${x}") ["rgb-r" "rgb-g" "rgb-b"]);
 in {
   imports = [
     inputs.plasma-manager.homeManagerModules.plasma-manager
@@ -21,7 +25,6 @@ in {
   };
 
   programs.plasma.configFile.yakuakerc = {
-
     # Set the yakuake theme
     Appearance = {
       Skin = "breeze-minimal";
@@ -34,7 +37,6 @@ in {
     };
   };
 
-  
   # Install my custom terminal theme
   home.file.".local/share/konsole/${themeName}.profile" = {
     text = ''

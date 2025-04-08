@@ -1,7 +1,9 @@
-{ pkgs, lib, ... }:
-
 {
-  programs.hyprland.enable = true; 
+  pkgs,
+  lib,
+  ...
+}: {
+  programs.hyprland.enable = true;
 
   # Important when using hyprland
   environment.sessionVariables = {
@@ -9,8 +11,8 @@
     XDG_SESSION_DESKTOP = "Hyprland";
     XDG_CURRENT_DESKTOP = "Hyprland";
   };
-  
-  services.greetd = let 
+
+  services.greetd = let
     command = "Hyprland >/dev/null";
   in {
     enable = true;
@@ -22,13 +24,13 @@
       };
       # user needs to authenticate on relogin
       default_session = {
-        command = ''${lib.getExe pkgs.greetd.tuigreet} \
-          --greeting 'Welcome to NixOS!' \
-          --asterisks \
-          --remember \
-          --remember-user-session \
-          --time \
-          --cmd "${command}"'';
+        command = ''          ${lib.getExe pkgs.greetd.tuigreet} \
+                    --greeting 'Welcome to NixOS!' \
+                    --asterisks \
+                    --remember \
+                    --remember-user-session \
+                    --time \
+                    --cmd "${command}"'';
         user = "greeter";
       };
     };

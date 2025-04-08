@@ -1,6 +1,8 @@
-{ pkgs, config, ... }:
-
 {
+  pkgs,
+  config,
+  ...
+}: {
   environment.systemPackages = with pkgs; [
     # Script to install the cert for eduroam uni leipzig
     eduroam.install-eduroam-leipzig
@@ -8,7 +10,7 @@
     openconnect
   ];
 
-  networking = let 
+  networking = let
     wireguardPort = 51820;
   in {
     networkmanager = {
@@ -58,7 +60,7 @@
       #     allowedIPs = [ "10.12.21.0/24" ];
       #     # this here would route ALL traffic through the tunnel
       #     # Problem: if the tunnel is blocked, no internet access at all is possible
-      #     # allowedIPs = [ "10.12.21.0/24" "0.0.0.0/0" ]; 
+      #     # allowedIPs = [ "10.12.21.0/24" "0.0.0.0/0" ];
       #     endpoint = "h8wkgwwxnvy0ut4t.myfritz.net:54241";
       #     persistentKeepalive = 25;
       #   }];

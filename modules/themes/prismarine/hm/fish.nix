@@ -1,6 +1,9 @@
-{ pkgs, lib, config, ... }:
-
 {
+  pkgs,
+  lib,
+  config,
+  ...
+}: {
   programs.fish.plugins = lib.mkIf config.programs.fish.enable [
     # A nice theme
     {

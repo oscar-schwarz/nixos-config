@@ -1,6 +1,11 @@
-{ pkgs, lib, inputs, config, nixosConfig, ... }:
-
-let
+{
+  pkgs,
+  lib,
+  inputs,
+  config,
+  nixosConfig,
+  ...
+}: let
   vscodeExts = inputs.nix-vscode-extensions.extensions.${pkgs.system};
 in {
   # Make codium default
@@ -22,21 +27,22 @@ in {
     "application/x-php"
     "application/x-ruby"
     "application/x-perl"
-
   ] (type: "codium.desktop");
 
   programs.vscode = {
     enable = true;
-    package = pkgs.vscodium.overrideAttrs (prev: with builtins; with lib.strings; {
-      # As NIXOS_OZONE_WL is enabled, it is tried here too. But VSCodium shows a warning that is it an
-      # unsupported parameter. This hack removes that parameter added by the environment variable.
-      preFixup = concatStringsSep "\n" (
-        # Filter out the line containing the parameter that causes the warning
-        filter
+    package = pkgs.vscodium.overrideAttrs (prev:
+      with builtins;
+      with lib.strings; {
+        # As NIXOS_OZONE_WL is enabled, it is tried here too. But VSCodium shows a warning that is it an
+        # unsupported parameter. This hack removes that parameter added by the environment variable.
+        preFixup = concatStringsSep "\n" (
+          # Filter out the line containing the parameter that causes the warning
+          filter
           (str: (match ".*ozone-platform-hint.*" str) == null)
           (splitString "\n" prev.preFixup)
-      );
-    });
+        );
+      });
     profiles.default = {
       userSettings = {
         # --- VSCODE ---
@@ -79,27 +85,25 @@ in {
         "php.debug.executablePath" = lib.getExe pkgs.php83;
         "namespaceResolver.autoSort" = false;
 
-
         # --- NIX ---
         "nix.enableLanguageServer" = true;
         "nix.serverPath" = "${lib.getExe pkgs.nixd}";
         "nix.serverSettings" = {
-          nixd =  {
+          nixd = {
             formatting = {
               command = ["${lib.getExe pkgs.alejandra}"];
             };
             options = {
               nixos = {
-                  expr = ''(builtins.getFlake "${../../../..}").nixosConfigurations.${nixosConfig.networking.hostName}.options'';
+                expr = ''(builtins.getFlake "${../../..}").nixosConfigurations.${nixosConfig.networking.hostName}.options'';
               };
               home-manager = {
-                  # This is the closest i've got to a correct expression, but sadly it doesnt work yet
-                  expr = ''(builtins.getFlake "${../../../..}").nixosConfigurations.${nixosConfig.networking.hostName}.options.home-manager.users.type.nestedTypes.elemType.getSubOptions ["${config.home.username}"]'';
+                # This is the closest i've got to a correct expression, but sadly it doesnt work yet
+                expr = ''(builtins.getFlake "${../../..}").nixosConfigurations.${nixosConfig.networking.hostName}.options.home-manager.users.type.nestedTypes.elemType.getSubOptions ["${config.home.username}"]'';
               };
             };
           };
         };
-
 
         # --- JAVA ---
         # All JDKs used for compiling
@@ -114,7 +118,7 @@ in {
           }
           {
             name = "JavaSE-21";
-            path = openjdk21  + "/lib/openjdk";
+            path = openjdk21 + "/lib/openjdk";
           }
         ];
         "java.jdt.ls.java.home" = pkgs.openjdk + "/lib/openjdk"; # JDK used for the language server
@@ -131,7 +135,8 @@ in {
           command = "search.action.openInEditor";
           when = "hasSearchResult && searchViewletFocus";
         }
-        { # open sidebar
+        {
+          # open sidebar
           key = "ctrl+p";
           command = "workbench.action.toggleSidebarVisibility";
         }
@@ -141,20 +146,24 @@ in {
         }
 
         # --- EXTENSIONS ---
-        { # open cline (when not yet opened)
+        {
+          # open cline (when not yet opened)
           key = "ctrl+o c";
           command = "runCommands";
           when = "!multipleEditorGroups";
           args = {
-            commands = [
-              "cline.openInNewTab" # opens the cline window in a tab
-              "workbench.action.moveActiveEditorGroupDown" # moves the tab below the actual code
+            commands =
+              [
+                "cline.openInNewTab" # opens the cline window in a tab
+                "workbench.action.moveActiveEditorGroupDown" # moves the tab below the actual code
 
-              # shrink the cline tab a couple of times to a reasonable size
-            ] ++ (lib.lists.replicate 7 "workbench.action.decreaseViewHeight");
+                # shrink the cline tab a couple of times to a reasonable size
+              ]
+              ++ (lib.lists.replicate 7 "workbench.action.decreaseViewHeight");
           };
         }
-        { # close cline
+        {
+          # close cline
           key = "ctrl+o c";
           command = "runCommands";
           when = "multipleEditorGroups";
@@ -167,7 +176,7 @@ in {
         }
 
         # --- FOCUS AND TOOLS MODE ---
-        # in Focus-Mode, no additional windows and zen mode activated 
+        # in Focus-Mode, no additional windows and zen mode activated
 
         # Enable focus mode
         {
@@ -198,27 +207,29 @@ in {
           command = "runCommands";
           when = "!multipleEditorGroups && !panelVisible && !sidebarVisible && !(editorPartMultipleEditorGroups && multipleEditorGroups)";
           args = {
-            commands = [
-              # enable zen mode
-              "workbench.action.exitZenMode"
-              "workbench.action.toggleZenMode"
+            commands =
+              [
+                # enable zen mode
+                "workbench.action.exitZenMode"
+                "workbench.action.toggleZenMode"
 
-              # enable panel
-              "workbench.action.closePanel"
-              "workbench.action.togglePanel"
+                # enable panel
+                "workbench.action.closePanel"
+                "workbench.action.togglePanel"
 
-              # disable sidebar
-              "workbench.action.closeSidebar"
+                # disable sidebar
+                "workbench.action.closeSidebar"
 
-              # enable cline
-              "cline.openInNewTab" # opens the cline window in a tab
-              "workbench.action.moveActiveEditorGroupDown" # moves the tab below the actual code
-              # shrink the cline tab a couple of times to a reasonable size
-            ] ++ (lib.lists.replicate 7 "workbench.action.decreaseViewHeight") ++ [
-
-              # focus the code
-              "workbench.action.focusLastEditorGroup"
-            ];
+                # enable cline
+                "cline.openInNewTab" # opens the cline window in a tab
+                "workbench.action.moveActiveEditorGroupDown" # moves the tab below the actual code
+                # shrink the cline tab a couple of times to a reasonable size
+              ]
+              ++ (lib.lists.replicate 7 "workbench.action.decreaseViewHeight")
+              ++ [
+                # focus the code
+                "workbench.action.focusLastEditorGroup"
+              ];
           };
         }
 
@@ -247,7 +258,6 @@ in {
           command = "workbench.action.editorLayoutSingle";
         }
 
-
         # --- GIT ---
         # Merge conflicts accept
         {
@@ -267,81 +277,92 @@ in {
           command = "diffEditor.revert";
         }
 
-
         # --- COMMENTS ---
-        { # Line
+        {
+          # Line
           key = "ctrl+/";
           command = "editor.action.commentLine";
           when = "editorTextFocus && !editorReadonly";
         }
-        { # Block
+        {
+          # Block
           key = "ctrl+shift+/";
           command = "editor.action.blockComment";
           when = "editorTextFocus && !editorReadonly";
         }
         # --- DOCBLOCK ---
-        { # phpDoc
+        {
+          # phpDoc
           key = "ctrl+enter";
           command = "phpdoc-generator.generatePHPDoc";
           when = "editorLangId == php";
         }
-        { # JSDoc
+        {
+          # JSDoc
           key = "ctrl+enter";
           command = "docthis.documentThis";
           when = "editorLangId =~ /vue|js|ts|jsx|tsx/";
         }
 
-
         # --- IMPORTS ---
-        { # PHP Imports
+        {
+          # PHP Imports
           key = "ctrl+o i";
           command = "namespaceResolver.import";
           when = "editorLangId == php";
         }
 
-
         # --- DEBUGGING ---
-        { # Start debugger
+        {
+          # Start debugger
           key = "ctrl+o e";
           command = "workbench.action.debug.start";
           when = "debuggersAvailable && !inDebugMode";
         }
-        { # Stop debugger
+        {
+          # Stop debugger
           key = "ctrl+o e";
           command = "workbench.action.debug.stop";
           when = "inDebugMode";
         }
-        { # Contiune when stopped
+        {
+          # Contiune when stopped
           key = "ctrl+shift+o";
           command = "workbench.action.debug.continue";
           when = "inDebugMode";
         }
-        { # Open watch panel
+        {
+          # Open watch panel
           key = "ctrl+o w";
           command = "workbench.debug.action.focusWatchView";
           when = "inDebugMode";
         }
-        { # Add a watch expression
+        {
+          # Add a watch expression
           key = "shift+enter";
           command = "workbench.debug.viewlet.action.addWatchExpression";
           when = "watchExpressionsFocused";
         }
-        { # Remove all watch expressions (removing one by one is really tedious through keyboard)
-          key = "shift+backspace"; 
+        {
+          # Remove all watch expressions (removing one by one is really tedious through keyboard)
+          key = "shift+backspace";
           command = "workbench.debug.viewlet.action.removeAllWatchExpressions";
           when = "watchExpressionsFocused";
         }
-        { # Edit a watched expression
+        {
+          # Edit a watched expression
           key = "enter";
           command = "debug.renameWatchExpression";
           when = "watchExpressionsFocused";
         }
-        { # Toggle breakpoint
+        {
+          # Toggle breakpoint
           key = "ctrl+o t";
           command = "editor.debug.action.toggleBreakpoint";
         }
       ];
-      extensions = with vscodeExts; with vscode-marketplace; let
+      extensions = with vscodeExts;
+      with vscode-marketplace; let
         op-vsx = open-vsx;
       in [
         # --- UTILITIES ---
@@ -377,7 +398,9 @@ in {
   };
 
   # Set VSCodium to be git editor
-  programs.git.extraConfig = let codium = "codium --wait --new-window"; in {
+  programs.git.extraConfig = let
+    codium = "codium --wait --new-window";
+  in {
     core.editor = "codium --wait";
     diff.tool = "vscodium";
     "difftool \"vscodium\"".cmd = codium + " --diff $LOCAL $REMOTE";

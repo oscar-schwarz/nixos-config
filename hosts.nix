@@ -24,15 +24,14 @@
 
         # password manager
         ./modules/shared/hm/password-store.nix
-        
+
         # Game Engine
         ./modules/shared/hm/godot.nix
       ];
       # NixOS modules given here should be a function that takes a username and returns a NixOS module
-      user-nixos-modules = [ ];
+      user-nixos-modules = [];
     };
   };
-
 
   blind-spots = {
     machine = "HP_250_G4_Notebook_PC";

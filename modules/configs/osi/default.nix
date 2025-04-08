@@ -46,9 +46,9 @@
   # Enable CUPS to print documents.
   services.printing = {
     enable = true;
-    drivers = with pkgs; [ 
-      gutenprint 
-      # epsonscan2 
+    drivers = with pkgs; [
+      gutenprint
+      # epsonscan2
     ];
   };
 

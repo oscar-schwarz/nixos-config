@@ -1,10 +1,13 @@
-{ pkgs, config, lib, ... }:
-let 
-  repositoryOrigin = "git@github.com:OsiPog/pass.git"; 
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}: let
+  repositoryOrigin = "git@github.com:OsiPog/pass.git";
 
   inherit (builtins) match;
-in
-{
+in {
   home.packages = [
     # a script to fetch the password store easily in the correct folder
     (pkgs.writeShellApplication {
@@ -35,6 +38,9 @@ in
   # add plugin to rofi if enabled
   programs.rofi.pass = lib.mkIf config.programs.rofi.enable {
     enable = true;
-    package = if (match ".*wayland.*" config.programs.rofi.package.name) != null then pkgs.rofi-pass-wayland else pkgs.rofi-pass;
+    package =
+      if (match ".*wayland.*" config.programs.rofi.package.name) != null
+      then pkgs.rofi-pass-wayland
+      else pkgs.rofi-pass;
   };
 }

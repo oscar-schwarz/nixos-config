@@ -1,5 +1,10 @@
-{ pkgs, nixosConfig, config, lib, ... }:
-let
+{
+  pkgs,
+  nixosConfig,
+  config,
+  lib,
+  ...
+}: let
   themeCfg = nixosConfig.prismarineTheme;
 in {
   # Hyprland itself

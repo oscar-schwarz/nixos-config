@@ -1,6 +1,9 @@
-{ pkgs, lib, config, ... }: 
-
 {
+  pkgs,
+  lib,
+  config,
+  ...
+}: {
   options.hypr-rotate-current-screen = with lib; {
     enable = mkEnableOption "Script that rotates the focused screen.";
     waybarIntegration = {
@@ -38,7 +41,7 @@
 
           # Find the resolution
           RES=$(hyprctl monitors | grep eDP-1 -A 1 | grep @ | awk '{ print $1 }')
-          
+
           NEW_ROTATION=$((ROTATION + 1))
 
           if [ "$NEW_ROTATION" = "2" ]; then
@@ -47,11 +50,11 @@
 
           # Apply new rotation
           hyprctl keyword monitor "$MONITOR, $RES, auto, $SCALE, transform, $NEW_ROTATION"
-        
+
           # Little hack to also rotate touchscreens when laptop built-in screen is focused
           if [ "$MONITOR" = "eDP-1" ]; then
-            hyprctl keyword input:touchdevice:transform $NEW_ROTATION            
-            hyprctl keyword input:tablet:transform $NEW_ROTATION            
+            hyprctl keyword input:touchdevice:transform $NEW_ROTATION
+            hyprctl keyword input:tablet:transform $NEW_ROTATION
           fi
         '';
       })

@@ -1,5 +1,9 @@
-{ pkgs, lib, config, ... }:
 {
+  pkgs,
+  lib,
+  config,
+  ...
+}: {
   options.matcha = with lib; {
     enable = mkEnableOption "a wayland idle inhibitor";
     waybarIntegration = {
@@ -27,7 +31,7 @@
         type = types.str;
         default = "Lid Switch";
         description = ''
-           The name of the switch.
+          The name of the switch.
         '';
       };
     };
@@ -42,15 +46,14 @@
           pkill matcha
         else
           matcha --daemon &
-        fi 
+        fi
       '')
     ];
 
     # Waybar integration
     programs.waybar.settings.${config.matcha.waybarIntegration.barName} = lib.mkIf config.matcha.waybarIntegration.enable {
-      "custom/${config.matcha.waybarIntegration.moduleName}" = let 
+      "custom/${config.matcha.waybarIntegration.moduleName}" = let
         # Toggles matcha, kill if running, start if not running
-        
         # Checks whether match is running
         statusCheck = pkgs.writeShellScript "" ''
           if pidof matcha>/dev/null; then

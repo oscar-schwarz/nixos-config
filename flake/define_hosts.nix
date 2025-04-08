@@ -21,7 +21,7 @@ in {
     hostOpts = addName: { ... }: {
       options = {
         machine = mkOption {
-          description = "The machine used for this host. Found in ./machines";
+          description = "The machine used for this host. Found in ../machines";
           type =  types.enum (allNixFileNamesInDir ../machines) ;
         };
         nixos-modules = mkOption {

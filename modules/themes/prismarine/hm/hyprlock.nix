@@ -1,5 +1,9 @@
-{ nixosConfig, lib, config, ... }: 
-let
+{
+  nixosConfig,
+  lib,
+  config,
+  ...
+}: let
   themeCfg = nixosConfig.prismarineTheme;
   colors = config.lib.stylix.colors;
 in {

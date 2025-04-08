@@ -15,14 +15,12 @@
     flake-utils.follows = "nix-vscode-extensions/flake-utils";
   };
 
-  outputs =
-    inputs:
+  outputs = inputs:
     inputs.flake-utils.lib.eachDefaultSystem (
-      system:
-      let
+      system: let
         # Aliases that simulate a module
         pkgs = import inputs.nixpkgs {
-          system = system; 
+          system = system;
           config = {
             allowUnfree = true; # Android studio
             android_sdk.accept_license = true; # Android SDK
@@ -35,63 +33,71 @@
             tools = "26.1.1";
             platformTools = "34.0.1";
             buildTools = "34.0.0";
-            ndk = [ "22.1.7171670" "21.3.6528147" ];
+            ndk = ["22.1.7171670" "21.3.6528147"];
             cmake = "3.18.1";
             emulator = "30.6.3";
           };
 
-          platforms = [ "28" "29" "30" "34" ];
-          abis = [ "armeabi-v7a" "arm64-v8a" ];
-          extras = [ "extras;google;gcm" ];
+          platforms = ["28" "29" "30" "34"];
+          abis = ["armeabi-v7a" "arm64-v8a"];
+          extras = ["extras;google;gcm"];
         };
 
-        androidSdk = (pkgs.androidenv.composeAndroidPackages {
-            toolsVersion = android.versions.tools;
-            platformToolsVersion = android.versions.platformTools;
-            buildToolsVersions = [ android.versions.buildTools ];
-            platformVersions = android.platforms;
+        androidSdk = pkgs.androidenv.composeAndroidPackages {
+          toolsVersion = android.versions.tools;
+          platformToolsVersion = android.versions.platformTools;
+          buildToolsVersions = [android.versions.buildTools];
+          platformVersions = android.platforms;
 
-            includeEmulator = false;
-            includeSources = false;
-            includeSystemImages = false;
+          includeEmulator = false;
+          includeSources = false;
+          includeSystemImages = false;
 
-            systemImageTypes = [ "google_apis_playstore" ];
-            abiVersions = android.abis;
-            cmakeVersions = [ android.versions.cmake ];
+          systemImageTypes = ["google_apis_playstore"];
+          abiVersions = android.abis;
+          cmakeVersions = [android.versions.cmake];
 
-            includeNDK = false;
-            useGoogleAPIs = false;
-            useGoogleTVAddOns = false;
-            includeExtras = android.extras;
-        });
+          includeNDK = false;
+          useGoogleAPIs = false;
+          useGoogleTVAddOns = false;
+          includeExtras = android.extras;
+        };
 
         # Functions
-        writeJson = set: pkgs.writeTextFile {
-          name = "filename"; # this does not need to be unique
-          text = builtins.toJSON set;
-        };
-        writeList = list: pkgs.writeTextFile {
-          name = "filename";
-          text = lib.concatStringsSep "\n" list;
-        };
-        writeYaml = set: pkgs.writeTextFile {
-          name = "filename";
-          text = lib.generators.toYAML {} set;
-        };
-        writeDotEnv = set: pkgs.writeTextFile {
-          name = "filename";
-          text = builtins.concatStringsSep "\n" (
-            map (attr: 
-              let
-                # Add quotation marks to value if it contains spaces
-                containsChar = char: str: builtins.any (c: c == char) (lib.strings.stringToCharacters str);
-                raw = builtins.getAttr attr set;
-                value = if containsChar " " raw then ("\"" + raw + "\"") else raw;
-              in
-                "${attr}=${value}"
-            ) (builtins.attrNames set)
-          ) + "\n";
-        };
+        writeJson = set:
+          pkgs.writeTextFile {
+            name = "filename"; # this does not need to be unique
+            text = builtins.toJSON set;
+          };
+        writeList = list:
+          pkgs.writeTextFile {
+            name = "filename";
+            text = lib.concatStringsSep "\n" list;
+          };
+        writeYaml = set:
+          pkgs.writeTextFile {
+            name = "filename";
+            text = lib.generators.toYAML {} set;
+          };
+        writeDotEnv = set:
+          pkgs.writeTextFile {
+            name = "filename";
+            text =
+              builtins.concatStringsSep "\n" (
+                map (
+                  attr: let
+                    # Add quotation marks to value if it contains spaces
+                    containsChar = char: str: builtins.any (c: c == char) (lib.strings.stringToCharacters str);
+                    raw = builtins.getAttr attr set;
+                    value =
+                      if containsChar " " raw
+                      then ("\"" + raw + "\"")
+                      else raw;
+                  in "${attr}=${value}"
+                ) (builtins.attrNames set)
+              )
+              + "\n";
+          };
 
         # PROGRAMS
         nodejs = pkgs.nodejs_20;
@@ -99,7 +105,6 @@
 
         # Useful scripts
         shellScripts = [
-
           # Starts the environment services
           (pkgs.writeShellApplication {
             name = "env-up";
@@ -126,7 +131,6 @@
           })
         ];
 
-
         dotEnv = {
           NUXT_PUBLIC_API_BASE = "https://beste.schule/api";
           NUXT_PUBLIC_OAUTH_AUTHORIZATION_URL = "https://beste.schule/oauth/authorize";
@@ -138,7 +142,6 @@
           NUXT_PUBLIC_OAUTH_CLIENT_ID_MOBILE = "105";
           NUXT_PUBLIC_OAUTH_CALLBACK_URL_MOBILE = "schule.beste:/login";
         };
-
 
         # Git config
         # This config structure is just for readability
@@ -155,14 +158,14 @@
         devShells.default = pkgs.mkShell {
           # The packages exposed to the shell
           buildInputs =
-            shellScripts ++
-          [
-            # You probably won't need these packages because 'env-up' should deal with them but here you go anyway
-            nodejs
-            chromium
-            pkgs.git
-            pkgs.android-tools
-          ];
+            shellScripts
+            ++ [
+              # You probably won't need these packages because 'env-up' should deal with them but here you go anyway
+              nodejs
+              chromium
+              pkgs.git
+              pkgs.android-tools
+            ];
 
           # Generate necessary files and create symlinks to them
           shellHook = ''
@@ -177,11 +180,10 @@
               echo "Updating .env"
               echo -e "$(cat $newEnvPath)" > .env
             fi
-            
+
           '';
         };
-      in
-      {
+      in {
         inherit devShells;
       }
     );

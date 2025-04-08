@@ -1,5 +1,8 @@
-{ config, lib, ... }: 
-let 
+{
+  config,
+  lib,
+  ...
+}: let
   literal = config.lib.formats.rasi.mkLiteral;
 in {
   programs.rofi.theme = with config.lib.stylix.colors.withHashtag; {
@@ -16,28 +19,28 @@ in {
       border-radius = literal "20px";
       border = literal "3px";
     };
-    
+
     mainbox = {
       padding = literal "20px 20px";
       spacing = literal "5px";
-      
-      children = map literal [ "inputbar" "listview" "message" ];
+
+      children = map literal ["inputbar" "listview" "message"];
     };
 
     inputbar = {
       margin-bottom = literal "5px";
-      children = map literal [ "textbox-prompt-colon" "entry" ];
+      children = map literal ["textbox-prompt-colon" "entry"];
     };
     textbox-prompt-colon = {
       margin = literal "2px 7px 0px 0px";
-      
+
       expand = false;
-      
+
       str = ">";
-      text-color = lib.mkForce ( literal base0C );
+      text-color = lib.mkForce (literal base0C);
     };
     entry = {
-      text-color = lib.mkForce ( literal base0B );
+      text-color = lib.mkForce (literal base0B);
     };
 
     listview = {
@@ -46,7 +49,7 @@ in {
     element = {
       highlight = literal "bold underline";
       padding = literal "5px";
-      children = map literal [ "element-icon" "element-text" ];
+      children = map literal ["element-icon" "element-text"];
     };
     element-text = {
       background-color = literal "inherit";
@@ -65,7 +68,7 @@ in {
       margin = literal "20px 5px 0px 5px";
     };
     textbox = {
-      background-color = lib.mkForce ( literal base00 );
+      background-color = lib.mkForce (literal base00);
     };
   };
 }

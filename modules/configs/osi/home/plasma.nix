@@ -1,6 +1,8 @@
-{ inputs, pkgs, ... }:
-
 {
+  inputs,
+  pkgs,
+  ...
+}: {
   imports = [
     inputs.plasma-manager.homeManagerModules.plasma-manager
   ];
@@ -9,7 +11,7 @@
     spectacle # screenshot utility
     yakuake # dropdown terminal
   ];
-  
+
   programs.plasma = {
     enable = true;
 
@@ -54,7 +56,7 @@
         Desktops = {
           Number = "2";
         };
-        
+
         # Mouse should be sticking between screens
         EdgeBarrier = {
           CornerBarrier = "false";
@@ -76,25 +78,28 @@
         Plugins = {
           diminactiveEnabled = "true";
         };
-
       };
 
       kwinrulesrc = let
-       rules = {
-        no-titlebar = {
-          Description = "Hide the title bar on all windows";
-          noborder = "true";
-          noborderrule = "3";
-          wmclass = ".*";
-          wmclassmatch = "3";
+        rules = {
+          no-titlebar = {
+            Description = "Hide the title bar on all windows";
+            noborder = "true";
+            noborderrule = "3";
+            wmclass = ".*";
+            wmclassmatch = "3";
+          };
         };
-       };
-      in {
-        General = let names = builtins.attrNames rules; in {
-          count = builtins.length names;
-          rules = builtins.concatStringsSep "," names;
-        };
-      } // rules;
+      in
+        {
+          General = let
+            names = builtins.attrNames rules;
+          in {
+            count = builtins.length names;
+            rules = builtins.concatStringsSep "," names;
+          };
+        }
+        // rules;
 
       # -- SETTINGS --
       # Laptop touchpad settings
@@ -138,7 +143,7 @@
 
           # Disable CAPS Lock (Who uses that anyway?)
           # Alt+Space to toggle layouts
-          Options= "caps:backspace,grp:alt_space_toggle";          
+          Options = "caps:backspace,grp:alt_space_toggle";
         };
       };
 
@@ -173,11 +178,11 @@
         };
         # Task manager
         "Containments/2/Applets/5/Configuration/General" = {
-          launchers = 
-             "applications:firefox.desktop" # Firefox, preferred://browser can have unexpected results when multiple are installed
-          + ",applications:chromium-browser.desktop" # Chromium
-          + ",applications:codium.desktop" # Codium
-          + ",applications:org.kde.konsole.desktop"; # Terminal: konsole
+          launchers =
+            "applications:firefox.desktop" # Firefox, preferred://browser can have unexpected results when multiple are installed
+            + ",applications:chromium-browser.desktop" # Chromium
+            + ",applications:codium.desktop" # Codium
+            + ",applications:org.kde.konsole.desktop"; # Terminal: konsole
           immutability = "1";
         };
         # Date display

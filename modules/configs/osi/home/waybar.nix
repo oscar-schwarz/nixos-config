@@ -1,6 +1,8 @@
-{ pkgs, lib, ... }:
-
-let
+{
+  pkgs,
+  lib,
+  ...
+}: let
   # Set of font awesome name and unicode code
   fa-icons = {
     battery-empty = "f244";
@@ -8,7 +10,7 @@ let
     battery-half = "f242";
     battery-quarter = "f243";
     battery-three-quarters = "f241";
-    bluetooth-b = "f294"; 
+    bluetooth-b = "f294";
     bolt = "f0e7";
     camera = "f030";
     display = "e163";
@@ -63,14 +65,14 @@ in {
   };
 
   # Allow installation of fonts through home.packages
-  fonts.fontconfig.enable =  true;
+  fonts.fontconfig.enable = true;
 
-  home.packages = with pkgs; [  
+  home.packages = with pkgs; [
     # font-awesome # for waybar icons
     font-awesome
 
     wvkbd # on-screen keyboard
-    ];
+  ];
 
   wayland.windowManager.hyprland.settings.exec-once = [
     # (lib.getExe (pkgs.writeShellScriptBin "bar-handler" ''
@@ -102,13 +104,12 @@ in {
     #     low_activate=0
     #     high_activate=$((screen_height - 1))
 
-    #     # Check if the cursor is on the edge of the screen if so, activate the waybar        
+    #     # Check if the cursor is on the edge of the screen if so, activate the waybar
     #     if (( cursor_y == high_activate || cursor_y == low_activate)); then
     #       pidof waybar || (waybar &) # only launch if not launched already
     #       # if triggered by the screen edge close the bar more quicker
     #       current_threshold=200
     #     fi
-
 
     #     # Only close waybar when its running
 
@@ -170,10 +171,10 @@ in {
 
           # State specific formats
           format-fatal = (fa "battery-empty") + "! {capacity} %";
-          
+
           # Status specific formats
           format-charging = (fa "bolt") + " {icon} {capacity} %";
-          
+
           format-icons = map fa [
             "battery-quarter"
             "battery-half"
@@ -192,7 +193,7 @@ in {
         };
 
         "network" = {
-          format-ethernet = (fa "network-wired");
+          format-ethernet = fa "network-wired";
           format-wifi = (fa "wifi") + " {essid}";
           tooltip-format = ''${fa "download"} {bandwidthDownBits}  ${fa "upload"} {bandwidthUpBits}'';
         };
@@ -221,14 +222,14 @@ in {
         "custom/rofi-drun" = {
           format = fa "ellipsis";
           on-click = pkgs.writeShellScript "" ''
-            pkill rofi || rofi -show drun 
+            pkill rofi || rofi -show drun
           '';
         };
       };
       bottomBar = {
         layer = "top";
         position = "bottom";
-        
+
         modules-left = [
           "pulseaudio"
           "pulseaudio/slider"
@@ -264,7 +265,7 @@ in {
         };
 
         "custom/hyprshot" = {
-          format = (fa "display") + " " + (fa "camera"); 
+          format = (fa "display") + " " + (fa "camera");
           on-click = pkgs.writeShellScript "" ''
             pkill hyprshot || hyprshot -m region --clipboard-only --freeze
           '';

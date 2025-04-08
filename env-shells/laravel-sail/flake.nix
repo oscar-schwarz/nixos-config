@@ -20,42 +20,48 @@
     };
   };
 
-  outputs =
-    inputs:
+  outputs = inputs:
     inputs.flake-utils.lib.eachDefaultSystem (
-      system:
-      let
+      system: let
         # Aliases that simulate a module
         pkgs = inputs.nixpkgs.legacyPackages.${system};
         lib = pkgs.lib;
 
         # Functions
-        writeJson = set: pkgs.writeTextFile {
-          name = "filename"; # this does not need to be unique
-          text = builtins.toJSON set;
-        };
-        writeList = list: pkgs.writeTextFile {
-          name = "filename";
-          text = builtins.concatStringsSep "\n" list;
-        };
-        writeYaml = set: pkgs.writeTextFile {
-          name = "filename";
-          text = lib.generators.toYAML {} set;
-        };
-        writeDotEnv = set: pkgs.writeTextFile {
-          name = "filename";
-          text = builtins.concatStringsSep "\n" (
-            map (attr: 
-              let
-                # Add quotation marks to value if it contains spaces
-                containsChar = char: str: builtins.any (c: c == char) (lib.strings.stringToCharacters str);
-                raw = builtins.getAttr attr set;
-                value = if containsChar " " raw then ("\"" + raw + "\"") else raw;
-              in
-                "${attr}=${value}"
-            ) (builtins.attrNames set)
-          ) + "\n";
-        };
+        writeJson = set:
+          pkgs.writeTextFile {
+            name = "filename"; # this does not need to be unique
+            text = builtins.toJSON set;
+          };
+        writeList = list:
+          pkgs.writeTextFile {
+            name = "filename";
+            text = builtins.concatStringsSep "\n" list;
+          };
+        writeYaml = set:
+          pkgs.writeTextFile {
+            name = "filename";
+            text = lib.generators.toYAML {} set;
+          };
+        writeDotEnv = set:
+          pkgs.writeTextFile {
+            name = "filename";
+            text =
+              builtins.concatStringsSep "\n" (
+                map (
+                  attr: let
+                    # Add quotation marks to value if it contains spaces
+                    containsChar = char: str: builtins.any (c: c == char) (lib.strings.stringToCharacters str);
+                    raw = builtins.getAttr attr set;
+                    value =
+                      if containsChar " " raw
+                      then ("\"" + raw + "\"")
+                      else raw;
+                  in "${attr}=${value}"
+                ) (builtins.attrNames set)
+              )
+              + "\n";
+          };
 
         # Useful scripts
         shellScripts = [
@@ -95,7 +101,7 @@
                 sudo dockerd >/dev/null 2>&1 &
               fi
               DOCKER_PID="$!"
-              
+
               # Wait for docker to boot
               sleep 3
 
@@ -114,7 +120,7 @@
               run-in-sail cat /etc/php/8.3/cli/php.ini > php.ini
               if [ "$(grep xdebug < php.ini)" == "" ]; then
                 echo "Injecting php xdebug config"
-                echo -e "[xdebug]\\nxdebug.start_with_request = yes" >> php.ini 
+                echo -e "[xdebug]\\nxdebug.start_with_request = yes" >> php.ini
                 run-in-sail cp php.ini /etc/php/8.3/cli/php.ini
                 echo "Restart container for injection to take effect"
                 sail restart laravel.test
@@ -132,7 +138,7 @@
               set +e
 
 
-              # ---- Vite ---- 
+              # ---- Vite ----
 
               # run vite (This is listening to CTRL+C)
               if $DEBUG; then
@@ -184,10 +190,9 @@
           })
         ];
 
-
         dotEnv = {
           APP_ENV = "local";
-          APP_DEBUG= "true";
+          APP_DEBUG = "true";
           APP_NAME = "Laravel-Sail-App";
           APP_URL = "http://localhost:8000";
           APP_PORT = "8000";
@@ -231,11 +236,11 @@
           # XDebug config
           SAIL_XDEBUG_MODE = "develop,debug,coverage";
 
-          # Pusher variables (I don't use pusher, thats to disable the warning about 
+          # Pusher variables (I don't use pusher, thats to disable the warning about
           # them not being defined)
-          PUSHER_APP_ID= "app-id";
-          PUSHER_APP_KEY= "app-key";
-          PUSHER_APP_SECRET= "app-secret";
+          PUSHER_APP_ID = "app-id";
+          PUSHER_APP_KEY = "app-key";
+          PUSHER_APP_SECRET = "app-secret";
         };
 
         # Git config
@@ -268,9 +273,12 @@
                   {
                     id = "no-commit-to-branch";
                     args = [
-                      "--branch" "master"
-                      "--branch" "main"
-                      "--branch" "production"
+                      "--branch"
+                      "master"
+                      "--branch"
+                      "main"
+                      "--branch"
+                      "production"
                     ];
                   }
                 ];
@@ -295,18 +303,18 @@
         devShells.default = pkgs.mkShell {
           # The packages exposed to the shell
           buildInputs = with pkgs;
-            shellScripts ++
-          [
-            # Nushell script to interact with application api
-            (callPackage "${inputs.malte}/pkgs/api.nix" {})
+            shellScripts
+            ++ [
+              # Nushell script to interact with application api
+              (callPackage "${inputs.malte}/pkgs/api.nix" {})
 
-            # You probably won't need these packages because 'env-up' should deal with them
-            docker
-            git
-            pre-commit
-            nodejs
-            php83Packages.composer
-          ];
+              # You probably won't need these packages because 'env-up' should deal with them
+              docker
+              git
+              pre-commit
+              nodejs
+              php83Packages.composer
+            ];
 
           # Generate necessary files and create symlinks to them
           shellHook = ''
@@ -316,10 +324,10 @@
             echo "Entering Laravel-Sail Dev Environment"
 
             # Git exclude
-            try-symlink .git/info/exclude "${writeList gitConfig.exclude}" 
+            try-symlink .git/info/exclude "${writeList gitConfig.exclude}"
 
             # Pre commit config
-            try-symlink .pre-commit-config.yaml "${writeYaml gitConfig.pre-commit-config}" 
+            try-symlink .pre-commit-config.yaml "${writeYaml gitConfig.pre-commit-config}"
             pre-commit install -f --hook-type pre-commit >/dev/null
 
             # .env setup (This can't be a symlink, laravel does not like that)
@@ -333,11 +341,10 @@
               echo "Updating .env"
               echo -e "$(cat $newEnvPath)" > .env
             fi
-            
+
           '';
         };
-      in
-      {
+      in {
         inherit devShells;
       }
     );

@@ -1,6 +1,10 @@
-{ config, pkgs, lib, inputs, ...}:
-
 {
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
   imports = [
     inputs.plasma-manager.homeManagerModules.plasma-manager
   ];
@@ -9,12 +13,11 @@
     configFile = {
       # -- yakuake --
       yakuakerc = {
-
         # Window appearance
         Window = {
           # don't occupy other windows
           KeepAbove = "false";
-          # don't close when focus lost 
+          # don't close when focus lost
           KeepOpen = "true";
 
           ToggleToFocus = "false";
@@ -41,7 +44,7 @@
           # Set them to 'none' because their defaults conflict with above shortcuts
           move-session-left = "none";
           move-session-right = "none";
-          
+
           toggle-window-state = "Meta+Y";
         };
       };

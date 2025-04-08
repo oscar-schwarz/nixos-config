@@ -1,13 +1,15 @@
-{ pkgs, config, ... }:
-
-let
+{
+  pkgs,
+  config,
+  ...
+}: let
   sddmTheme = pkgs.where-is-my-sddm-theme.override {
     themeConfig.General = with config.lib.stylix.colors.withHashtag; {
       hideCursor = "true"; # hides mouse
-      passwordFontSize= "48";
-      passwordInputWidth= "1";
-      passwordCharacter= "•";
-      
+      passwordFontSize = "48";
+      passwordInputWidth = "1";
+      passwordCharacter = "•";
+
       # Colors
       backgroundFill = base00;
       basicTextColor = base05;

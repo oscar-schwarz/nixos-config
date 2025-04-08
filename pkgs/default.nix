@@ -1,5 +1,3 @@
-{ pkgs ? import <nixpkgs> { } }:
-
-{
-  claude-code = pkgs.callPackage ./claude-code.nix { };
+{pkgs ? import <nixpkgs> {}}: {
+  claude-code = pkgs.callPackage ./claude-code.nix {};
 }

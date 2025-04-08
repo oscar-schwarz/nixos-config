@@ -1,6 +1,4 @@
-{ ... }: 
-
-let 
+{...}: let
   monitors = [
     # { # Laptop monitor
     #   resolution = "1920x1200";
@@ -11,7 +9,8 @@ let
     #     "Chimei Innolux Corporation 0x143F"
     #   ];
     # }
-    { # Portable monitor
+    {
+      # Portable monitor
       resolution = "1920x1080";
       position = "auto";
       scale = 1;
@@ -21,7 +20,8 @@ let
         "DZX EVP-304 000000000000"
       ];
     }
-    { # Landscape desktop monitor
+    {
+      # Landscape desktop monitor
       resolution = "2560x1440";
       position = "0x240";
       scale = 1;
@@ -30,7 +30,8 @@ let
         "ViewSonic Corporation VA3209-QHD WYM241340384"
       ];
     }
-    { # Portrait desktop monitor
+    {
+      # Portrait desktop monitor
       resolution = "1920x1080";
       position = "2560x0";
       scale = 1;
@@ -44,15 +45,19 @@ let
   ];
 in {
   # All home manager specific options
-  home-manager.sharedModules = [({ ... }: {
-
+  home-manager.sharedModules = [
+    ({...}: {
       # Config for hyprland
       wayland.windowManager.hyprland.settings.monitor = builtins.concatLists (
-        map (monitor: 
-          map (name:
-            "desc:${name}, ${monitor.resolution}, ${monitor.position}, ${builtins.toString monitor.scale}, ${monitor.additional}" 
-          ) monitor.names
-        ) monitors
+        map (
+          monitor:
+            map (
+              name: "desc:${name}, ${monitor.resolution}, ${monitor.position}, ${builtins.toString monitor.scale}, ${monitor.additional}"
+            )
+            monitor.names
+        )
+        monitors
       );
-    })];
+    })
+  ];
 }

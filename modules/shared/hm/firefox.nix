@@ -1,20 +1,21 @@
-{ pkgs, lib, config, ... }: 
-
-let 
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: let
   packageName = "librewolf";
 in {
   # Make firefox default
   xdg.mimeApps.defaultApplications = lib.attrsets.genAttrs [
-    
     # Open links in firefox
     "x-scheme-handler/http"
-    "x-scheme-handler/https" 
-    "x-scheme-handler/about" 
+    "x-scheme-handler/https"
+    "x-scheme-handler/about"
     "x-scheme-handler/unknown"
 
     # Open PDF Files with firefox
     "application/pdf"
-
   ] (type: "${packageName}.desktop");
   home.sessionVariables.DEFAULT_BROWSER = lib.getExe config.programs.firefox.package;
 
@@ -29,11 +30,13 @@ in {
       AppAutoUpdate = false; # Disable automatic application update
       BackgroundAppUpdate = false; # Disable automatic application update in the background, when the application is not running.
       Bookmarks = [
-        { # to search nixpkgs and options
+        {
+          # to search nixpkgs and options
           Title = "MyNixOS";
           URL = "https://mynixos.com";
         }
-        { # to search nix functions
+        {
+          # to search nix functions
           Title = "Noogle";
           URL = "https://noogle.dev";
         }
@@ -163,7 +166,7 @@ in {
       };
       PostQuantumKeyAgreementEnabled = true;
       Preferences = {
-          "browser.startup.homepage" = "";
+        "browser.startup.homepage" = "";
       };
       PromptForDownloadLocation = false;
       SanitizeOnShutdown = {

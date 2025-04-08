@@ -17,11 +17,13 @@
   # basically making electron think its on gnome so that is uses "gio" (from glib) to open programs
   # https://forum.obsidian.md/t/obsidian-freezes-entirely-when-an-attachment-is-open-with-an-external-program/78861
   obsidianOverride = pkgs.obsidian.overrideAttrs (prev: {
-    installPhase = prev.installPhase + ''
-      wrapProgram $out/bin/obsidian \
-        --prefix PATH : ${pkgs.glib}/bin \
-        --set XDG_CURRENT_DESKTOP "GNOME"  
-    '';
+    installPhase =
+      prev.installPhase
+      + ''
+        wrapProgram $out/bin/obsidian \
+          --prefix PATH : ${pkgs.glib}/bin \
+          --set XDG_CURRENT_DESKTOP "GNOME"
+      '';
   });
 in {
   # Import modules

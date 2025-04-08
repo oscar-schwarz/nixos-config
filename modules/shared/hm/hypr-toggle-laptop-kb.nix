@@ -1,6 +1,9 @@
-{ pkgs, lib, config, ... }:
-
-let
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: let
   cfg = config.hypr-toggle-laptop-kb;
 
   statusFilePath = ''"$XDG_RUNTIME_DIR/keyboard.status"'';
@@ -41,8 +44,7 @@ let
       fi
     '';
   };
-in
-{
+in {
   options.hypr-toggle-laptop-kb = with lib; {
     enable = mkEnableOption ''
       hypr-toggle-laptop-kb is a script that toggles the laptop keyboard.
@@ -62,7 +64,7 @@ in
         type = types.str;
         default = "Lid Switch";
         description = ''
-           The name of the switch.
+          The name of the switch.
         '';
       };
     };
@@ -89,7 +91,6 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    
     # Add it for use
     home.packages = [
       toggleKB
@@ -128,5 +129,5 @@ in
         # hide_empty_text = true;
       };
     };
-  };  
+  };
 }

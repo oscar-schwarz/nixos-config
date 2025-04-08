@@ -6,6 +6,9 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/release-24.11";
 
+    # Utilities
+    flake-utils.url = "github:numtide/flake-utils";
+
     # HOME MANAGER - for all user related stuff
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -68,7 +71,7 @@
     };
   };
 
-  outputs = {nixpkgs, ...} @ inputs: with nixpkgs.lib; with builtins; let
+  outputs = {nixpkgs, flake-utils, ...} @ inputs: with nixpkgs.lib; with builtins; let
     # --- NIXOS CONFIGURATIONS ---
 
     # Definitions are in a seperate file next to this flake.nix
@@ -132,7 +135,18 @@
         ];
       }
     );
+
+    # --- OTHER OUTPUTS FOR EACH SYSTEM ---
+    outputsEachSystem = flake-utils.lib.eachDefaultSystem (system:
+      let pkgs = nixpkgs.legacyPackages.${system}; in
+      {
+        # cant use until issue resolved: https://github.com/kamadorueda/alejandra/issues/436
+        # formatter = pkgs.alejandra; 
+        packages = {};
+      }
+    );
+
   in {
     inherit nixosConfigurations;
-  };
+  } // outputsEachSystem;
 }

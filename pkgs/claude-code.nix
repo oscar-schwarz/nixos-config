@@ -1,5 +1,13 @@
-{ lib, stdenv, fetchurl, makeWrapper, nodejs_20, pkg-config, python3, libuuid }:
-
+{
+  lib,
+  stdenv,
+  fetchurl,
+  makeWrapper,
+  nodejs_20,
+  pkg-config,
+  python3,
+  libuuid,
+}:
 stdenv.mkDerivation rec {
   pname = "claude-code";
   version = "0.2.32";
@@ -8,12 +16,12 @@ stdenv.mkDerivation rec {
     url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-${version}.tgz";
     sha256 = "06y06cpqr09l6gn965hdzbhicgqfazc0hcbkrhlqpwy9j3327mch";
   };
-  
-  buildInputs = [ nodejs_20 pkg-config python3 libuuid ];
-  nativeBuildInputs = [ makeWrapper ];
+
+  buildInputs = [nodejs_20 pkg-config python3 libuuid];
+  nativeBuildInputs = [makeWrapper];
 
   sourceRoot = ".";
-  
+
   unpackPhase = ''
     mkdir -p $TMPDIR/source
     tar -xzf $src -C $TMPDIR/source
@@ -27,9 +35,9 @@ stdenv.mkDerivation rec {
   installPhase = ''
     mkdir -p $out
     cp -r $TMPDIR/source/package/* $out/
-    
+
     mkdir -p $out/bin
-    
+
     # Create a wrapper script to run the CLI
     makeWrapper ${nodejs_20}/bin/node $out/bin/claude-code \
       --add-flags "$out/cli.mjs" \
