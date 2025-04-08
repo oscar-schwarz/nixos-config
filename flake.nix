@@ -75,13 +75,6 @@
   };
 
   outputs = {nixpkgs, ...} @ inputs: with nixpkgs.lib; with builtins; let
-
-    # --- PACKAGES ---
-    packages.x86_64-linux = {
-      claude-code = nixpkgs.legacyPackages.x86_64-linux.callPackage ./pkgs/claude-code.nix {};
-    };
-
-
     # --- NIXOS CONFIGURATIONS ---
 
     # Definitions are in a seperate file next to this flake.nix
@@ -135,26 +128,11 @@
 
           # --- HOSTS MODULE ---
           # All host specific settings are imported
-          ({ ... }: {
-            imports = [
-              # Import based on current machine
-              (./machines + "/${host.machine}.nix")
-              (./modules/configs + "/${host.config}")
-
-              # Defines the used options below
-              ./modules/shared/system/hosts.nix
-            ];
-
-            # Tell the hosts module all definitions
-            hosts.all = hostDefinitions;
-
-            # Set the host name to the current host
-            networking.hostName = hostName;
-          })
+          (import ./flake/implement_hosts.nix hostName)
 
           # --- SOPS MODULE ---
           # all hosts should have access to their respective secrets
-          ./secrets
+          ./flake/secrets.nix
 
           # --- FIX FOR UNFREE PREDICATE ---
           ./modules/shared/system/allowed-unfree.nix
@@ -163,6 +141,5 @@
     );
   in {
     inherit nixosConfigurations;
-    inherit packages;
   };
 }
