@@ -28,22 +28,24 @@
   };
 
   # --- BROWSER BOOKMARKS
-  programs.firefox.policies.Bookmarks = [
-      {
-        Title = "Moodle Uni Leipzig";
-        URL = "https://moodle2.uni-leipzig.de/my/courses.php";
-      }
-      {
-        Title = "GitLab Uni Leipzig";
-        URL = "https://git.informatik.uni-leipzig.de/";
-      }
-      {
-        Title = "Almaweb";
-        URL = "https://almaweb.uni-leipzig.de/";
-      }
-      {
-        Title = "Tool Uni Leipzig";
-        URL = "https://tool.uni-leipzig.de/";
-      }
-  ];
+  home-manager.sharedModules = [({ config, lib, ... }: {
+    programs.firefox.policies.Bookmarks = lib.mkIf config.programs.firefox.enable [
+        {
+          Title = "Moodle Uni Leipzig";
+          URL = "https://moodle2.uni-leipzig.de/my/courses.php";
+        }
+        {
+          Title = "GitLab Uni Leipzig";
+          URL = "https://git.informatik.uni-leipzig.de/";
+        }
+        {
+          Title = "Almaweb";
+          URL = "https://almaweb.uni-leipzig.de/";
+        }
+        {
+          Title = "Tool Uni Leipzig";
+          URL = "https://tool.uni-leipzig.de/";
+        }
+      ];
+  })];
 }
