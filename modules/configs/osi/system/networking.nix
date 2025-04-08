@@ -3,13 +3,6 @@
   config,
   ...
 }: {
-  environment.systemPackages = with pkgs; [
-    # Script to install the cert for eduroam uni leipzig
-    eduroam.install-eduroam-leipzig
-
-    openconnect
-  ];
-
   networking = let
     wireguardPort = 51820;
   in {
@@ -30,18 +23,6 @@
       #   { from = 8000; to = 8010; }
       # ];
     };
-
-    openconnect.interfaces = {
-      uni-leipzig-vpn = {
-        # Start with `sudo systemctl start openconnect-uni-leipzig-vpn`
-        autoStart = false;
-        gateway = "vpn.uni-leipzig.de";
-        protocol = "anyconnect";
-        user = "zu66owol@uni-leipzig.de";
-        passwordFile = config.getSopsFile "other/uni-leipzig-vpn-auth";
-      };
-    };
-
     wireguard.interfaces = {
       # TODO: Internet connection in home network incredibly slow, printer doesnt work when active
       # sculk = {

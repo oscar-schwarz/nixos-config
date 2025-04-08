@@ -1,5 +1,5 @@
 hostName:
-{ config, lib, ... }:
+args@{ pkgs, config, lib, ... }:
 let
   # The content of the hosts.nix file
   hostDefinitions = import ../hosts.nix;
@@ -19,6 +19,7 @@ let
   # helper
   inherit (lib.attrsets) mapAttrs attrValues;
   inherit (lib) flatten;
+  inherit (builtins) typeOf;
 in {
   # Tell the hosts module all definitions
   # This also type checks the hosts.nix file and sets default values
@@ -46,10 +47,10 @@ in {
     ++ (host.users |> mapAttrs (userName: userConfig: 
       userConfig.user-nixos-modules |> map (module: 
         # If a path was provided import the file and give it the userName as an argument, else just give the argument
-        if builtins.typeOf module == "path" then
-          (import module) userName
+        if typeOf module == "path" then
+          (import module (args // {inherit userName;}))
         else
-          module userName
+          (module (args // {inherit userName;}))
       )
     ) |> attrValues |> flatten);
   # Set up the users, just give an empty set, but define the set

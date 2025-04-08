@@ -116,7 +116,6 @@
 
                   # custom flake packages
                   matcha = matcha.packages.${prev.system}.default;
-                  eduroam = eduroam.packages.${prev.system};
                 }
               )
             ];
@@ -129,9 +128,6 @@
           # --- SOPS MODULE ---
           # all hosts should have access to their respective secrets
           ./flake/secrets.nix
-
-          # --- FIX FOR UNFREE PREDICATE ---
-          ./flake/allowed-unfree.nix
         ];
       }
     );

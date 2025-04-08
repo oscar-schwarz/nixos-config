@@ -49,14 +49,6 @@ in {
           URL = "https://duckduckgo.com/";
         }
         {
-          Title = "Moodle Uni Leipzig";
-          URL = "https://moodle2.uni-leipzig.de/my/courses.php";
-        }
-        {
-          Title = "GitLab Uni Leipzig";
-          URL = "https://git.informatik.uni-leipzig.de/";
-        }
-        {
           Title = "Syncthing Web GUI";
           URL = "http://127.0.0.1:8384/";
         }

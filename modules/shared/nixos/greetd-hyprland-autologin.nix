@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  userName ? "user",
   ...
 }: {
   programs.hyprland.enable = true;
@@ -20,7 +21,7 @@
       # Run hyprland on boot (autologin)
       initial_session = {
         inherit command;
-        user = "osi";
+        user = userName;
       };
       # user needs to authenticate on relogin
       default_session = {
