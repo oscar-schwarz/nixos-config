@@ -20,20 +20,6 @@ let
 
 in {
 
-  imports = [
-    # Waybar styling from stylix that is based of stylix terminal
-    (import ../../../stylix/home/waybar-terminal.nix 
-      (args // {
-        inherit border;
-        inherit margin;
-        inherit terminal-padding;
-      })
-    )
-
-    # Rofi styling
-    ../../../stylix/home/rofi-terminal.nix
-  ];
-
   # Terminal
   programs.kitty.settings = {
     # Text is moved a bit inwards, like that its not so close to the border

@@ -11,10 +11,6 @@
     ./system/networking.nix
     # window manager and display manager
     ./system/desktop.nix
-    # language specific
-    ./system/locale.nix
-    # Theme of everything
-    ./system/stylix.nix
     # Settings specific to my monitor setup
     ../../shared/system/monitors.nix
   ];

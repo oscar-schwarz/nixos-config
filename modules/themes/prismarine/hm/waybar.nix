@@ -1,13 +1,4 @@
-{ 
-  border ? {
-    radius = 10;
-    width = 3;
-  },
-  margin ? 3,
-  terminal-padding ? 7,
-
-  config, lib, ... 
-}:
+{ config, lib, nixosConfig, ... }:
 
 let
   # Defined by stylix somewhere else
@@ -23,12 +14,19 @@ let
         (map (x: config.lib.stylix.colors."${colorID}-${x}") ["rgb-r" "rgb-g" "rgb-b"]);
 
   filterStr = str: cs: builtins.concatStringsSep "" (lib.filter (c: ! builtins.elem c cs) (lib.splitString "" str));
+
+  # theme options
+  themeCfg = nixosConfig.prismarineTheme;
+  border = {
+    radius = themeCfg.border-radius;
+    width = themeCfg.border-width;
+  };
+  margin = themeCfg.margin;
+  terminal-padding = themeCfg.padding;
+  
 in {
   stylix.targets.waybar.enable = false; # turn off stylix ricing that style.css can be changed
-  programs.waybar = {
-    settings.mainBar = {
-      height = 35;
-    };
+  programs.waybar = lib.mkIf config.programs.waybar.enable {
     style = with colors.withHashtag;''
       /* STYLIX COLORS */
       @define-color base00 ${base00}; @define-color base01 ${base01}; @define-color base02 ${base02}; @define-color base03 ${base03};

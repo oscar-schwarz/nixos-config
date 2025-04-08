@@ -1,6 +1,8 @@
 { pkgs, lib, inputs, ... }:
-
-{
+let
+  inherit (lib) mkDefault;
+  inherit (lib.attrsets) mapAttrs;
+in {
   # Bootloader setup
   boot.loader.systemd-boot = {
     enable = true;
@@ -75,9 +77,6 @@
       };
 
       programs.bashmount.enable = true;
-
-      # little fix for gtk apps
-      gtk.iconTheme.name = lib.mkDefault "Adwaita";
     })];
   };
 
@@ -92,6 +91,23 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+  };
+
+  # language specific
+  i18n = {
+    defaultLocale = mkDefault "en_US.UTF-8";
+    # Home sweet home german formats
+    extraLocaleSettings = mapAttrs (_: value: mkDefault value) {
+      LC_ADDRESS = "de_DE.UTF-8";
+      LC_IDENTIFICATION = "de_DE.UTF-8";
+      LC_MEASUREMENT = "de_DE.UTF-8";
+      LC_MONETARY = "de_DE.UTF-8";
+      LC_NAME = "de_DE.UTF-8";
+      LC_NUMERIC = "de_DE.UTF-8";
+      LC_PAPER = "de_DE.UTF-8";
+      LC_TELEPHONE = "de_DE.UTF-8";
+      LC_TIME = "de_DE.UTF-8";
+    };
   };
 
   # Make all keyboards the same
