@@ -2,6 +2,7 @@
   pkgs,
   config,
   lib,
+  nixosConfig,
   ...
 }: let
   repositoryOrigin = "git@github.com:OsiPog/pass.git";
@@ -33,6 +34,22 @@ in {
     settings = {
       PASSWORD_STORE_DIR = "$HOME/.password-store";
     };
+  };
+
+  # Enable gpg it will only work with it
+  programs.gpg = {
+    enable = true;
+    publicKeys = [
+      {
+        trust = 5;
+        source = nixosConfig.getSopsFile "pgp-keys/id-0x675D2CB5013E8731/public";
+      }
+    ];
+  };
+  services.gpg-agent = {
+    enable = true;
+    enableScDaemon = true;
+    enableSshSupport = true;
   };
 
   # add plugin to rofi if enabled

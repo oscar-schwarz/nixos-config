@@ -13,8 +13,11 @@
     ];
     users.osi = {
       hm-modules = [
-        # Code editor
-        ./modules/shared/hm/vscode.nix
+        # shell
+        ./modules/shared/hm/fish.nix
+
+        # terminal
+        ./modules/shared/hm/kitty.nix
 
         # Window manager
         ./modules/shared/hm/hyprland # base config
@@ -24,20 +27,22 @@
         ./modules/shared/hm/hyprland/lockscreen.nix # lockscreen with auto enable on inactivity
         ./modules/shared/hm/hyprland/rofi.nix # Powerfull runner
         
+        # code editor
+        ./modules/shared/hm/vscode.nix
+
         # web browser
         ./modules/shared/hm/firefox.nix
-
-        # shell
-        ./modules/shared/hm/fish.nix
-
-        # terminal
-        ./modules/shared/hm/kitty.nix
+        ./modules/shared/hm/chromium.nix # when firefox fails
 
         # password manager
         ./modules/shared/hm/password-store.nix
 
         # Game Engine
         ./modules/shared/hm/godot.nix
+
+        # Some common desktop apps I need
+        ./modules/shared/hm/desktop-apps.nix
+        ./modules/shared/hm/cli-tools.nix
       ];
       # NixOS modules given here should be a function that takes a username and returns a NixOS module
       user-nixos-modules = [];

@@ -129,14 +129,6 @@
     root.hashedPasswordFile = config.getSopsFile "pass-hashes/osi";
   };
 
-  home-manager = {
-    users = {
-      "osi" = import ./home.nix;
-    };
-    # files with this extension should be deleted regulary
-    backupFileExtension = "homeManagerBackupFileExtension";
-  };
-
   # CUSTOM USB DEVICE
   services.udev = {
     packages = [

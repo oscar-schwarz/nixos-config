@@ -81,7 +81,13 @@ in {
           };
         };
 
-        programs.bashmount.enable = true;
+        programs.btop = {
+          enable = true;
+          settings = {
+            # Using the theme provided by the terminal
+            force_tty = "False";
+          };
+        };
       })
     ];
   };

@@ -1,0 +1,39 @@
+{ pkgs, lib, nixosConfig, ... }: 
+let
+  heygptWrapper = pkgs.writeShellApplication {
+    name = "heygpt";
+    text = ''
+      OPENAI_API_BASE="https://api.openai.com/v1" \
+      OPENAI_API_KEY=$(cat ${nixosConfig.getSopsFile "api-keys/open-ai"}) \
+      ${lib.getExe pkgs.heygpt} --model "''${HEYGPT_MODEL:-gpt-4o}" "$@"
+    '';
+  };
+in {
+  home.packages = with pkgs; [
+    bluetuith # bluetooth tui
+    devenv # dev environments made easy
+    ncpamixer # Pulse Audio mixer utility
+    restic
+    # Tools
+    wl-clipboard-rs # copy to clipboard from terminal
+
+    # Scripts
+    heygptWrapper # terminal gpt integration
+  ];
+
+  # Mounting usb devices easily
+  programs.bashmount.enable = true;
+
+  # Youtube downloader
+  programs.yt-dlp = {
+    enable = true;
+  };
+
+  # nice cli git experience
+  programs.lazygit = {
+    enable = true;
+    settings = {
+      mouseEvents = false; # don't need no mouse
+    };
+  };
+}
