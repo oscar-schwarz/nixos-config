@@ -1,24 +1,26 @@
 { pkgs, ... }:
 {
-  wayland.windowManager.hyprland.settings = {
-    bind = [
-      # workspace overview through hyprspace
-      "$meta, V, overview:toggle"
-    ];
-
-    # Plugin for overview over workspaces
+  wayland.windowManager.hyprland = {
+    # Plugin for touch inputs
     plugins = with pkgs.hyprlandPlugins; [
-      hyprspace
+      hyprgrass
     ];
+    
+    settings = {
+      bind = [
+        # workspace overview through hyprspace
+        "$meta, V, overview:toggle"
+      ];
 
-    "plugin:overview" = {
-      panelHeight = 200;
-      showNewWorkspace = false;
-      showEmptyWorkspace = true;
-      hideTopLayers = true;
-      hideBackgroundLayers = true;
-      overrideGaps = false;
-      disableGestures = true;
+      "plugin:overview" = {
+        panelHeight = 200;
+        showNewWorkspace = false;
+        showEmptyWorkspace = true;
+        hideTopLayers = true;
+        hideBackgroundLayers = true;
+        overrideGaps = false;
+        disableGestures = true;
+      };
     };
   };
 }
