@@ -32,9 +32,6 @@ in {
     # ./modules/home/plasma.nix
     # ./modules/home/yakuake.nix
 
-    # All hyprland options (a lot of them)
-    ./home/hyprland.nix
-
     # Everything todo
     # ./home/todo.nix
   ];

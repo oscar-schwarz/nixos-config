@@ -95,11 +95,11 @@ in {
             };
             options = {
               nixos = {
-                expr = ''(builtins.getFlake "${../../..}").nixosConfigurations.${nixosConfig.networking.hostName}.options'';
+                expr = ''(builtins.getFlake \'\'${../../..}\'\').nixosConfigurations.${nixosConfig.networking.hostName}.options'';
               };
               home-manager = {
                 # This is the closest i've got to a correct expression, but sadly it doesnt work yet
-                expr = ''(builtins.getFlake "${../../..}").nixosConfigurations.${nixosConfig.networking.hostName}.options.home-manager.users.type.nestedTypes.elemType.getSubOptions ["${config.home.username}"]'';
+                expr = ''(builtins.getFlake \'\'${../../..}\'\').nixosConfigurations.${nixosConfig.networking.hostName}.options.home-manager.users.type.nestedTypes.elemType.getSubOptions ["${config.home.username}"]'';
               };
             };
           };
@@ -369,6 +369,7 @@ in {
         davidlgoldberg.jumpy2 # jumping cursors with short letter combo
         eamodio.gitlens # useful for git blame inline
         saoudrizwan.claude-dev # llm coding agent
+        sleistner.vscode-fileutils # crud for files
 
         # --- PHP ---
         zobo.php-intellisense # intellisense
