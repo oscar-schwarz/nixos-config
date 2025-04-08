@@ -2,9 +2,6 @@
 
 {
   imports = [
-    # Styled
-    ./hyprland-rice.nix
-
     # shared waybar module
     ./waybar.nix
   ];
@@ -346,7 +343,7 @@
 
       # --- WINDOW RULES
       windowrulev2 = [
-        # by default tile all windows
+        # by default tile all 
         # "float"
 
         "stayfocused, title:^Hyprland Polkit Agent$"
