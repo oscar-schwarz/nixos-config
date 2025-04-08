@@ -25,7 +25,7 @@ in {
   hosts.all = hostDefinitions;
 
   # Set the value of the `this` set
-  hosts.this = config.all.${hostName} // { name = hostName;};
+  hosts.this = config.hosts.all.${hostName} // { name = hostName;};
 
   # Set the host name to the current host
   networking.hostName = hostName;

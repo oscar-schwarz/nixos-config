@@ -61,12 +61,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Working version of the hyprpolkitagent
-    hyprpolkitagent = {
-      url = "github:hyprwm/hyprpolkitagent";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # Customized build of libfprint to make my laptops fingerpint reader work
     libfprint-goodix-55b4 = {
       url = "github:oscar-schwarz/libfprint-goodix-55b4";
@@ -120,7 +114,6 @@
                   # custom flake packages
                   matcha = matcha.packages.${prev.system}.default;
                   eduroam = eduroam.packages.${prev.system};
-                  hyprpolkitagent = hyprpolkitagent.packages.${prev.system}.default;
                 }
               )
             ];
@@ -135,7 +128,7 @@
           ./flake/secrets.nix
 
           # --- FIX FOR UNFREE PREDICATE ---
-          ./modules/shared/system/allowed-unfree.nix
+          ./flake/allowed-unfree.nix
         ];
       }
     );

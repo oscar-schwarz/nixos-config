@@ -32,9 +32,9 @@ let
   fa = name: "&#x" + fa-icons.${name} + ";";
 in {
   imports = [
-    ../../../shared/home/hypr-toggle-laptop-kb.nix
-    ../../../shared/home/hypr-rotate-current-screen.nix
-    ../../../shared/home/matcha.nix
+    ../../../shared/hm/hypr-toggle-laptop-kb.nix
+    ../../../shared/hm/hypr-rotate-current-screen.nix
+    ../../../shared/hm/matcha.nix
   ];
 
   # Options for my hypr-toggle-laptop-kb module

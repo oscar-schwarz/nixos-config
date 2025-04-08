@@ -1,4 +1,4 @@
-{ pkgs, lib, config, inputs, ... }: 
+{ pkgs, lib, config, ... }: 
 
 let 
   packageName = "librewolf";
@@ -17,7 +17,6 @@ in {
 
   ] (type: "${packageName}.desktop");
   home.sessionVariables.DEFAULT_BROWSER = lib.getExe config.programs.firefox.package;
-
 
   # Install firefox.
   programs.firefox = {
@@ -121,11 +120,11 @@ in {
           install_url = "https://addons.mozilla.org/firefox/downloads/file/4297952/vue_js_devtools-6.6.3.xpi";
           installation_mode = "force_installed";
         };
-        # DuckDuckGo, this extension sets the default search engine to ddg
-        "jid1-ZAdIEUB7XOzOJw@jetpack" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/file/4325805/duckduckgo_for_firefox-2024.7.24.xpi";
-          installation_mode = "force_installed";
-        };
+        # DuckDuckGo, this extension sets the default search engine to ddg (not needed when using librewolf)
+        # "jid1-ZAdIEUB7XOzOJw@jetpack" = {
+        #   install_url = "https://addons.mozilla.org/firefox/downloads/file/4325805/duckduckgo_for_firefox-2024.7.24.xpi";
+        #   installation_mode = "force_installed";
+        # };
       };
       FirefoxHome = {
         TopSites = false;

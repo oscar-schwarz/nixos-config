@@ -89,12 +89,8 @@
     plugins = with pkgs; [
       rofi-emoji-wayland
     ];
-
-    pass = {
-      enable = true;
-      package = pkgs.rofi-pass-wayland;
-    };
   };
+
   services.gpg-agent.pinentryPackage = pkgs.pinentry-rofi.override {
     rofi = pkgs.rofi-wayland;
   };
@@ -348,10 +344,6 @@
 
         "stayfocused, title:^Hyprland Polkit Agent$"
         # "dimaround, title:^Hyprland Polkit Agent$"
-        "float, title:.*\\(DEBUG\\)$"
-        "size 1280 720, title:.*\\(DEBUG\\)$"
-
-        "tile, title:.*Godot Engine$"
         
         # browser saving action
         "float, title:^Save File$"

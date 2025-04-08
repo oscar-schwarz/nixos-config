@@ -1,20 +1,18 @@
 { lib, config, ...}: 
-with lib;
-# with builtins;
+
 let 
-  allDirectoriesInDir = dir:
+  allNixFileNamesInDir = dir:
     (readDir dir) 
-    |> attrsets.filterAttrs (name: value: value == "directory") 
-    |> attrNames; 
-  allNixFilesInDir = dir: 
-    (readDir dir) 
-    |> attrsets.filterAttrs (name: value: value == "regular") 
-    |> attrNames;
+    |> filterAttrs (name: value: value == "regular") 
+    |> attrNames
+    |> map (replaceStrings [".nix"] [""]);
   
   # Define a type that can be either a path or a module (attrset or function)
   moduleOrPathList = with types; listOf (oneOf [ path deferredModule]);
-  
-  cfg = config.hosts;
+
+  inherit (lib) types mkOption;
+  inherit (lib.attrsets) filterAttrs attrNames;
+  inherit (builtins) readDir replaceStrings;
 in {
   
   # --- INTERFACE
@@ -24,7 +22,7 @@ in {
       options = {
         machine = mkOption {
           description = "The machine used for this host. Found in ./machines";
-          type =  types.enum (allDirectoriesInDir ../machines) ;
+          type =  types.enum (allNixFileNamesInDir ../machines) ;
         };
         nixos-modules = mkOption {
           description = "All NixOS modules added to this host.";
@@ -38,7 +36,7 @@ in {
         };
         users = mkOption {
           description = "The users defined on this host with their respective home manager and NixOS modules.";
-          type = with types; attrsOf submodule ({ ... }: {
+          type = with types; attrsOf (submodule ({ ... }: {
             options = {
               hm-modules =  mkOption {
                 description = "All Home Manager modules of this user.";
@@ -51,16 +49,16 @@ in {
                 type = with types; listOf (oneOf [ path (functionTo deferredModule)]);
               };
             };
-          });
-        } // (
-          if addName then {
-            name = mkOption {
-              description = "The host name of the host this config is used in.";
-              type = types.enum (attrsets.attrNames (import ../hosts.nix));
-            };
-          } else {}
-        ); 
-      };
+          }));
+        };
+      } // (
+        if addName then {
+          name = mkOption {
+            description = "The host name of the host this config is used in.";
+            type = types.enum (attrNames (import ../hosts.nix));
+          };
+        } else {}
+      ); 
     };
   in {
     hosts = {
@@ -71,7 +69,7 @@ in {
       };
       this = mkOption {
         description = "The definition of the current host.";
-        type = with types; attrsOf (submodule (hostOpts true));
+        type = with types; submodule (hostOpts true);
       };
     };
   };

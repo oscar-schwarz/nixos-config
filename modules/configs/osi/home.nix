@@ -13,22 +13,6 @@
       ${lib.getExe pkgs.heygpt} --model "''${HEYGPT_MODEL:-gpt-4o}" "$@"
     '';
   };
-
-  # A small script that easily clones and pulls changes of the password store
-  pass-fetch = pkgs.writeShellApplication {
-    name = "pass-fetch";
-    text = ''
-      REPO_URL="git@github.com:OsiPog/pass.git"
-      DEST_DIR="${config.home.homeDirectory}/.password-store"
-
-      if [ ! -d "$DEST_DIR" ]; then
-        git clone "$REPO_URL" "$DEST_DIR"
-      else
-        ${lib.getExe pkgs.pass} git pull
-        ${lib.getExe pkgs.pass} git push
-      fi
-    '';
-  };
   # A fix for obsidian to properly open attachments:
   # basically making electron think its on gnome so that is uses "gio" (from glib) to open programs
   # https://forum.obsidian.md/t/obsidian-freezes-entirely-when-an-attachment-is-open-with-an-external-program/78861
@@ -49,26 +33,9 @@ in {
     # All hyprland options (a lot of them)
     ./home/hyprland.nix
 
-    # VSCodium setup
-    ./home/vscode.nix
-
-    # Shell
-    ./home/fish.nix
-
-    # Firefox settings
-    ./home/firefox.nix
-
     # Everything todo
     # ./home/todo.nix
-
-    # mail client
-    ./home/mail.nix
   ];
-
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
-  home.username = "osi";
-  home.homeDirectory = "/home/osi";
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -76,16 +43,12 @@ in {
     bluetuith # bluetooth tui
     devenv # dev environments made easy
     gnome-disk-utility # format disks
-    godot_4
-    gource # Git history visualisation
     libreoffice # office suite
     loupe # Image Viewer
     nautilus # File Browser
-    nnn # terminal file manager
     ncpamixer # Pulse Audio mixer utility
     obsidianOverride # markdown note taking app
     prismlauncher # Open Source Minecraft Launcher
-    qrcode # simple qr code tool
     restic
     signal-desktop # secure messaging
     vlc # Media Player
@@ -100,11 +63,7 @@ in {
     wl-clipboard-rs # copy to clipboard from terminal
 
     # Scripts
-    pass-fetch # script for fetching password store repo
     heygptWrapper # terminal gpt integration
-
-    # Icons
-    adwaita-icon-theme
   ];
 
   home.sessionVariables = {
@@ -118,17 +77,6 @@ in {
       "video/mp4" = ["vlc.desktop"];
       "image/jpeg" = ["org.gnome.Loupe.desktop"];
       "image/png" = ["org.gnome.Loupe.desktop"];
-    };
-  };
-
-  # Password store
-  programs.password-store = {
-    enable = true;
-    package = pkgs.pass.withExtensions (exts: [
-      exts.pass-otp
-    ]);
-    settings = {
-      PASSWORD_STORE_DIR = "$HOME/.password-store";
     };
   };
 

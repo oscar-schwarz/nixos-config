@@ -1,7 +1,7 @@
 { pkgs, lib, inputs, config, nixosConfig, ... }:
 
 let
-  vscodeExts = inputs.nix-vscode-extensions.extensions.x86_64-linux;
+  vscodeExts = inputs.nix-vscode-extensions.extensions.${pkgs.system};
 in {
   # Make codium default
   xdg.mimeApps.defaultApplications = lib.attrsets.genAttrs [
@@ -119,10 +119,6 @@ in {
         ];
         "java.jdt.ls.java.home" = pkgs.openjdk + "/lib/openjdk"; # JDK used for the language server
         "java.configuration.detectJdksAtStart" = false; # Do not try to detect JDKs
-
-
-        # --- GODOT ---
-        "godotTools.editorPath.godot4" = lib.getExe pkgs.godot_4;
       };
       # Keybindings
       # `when` makes the keybind only available in certain contexts: more on that here

@@ -5,14 +5,12 @@
   ...
 }: {
   imports = [
-    # Essential stuff needed on every system
-    ../../shared/system/essentials.nix
     # setup networks
     ./system/networking.nix
     # window manager and display manager
     ./system/desktop.nix
     # Settings specific to my monitor setup
-    ../../shared/system/monitors.nix
+    ../../shared/nixos/monitors.nix
   ];
 
   sops.secrets = {
