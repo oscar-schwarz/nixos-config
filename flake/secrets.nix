@@ -6,7 +6,7 @@
   options,
   ...
 }: let 
-  hmSecretName = userName: name: "hm-secret-${userName}-${name}"; 
+  hmSecretName = userName: name: "hm-secrets/${userName}/${name}"; 
 
   inherit (lib) attrsToList flatten mkOption;
   inherit (builtins) listToAttrs;
