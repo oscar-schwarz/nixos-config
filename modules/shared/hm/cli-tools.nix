@@ -1,10 +1,10 @@
-{ pkgs, lib, nixosConfig, ... }: 
+{ pkgs, lib, config, ... }: 
 let
   heygptWrapper = pkgs.writeShellApplication {
     name = "heygpt";
     text = ''
       OPENAI_API_BASE="https://api.openai.com/v1" \
-      OPENAI_API_KEY=$(cat ${nixosConfig.getSopsFile "api-keys/open-ai"}) \
+      OPENAI_API_KEY=$(cat ${config.getSopsFile "api-keys/open-ai"}) \
       ${lib.getExe pkgs.heygpt} --model "''${HEYGPT_MODEL:-gpt-4o}" "$@"
     '';
   };
@@ -20,6 +20,11 @@ in {
     # Scripts
     heygptWrapper # terminal gpt integration
   ];
+
+  # Secrets needed in this file
+  sops.secrets = {
+    "api-keys/open-ai" = {};
+  };
 
   # Mounting usb devices easily
   programs.bashmount.enable = true;

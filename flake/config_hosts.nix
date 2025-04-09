@@ -56,7 +56,6 @@ in {
   # Set up the users, just give an empty set, but define the set
   users.users = host.users |> mapAttrs (_: _: {});
 
-
   # Set up home manager
 
   # Import shared Home Manager modules

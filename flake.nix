@@ -85,7 +85,6 @@
         modules = with inputs; [
           # --- FLAKE INPUTS MODULES ---
           home-manager.nixosModules.default
-          sops-nix.nixosModules.sops
           stylix.nixosModules.stylix
           programs-sqlite.nixosModules.programs-sqlite
           custom-udev-rules.nixosModule

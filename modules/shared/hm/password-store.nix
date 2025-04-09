@@ -2,7 +2,6 @@
   pkgs,
   config,
   lib,
-  nixosConfig,
   ...
 }: let
   repositoryOrigin = "git@github.com:OsiPog/pass.git";
@@ -26,6 +25,11 @@ in {
     })
   ];
 
+  # secrets needed in this file
+  sops.secrets = {
+    "pgp-keys/id-0x675D2CB5013E8731/public" = {};
+  };
+
   programs.password-store = {
     enable = true;
     package = pkgs.pass.withExtensions (exts: [
@@ -42,7 +46,7 @@ in {
     publicKeys = [
       {
         trust = 5;
-        source = nixosConfig.getSopsFile "pgp-keys/id-0x675D2CB5013E8731/public";
+        source = config.getSopsFile "pgp-keys/id-0x675D2CB5013E8731/public";
       }
     ];
   };
