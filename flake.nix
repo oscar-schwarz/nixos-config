@@ -123,7 +123,7 @@
 
           # --- HOSTS MODULE ---
           # All host specific settings are imported
-          (import ./flake/implement_hosts.nix hostName)
+          (import ./flake/config_hosts.nix hostName)
 
           # --- SOPS MODULE ---
           # all hosts should have access to their respective secrets

@@ -34,7 +34,7 @@ in {
   # import the defined nixos modules
   imports = [ 
     # definitions of `hosts` config
-    ./define_hosts.nix 
+    ./options_hosts.nix 
 
     # the machine of the host
     (../machines + "/${host.machine}" + ".nix")
