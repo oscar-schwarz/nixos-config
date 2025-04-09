@@ -59,7 +59,7 @@
         ./modules/shared/hm/desktop-apps.nix
         ./modules/shared/hm/cli-tools.nix
       ];
-      # NixOS modules here is given an additional attribute to the set called userName, which is the user above
+      # NixOS modules here is given an additional attribute to the set called username, which is the user above
       user-nixos-modules = [
         # Use greetd as display manager and autologin to hyprland
         ./modules/shared/nixos/greetd-hyprland-autologin.nix

@@ -14,10 +14,8 @@
   sops.secrets = {
     "pass-hashes/osi" = {neededForUsers = true;};
     "api-keys/nix-access-tokens" = {};
-    # "api-keys/open-ai" = {owner = "osi";};
     "wireguard/biome-fest/private-key" = {};
     "wireguard/biome-fest/psk" = {};
-    # "pgp-keys/id-0x675D2CB5013E8731/public" = {owner = "osi";};
   };
 
   # Add github token to github calls
