@@ -1,7 +1,7 @@
 {
   pkgs,
   lib,
-  username ? "user",
+  username,
   ...
 }: {
   programs.hyprland.enable = true;

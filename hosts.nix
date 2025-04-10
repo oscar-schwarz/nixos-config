@@ -62,7 +62,7 @@
       # NixOS modules here is given an additional attribute to the set called username, which is the user above
       user-nixos-modules = [
         # Use greetd as display manager and autologin to hyprland
-        ./modules/shared/nixos/greetd-hyprland-autologin.nix
+        ./modules/shared/nixos/user/greetd-hyprland-autologin.nix
       ];
     };
   };

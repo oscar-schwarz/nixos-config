@@ -44,13 +44,13 @@ in {
     ++ host.nixos-modules
 
     # The nixos modules per user
-    ++ (host.users |> mapAttrs (userName: userConfig: 
+    ++ (host.users |> mapAttrs (username: userConfig: 
       userConfig.user-nixos-modules |> map (module: 
         # If a path was provided import the file and give it the userName as an argument, else just give the argument
         if typeOf module == "path" then
-          (import module (args // {inherit userName;}))
+          (import module (args // {inherit username;}))
         else
-          (module (args // {inherit userName;}))
+          (module (args // {inherit username;}))
       )
     ) |> attrValues |> flatten);
   # Set up the users, just give an empty set, but define the set
