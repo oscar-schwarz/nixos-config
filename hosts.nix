@@ -22,9 +22,6 @@
 
       # gaming
       ./modules/shared/nixos/steam
-
-      # uni leipzig
-      ./modules/shared/nixos/uni-leipzig.nix
     ];
     users.osi = {
       hm-modules = [
@@ -63,6 +60,9 @@
       user-nixos-modules = [
         # Use greetd as display manager and autologin to hyprland
         ./modules/shared/nixos/user/greetd-hyprland-autologin.nix
+
+        # Uni Leipzig
+        ./modules/shared/nixos/user/uni-leipzig.nix
       ];
     };
   };
