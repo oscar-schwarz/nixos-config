@@ -1,18 +1,49 @@
 { lib, config, ...}: 
 
 let 
+  sharedModulesDir = ../modules;
+
+  inherit (lib) types mkOption;
+  inherit (lib.attrsets) filterAttrs attrNames;
+  inherit (lib.filesystem) listFilesRecursive;
+  inherit (builtins) readDir replaceStrings filter match;
+
   allNixFileNamesInDir = dir:
     (readDir dir) 
     |> filterAttrs (name: value: value == "regular") 
     |> attrNames
     |> map (replaceStrings [".nix"] [""]);
-  
-  # Define a type that can be either a path or a module (attrset or function)
-  moduleOrPathList = with types; listOf (oneOf [ path deferredModule]);
 
-  inherit (lib) types mkOption;
-  inherit (lib.attrsets) filterAttrs attrNames;
-  inherit (builtins) readDir replaceStrings;
+  allDirNamesInDir = dir:
+    (readDir dir) 
+    |> filterAttrs (name: value: value == "directory") 
+    |> attrNames;
+
+  listOfModulesOrStringPathWithoutPrefix = prefixDirStr: with types; listOf (oneOf [ 
+    # path to a module
+    path 
+    # a module itself
+    deferredModule
+    enum (
+      (listFilesRecursive sharedModulesDir)
+      
+      # convert the found paths to string
+      |> map toString
+      
+      # now filter based on given prefix
+      |> filter (pathStr:
+        (match "^${toString sharedModulesDir}/${prefixDirStr}/.*" pathStr) != null
+      )
+
+      # remove the store path prefix from the strings
+      # also the default nix and .nix extension
+      |> map (replaceStrings [
+        ((toString sharedModulesDir) + "/${prefixDirStr}/")
+        "default.nix"
+        ".nix" #remove repetitive file extension
+      ] [ "" "" "" ])
+    )
+  ]);
 in {
   
   # --- INTERFACE
@@ -21,18 +52,23 @@ in {
     hostOpts = addName: { ... }: {
       options = {
         machine = mkOption {
-          description = "The machine used for this host. Found in ../machines";
+          description = "The machine used for this host. Found in ./machines";
           type =  types.enum (allNixFileNamesInDir ../machines) ;
+        };
+        theme = mkOption {
+          description = "The style theme applied to the host. Found in ./themes";
+          type = with types; nullOr (enum (allDirNamesInDir ../themes));
+          default = null;
         };
         nixos-modules = mkOption {
           description = "All NixOS modules added to this host.";
           default = [];
-          type = moduleOrPathList;
+          type = listOfModulesOrStringPathWithoutPrefix "nixos";
         };
         shared-hm-modules = mkOption {
           description = "All Home Manager modules added to each Home Manager configuration.";
           default = [];
-          type = moduleOrPathList;
+          type = listOfModulesOrStringPathWithoutPrefix "hm";
         };
         users = mkOption {
           description = "The users defined on this host with their respective home manager and NixOS modules.";
@@ -41,12 +77,12 @@ in {
               hm-modules =  mkOption {
                 description = "All Home Manager modules of this user.";
                 default = [];
-                type = moduleOrPathList;
+                type = listOfModulesOrStringPathWithoutPrefix "hm";
               };
               user-nixos-modules = mkOption {
                 description = "All NixOS modules added by this specific user. The modules need to be functions that take the username and return a module.";
                 default = [];
-                type = with types; listOf (oneOf [ path (functionTo deferredModule)]);
+                type = listOfModulesOrStringPathWithoutPrefix "nixos-user";
               };
             };
           }));

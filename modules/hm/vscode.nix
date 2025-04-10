@@ -95,11 +95,11 @@ in {
             };
             options = {
               nixos = {
-                expr = ''(builtins.getFlake \'\'${../../..}\'\').nixosConfigurations.${nixosConfig.networking.hostName}.options'';
+                expr = ''(builtins.getFlake \'\'${../..}\'\').nixosConfigurations.${nixosConfig.networking.hostName}.options'';
               };
               home-manager = {
                 # This is the closest i've got to a correct expression, but sadly it doesnt work yet
-                expr = ''(builtins.getFlake \'\'${../../..}\'\').nixosConfigurations.${nixosConfig.networking.hostName}.options.home-manager.users.type.nestedTypes.elemType.getSubOptions ["${config.home.username}"]'';
+                expr = ''(builtins.getFlake \'\'${../..}\'\').nixosConfigurations.${nixosConfig.networking.hostName}.options.home-manager.users.type.nestedTypes.elemType.getSubOptions ["${config.home.username}"]'';
               };
             };
           };

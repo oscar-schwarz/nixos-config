@@ -7,20 +7,13 @@
   imports = [
     # setup networks
     ./system/networking.nix
-    # Settings specific to my monitor setup
-    ../../shared/nixos/monitors.nix
   ];
 
   sops.secrets = {
     "pass-hashes/osi" = {neededForUsers = true;};
-    "api-keys/nix-access-tokens" = {};
     "wireguard/biome-fest/private-key" = {};
     "wireguard/biome-fest/psk" = {};
   };
-
-  # Add github token to github calls
-  nix.extraOptions = "!include " + config.getSopsFile "api-keys/nix-access-tokens";
-
   # Syncthing
   services.syncthing = {
     enable = true;
@@ -55,18 +48,6 @@
       HostName github.com
       User git
       IdentityFile /home/osi/.ssh/id_rsa_github_os
-      IdentitiesOnly yes
-
-    Host git.informatik.uni-leipzig.de
-      HostName git.informatik.uni-leipzig.de
-      User git
-      IdentityFile /home/osi/.ssh/id_rsa_github_os
-      IdentitiesOnly yes
-
-    Host local.server
-      HostName 101.201.4.22
-      User user
-      IdentityFile /home/osi/.ssh/id_blind-spots_user
       IdentitiesOnly yes
   '';
 

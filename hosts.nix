@@ -1,68 +1,69 @@
 {
   biome-fest = {
     machine = "LENOVO_LNVNB161216";
+    theme = "prismarine";
     # NixOS modules this host consists of
     nixos-modules = [
       ./modules/configs/osi
 
-      # Theme of the host
-      ./modules/themes/prismarine
-
       # Essential things
-      ./modules/shared/nixos/essentials.nix
+      "essentials"
 
       # fingerprint sensor
-      ./modules/shared/nixos/fingerprint.nix
+      "fingerprint"
 
       # Allow selected unfree packages
-      ./modules/shared/nixos/allow-some-unfree.nix
+      "allow-some-unfree"
 
       # printing documents with printers
-      ./modules/shared/nixos/printing.nix
+      "printing"
 
       # gaming
-      ./modules/shared/nixos/steam
+      "steam/"
+
+      # Settings specific to my monitor setup
+      "monitors"
     ];
     users.osi = {
       hm-modules = [
         # shell
-        ./modules/shared/hm/fish.nix
+        "fish"
 
         # terminal
-        ./modules/shared/hm/kitty.nix
+        "kitty"
 
         # Window manager
-        ./modules/shared/hm/hyprland # base config
-        ./modules/shared/hm/hyprland/laptop.nix # for laptops
-        ./modules/shared/hm/hyprland/touch.nix # for laptops
-        ./modules/shared/hm/hyprland/waybar.nix # utility bar
-        ./modules/shared/hm/hyprland/lockscreen.nix # lockscreen with auto enable on inactivity
-        ./modules/shared/hm/hyprland/rofi.nix # Powerfull runner
+        "hyprland/" # base config
+        "hyprland/laptop" # for laptops
+        "hyprland/touch" # for laptops
+        "hyprland/waybar" # utility bar
+        "hyprland/lockscreen" # lockscreen with auto enable on inactivity
+        "hyprland/rofi" # Powerfull runner
 
         # code editor
-        ./modules/shared/hm/vscode.nix
+        "vscode"
 
         # web browser
-        ./modules/shared/hm/firefox.nix
-        ./modules/shared/hm/chromium.nix # when firefox fails
+        "firefox"
+        "chromium" # when firefox fails
 
         # password manager
-        ./modules/shared/hm/password-store.nix
+        "password-store"
 
         # Game Engine
-        ./modules/shared/hm/godot.nix
+        "godot"
 
         # Some common desktop apps I need
-        ./modules/shared/hm/desktop-apps.nix
-        ./modules/shared/hm/cli-tools.nix
+        "desktop-apps"
+        "cli-tools"
       ];
       # NixOS modules here is given an additional attribute to the set called username, which is the user above
       user-nixos-modules = [
         # Use greetd as display manager and autologin to hyprland
-        ./modules/shared/nixos/user/greetd-hyprland-autologin.nix
+        "greetd-hyprland-autologin"
 
         # Uni Leipzig
-        ./modules/shared/nixos/user/uni-leipzig.nix
+        "uni-leipzig"
       ];
     };
   };
