@@ -82,10 +82,11 @@ in {
         Fingerprinting = true;
         EmailTracking = true;
       };
+      ExtensionUpdate = false; # disable extension update, updating only should happen through updating the links below
       ExtensionSettings = {
-        # Dark Mode for every website
+        # Dark Reader: Dark Mode for every website
         "addon@darkreader.org" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/file/4359254/darkreader-4.9.94.xpi";
+          install_url = "https://addons.mozilla.org/firefox/downloads/file/4439735/darkreader-4.9.103.xpi";
           installation_mode = "force_installed";
         };
         # Time-to-Work
@@ -95,18 +96,18 @@ in {
         };
         # Chameleon, user-agent headers and more spoofer
         "{3579f63b-d8ee-424f-bbb6-6d0ce3285e6a}" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/file/4349329/chameleon_ext-0.22.65.1.xpi";
+          install_url = "https://addons.mozilla.org/firefox/downloads/file/4455676/chameleon_ext-0.22.71.1.xpi";
           installation_mode = "force_installed";
         };
         # uBlock Origin
         "uBlock0@raymondhill.net" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
+          install_url = "https://addons.mozilla.org/firefox/downloads/file/4458450/ublock_origin-1.63.2.xpi";
           installation_mode = "force_installed";
           private_browsing = true;
         };
         # Vimium, keyboard driven website navigation
         "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/file/4259790/vimium_ff-2.1.2.xpi";
+          install_url = "https://addons.mozilla.org/firefox/downloads/file/4458679/vimium_ff-2.2.1.xpi";
           installation_mode = "force_installed";
           private_browsing = true;
         };
