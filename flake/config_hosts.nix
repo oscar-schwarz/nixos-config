@@ -29,8 +29,8 @@ let
 
   # helper
   inherit (lib.attrsets) mapAttrs attrValues;
-  inherit (lib) flatten attrsToList;
-  inherit (builtins) typeOf match concatStringsSep;
+  inherit (lib) flatten;
+  inherit (builtins) typeOf match;
 
   # Converts a string to a path with a prefix if input is a string (see definition at)
   toPathIfString = prefixDir: maybeStr: 
@@ -60,6 +60,9 @@ in {
   imports = [ 
     # definitions of `hosts` config
     ./options_hosts.nix 
+
+    # implemenation of ssh for the hosts
+    ./config_hosts_ssh.nix
 
     # the machine of the host
     (../machines + "/${host.machine}")
@@ -107,22 +110,4 @@ in {
       home.stateVersion = nixosConfig.system.stateVersion;
     }
   ));
-
-
-  # --- SSH
-
-  # the ssh key of the host
-  sops.secrets = {
-    "ssh-keys/host-${hostname}/private" = {};
-  };
-
-  # Set up ssh keys, you should be able to ssh into another host using its hostname at all times
-  programs.ssh.extraConfig = hostDefinitions
-    |> mapAttrs (hostName: host: ''
-      Host ${hostName}
-        HostName ${host.ip-address}
-        IdentityFile ${config.getSopsFile "ssh-keys/host-${hostname}/private"}
-    '')
-    |> attrsToList |> map (e: e.value) # getting a list of values
-    |> concatStringsSep "\n";
 }

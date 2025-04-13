@@ -83,6 +83,8 @@
 
   blind-spots = {
     machine = "HP_250_G4_Notebook_PC";
+    theme = "prismarine";
+    allow-connections-from = [ "biome-fest" ];
     ip-address = "10.12.21.33";
     nixos-modules = [
       ./modules/configs/server

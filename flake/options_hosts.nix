@@ -1,6 +1,9 @@
 { lib, config, ...}: 
 
 let 
+  # The content of the hosts.nix file
+  hostDefinitions = import ../hosts.nix;
+
   sharedModulesDir = ../modules;
 
   inherit (lib) types mkOption;
@@ -63,6 +66,11 @@ in {
         ip-address = mkOption {
           description = "The IP address of the host in the private network.";
           type = types.str;
+          default = null;
+        };
+        allow-connections-from = mkOption {
+          description = "The hosts which are allowed to connect to this host via SSH.";
+          type = with types; listOf (attrNames hostDefinitions);
           default = null;
         };
         nixos-modules = mkOption {
