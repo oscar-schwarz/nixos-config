@@ -4,10 +4,11 @@
     theme = "prismarine";
     # NixOS modules this host consists of
     nixos-modules = [
-      ./modules/configs/osi
-
       # Essential things
       "essentials"
+
+      # connection to the world
+      "networking"
 
       # fingerprint sensor
       "fingerprint"
@@ -56,9 +57,20 @@
         # Some common desktop apps I need
         "desktop-apps"
         "cli-tools"
+
+        # certain ssh keys configured
+        "github-ssh"
+
+        "syncthing/"
       ];
       # NixOS modules here is given an additional attribute to the set called username, which is the user above
       user-nixos-modules = [
+        # base user
+        "normal-wheel-user"
+
+        # set the password of the root user to the one of the user
+        ({ config, username, ...}: {users.users.root.hashedPasswordFile = config.getSopsFile "pass-hashes/${username}";})
+
         # Use greetd as display manager and autologin to hyprland
         "greetd-hyprland-autologin"
 
