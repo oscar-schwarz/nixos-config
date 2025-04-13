@@ -1,10 +1,11 @@
 {
   config,
+  username,
   ...
 }: {
   sops.secrets = {
-    "ssh-keys/rsa_github_osipog/private" = {};
-    "ssh-keys/rsa_github_os/private" = {};
+    "ssh-keys/rsa_github_osipog/private" = {owner = username;};
+    "ssh-keys/rsa_github_os/private" = {owner = username;};
   };
 
   programs.ssh.extraConfig = ''

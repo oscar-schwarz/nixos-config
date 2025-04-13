@@ -25,9 +25,6 @@
 
       # Settings specific to my monitor setup
       "monitors"
-
-      # certain ssh keys configured
-      "github-ssh"
     ];
     users.osi = {
       hm-modules = [
@@ -77,6 +74,9 @@
 
         # Uni Leipzig
         "uni-leipzig"
+        
+        # certain ssh keys configured
+        "github-ssh"
       ];
     };
   };
