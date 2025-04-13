@@ -2,6 +2,7 @@
   biome-fest = {
     machine = "LENOVO_LNVNB161216";
     theme = "prismarine";
+    ip-address = "10.12.21.10";
     # NixOS modules this host consists of
     nixos-modules = [
       # Essential things
@@ -82,6 +83,7 @@
 
   blind-spots = {
     machine = "HP_250_G4_Notebook_PC";
+    ip-address = "10.12.21.33";
     nixos-modules = [
       ./modules/configs/server
     ];

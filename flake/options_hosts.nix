@@ -8,11 +8,11 @@ let
   inherit (lib.filesystem) listFilesRecursive;
   inherit (builtins) readDir replaceStrings filter match;
 
-  allNixFileNamesInDir = dir:
-    (readDir dir) 
-    |> filterAttrs (name: value: value == "regular") 
-    |> attrNames
-    |> map (replaceStrings [".nix"] [""]);
+  # allNixFileNamesInDir = dir:
+  #   (readDir dir) 
+  #   |> filterAttrs (name: value: value == "regular") 
+  #   |> attrNames
+  #   |> map (replaceStrings [".nix"] [""]);
 
   allDirNamesInDir = dir:
     (readDir dir) 
@@ -53,11 +53,16 @@ in {
       options = {
         machine = mkOption {
           description = "The machine used for this host. Found in ./machines";
-          type =  types.enum (allNixFileNamesInDir ../machines) ;
+          type =  types.enum (allDirNamesInDir ../machines) ;
         };
         theme = mkOption {
           description = "The style theme applied to the host. Found in ./themes";
           type = with types; nullOr (enum (allDirNamesInDir ../themes));
+          default = null;
+        };
+        ip-address = mkOption {
+          description = "The IP address of the host in the private network.";
+          type = types.str;
           default = null;
         };
         nixos-modules = mkOption {

@@ -15,6 +15,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # make the disk layout of the machines declareable
+    disko = {
+      url = "github:nix-community/disko";
+    };
+
     # Idle inhibitor
     matcha = {
       url = "git+https://codeberg.org/QuincePie/matcha";
@@ -88,6 +93,7 @@
           stylix.nixosModules.stylix
           programs-sqlite.nixosModules.programs-sqlite
           custom-udev-rules.nixosModule
+          disko.nixosModules.disko
 
           # --- FLAKE MODULE ---
           # flake specific settings
