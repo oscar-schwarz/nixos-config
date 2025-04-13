@@ -3,7 +3,7 @@
   ...
 }: {
   sops.secrets = {
-    "ssh-keys/rsa_github_os/private" = {};
+    "ssh-keys/rsa_github_osipog/private" = {};
     "ssh-keys/rsa_github_os/private" = {};
   };
 
@@ -11,7 +11,7 @@
     Host github.com
       HostName github.com
       User git
-      IdentityFile ${config.getSopsFile "ssh-keys/rsa_github_os/private"}
+      IdentityFile ${config.getSopsFile "ssh-keys/rsa_github_osipog/private"}
       IdentitiesOnly yes
 
     Host os.github.com

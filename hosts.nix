@@ -25,6 +25,9 @@
 
       # Settings specific to my monitor setup
       "monitors"
+
+      # certain ssh keys configured
+      "github-ssh"
     ];
     users.osi = {
       hm-modules = [
@@ -58,9 +61,6 @@
         # Some common desktop apps I need
         "desktop-apps"
         "cli-tools"
-
-        # certain ssh keys configured
-        "github-ssh"
 
         "syncthing/"
       ];
