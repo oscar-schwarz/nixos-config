@@ -8,8 +8,8 @@
     ];
 
     settings = {
-      # Touch input is sent to the currently focused monitor
-      input.tablet.output = "current";
+      # Touch input is sent to the touchscreen
+      input.tablet.output = "eDP-1";
 
       # settings for above plugin
       "plugin:touch-gestures" = {

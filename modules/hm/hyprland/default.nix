@@ -21,6 +21,9 @@
         # Allow to resize windows with dragging the border
         resize_on_border = true;
       };
+      misc = {
+        enable_anr_dialog = false; # remove the "application not responding" popup when an app takes a little longer
+      };
 
       binds = {
         # To be able to move focus to another monitor even when maximized on current
