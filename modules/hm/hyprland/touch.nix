@@ -13,6 +13,7 @@
         output = "eDP-1";
         transform = 0;
       };
+      input.tablet.output = "eDP-1";
 
       # settings for above plugin
       "plugin:touch-gestures" = {
