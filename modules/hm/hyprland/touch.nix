@@ -9,8 +9,10 @@
 
     settings = {
       # Touch input is sent to the touchscreen
-      input.touchdevice.output = "eDP-1";
-      input.tablet.output = "eDP-1";
+      input.touchdevice = {
+        output = "eDP-1";
+        transform = 0;
+      };
 
       # settings for above plugin
       "plugin:touch-gestures" = {
