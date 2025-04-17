@@ -9,6 +9,7 @@
     hyprshot
     hypridle
     hyprpolkitagent
+    ydotool
   ];
 
   # Hyprland would be unusable without a terminal
@@ -38,6 +39,7 @@
       exec-once = [
         # Auth agent for gui apps
         "systemctl --user start hyprpolkitagent"
+        "ydotoold" # for virtual keyboard control
       ];
 
       # --- Keyboard settings ---
@@ -48,6 +50,15 @@
         kb_variant = xkb.variant;
         kb_options = xkb.options;
       };
+
+      device = [
+        { # override the defaults otherwise it would type gibberish with colemak
+          name = "ydotoold-virtual-device";
+          kb_layout="us";                                                                                               
+          kb_options="";                                                                                             
+          kb_variant=""; 
+        }
+      ];
 
       # --- Keybindings ---
       "$meta" = "SUPER";

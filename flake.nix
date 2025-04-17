@@ -139,11 +139,22 @@
 
     # --- OTHER OUTPUTS FOR EACH SYSTEM ---
     outputsEachSystem = flake-utils.lib.eachDefaultSystem (system:
-      let pkgs = nixpkgs.legacyPackages.${system}; in
+      let 
+        pkgs = nixpkgs.legacyPackages.${system}; 
+        
+        # Get custom packages from pkgs directory
+        customPackages = attrNames (readDir ./pkgs) 
+          |> filter (f: hasSuffix ".nix" f)
+          |> map (file: {
+              name = removeSuffix ".nix" file;
+              value = import (./pkgs + "/${file}") pkgs;
+            })
+          |> listToAttrs;
+      in
       {
         # cant use until issue resolved: https://github.com/kamadorueda/alejandra/issues/436
         # formatter = pkgs.alejandra; 
-        packages = {};
+        packages = customPackages;
       }
     );
 
