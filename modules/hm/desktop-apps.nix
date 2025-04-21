@@ -27,6 +27,7 @@ in
     gimp # image editor
     obs-studio # screen capture goat
     krita # best drawing
+    megapixels # camera app
   ];
 
   # Default apps

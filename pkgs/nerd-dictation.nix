@@ -1,22 +1,20 @@
 pkgs@{
   lib,
-  stdenv,
   fetchzip,
   fetchFromGitHub,
   python3Packages,
   makeWrapper,
-  wtype,
   pulseaudio,
+  vosk-model ? (fetchzip {
+      url = "https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15-lgraph.zip";
+      hash = "sha256-CIoPZ/krX+UW2w7c84W3oc1n4zc9BBS/fc8rVYUthuY="; # vosk-model-small-en-us-0.15
+      # hash = "sha256-AOnKWIoInKzHtF0odhnp6RXDyfjA4bDMBxL0rcZkAd0="; # vosk-model-small-de-0.15
+      # hash = "sha256-kakOhA7hEtDM6WY3oAnb8xKZil9WTA3xePpLIxr2+yM="; # vosk-model-en-us-0.22
+      # hash = "sha256-GVheflRwix9PnQjIVFl1mkNRduaYRNvZGhTZaobTibY="; # vosk-model-en-us-0.22-lgraph
+      # hash = lib.fakeHash;
+    }),
   ...
-}: let
-  vosk-model-name = "vosk-model-small-en-us-0.15";
-  vosk-model = fetchzip {
-    url = "https://alphacephei.com/vosk/models/${vosk-model-name}.zip";
-    hash = "sha256-CIoPZ/krX+UW2w7c84W3oc1n4zc9BBS/fc8rVYUthuY="; # vosk-model-small-en-us-0.15
-    # hash = "sha256-AOnKWIoInKzHtF0odhnp6RXDyfjA4bDMBxL0rcZkAd0=";
-    # hash = lib.fakeHash;
-  };
-in python3Packages.buildPythonApplication {
+}: python3Packages.buildPythonApplication {
   pname = "nerd-dictation";
   version = "0.1.0";  # Using a placeholder version as we're fetching from main branch
 
@@ -47,7 +45,7 @@ in python3Packages.buildPythonApplication {
     cat > $out/bin/nerd-dictation << EOF
     #!/bin/sh
     if [ "\$1" = "begin" ]; then
-      exec $out/bin/.nerd-dictation-unwrapped "\$@" --simulate-input-tool WTYPE --vosk-model-dir ${vosk-model}
+      exec $out/bin/.nerd-dictation-unwrapped "\$@" --vosk-model-dir ${vosk-model}
     else
       exec $out/bin/.nerd-dictation-unwrapped "\$@"
     fi
@@ -56,9 +54,8 @@ in python3Packages.buildPythonApplication {
     chmod +x $out/bin/nerd-dictation
     
     wrapProgram $out/bin/.nerd-dictation-unwrapped \
-      --prefix PATH : ${lib.makeBinPath [ wtype pulseaudio ]}
+      --prefix PATH : ${lib.makeBinPath [ pulseaudio ]}
   '';
-
   meta = with lib; {
     description = "Simple hackable offline speech to text using VOSK-API";
     homepage = "https://github.com/ideasman42/nerd-dictation";

@@ -122,6 +122,7 @@
         "$meta, D, resizeactive, ${resizeFactor} ${resizeFactor}"
 
         # Volume keys
+        # (the brightness keys are handled in the laptop file)
         ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_SINK@ 10%+"
         ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_SINK@ 10%-"
       ];
