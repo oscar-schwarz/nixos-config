@@ -53,7 +53,7 @@
         "password-store"
 
         # Game Engine
-        "godot"
+        # "godot" # currently broken
 
         # Some common desktop apps I need
         "desktop-apps"

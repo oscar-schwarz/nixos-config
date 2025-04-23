@@ -56,15 +56,10 @@
     }
   ];
 
-  # Plymouth boot animation
   boot = {
-    plymouth.enable = true;
-
     # Enable "Silent Boot"
     consoleLogLevel = 0;
     kernelParams = [
-      "quiet"
-      "splash"
       "boot.shell_on_fail"
       "loglevel=3"
       "rd.systemd.show_status=false"

@@ -15,6 +15,8 @@
       };
       input.tablet.output = "eDP-1";
 
+
+
       # settings for above plugin
       "plugin:touch-gestures" = {
         sensitivity = 4.0;
@@ -36,6 +38,11 @@
           ", edge:u:d, exec, pkill waybar || waybar" # swipe from top to bottom
           # swipe from bottom to top does not work
         ];
+      };
+
+      gestures = {
+        workspace_swipe = true;
+        workspace_swipe_cancel_ratio = 0.15;
       };
     };
   };

@@ -86,6 +86,15 @@ in {
       };
     };
 
+    # Enable plymouth for boot
+    boot = {
+      plymouth.enable = true;
+      kernelParams = [
+        "quiet"
+        "splash"
+      ];
+    };
+
     # import additional modules
     # import = (absoluteNixFilesInDir ./nixos); 
 
