@@ -57,5 +57,9 @@
         Title = "Tool Uni Leipzig";
         URL = "https://tool.uni-leipzig.de/";
       }
+      {
+        Title = "Vorlesungsverzeichnis Uni Leipzig Informatik";
+        URL = "https://www.informatik.uni-leipzig.de/ifijung/10/service/stundenplaene/ss2025/inf-bachelor.html";
+      }
     ];
 }
