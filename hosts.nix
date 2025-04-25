@@ -7,6 +7,7 @@
     nixos-modules = [
       # Essential things
       "essentials"
+      "sound"
 
       # connection to the world
       "networking"

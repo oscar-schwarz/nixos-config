@@ -96,16 +96,6 @@ in {
   # Mounts to /run/media/username
   services.udisks2.enable = true;
 
-  # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
   # language specific
   i18n = {
     defaultLocale = mkDefault "en_US.UTF-8";
