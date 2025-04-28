@@ -63,6 +63,7 @@
       "boot.shell_on_fail"
       "8250.nr_uarts=0" # disable serial tty
       "tpm_tis.force=0" # disable tpm
+      "i915.fastboot=1" # enable fastboot
     ];
     # Hide the OS choice for bootloaders.
     # It's still possible to open the bootloader list by pressing any key
