@@ -61,7 +61,7 @@
     consoleLogLevel = 0;
     kernelParams = [
       "boot.shell_on_fail"
-      "8250.nr_uarts=0" # disable serial tty
+      "8250.nr_uarts=1" # disable serial tty (except one)
       "i915.fastboot=1" # enable fastboot
     ];
     # Hide the OS choice for bootloaders.
