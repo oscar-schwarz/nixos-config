@@ -63,6 +63,14 @@ in {
         # Let home manager manage itself
         programs.home-manager.enable = true;
 
+
+        # Configure direnv for home-manager
+        programs.direnv = {
+          enable = true;
+          silent = true;
+          nix-direnv.enable = true;
+        };
+
         # better cd
         programs.zoxide = {
           enable = true;
