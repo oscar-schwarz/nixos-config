@@ -31,7 +31,7 @@
       # sudo systemd-cryptenroll --fido2-device=auto --fido2-with-user-presence=false --fido2-with-user-verification=true /dev/disk/by-uuid/ff0fdffe-9e8d-4956-92ef-ce2317629a32
       crypttabExtraOpts = [
         "fido2-device=auto"
-        "token-timeout=5"
+        "token-timeout=3"
         # you can always just restart the machine and the counter will be reset, so I can also just give infinite tries
         "tries=0"
       ];
@@ -61,11 +61,8 @@
     consoleLogLevel = 0;
     kernelParams = [
       "boot.shell_on_fail"
-      "loglevel=3"
-      "rd.systemd.show_status=false"
-      "rd.udev.log_level=3"
-      "udev.log_priority=3"
       "8250.nr_uarts=0" # disable serial tty
+      "tpm_tis.force=0" # disable tpm
     ];
     # Hide the OS choice for bootloaders.
     # It's still possible to open the bootloader list by pressing any key
