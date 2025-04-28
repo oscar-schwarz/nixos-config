@@ -31,7 +31,7 @@
       # sudo systemd-cryptenroll --fido2-device=auto --fido2-with-user-presence=false --fido2-with-user-verification=true /dev/disk/by-uuid/ff0fdffe-9e8d-4956-92ef-ce2317629a32
       crypttabExtraOpts = [
         "fido2-device=auto"
-        "token-timeout=3"
+        "token-timeout=5"
         # you can always just restart the machine and the counter will be reset, so I can also just give infinite tries
         "tries=0"
       ];
@@ -62,7 +62,6 @@
     kernelParams = [
       "boot.shell_on_fail"
       "8250.nr_uarts=0" # disable serial tty
-      "tpm_tis.force=0" # disable tpm
       "i915.fastboot=1" # enable fastboot
     ];
     # Hide the OS choice for bootloaders.

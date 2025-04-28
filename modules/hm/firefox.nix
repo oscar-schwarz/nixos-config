@@ -161,6 +161,7 @@ in {
       PostQuantumKeyAgreementEnabled = true;
       Preferences = {
         "browser.startup.homepage" = "";
+        "browser.sessionstore.resume_from_crash" = false;
       };
       PromptForDownloadLocation = false;
       SanitizeOnShutdown = {
