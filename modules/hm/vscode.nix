@@ -87,7 +87,7 @@ in {
 
         # --- NIX ---
         "nix.enableLanguageServer" = true;
-        "nix.serverPath" = "${lib.getExe pkgs.nixd}";
+        "nix.serverPath" = "${lib.getExe pkgs.nil}";
         "nix.serverSettings" = {
           nixd = {
             formatting = {
