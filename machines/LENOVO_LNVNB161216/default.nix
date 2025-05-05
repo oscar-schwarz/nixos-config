@@ -34,6 +34,8 @@
         "token-timeout=5"
         # you can always just restart the machine and the counter will be reset, so I can also just give infinite tries
         "tries=0"
+        # do not crash when idle
+        "x-systemd.device-timeout=100h"
       ];
     };
     systemd = {
@@ -62,17 +64,13 @@
     kernelParams = [
       "boot.shell_on_fail"
       "8250.nr_uarts=1" # disable serial tty (except one)
-      "i915.fastboot=1" # enable fastboot
     ];
-    # Hide the OS choice for bootloaders.
-    # It's still possible to open the bootloader list by pressing any key
-    # It will just not appear on screen unless a key is pressed
-    loader.timeout = 0;
   };
-  boot.initrd.verbose = false;
-
   # Enable bluetooth
   hardware.bluetooth.enable = true;
+
+  # The laptop has a thunderbolt port
+  services.hardware.bolt.enable = true;
 
   # The laptop has a fingerprint sensor, enabling it here
   # Make sure to patch the firmware: https://github.com/goodix-fp-linux-dev/goodix-fp-dump
