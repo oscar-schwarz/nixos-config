@@ -87,19 +87,23 @@ in {
 
         # --- NIX ---
         "nix.enableLanguageServer" = true;
-        "nix.serverPath" = "${lib.getExe pkgs.nil}";
+        "nix.serverPath" = "${lib.getExe pkgs.nixd}";
         "nix.serverSettings" = {
-          nixd = {
+          nixd = let 
+            flakeExpr = "(builtins.getFlake \'\'${../..}\'\')";
+          in {
             formatting = {
               command = ["${lib.getExe pkgs.alejandra}"];
             };
-            options = {
+            nixpkgs.expr = flakeExpr + ".inputs.nixpkgs {}";
+            options = let 
+              currentSystemExpr = flakeExpr + ".nixosConfigurations.${nixosConfig.networking.hostName}"; 
+            in {
               nixos = {
-                expr = ''(builtins.getFlake \'\'${../..}\'\').nixosConfigurations.${nixosConfig.networking.hostName}.options'';
+                expr = currentSystemExpr + ".options";
               };
               home-manager = {
-                # This is the closest i've got to a correct expression, but sadly it doesnt work yet
-                expr = ''(builtins.getFlake \'\'${../..}\'\').nixosConfigurations.${nixosConfig.networking.hostName}.options.home-manager.users.type.nestedTypes.elemType.getSubOptions ["${config.home.username}"]'';
+                expr = currentSystemExpr + ".options.home-manager.users.type.getSubOptions {}";
               };
             };
           };

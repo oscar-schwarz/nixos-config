@@ -40,6 +40,7 @@
         # Auth agent for gui apps
         "systemctl --user start hyprpolkitagent"
         "ydotoold" # for virtual keyboard control
+        # start firefox in a distant workspace for faster startup of additional windows
         "[ workspace 100 silent ] ${config.programs.firefox.package.meta.mainProgram}"
       ];
 

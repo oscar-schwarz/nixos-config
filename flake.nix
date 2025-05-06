@@ -152,8 +152,7 @@
           |> listToAttrs;
       in
       {
-        # cant use until issue resolved: https://github.com/kamadorueda/alejandra/issues/436
-        # formatter = pkgs.alejandra; 
+        formatter = pkgs.alejandra; 
         packages = customPackages;
       }
     );
