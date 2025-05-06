@@ -89,15 +89,15 @@ in {
         "nix.enableLanguageServer" = true;
         "nix.serverPath" = "${lib.getExe pkgs.nixd}";
         "nix.serverSettings" = {
-          nixd = let 
+          nixd = let
             flakeExpr = "(builtins.getFlake \'\'${../..}\'\')";
           in {
             formatting = {
               command = ["${lib.getExe pkgs.alejandra}"];
             };
-            nixpkgs.expr = flakeExpr + ".inputs.nixpkgs {}";
-            options = let 
-              currentSystemExpr = flakeExpr + ".nixosConfigurations.${nixosConfig.networking.hostName}"; 
+            nixpkgs.expr = "import ${flakeExpr} .inputs.nixpkgs {}";
+            options = let
+              currentSystemExpr = flakeExpr + ".nixosConfigurations.${nixosConfig.networking.hostName}";
             in {
               nixos = {
                 expr = currentSystemExpr + ".options";
