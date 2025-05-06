@@ -98,15 +98,9 @@ in {
             nixpkgs.expr = "import ${flakeExpr}.inputs.nixpkgs {}";
             options = let
               currentSystemExpr = flakeExpr + ".nixosConfigurations.${nixosConfig.networking.hostName}";
-              libExpr = currentSystemExpr + ".lib";
             in {
-              nixos = {
-                expr = 
-                  "${libExpr}.attrsets.recursiveUpdate"
-                    + " (${currentSystemExpr}.options)" 
-                    + " (${currentSystemExpr}.options.home-manager.users.type.getSubOptions {})"
-                ;
-              };
+              nixos.expr = "${currentSystemExpr}.options";
+              home-manager.expr = "${currentSystemExpr}.options.home-manager.users.type.getSubOptions {}"; 
             };
           };
         };
