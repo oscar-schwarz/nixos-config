@@ -19,6 +19,8 @@
       ns = "nix-shell -p $argv";
       nsc = "nix-shell -p $argv --command $argv";
       rebuild = ''
+        #!/bin/env fish
+
         # No VSCodium, these plugins are NOT obsolete!
         if test -f ~/.vscode-oss/extensions/.obsolete
           rm -f ~/.vscode-oss/extensions/.obsolete

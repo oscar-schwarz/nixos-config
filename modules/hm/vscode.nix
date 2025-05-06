@@ -379,7 +379,6 @@ in {
 
         # --- NIX ---
         jnoortheen.nix-ide # nix language features
-        jeff-hykin.better-nix-syntax # better syntax
 
         # --- NODE ---
         vue.volar # vue language features
