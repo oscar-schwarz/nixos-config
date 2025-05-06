@@ -41,7 +41,7 @@
         "hyprland/touch" # for laptops
         "hyprland/waybar" # utility bar
         "hyprland/lockscreen" # lockscreen with auto enable on inactivity
-        "hyprland/rofi" # Powerfull runner
+        "hyprland/runner"
 
         # code editor
         "vscode"

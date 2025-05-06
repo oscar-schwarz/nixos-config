@@ -1,0 +1,43 @@
+# The runner for hyprland is using a combination of wofi and rofi. Rofi is generally more lightweight while Wofi has
+# touch support which is essential to tablet mode.
+{ pkgs, ... }: 
+{
+  home.packages = with pkgs; [
+    wofi-emoji
+    wofi-pass
+  ];
+
+  # Highly supported runner
+  programs.rofi = {
+    enable = true;
+    package = pkgs.rofi-wayland;
+
+    plugins = with pkgs; [
+      rofi-emoji-wayland
+    ];
+  };
+
+  programs.wofi.enable = true;
+
+  services.gpg-agent.pinentryPackage = pkgs.pinentry-rofi.override {
+    rofi = pkgs.rofi-wayland;
+  };
+
+  wayland.windowManager.hyprland.settings.bind = [
+    # Rofi menus
+    # launcher
+    # "$meta, O, exec, pidof rofi || rofi -show drun"
+    # window selector
+    # "$meta, E, exec, pidof rofi || rofi -show window"
+    # emoji
+    # "$meta, U, exec, pidof rofi || rofi -show emoji"
+    # Pass
+    "$meta, P, exec, pidof rofi || rofi-pass"
+
+    # Wofi menus
+    # launcher
+    "$meta, E, exec, pidof wofi || wofi --show drun"
+    # emoji
+    "$meta, U, exec, pidof wofi || wofi-emoji"
+  ];
+}
