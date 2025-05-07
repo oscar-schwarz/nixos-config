@@ -91,16 +91,26 @@ in {
         "nix.serverSettings" = {
           nixd = let
             flakeExpr = "(builtins.getFlake \'\'${../..}\'\')";
+            pkgsExpr = "(import ${flakeExpr}.inputs.nixpkgs {})";
           in {
             formatting = {
               command = ["${lib.getExe pkgs.alejandra}"];
             };
-            nixpkgs.expr = "import ${flakeExpr}.inputs.nixpkgs {}";
+            nixpkgs.expr = pkgsExpr;
             options = let
               currentSystemExpr = flakeExpr + ".nixosConfigurations.${nixosConfig.networking.hostName}";
             in {
               nixos.expr = "${currentSystemExpr}.options";
-              home-manager.expr = "${currentSystemExpr}.options.home-manager.users.type.getSubOptions {}"; 
+              home-manager.expr = "${currentSystemExpr}.options.home-manager.users.type.getSubOptions {}";
+              devenv.expr = let 
+                devenvExpr = flakeExpr + ".inputs.devenv";
+              in "(${pkgsExpr}.lib.evalModules"
+                + " { modules = [(${devenvExpr}.outPath + \"/src/modules/top-level.nix\")];"
+                + " specialArgs = {"
+                  + " pkgs = import (${devenvExpr}.inputs.nixpkgs {};"
+                  + " inputs = ${devenvExpr}.inputs;"
+                + "};"
+              + "}).options";
             };
           };
         };

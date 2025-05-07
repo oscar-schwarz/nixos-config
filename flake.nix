@@ -40,6 +40,11 @@
       inputs.home-manager.follows = "home-manager";
     };
 
+    # Development environments the easy nix way
+    devenv = {
+      url = "github:cachix/devenv";
+    };
+
     # Secret management
     sops-nix = {
       url = "github:Mic92/sops-nix";
