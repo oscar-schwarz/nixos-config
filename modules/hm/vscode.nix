@@ -94,7 +94,6 @@ in {
             flakeExpr = "(builtins.getFlake \'\'${../..}\'\')";
             pkgsExpr = "(import ${flakeExpr}.inputs.nixpkgs {})";
             currentSystemExpr = flakeExpr + ".nixosConfigurations.${nixosConfig.networking.hostName}";
-            devenvExpr = flakeExpr + ".inputs.devenv";
           in {
             formatting = {
               command = ["${lib.getExe pkgs.alejandra}"];
@@ -103,8 +102,7 @@ in {
             options = {
               nixos.expr = "${currentSystemExpr}.options";
               home-manager.expr = "${currentSystemExpr}.options.home-manager.users.type.getSubOptions {}";
-              devenv-general.expr = "import ${../../lib/devenv/options-general.nix} ${flakeExpr}";
-              devenv-project.expr = "import ${../../lib/devenv/options-per-project.nix} ${flakeExpr}";
+              devenv.expr = "import ${../../lib/devenv-options.nix} ${flakeExpr}";
             };
           };
         };
