@@ -6,7 +6,7 @@
   nixosConfig,
   ...
 }: let
-  inherit (builtins) replaceStrings;
+  inherit (builtins) replaceStrings readFile;
   vscodeExts = inputs.nix-vscode-extensions.extensions.${pkgs.system};
 in {
   # Make codium default
@@ -95,7 +95,7 @@ in {
             pkgsExpr = "(import ${flakeExpr}.inputs.nixpkgs {})";
             currentSystemExpr = flakeExpr + ".nixosConfigurations.${nixosConfig.networking.hostName}";
             devenvExpr = flakeExpr + ".inputs.devenv";
-          in {
+          in rec {
             formatting = {
               command = ["${lib.getExe pkgs.alejandra}"];
             };
@@ -105,7 +105,7 @@ in {
               home-manager.expr = "${currentSystemExpr}.options.home-manager.users.type.getSubOptions {}";
               # This is copied and adapted from: 
               # https://github.com/cachix/devenv/blob/3febc91939aea65bdff8850f026443afb6b6b22f/flake.nix#L95
-              devenv.expr = ''
+              devenv-general.expr = ''
                 (${pkgsExpr}.lib.evalModules {
                   modules = [
                     (${devenvExpr}.outPath + "/src/modules/top-level.nix")
@@ -116,6 +116,8 @@ in {
                   };
                 }).options
               '' |> replaceStrings ["\n" "\""] [" " "\'\'"];
+
+              devenv-project.expr = (readFile ../../lib/devenv-options-per-project.nix) + " " + pkgsExpr;
             };
           };
         };
