@@ -115,7 +115,7 @@ in {
                     inputs = ${devenvExpr}.inputs;
                   };
                 }).options
-              '' |> replaceStrings ["\n" ''"''] [" " "\\'\\'"];
+              '' |> replaceStrings ["\n" "\""] [" " "\'\'"];
             };
           };
         };
