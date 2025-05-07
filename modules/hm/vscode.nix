@@ -380,6 +380,9 @@ in {
         # --- NIX ---
         jnoortheen.nix-ide # nix language features
 
+        # --- NUSHELL ---
+        thenuprojectcontributors.vscode-nushell-lang
+
         # --- NODE ---
         vue.volar # vue language features
         oouo-diogo-perdigao.docthis # jsdoc
