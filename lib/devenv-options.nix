@@ -10,7 +10,7 @@ let
   # all options provided by devenv 
   devenvOptions = let 
     devenvFlake = flake.inputs.devenv;
-    pkgs = import devenvFlake.nixpkgs {};
+    pkgs = import devenvFlake.inputs.nixpkgs {};
   in
   # This is copied and adapted from: 
   # https://github.com/cachix/devenv/blob/3febc91939aea65bdff8850f026443afb6b6b22f/flake.nix#L95
