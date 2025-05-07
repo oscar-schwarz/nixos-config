@@ -6,6 +6,7 @@
   nixosConfig,
   ...
 }: let
+  inherit (builtins) replaceStrings;
   vscodeExts = inputs.nix-vscode-extensions.extensions.${pkgs.system};
 in {
   # Make codium default
@@ -92,25 +93,29 @@ in {
           nixd = let
             flakeExpr = "(builtins.getFlake \'\'${../..}\'\')";
             pkgsExpr = "(import ${flakeExpr}.inputs.nixpkgs {})";
+            currentSystemExpr = flakeExpr + ".nixosConfigurations.${nixosConfig.networking.hostName}";
+            devenvExpr = flakeExpr + ".inputs.devenv";
           in {
             formatting = {
               command = ["${lib.getExe pkgs.alejandra}"];
             };
             nixpkgs.expr = pkgsExpr;
-            options = let
-              currentSystemExpr = flakeExpr + ".nixosConfigurations.${nixosConfig.networking.hostName}";
-            in {
+            options = {
               nixos.expr = "${currentSystemExpr}.options";
               home-manager.expr = "${currentSystemExpr}.options.home-manager.users.type.getSubOptions {}";
-              devenv.expr = let 
-                devenvExpr = flakeExpr + ".inputs.devenv";
-              in "(${pkgsExpr}.lib.evalModules"
-                + '' { modules = [(${devenvExpr}.outPath + "/src/modules/top-level.nix")];''
-                + " specialArgs = {"
-                  + " pkgs = import (${devenvExpr}.inputs.nixpkgs {};"
-                  + " inputs = ${devenvExpr}.inputs;"
-                + "};"
-              + "}).options";
+              # This is copied and adapted from: 
+              # https://github.com/cachix/devenv/blob/3febc91939aea65bdff8850f026443afb6b6b22f/flake.nix#L95
+              devenv.expr = ''
+                (${pkgsExpr}.lib.evalModules {
+                  modules = [
+                    (${devenvExpr}.outPath + "/src/modules/top-level.nix")
+                  ];
+                  specialArgs = {
+                    pkgs = import (${devenvExpr}.inputs.nixpkgs) {};
+                    inputs = ${devenvExpr}.inputs;
+                  };
+                }).options
+              '' |> replaceStrings ["\n" ''"''] [" " "\\'\\'"];
             };
           };
         };
