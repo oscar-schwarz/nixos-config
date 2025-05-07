@@ -95,7 +95,7 @@ in {
             pkgsExpr = "(import ${flakeExpr}.inputs.nixpkgs {})";
             currentSystemExpr = flakeExpr + ".nixosConfigurations.${nixosConfig.networking.hostName}";
             devenvExpr = flakeExpr + ".inputs.devenv";
-          in rec {
+          in {
             formatting = {
               command = ["${lib.getExe pkgs.alejandra}"];
             };
@@ -103,21 +103,8 @@ in {
             options = {
               nixos.expr = "${currentSystemExpr}.options";
               home-manager.expr = "${currentSystemExpr}.options.home-manager.users.type.getSubOptions {}";
-              # This is copied and adapted from: 
-              # https://github.com/cachix/devenv/blob/3febc91939aea65bdff8850f026443afb6b6b22f/flake.nix#L95
-              devenv-general.expr = ''
-                (${pkgsExpr}.lib.evalModules {
-                  modules = [
-                    (${devenvExpr}.outPath + "/src/modules/top-level.nix")
-                  ];
-                  specialArgs = {
-                    pkgs = import (${devenvExpr}.inputs.nixpkgs) {};
-                    inputs = ${devenvExpr}.inputs;
-                  };
-                }).options
-              '' |> replaceStrings ["\n" "\""] [" " "\'\'"];
-
-              devenv-project.expr = (readFile ../../lib/devenv-options-per-project.nix) + " " + pkgsExpr;
+              devenv-general.expr = "import ${../../lib/devenv/options-general.nix} ${flakeExpr}";
+              devenv-project.expr = "import ${../../lib/devenv/options-per-project.nix} ${flakeExpr}";
             };
           };
         };
