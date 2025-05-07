@@ -105,7 +105,7 @@ in {
               devenv.expr = let 
                 devenvExpr = flakeExpr + ".inputs.devenv";
               in "(${pkgsExpr}.lib.evalModules"
-                + " { modules = [(${devenvExpr}.outPath + \"/src/modules/top-level.nix\")];"
+                + '' { modules = [(${devenvExpr}.outPath + "/src/modules/top-level.nix")];''
                 + " specialArgs = {"
                   + " pkgs = import (${devenvExpr}.inputs.nixpkgs {};"
                   + " inputs = ${devenvExpr}.inputs;"
