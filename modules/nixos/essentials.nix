@@ -56,6 +56,7 @@ in {
   home-manager = {
     extraSpecialArgs = {inherit inputs;};
     useGlobalPkgs = true;
+    backupFileExtension = "backupFileExtension";
 
     # Home manager settings for every user
     sharedModules = [

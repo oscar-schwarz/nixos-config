@@ -61,5 +61,9 @@
         Title = "Vorlesungsverzeichnis Uni Leipzig Informatik";
         URL = "https://www.informatik.uni-leipzig.de/ifijung/10/service/stundenplaene/ss2025/inf-bachelor.html";
       }
+      {
+        Title = "Speiseplan MaP";
+        URL = "https://www.studentenwerk-leipzig.de/mensen-cafeterien/speiseplan/?location=106";
+      }
     ];
 }

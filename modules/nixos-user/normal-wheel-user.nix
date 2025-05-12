@@ -1,6 +1,7 @@
 { 
   username,
   config,
+  lib,
   ... 
 }: {
   sops.secrets = {
@@ -9,7 +10,7 @@
 
   users.users.${username} = {
     isNormalUser = true;
-    description = "A normal wheel user called '${username}'.";
+    description = lib.toUpper username;
     extraGroups = [ "wheel" ];
     hashedPasswordFile = config.getSopsFile "pass-hashes/${username}";
  

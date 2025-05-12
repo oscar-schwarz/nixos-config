@@ -79,7 +79,8 @@
   # Power management using auto-cpufreq
   powerManagement.enable = true; # basic NixOS powermanagement
   services.auto-cpufreq.enable = true;
-  services.tlp.enable = false; # Wiki says so to avoid conflicts
+  services.tlp.enable = false; # to avoid conflicts
+  services.power-profiles-daemon.enable = false; # same here
   services.auto-cpufreq.settings = {
     battery = {
       governor = "powersave";

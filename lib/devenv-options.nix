@@ -2,10 +2,28 @@ flake:
 let
   pkgs = import flake.inputs.nixpkgs {};
 
-  inherit (builtins) getEnv hasAttr mapAttrs getFlake readFile replaceStrings toFile pathExists;
+  inherit (builtins) getEnv hasAttr readFile replaceStrings toFile pathExists typeOf attrNames match head concatStringsSep;
   inherit (pkgs) runCommand copyPathToStore;
   inherit (pkgs.lib) pipe;
-  inherit (pkgs.lib.attrsets) filterAttrs;
+
+  # Helper function to convert a deep set with only strings to a valid string expression
+  # (Why does something like this not exist in nixpkgs?)
+  stringSetToString = set: pipe set [
+    # Get attribute names
+    attrNames
+    # collapse to string
+    (map (name: "${name}=" + (
+        if (typeOf set.${name} == "set") then
+          stringSetToString set.${name}
+        else
+          "\"${set.${name}}\""
+      ) + ";"
+    ))
+    # concat
+    (concatStringsSep "")
+    # add braces
+    (str: "{${str}}")
+  ];
   
   # all options provided by devenv 
   devenvOptions = let 
@@ -28,33 +46,33 @@ let
   projectOptions = pipe (
     (getEnv "PWD") + "/.devenv.flake.nix"
   ) [
-    # get the content
-    readFile
-    # little hack to include a very necessary output
+    # The .devenv.flake.nix file has a special format. It allows complex logic inside the inputs block
+    # which normal flakes do not allow. So we evaluate the inputs and then convert it to a string now with 
+    # baked in let values.
+    # The outputs expression must stay the same. So the part where the outputs begin is just kept.
+    (file: '' 
+      { inputs = ${stringSetToString (import file).inputs};
+      ${pipe file [readFile (match ".*(outputs.*$)") head]}
+    '')
+
+    # A little hack that includes the `project` variable that contains the options set.
+    # the variable is defined in a let..in block in the outputs section.
     (replaceStrings ["devShell ="] ["inherit project;devShell ="])
-    # transform to a file again
-    (toFile "flake.nix")
-    # put this file together with devenv.nix
-    (file: runCommand "devenv-flake" {} ''
+
+    # put this file together with devenv.nix and devenv.lock (as flake.lock)
+    (expr: runCommand "devenv-flake" {} ''
       mkdir -p $out
       cp ${copyPathToStore ((getEnv "PWD") + "/devenv.nix")} $out/devenv.nix
-      cp ${file} $out/default.nix; # needs to be called default.nix for the import statement below
+      cp ${copyPathToStore ((getEnv "PWD") + "/devenv.lock")} $out/flake.lock
+      cp ${toFile "flake.nix" expr} $out/flake.nix;
+      echo "builtins.getFlake \"$out\"" > $out/default.nix # needed for the import statement
     '')
-    # and evaluate as regular set
+
+    # once again, import the final flake, this time actually as a flake
     import
 
-    # now we can call the outputs function, for that the inputs attrset needs to be converted to an attrset of flakes
-    (flakeSet: flakeSet.outputs (
-      pipe flakeSet.inputs [
-        # Only allow inputs that have an url
-        (filterAttrs (_: value: hasAttr "url" value ))
-        # transform each to flake
-        (mapAttrs (_: value: getFlake value.url))
-      ]
-    ))
-
-    # lastly, we can extract the options
-    (outputs: outputs.project.options)
+    # lastly, we can extract the options from the outputs
+    (finalFlake: finalFlake.outputs.project.options)
   ];
 
 in
