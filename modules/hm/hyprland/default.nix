@@ -113,6 +113,7 @@
 
           # Taking screenshots
           "$meta, A, exec, pidof hyprshot || hyprshot -m region --clipboard-only --freeze"
+          "$meta_CTRL, A, exec, pidof hyprshot || hyprshot -m region --freeze -o ~/Pictures"
         ];
 
       # Binds here will be repeated on press
