@@ -19,7 +19,7 @@
 
   programs.wofi.enable = true;
 
-  services.gpg-agent.pinentryPackage = pkgs.pinentry-rofi.override {
+  services.gpg-agent.pinentry.package = pkgs.pinentry-rofi.override {
     rofi = pkgs.rofi-wayland;
   };
 
