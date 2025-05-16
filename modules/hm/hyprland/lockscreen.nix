@@ -19,7 +19,7 @@
     enable = true;
     settings = {
       general = {
-        lock_cmd = "pidof hyprlock || hyprlock --immediate --no-fade-in";
+        lock_cmd = "pidof hyprlock || hyprlock --immediate";
         ignore_systemd_inhibit = true;
         ignore_dbus_inhibit = true;
       };

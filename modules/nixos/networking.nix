@@ -14,6 +14,7 @@
       enable = true;
       allowedTCPPorts = [
         8000
+        9003
       ];
       allowedUDPPorts = [
         wireguardPort
