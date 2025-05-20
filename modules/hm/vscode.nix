@@ -75,6 +75,9 @@ in {
         "zenMode.hideLineNumbers" = false;
         "zenMode.fullScreen" = false;
         "zenMode.centerLayout" = false;
+        # general extensions
+        "extensions.autoUpdate" = false;
+        "extensions.autoCheckUpdates" = false;
 
         # --- Debug ---
         "debug.openDebug" = "neverOpen"; # its really annoying that the debug window opens on breakpoint
@@ -227,7 +230,7 @@ in {
                 "workbench.action.moveActiveEditorGroupDown" # moves the tab below the actual code
                 # shrink the cline tab a couple of times to a reasonable size
               ]
-              ++ (lib.lists.replicate 7 "workbench.action.decreaseViewHeight")
+              ++ (lib.lists.replicate 5 "workbench.action.decreaseViewHeight")
               ++ [
                 # focus the code
                 "workbench.action.focusLastEditorGroup"
@@ -390,7 +393,7 @@ in {
         oouo-diogo-perdigao.docthis # jsdoc
 
         # --- JAVA ---
-        redhat.java # language features
+        # redhat.java # language features
         vscjava.vscode-java-debug # debugger
         vscjava.vscode-java-dependency # project manager
 
