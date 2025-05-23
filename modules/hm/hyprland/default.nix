@@ -15,6 +15,7 @@
   # Hyprland would be unusable without a terminal
   programs.kitty.enable = lib.mkDefault true;
 
+
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
