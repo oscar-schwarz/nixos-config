@@ -46,13 +46,13 @@ in {
       ];
       animation = [
         "windows, 1, 3, fast-in, popin"
-        "workspaces, 1, 5, default, slidevert"
         "layers, 1, 3, fast-in"
       ];
 
       # --- Layerrules
       layerrule = [
         "animation popin, rofi"
+        "animation popin, wofi"
         # "xray on, rofi"
         # "dimaround, rofi"
       ];

@@ -42,7 +42,7 @@
         "hyprland/waybar" # utility bar
         "hyprland/lockscreen" # lockscreen with auto enable on inactivity
         "hyprland/runner"
-        "hyprland/hyprexpo"
+        "hyprland/workspaces"
 
         # code editor
         "vscode"
