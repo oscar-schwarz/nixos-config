@@ -20,5 +20,8 @@
       User git
       IdentityFile ${config.getSopsFile "ssh-keys/rsa_github_os/private"}
       IdentitiesOnly yes
+
+    # Allow overwriting the values above
+    Include ${config.home-manager.users.${username}.home.homeDirectory}/.ssh/config
   '';
 }
