@@ -69,7 +69,7 @@
         "normal-wheel-user"
 
         # set the password of the root user to the one of the user
-        ({ config, username, ...}: {users.users.root.hashedPasswordFile = config.getSopsFile "pass-hashes/${username}";})
+        (username: { config, ...}: {users.users.root.hashedPasswordFile = config.getSopsFile "pass-hashes/${username}";})
 
         # Use greetd as display manager and autologin to hyprland
         "greetd-hyprland-autologin"

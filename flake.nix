@@ -81,88 +81,110 @@
     };
   };
 
-  outputs = {nixpkgs, flake-utils, ...} @ inputs: with nixpkgs.lib; with builtins; let
-    # --- NIXOS CONFIGURATIONS ---
+  outputs = {
+    nixpkgs,
+    flake-utils,
+    ...
+  } @ inputs: let
+    inherit (builtins) attrNames attrValues readDir filter listToAttrs;
+    inherit (nixpkgs.lib) pipe nixosSystem hasSuffix removeSuffix;
+    inherit (nixpkgs.lib.attrsets) mapAttrs;
+    inherit (flake-utils.lib) eachDefaultSystem;
 
+    # --- NIXOS CONFIGURATIONS ---
     # Definitions are in a seperate file next to this flake.nix
     hostDefinitions = import ./hosts.nix;
 
-    # Create a nixos configuration for each defined hosts in hosts.nix
-    nixosConfigurations = hostDefinitions |> attrsets.mapAttrs (hostName: host: 
-      nixosSystem {
-        specialArgs = { inherit inputs; };
-        
-        modules = with inputs; [
-          # --- FLAKE INPUTS MODULES ---
-          home-manager.nixosModules.default
-          stylix.nixosModules.stylix
-          programs-sqlite.nixosModules.programs-sqlite
-          custom-udev-rules.nixosModule
-          disko.nixosModules.disko
+    # Create a nixos configuration for each defined host in hosts.nix
+    nixosConfigurations = pipe hostDefinitions [
+      (mapAttrs (
+        hostName: host:
+          nixosSystem {
+            specialArgs = {inherit inputs;};
 
-          # --- FLAKE MODULE ---
-          # flake specific settings
-          ({inputs, ...}: {
+            modules = with inputs; [
+              # --- FLAKE INPUTS MODULES ---
+              home-manager.nixosModules.default
+              stylix.nixosModules.stylix
+              programs-sqlite.nixosModules.programs-sqlite
+              custom-udev-rules.nixosModule
+              disko.nixosModules.disko
 
-            # Enable flakes and pipe operators
-            nix.settings.experimental-features = [
-              "nix-command"
-              "flakes"
-              "pipe-operators"
+              # --- FLAKE MODULE ---
+              # flake specific settings
+              ({inputs, ...}: {
+                # Enable flakes and pipe operators
+                nix.settings.experimental-features = [
+                  "nix-command"
+                  "flakes"
+                ];
+
+                # Import home manager modules to home manager
+                # home-manager.sharedModules = with inputs; [ ];
+
+                nixpkgs.overlays = with inputs; [
+                  # Add packages of the flakes in an overlay
+                  (
+                    final: prev: let
+                      stable = nixpkgs-stable.legacyPackages.${prev.system};
+                    in {
+                      # to access stable packages
+                      inherit stable;
+
+                      # stable packages
+                      auto-cpufreq = stable.auto-cpufreq;
+
+                      # custom flake packages
+                      matcha = matcha.packages.${prev.system}.default;
+                    }
+                  )
+                ];
+              })
+
+              # --- HOSTS MODULE ---
+              # All host specific settings are imported
+              (import ./flake/config_hosts.nix hostName)
+
+              # --- SOPS MODULE ---
+              # all hosts should have access to their respective secrets
+              ./flake/secrets.nix
             ];
-
-            # Import home manager modules to home manager
-            # home-manager.sharedModules = with inputs; [ ];
-
-            nixpkgs.overlays = with inputs; [
-              # Add packages of the flakes in an overlay
-              (
-                final: prev: let stable = nixpkgs-stable.legacyPackages.${prev.system}; in {
-                  # to access stable packages
-                  inherit stable;
-
-                  # stable packages
-                  auto-cpufreq = stable.auto-cpufreq;
-
-                  # custom flake packages
-                  matcha = matcha.packages.${prev.system}.default;
-                }
-              )
-            ];
-          })
-
-          # --- HOSTS MODULE ---
-          # All host specific settings are imported
-          (import ./flake/config_hosts.nix hostName)
-
-          # --- SOPS MODULE ---
-          # all hosts should have access to their respective secrets
-          ./flake/secrets.nix
-        ];
-      }
-    );
+          }
+      ))
+    ];
 
     # --- OTHER OUTPUTS FOR EACH SYSTEM ---
-    outputsEachSystem = flake-utils.lib.eachDefaultSystem (system:
-      let 
-        pkgs = nixpkgs.legacyPackages.${system}; 
-        
+    outputsEachSystem = eachDefaultSystem (
+      system: let
+        pkgs = nixpkgs.legacyPackages.${system};
+
         # Get custom packages from pkgs directory
-        customPackages = attrNames (readDir ./pkgs) 
-          |> filter (f: hasSuffix ".nix" f)
-          |> map (file: {
-              name = removeSuffix ".nix" file;
-              value = import (./pkgs + "/${file}") pkgs;
-            })
-          |> listToAttrs;
-      in
-      {
-        formatter = pkgs.alejandra; 
+        customPackages = pipe (readDir ./pkgs) [
+          # get all file names
+          attrNames
+
+          # assume that each entry returned by readDir is a valid nix import argument
+
+          # evaluate package and transform list to name-value-pairs
+          (map (file: {
+            name = removeSuffix ".nix" file;
+            value = import (./pkgs + "/${file}") pkgs;
+          }))
+
+          listToAttrs
+        ];
+      in {
+        formatter = pkgs.alejandra;
         packages = customPackages;
+        devShells.default = pkgs.mkShell {
+          name = (import ./flake.nix).description; # sir, is that legal?
+          buildInputs = attrValues customPackages;
+        };
       }
     );
-
-  in {
-    inherit nixosConfigurations;
-  } // outputsEachSystem;
+  in
+    {
+      inherit nixosConfigurations;
+    }
+    // outputsEachSystem;
 }

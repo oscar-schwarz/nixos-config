@@ -1,6 +1,5 @@
-{
+username: {
   config,
-  username,
   ...
 }: {
   sops.secrets = {

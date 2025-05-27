@@ -6,8 +6,9 @@ pkgs@{
   makeWrapper,
   pulseaudio,
   vosk-model ? (fetchzip {
-      url = "https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15-lgraph.zip";
-      hash = "sha256-CIoPZ/krX+UW2w7c84W3oc1n4zc9BBS/fc8rVYUthuY="; # vosk-model-small-en-us-0.15
+      # Go to https://alphacephei.com/vosk/models to find the download links
+      url = "https://alphacephei.com/vosk/models/vosk-model-en-us-0.22-lgraph.zip";
+      hash = "sha256-GVheflRwix9PnQjIVFl1mkNRduaYRNvZGhTZaobTibY="; # vosk-model-small-en-us-0.15
       # hash = "sha256-AOnKWIoInKzHtF0odhnp6RXDyfjA4bDMBxL0rcZkAd0="; # vosk-model-small-de-0.15
       # hash = "sha256-kakOhA7hEtDM6WY3oAnb8xKZil9WTA3xePpLIxr2+yM="; # vosk-model-en-us-0.22
       # hash = "sha256-GVheflRwix9PnQjIVFl1mkNRduaYRNvZGhTZaobTibY="; # vosk-model-en-us-0.22-lgraph

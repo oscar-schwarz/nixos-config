@@ -1,13 +1,13 @@
-{ lib
-, python3Packages
-, pkg-config
-, ffmpeg
-, fetchurl
-, stdenv
-, autoPatchelfHook
-, ...
+{
+  lib,
+  python3Packages,
+  pkg-config,
+  ffmpeg,
+  fetchurl,
+  stdenv,
+  autoPatchelfHook,
+  ...
 }:
-
 python3Packages.buildPythonPackage rec {
   pname = "vosk";
   version = "0.3.45";
@@ -40,13 +40,13 @@ python3Packages.buildPythonPackage rec {
   # The package doesn't have tests
   doCheck = false;
 
-  pythonImportsCheck = [ "vosk" ];
+  pythonImportsCheck = ["vosk"];
 
   meta = with lib; {
     description = "Offline speech recognition API for Python, with PyPy support";
     homepage = "https://alphacephei.com/vosk/";
     license = licenses.asl20;
-    maintainers = [ ];
+    maintainers = [];
     platforms = platforms.all;
   };
 }

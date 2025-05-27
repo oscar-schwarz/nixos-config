@@ -1,10 +1,8 @@
-{
+username: {
   pkgs,
   config,
   lib,
   inputs,
-
-  username,
   ...
 }: {
   environment.systemPackages = [

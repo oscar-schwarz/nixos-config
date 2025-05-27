@@ -13,6 +13,7 @@ in {
       "plugin:hyprexpo" = {
         inherit columns;
         enable_gesture = false;
+        workspace_method = "center current";
       };
 
       bind = [
