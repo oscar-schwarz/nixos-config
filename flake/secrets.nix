@@ -38,8 +38,7 @@ in {
       keyFile = "/root/.age-key.txt";
 
       # From which key to generate it
-      # This only needs to be present on the machine that executes 'nixos-rebuild'
-      sshKeyPaths = ["/root/.ssh/id_ed25519_sops"];
+      sshKeyPaths = ["/etc/ssh/id_ed25519"];
     };
 
     # Simulate the a home manager module for sops nix. Actually the secrets are imported through the system
