@@ -74,7 +74,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Customized build of libfprint to make my laptops fingerpint reader work
+    # Customized build of libfprint to make my laptops fingerprint reader work
     libfprint-goodix-55b4 = {
       url = "github:oscar-schwarz/libfprint-goodix-55b4";
       # inputs.nixpkgs.follows = "nixpkgs"; # needs a specific nixpkgs version
@@ -86,9 +86,8 @@
     flake-utils,
     ...
   } @ inputs: let
-    inherit (builtins) attrNames attrValues readDir filter listToAttrs;
-    inherit (nixpkgs.lib) pipe nixosSystem hasSuffix removeSuffix;
-    inherit (nixpkgs.lib.attrsets) mapAttrs;
+    inherit (builtins) attrNames attrValues readDir listToAttrs;
+    inherit (nixpkgs.lib) pipe nixosSystem removeSuffix mapAttrs filterAttrs;
     inherit (flake-utils.lib) eachDefaultSystem;
 
     # --- NIXOS CONFIGURATIONS ---

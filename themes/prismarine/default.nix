@@ -1,6 +1,8 @@
-{ pkgs, lib, ... }:
-
-let
+{
+  pkgs,
+  lib,
+  ...
+}: let
   # The base 16 colorscheme used, modify this to see a theme change!
   themeName = "oceanicnext";
   # themeName = "sakura";
@@ -8,17 +10,16 @@ let
 
   # helper
   absoluteNixFilesInDir = dir:
-    (readDir dir)
-    |> filterAttrs (_: value: value == "regular")
-    |> attrNames 
-    |> map (path: dir + "/${path}");
-  
+    pipe (readDir dir) [
+      (filterAttrs (_: value: value == "regular"))
+      attrNames
+      (map (path: dir + "/${path}"))
+    ];
+
   inherit (lib.attrsets) attrNames filterAttrs;
   inherit (builtins) readDir;
-  inherit (lib) mkOption types;
-  
+  inherit (lib) mkOption types pipe;
 in {
-
   # Some options not handled by stylix
   options.prismarineTheme = {
     border-radius = mkOption {
@@ -40,7 +41,6 @@ in {
   };
 
   config = {
-
     # Implement the defined options from above
     prismarineTheme = {
       border-radius = 10;
@@ -63,7 +63,7 @@ in {
       };
 
       cursor = {
-        package = pkgs.graphite-cursors; 
+        package = pkgs.graphite-cursors;
         name = "graphite-dark";
         size = 25;
       };
@@ -96,22 +96,24 @@ in {
     };
 
     # import additional modules
-    # import = (absoluteNixFilesInDir ./nixos); 
+    # import = (absoluteNixFilesInDir ./nixos);
 
-    home-manager.sharedModules = 
+    home-manager.sharedModules =
       (absoluteNixFilesInDir ./hm)
-      ++ [({ pkgs, ...} : {
-        # consisent icon theme
-        home.packages = with pkgs; [
-          adwaita-icon-theme
-        ];
-        # little fix for gtk apps
-        gtk.iconTheme.name = "Adwaita";
+      ++ [
+        ({pkgs, ...}: {
+          # consisent icon theme
+          home.packages = with pkgs; [
+            adwaita-icon-theme
+          ];
+          # little fix for gtk apps
+          gtk.iconTheme.name = "Adwaita";
 
-        stylix.targets = {
-          firefox.profileNames = [ "default" ];
-          vscode.profileNames = [ "default" ];
-        };
-      })]; 
+          stylix.targets = {
+            firefox.profileNames = ["default"];
+            vscode.profileNames = ["default"];
+          };
+        })
+      ];
   };
 }

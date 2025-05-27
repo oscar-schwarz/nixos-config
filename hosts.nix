@@ -69,14 +69,14 @@
         "normal-wheel-user"
 
         # set the password of the root user to the one of the user
-        (username: { config, ...}: {users.users.root.hashedPasswordFile = config.getSopsFile "pass-hashes/${username}";})
+        (username: {config, ...}: {users.users.root.hashedPasswordFile = config.getSopsFile "pass-hashes/${username}";})
 
         # Use greetd as display manager and autologin to hyprland
         "greetd-hyprland-autologin"
 
         # Uni Leipzig
         "uni-leipzig"
-        
+
         # certain ssh keys configured
         "github-ssh"
       ];
@@ -86,10 +86,20 @@
   blind-spots = {
     machine = "HP_250_G4_Notebook_PC";
     theme = "prismarine";
-    allow-connections-from = [ "biome-fest" ];
+    allow-connections-from = ["biome-fest"];
     ip-address = "10.12.21.33";
     nixos-modules = [
       ./modules/configs/server
     ];
   };
+
+  # haunt-muskie = {};
+  # dreiton = {};
+  # aria-math = {};
+  # taswell = {};
+  # dead-voxel = {};
+  # moog-city = {};
+  # concrete-halls = {};
+  # floating-trees = {};
+  # wet-hands = {};
 }

@@ -5,11 +5,11 @@
   inputs,
   options,
   ...
-}: let 
-  hmSecretName = userName: name: "hm-secrets/${userName}/${name}"; 
+}: let
+  inherit (builtins) listToAttrs toFile;
+  inherit (lib) pipe attrsToList mkOption flatten;
 
-  inherit (lib) attrsToList flatten mkOption;
-  inherit (builtins) listToAttrs;
+  hmSecretName = userName: name: "hm-secrets/${userName}/${name}";
 in {
   # Import the nixos module
   imports = [
@@ -20,8 +20,7 @@ in {
     description = "A helper function to get the path to a sops secret.";
   };
   config = {
-    
-    getSopsFile = name: config.sops.secrets.${name}.path;
+    getSopsFile = name: config.sops.secrets.${name}.path or (toFile name "sops-key-not-found");
 
     environment.systemPackages = with pkgs; [
       sops
@@ -46,14 +45,18 @@ in {
     # Simulate the a home manager module for sops nix. Actually the secrets are imported through the system
     # but we need to create an api from inside Home Manager
     home-manager.sharedModules = [
-      ({ nixosConfig, config, ... }: { 
+      ({
+        nixosConfig,
+        config,
+        ...
+      }: {
         options = {
-          sops.secrets = mkOption { 
-            description = "The content of this option passed to the NixOS sops.secrets option"; 
+          sops.secrets = mkOption {
+            description = "The content of this option passed to the NixOS sops.secrets option";
           };
           getSopsFile = lib.mkOption {
             description = "A helper function to get the path to a sops secret.";
-          };      
+          };
         };
         # Create a wrapper for the getSopsFile function that looks for the correct name
         config.getSopsFile = name: nixosConfig.getSopsFile (hmSecretName config.home.username name);
@@ -61,35 +64,33 @@ in {
     ];
 
     # Import the secrets that are defined inside Home Manager
-    sops.secrets = 
+    sops.secrets = pipe config.home-manager.users [
       # Get a list of name value pairs of all home manager users
-      attrsToList config.home-manager.users
-      # map the name, value pair list to name = "" and value = sops secret name value pair list
-      |> map (userCfg: {
-        name = "";
+      attrsToList
 
-        value = userCfg.value.sops.secrets
-          # Same as above
-          |> attrsToList
-        
-          # Create a list of secrets of this user
-          |> map (secret: {
-            # secret name will be e.g. "hm-secret-osi-api-keys/open-ai"
+      # map all defined keys in home-manager to system wide keys with the user enabled
+      (map (userCfg:
+        pipe userCfg.value.sops.secrets [
+          # same as above
+          attrsToList
+
+          (map (secret: {
+            # secret name will be e.g. "hm-secrets/osi/api-keys/open-ai"
             name = hmSecretName userCfg.name secret.name;
-            value = secret.value // { 
-              # Set the correct user
-              owner = userCfg.name;
-              # and the correct key
-              key = secret.name;
-            };
-          });
-      })
-      # Transform into a name value pair list of sops secrets
-      |> map (value: value.value)
-      |> flatten
-      
-      # transform the sops secret name value pair list to a set of sops secrets
-      |> listToAttrs;
+            value =
+              secret.value
+              // {
+                # Set the correct user
+                owner = userCfg.name;
+                # and the correct key
+                key = secret.name;
+              };
+          }))
+        ]))
 
+      # transform the sops secret name value pair list to a set of sops secrets
+      flatten
+      listToAttrs
+    ];
   };
 }

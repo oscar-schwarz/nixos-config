@@ -42,10 +42,12 @@ hostname: moduleArgs @ {
     pipe {
       nixos-modules = [];
       shared-hm-modules = [];
-      users = mapAttrs (username: userConf: {
-        hm-modules = userConf.hm-modules or [];
-        user-nixos-modules = userConf.user-nixos-modules or [];
-      }) hostDefinitions.${hostname}.users;
+      users =
+        mapAttrs (username: userConf: {
+          hm-modules = userConf.hm-modules or [];
+          user-nixos-modules = userConf.user-nixos-modules or [];
+        })
+        hostDefinitions.${hostname}.users;
     } [
       # Apply the values from the host definition
       (defaults: defaults // hostDefinitions.${hostname})
