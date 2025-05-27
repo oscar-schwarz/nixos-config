@@ -1,7 +1,12 @@
 keys:
-  - &primary age17l4z2r6j7gl47wkfwt4hkedkfq2j8hwadp6jjrz83gc7cqp82uaqzw7mmu
+  - &biome-fest age17l4z2r6j7gl47wkfwt4hkedkfq2j8hwadp6jjrz83gc7cqp82uaqzw7mmu
+  - &blind-spots age1zyvzu2fhz8597af987h74ypty09lgdl82ts79lhxh7muu6z5zp8q87ndpd
 creation_rules:
-  - path_regex: secrets.yaml$
+  - path_regex: secrets/biome-fest.yaml$
     key_groups:
     - age:
-      - *primary
+      - *biome-fest
+  - path_regex: secrets/blind-spots.yaml$
+    key_groups:
+    - age:
+      - *blind-spots

@@ -27,7 +27,7 @@ in {
     ];
 
     # Setup the secrets file
-    sops.defaultSopsFile = ../secrets.yaml;
+    sops.defaultSopsFile = ../. + "/secrets/${config.networking.hostName}.yaml";
     sops.defaultSopsFormat = "yaml";
 
     # Generate the age key from a provided ssh key
