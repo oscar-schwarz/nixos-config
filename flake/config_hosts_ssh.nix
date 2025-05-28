@@ -3,13 +3,18 @@
   config,
   ...
 }: let
-  inherit (builtins) concatStringsSep listToAttrs elem filter attrNames attrValues;
+  inherit (builtins) fromJSON readFile attrValues getAttr;
   inherit (lib) pipe attrsToList concatLines mapAttrs filterAttrs;
 
   hostDefinitions = import ../hosts.nix;
 
-  # authorizedHosts = pipe hostDefinitions [
-  #   filterAttrs (hostname: host: )
+  # authorizedHosts = pipe (config.sops.defaultSopsFile) [
+  #   # convert json file to attrset
+  #   readFile
+  #   fromJSON
+
+  #   # only the `authorized_hosts` key is interesting
+  #   (set: set.authorized_hosts or {})
   # ];
 in {
   # the private ssh key of the host and all public ssh keys of other hosts
@@ -30,9 +35,9 @@ in {
 
   # Set up ssh keys, you should be able to ssh into another host using its hostname at all times
   programs.ssh.extraConfig = pipe hostDefinitions [
-    (mapAttrs (hostName: host: ''
-      Host ${hostName}
-        HostName ${host.ip-address}
+    (mapAttrs (hostname: host: ''
+      Host ${hostname}
+        HostName ${hostname}
         IdentityFile /etc/ssh/id_ed25519
         IdentitiesOnly Yes
     ''))
@@ -42,9 +47,19 @@ in {
     concatLines
   ];
 
-  # systemd.services."setup-authorized-hosts-file" = {
-  #   script = ''
-  #     echo "" > /etc/ssh/authorized_hosts
-  #   '' ++ (pipe );
+  # system.activationScripts = {
+  #   setupAuthorizedKeys = {
+  #     # Run after we have the sops secrets
+  #     # puts each public key from the `authorizedHosts` set in /etc/ssh/authorized_keys
+  #     deps = ["setupSecrets"];
+  #     text = ''
+  #       cat > /etc/ssh/authorized_keys << EOF
+  #     '' + (pipe authorizedHosts [
+  #       attrValues
+  #       concatLines
+  #     ]) + ''
+  #         EOF
+  #     '';
+  #   };
   # };
 }
