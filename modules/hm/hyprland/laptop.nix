@@ -29,6 +29,33 @@
         hyprctl keyword monitor "eDP-1, disable"
       '';
     })
+
+    # Another script that tries to fix a flickering screen at my desk (probably related to docking station)
+    (pkgs.writeShellApplication {
+      name = "hypr-fix-flicker-screen";
+      text = ''
+        # intentionally set invalid resolution@framerate
+        hyprctl keyword monitor "$MONITOR, 1920x1080@30, auto, preffered"
+        
+        # let the old boy rest
+        sleep 30
+        
+        # put him to sleep
+        hyprctl dispatch dpms toggle "$MONITOR"
+        
+        # let him sleep 
+        sleep 30
+        
+        # wake him up
+        hyprctl dispatch dpms toggle "$MONITOR"
+        
+        # snooze
+        sleep 10
+        
+        # everyting to be normal (sometimes the flicker stopped now)
+        hyprctl reload
+      '';
+    })
   ];
 
   wayland.windowManager.hyprland.settings = {
