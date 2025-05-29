@@ -57,7 +57,10 @@ in {
         # --- clear file
         : > /etc/ssh/authorized_keys
       '' + (pipe authorizedKeyFiles [
-        (map (file: "cat ${file} >> /etc/ssh/authorized_keys"))
+        (map (file: ''
+          cat ${file} >> /etc/ssh/authorized_keys
+          echo "" >> /etc/ssh/authorized_keys # add newline after public key
+        ''))
         concatLines
       ]);
     };
