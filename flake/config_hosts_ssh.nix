@@ -16,23 +16,23 @@
     fromYAML
 
     # only the `authorized_hosts` key is interesting
-    (set: set.authorized_hosts or {})
+    (set: set.authorized-hosts or {})
 
     attrNames
   ];
 
   # authorized ssh public keys derived from authorized hosts and sops
-  authorizedKeyFiles = map (name: config.getSopsFile "authorized_hosts/${name}") authorizedHosts;
+  authorizedKeyFiles = map (name: config.getSopsFile "authorized-hosts/${name}") authorizedHosts;
 in {
   # the private ssh key of the host and all public ssh keys of other hosts
-  sops.secrets = builtins.trace (builtins.toJSON authorizedHosts) (pipe authorizedHosts [
+  sops.secrets = pipe authorizedHosts [
       (map (hostname: {
-        name = "authorized_hosts/${hostname}";
+        name = "authorized-hosts/${hostname}";
         value = {mode = "0444";};
       }))
 
       listToAttrs
-    ]);
+    ];
 
   # Set up ssh keys, you should be able to ssh into another host using its hostname at all times
   programs.ssh.extraConfig = pipe hostDefinitions [
