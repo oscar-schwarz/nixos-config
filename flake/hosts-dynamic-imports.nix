@@ -1,18 +1,11 @@
 hostname: moduleArgs @ {
   pkgs,
-  config,
   lib,
   ...
 }: let
-  inherit (lib.attrsets) mapAttrs attrValues;
-  inherit (lib) pipe flatten;
-  inherit (builtins) typeOf match;
-
-  # The content of the hosts.nix file
-  hostDefinitions = import ../hosts.nix;
-
-  sharedModulesDir = ../modules;
-
+  # --- FUNCTIONS
+  inherit (builtins) mapAttrs attrValues match;
+  inherit (lib) pipe flatten typeOf;
   # Converts a string to a path with a prefix if input is a string (see definition at)
   toPathIfString = prefixDir: maybeStr:
     if typeOf maybeStr == "string"
@@ -36,6 +29,11 @@ hostname: moduleArgs @ {
 
   # Do the above function for each element in a list assuming only files in shared modules are handled
   resolveSharedModulesIn = prefix: list: map (toPathIfString (sharedModulesDir + prefix)) list;
+
+  # --- VARIABLES
+
+  sharedModulesDir = ../modules;
+  hostDefinitions = import ../hosts.nix;
 
   # The defintion of the host with the provided name above
   host =
@@ -67,25 +65,9 @@ hostname: moduleArgs @ {
         })
     ];
 in {
-  # Tell the hosts module all definitions
-  # This also type checks the hosts.nix file and sets default values
-  hosts.all = hostDefinitions;
-
-  # Set the value of the `this` set
-  hosts.this = config.hosts.all.${hostname} // {name = hostname;};
-
-  # Set the host name to the current host
-  networking.hostName = hostname;
-
   # import the defined nixos modules
   imports =
     [
-      # definitions of `hosts` config
-      ./options_hosts.nix
-
-      # implemenation of ssh for the hosts
-      ./config_hosts_ssh.nix
-
       # the machine of the host
       (../machines + "/${host.machine}")
     ]
@@ -108,10 +90,6 @@ in {
       attrValues
       flatten
     ]);
-
-  # Set up the users, just give an empty set, but define the set
-  users.users = mapAttrs (_: _: {}) host.users;
-
   # Set up home manager
 
   # Import shared Home Manager modules (if strings in list then convert to appropriate path)
@@ -120,15 +98,8 @@ in {
   # and set up users
   home-manager.users =
     mapAttrs (userName: userConfig: (
-      {nixosConfig, ...}: {
+      {...}: {
         imports = userConfig.hm-modules;
-
-        # Define the user name and the home directory for reference
-        home.username = userName;
-        home.homeDirectory = "/home/" + userName;
-
-        # As home manager is installed on each system the same time as home manager the state version is the same
-        home.stateVersion = nixosConfig.system.stateVersion;
       }
     ))
     host.users;
