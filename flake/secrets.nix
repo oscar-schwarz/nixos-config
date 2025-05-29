@@ -3,11 +3,11 @@
   config,
   lib,
   inputs,
-  options,
+  self,
   ...
 }: let
-  inherit (builtins) listToAttrs toFile;
-  inherit (lib) pipe attrsToList mkOption flatten;
+  inherit (builtins) listToAttrs toFile head;
+  inherit (lib) pipe attrsToList mkOption flatten getExe;
 
   hmSecretName = userName: name: "hm-secrets/${userName}/${name}";
 in {
@@ -20,7 +20,7 @@ in {
     description = "A helper function to get the path to a sops secret.";
   };
   config = {
-    getSopsFile = name: config.sops.secrets.${name}.path or (toFile name "sops-key-not-found");
+    getSopsFile = name: config.sops.secrets.${name}.path /*or (toFile name "")*/;
 
     environment.systemPackages = with pkgs; [
       sops
@@ -32,14 +32,21 @@ in {
 
     # Generate the age key from a provided ssh key
     sops.age = {
-      generateKey = true;
-
-      # Key to be generated
-      keyFile = "/root/.age-key.txt";
-
       # From which key to generate it
       sshKeyPaths = ["/etc/ssh/id_ed25519"];
+
+      keyFile = "/root/.config/sops/age/keys.txt";
     };
+    # We need to generate the key correctly because sops is doing it wrong
+    system.activationScripts = {
+      generateAgeKeyFromSSH.text = ''
+        ${getExe pkgs.ssh-to-age} -private-key -i ${head config.sops.age.sshKeyPaths} -o ${config.sops.age.keyFile}
+      '';
+      setupSecretsForUsers.deps = [ "generateAgeKeyFromSSH" ];
+      setupSecrets.deps = [ "generateAgeKeyFromSSH" ];
+    };
+
+    # Sops has weird behavior, we will generate the age key correctly
 
     # Simulate the a home manager module for sops nix. Actually the secrets are imported through the system
     # but we need to create an api from inside Home Manager
