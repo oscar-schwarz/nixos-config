@@ -25,7 +25,9 @@
   authorizedKeyFiles = map (name: config.getSopsFile "authorized-hosts/${name}") authorizedHosts;
 in {
   # the private ssh key of the host and all public ssh keys of other hosts
-  sops.secrets = pipe authorizedHosts [
+  sops.secrets = pipe hostDefinitions [
+      attrNames
+
       (map (hostname: {
         name = "authorized-hosts/${hostname}";
         value = {mode = "0444";};
@@ -33,6 +35,16 @@ in {
 
       listToAttrs
     ];
+
+  # Add an entry for each host in /etc/hosts with their respective ip address
+  networking.hosts = pipe hostDefinitions [
+    attrsToList
+    (map ({name, value}: {
+      name = value.ip-address;
+      value = [ name ];
+    }))
+    listToAttrs
+  ];
 
   # Set up ssh keys, you should be able to ssh into another host using its hostname at all times
   programs.ssh.extraConfig = pipe hostDefinitions [
