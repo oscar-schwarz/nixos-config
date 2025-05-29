@@ -1,37 +1,38 @@
 {
+  pkgs,
   lib,
   config,
   ...
 }: let
-  inherit (builtins) fromJSON readFile attrValues getAttr;
-  inherit (lib) pipe attrsToList concatLines mapAttrs filterAttrs;
+  inherit (builtins) fromJSON readFile attrValues getAttr attrNames;
+  inherit (lib) pipe attrsToList concatLines mapAttrs filterAttrs listToAttrs;
+  fromYAML = import ../lib/from-yaml.nix pkgs;
 
   hostDefinitions = import ../hosts.nix;
 
-  # authorizedHosts = pipe (config.sops.defaultSopsFile) [
-  #   # convert json file to attrset
-  #   readFile
-  #   fromJSON
+  authorizedHosts = pipe config.sops.defaultSopsFile [
+    # convert yaml file to attrset
+    readFile
+    fromYAML
 
-  #   # only the `authorized_hosts` key is interesting
-  #   (set: set.authorized_hosts or {})
-  # ];
+    # only the `authorized_hosts` key is interesting
+    (set: set.authorized_hosts or {})
+
+    attrNames
+  ];
+
+  # authorized ssh public keys derived from authorized hosts and sops
+  authorizedKeyFiles = map (name: config.getSopsFile "authorized_hosts/${name}") authorizedHosts;
 in {
   # the private ssh key of the host and all public ssh keys of other hosts
-  # sops.secrets =
-  #   {
-  #     "ssh-keys/host-${config.hosts.this.name}/private" = {};
-  #   }
-  #   // (pipe hostDefinitions [
-  #     attrNames
+  sops.secrets = builtins.trace (builtins.toJSON authorizedHosts) (pipe authorizedHosts [
+      (map (hostname: {
+        name = "authorized_hosts/${hostname}";
+        value = {mode = "0444";};
+      }))
 
-  #     (map (hostName: {
-  #       name = "ssh-keys/host-${hostName}/public";
-  #       value = {mode = "0444";};
-  #     }))
-
-  #     listToAttrs
-  #   ]);
+      listToAttrs
+    ]);
 
   # Set up ssh keys, you should be able to ssh into another host using its hostname at all times
   programs.ssh.extraConfig = pipe hostDefinitions [
@@ -47,19 +48,18 @@ in {
     concatLines
   ];
 
-  # system.activationScripts = {
-  #   setupAuthorizedKeys = {
-  #     # Run after we have the sops secrets
-  #     # puts each public key from the `authorizedHosts` set in /etc/ssh/authorized_keys
-  #     deps = ["setupSecrets"];
-  #     text = ''
-  #       cat > /etc/ssh/authorized_keys << EOF
-  #     '' + (pipe authorizedHosts [
-  #       attrValues
-  #       concatLines
-  #     ]) + ''
-  #         EOF
-  #     '';
-  #   };
-  # };
+  system.activationScripts = {
+    setupAuthorizedKeys = {
+      # Run after we have the sops secrets
+      # puts each public key from the `authorizedHosts` set in /etc/ssh/authorized_keys
+      deps = ["setupSecrets"];
+      text = ''
+        # --- clear file
+        : > /etc/ssh/authorized_keys
+      '' + (pipe authorizedKeyFiles [
+        (map (file: "cat ${file} >> /etc/ssh/authorized_keys"))
+        concatLines
+      ]);
+    };
+  };
 }
