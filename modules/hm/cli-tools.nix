@@ -14,6 +14,7 @@ in {
     devenv # dev environments made easy
     ncpamixer # Pulse Audio mixer utility
     restic
+    nushell # a new and fancy type of shell
     # Tools
     wl-clipboard-rs # copy to clipboard from terminal
 

@@ -3,10 +3,9 @@
   config,
   lib,
   inputs,
-  self,
   ...
 }: let
-  inherit (builtins) listToAttrs toFile head;
+  inherit (builtins) listToAttrs head;
   inherit (lib) pipe attrsToList mkOption flatten getExe;
 
   hmSecretName = userName: name: "hm-secrets/${userName}/${name}";
@@ -33,12 +32,20 @@ in {
 
     # Generate the age key from a provided ssh key
     sops.age = {
-      # From which key to generate it
-      sshKeyPaths = ["/etc/ssh/id_ed25519"];
-
+      # The path to the age key
+      # this must be '/root/.config/sops/age/keys.txt' as this is the path where sops will for an age key when using
+      # `sudo sops ...` 
       keyFile = "/root/.config/sops/age/keys.txt";
+      
+      # As we want the age key to be deterministic we will generate it from this SSH key which should be present on each host
+      sshKeyPaths = ["/etc/ssh/id_ed25519"];
+      
+      # For some reason this option will not generate the age key from the given ssh key but just generate one at random
+      # so we need to disable that and do it on owr own down beiow 
+      generateKey = false;
     };
-    # We need to generate the key correctly because sops is doing it wrong
+    # An acivation script that runs on `nixos-rebuild switch` and reboot that generates a private AGE key from our private
+    # SSH key.
     system.activationScripts = {
       generateAgeKeyFromSSH.text = ''
         ${getExe pkgs.ssh-to-age} -private-key -i ${head config.sops.age.sshKeyPaths} -o ${config.sops.age.keyFile}
@@ -47,7 +54,6 @@ in {
       setupSecrets.deps = [ "generateAgeKeyFromSSH" ];
     };
 
-    # Sops has weird behavior, we will generate the age key correctly
 
     # Simulate the a home manager module for sops nix. Actually the secrets are imported through the system
     # but we need to create an api from inside Home Manager
