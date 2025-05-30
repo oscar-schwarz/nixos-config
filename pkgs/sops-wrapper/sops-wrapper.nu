@@ -30,7 +30,8 @@ def --wrapped main [ --impersonate-host: string ...rest ] {
         impersonate $impersonate_host
     }
 
-    ^sops ...$rest
+    # must be called with sudo
+    ^sudo sops ...$rest
 
     # reset impersonation
     impersonate

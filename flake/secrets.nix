@@ -23,12 +23,13 @@ in {
     getSopsFile = name: config.sops.secrets.${name}.path /*or (toFile name "")*/;
 
     environment.systemPackages = with pkgs; [
-      sops
+      # sops # not needed, sops-wrapper in flake dev shell
     ];
 
     # Setup the secrets file
     sops.defaultSopsFile = ../. + "/secrets/${config.networking.hostName}.yaml";
     sops.defaultSopsFormat = "yaml";
+
 
     # Generate the age key from a provided ssh key
     sops.age = {
