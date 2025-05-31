@@ -53,20 +53,20 @@
           heygpt  """$argv""" | ${pkgs.glow}
         end
       '';
-      gptcommit = ''
-        set message $(\
-          heygpt \
-            --system="You are a git commit generator. When given a certain diff you will reply with \
-            ONLY ONE commit message following the conventional commits specification. Make sure to use scopes. \
-            The allowed commit types are feat, fix, chore and refactor. \
-            No Markdown, no codeblocks just a commit message. I REPEAT: No codeblocks and only allowed commit types \
-            are feat, fix, chore and refactor!" \
-            --temperature 0.1 \
-            """$(git diff --staged)"""
-        )
+      # gptcommit = ''
+      #   set message $(\
+      #     heygpt \
+      #       --system="You are a git commit generator. When given a certain diff you will reply with \
+      #       ONLY ONE commit message following the conventional commits specification. Make sure to use scopes. \
+      #       The allowed commit types are feat, fix, chore and refactor. \
+      #       No Markdown, no codeblocks just a commit message. I REPEAT: No codeblocks and only allowed commit types \
+      #       are feat, fix, chore and refactor!" \
+      #       --temperature 0.1 \
+      #       """$(git diff --staged)"""
+      #   )
 
-        git commit -m """$message"""
-      '';
+      #   git commit -m """$message"""
+      # '';
 
       silent-plasma-restart = ''
         # restart plasmashell without any console output
