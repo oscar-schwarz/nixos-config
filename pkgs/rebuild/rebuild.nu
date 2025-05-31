@@ -22,7 +22,7 @@ def --wrapped main [
     let flakeFlag = $flake | default ($flakePath + "#" + $host)
 
     do {
-        let result = ^sudo nixos-rebuild --flake $flakeFlag ...$rest | complete
+        let result = (^sudo nixos-rebuild --flake $flakeFlag ...$rest) | complete
 
         if ($result.exit_code == 0) {
             ^git commit -m "Successful Rebuild"
