@@ -6,5 +6,5 @@
 }: writeShellApplication {
   name = "rebuild";
   runtimeInputs = [ nushell git ];
-  text = "nu ${./rebuild.nu}";
+  text = ''nu ${./rebuild.nu} "$@"'';
 }

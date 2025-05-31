@@ -7,28 +7,33 @@ def --wrapped main [
     --hostname: string 
     --flake-path: path
     --disable-git-commit
-    --flake: string 
+    --flake: string
+    command?: string
     ...rest: string
 ] {
-    let flakePath = $flake_path | default "~/nixos"
+    let flakePath = $flake_path | default ($env.HOME + "/nixos")
     let host = $hostname | default (^hostname)
+
+    if $command == null {
+        ^nixos-rebuild
+        exit
+    }
 
     let previousPWD = $env.PWD
     if not $disable_git_commit {
         cd $flakePath
         ^git add --all
+        cd $previousPWD
     }
 
     let flakeFlag = $flake | default ($flakePath + "#" + $host)
 
-    do --ignore-errors {
-        let result = (^sudo nixos-rebuild --flake $flakeFlag ...$rest) | complete
-        $result
-        # if ($result.exit_code == 0) {
-        #     ^git commit -m "Successful Rebuild"
-        #     ^git push
-        # }
+    
+    ^sudo nixos-rebuild --flake $flakeFlag $command ...$rest
+        
+    if not $disable_git_commit {
+        cd $flakePath
+        ^git commit -m "Successful Rebuild"
+        cd $previousPWD
     }
-
-    cd $previousPWD
 }
