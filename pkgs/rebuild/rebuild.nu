@@ -23,7 +23,7 @@ def --wrapped main [
 
     do {
         let result = (^sudo nixos-rebuild --flake $flakeFlag ...$rest) | complete
-
+        $result
         if ($result.exit_code == 0) {
             ^git commit -m "Successful Rebuild"
             ^git push
