@@ -15,6 +15,7 @@ in {
     ncpamixer # Pulse Audio mixer utility
     restic
     nushell # a new and fancy type of shell
+    opencommit # use AI to generate commit messages
     # Tools
     wl-clipboard-rs # copy to clipboard from terminal
 
