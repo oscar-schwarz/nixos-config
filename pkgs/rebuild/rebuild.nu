@@ -21,13 +21,13 @@ def --wrapped main [
 
     let flakeFlag = $flake | default ($flakePath + "#" + $host)
 
-    do {
+    do --ignore-errors {
         let result = (^sudo nixos-rebuild --flake $flakeFlag ...$rest) | complete
         $result
-        if ($result.exit_code == 0) {
-            ^git commit -m "Successful Rebuild"
-            ^git push
-        }
+        # if ($result.exit_code == 0) {
+        #     ^git commit -m "Successful Rebuild"
+        #     ^git push
+        # }
     }
 
     cd $previousPWD
