@@ -18,32 +18,32 @@
       # --- NIX
       ns = "nix-shell -p $argv";
       nsc = "nix-shell -p $argv --command $argv";
-      rebuild = ''
-        #!/bin/env fish
+      # rebuild = ''
+      #   #!/bin/env fish
 
-        # No VSCodium, these plugins are NOT obsolete!
-        if test -f ~/.vscode-oss/extensions/.obsolete
-          rm -f ~/.vscode-oss/extensions/.obsolete
-        end
+      #   # No VSCodium, these plugins are NOT obsolete!
+      #   if test -f ~/.vscode-oss/extensions/.obsolete
+      #     rm -f ~/.vscode-oss/extensions/.obsolete
+      #   end
 
-        # add all new files to git, so that they are seen by nixos
-        set PREV_PWD "$PWD"
-        cd ~/nixos
-        direnv reload
-        git add --all
+      #   # add all new files to git, so that they are seen by nixos
+      #   set PREV_PWD "$PWD"
+      #   cd ~/nixos
+      #   direnv reload
+      #   git add --all
 
-        sudo nixos-rebuild --flake ~/nixos#${nixosConfig.hosts.this.name} $argv
+      #   sudo nixos-rebuild --flake ~/nixos#${nixosConfig.hosts.this.name} $argv
 
-        # only commit if succeeded
-        if test $status -eq 0
-          # commit all changes
-          gptcommit
-          git push
-        end
+      #   # only commit if succeeded
+      #   if test $status -eq 0
+      #     # commit all changes
+      #     gptcommit
+      #     git push
+      #   end
 
-        # Go back to previous cwd
-        cd "$PREV_PWD"
-      '';
+      #   # Go back to previous cwd
+      #   cd "$PREV_PWD"
+      # '';
 
       # --- HEYGPT
       ask = ''

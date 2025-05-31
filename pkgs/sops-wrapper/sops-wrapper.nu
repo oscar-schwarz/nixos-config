@@ -1,38 +1,64 @@
+const SSH_KEYS_DIR = "/etc/ssh"
 
-def impersonate [ hostname?: string ] {
+def check-sudo [] {
+# make sure that the command is run as sudo
+    if (^bash -c 'echo $EUID') != "0" {
+        error make {
+            msg: "This command must be run as sudo."
+            help: "sudo sops ..."
+        }
+    }
+}
+
+def make-decryptable [ file?: path ] {
     # the path to the age key defined in the nix config
     let ageKeyPath = ^nix eval --impure --raw --expr $"\(__getFlake \"($env.PWD)\"\).outputs.nixosConfigurations.(^hostname).config.sops.age.keyFile"
 
-    if $hostname == null {
-        ^ssh-to-age -private-key -i "/etc/ssh/id_ed25519" -o $ageKeyPath
+    if $file == null {
+        ^ssh-to-age -private-key -i $"($SSH_KEYS_DIR)/id_ed25519" -o $ageKeyPath
         exit  
     }
-    let availableHosts = ^ls /etc/ssh
-        | split row "\n"
-        | where {|filename| $filename =~ "^id_ed25519_.+$"}
-        | str replace "id_ed25519_" ""
-    let otherSshKeyFile = $"/etc/ssh/id_ed25519_($hostname)" 
 
-    if not ($otherSshKeyFile | path exists) {
-        error make {
-            msg: $"Cannot impersonate ($hostname) as ($otherSshKeyFile) does not exist."
-            help: $"The following hosts are available for impersonation: ($availableHosts | str join ', ')"
+    open .sops.yaml
+        | get creation_rules
+        | where {|row| $file =~ $row.path_regex}
+        | get key_groups.age | first | first
+        | each {|$publicAgeKey|
+            ls $SSH_KEYS_DIR
+                | get name
+                | where {|file| (open $file) =~ "OPENSSH PRIVATE KEY"} 
+                | each {|sshKeyFile|
+                    ^ssh-to-age -private-key -i $sshKeyFile # to private age key
+                }
+                | where {|$privateAgeKey|
+                    $privateAgeKey | save --force /tmp/ageKey # save to temp file as age-keygen needs file input
+                    return ($publicAgeKey == (^age-keygen -y /tmp/ageKey))
+                }
+                | if ($in | length) > 0 {
+                    first
+                } else {
+                    null
+                }
         }
-    }
-
-    print $"Impersonating ($hostname)..."
-    ^ssh-to-age -private-key -i $otherSshKeyFile -o $ageKeyPath
-
+        | if ($in | length) > 0 {
+            $in | first | save --force $ageKeyPath
+        } else {
+            error make {
+                msg: $"No SSH key found in ($SSH_KEYS_DIR) that can decrypt $($file)"
+            }
+        }
 }
 
-def --wrapped main [ --impersonate-host: string ...rest ] {
-    if $impersonate_host != null {
-        impersonate $impersonate_host
+def --wrapped main [ file: path ...rest ] {
+    check-sudo
+
+    make-decryptable $file
+
+    do --ignore-errors { # errors are okay here
+        # must be called with sudo
+        ^sops $file ...$rest
     }
 
-    # must be called with sudo
-    ^sudo sops ...$rest
-
     # reset impersonation
-    impersonate
+    make-decryptable
 }
