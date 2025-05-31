@@ -1,10 +1,10 @@
-runtimeInputs@{
+{
   writeShellApplication,
   nushell,
   git,
   ...
 }: writeShellApplication {
-  inherit runtimeInputs;
   name = "rebuild";
+  runtimeInputs = [ nushell git ];
   text = "nu ${./rebuild.nu}";
 }
