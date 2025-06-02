@@ -44,9 +44,9 @@ in {
     # Implement the defined options from above
     prismarineTheme = {
       border-radius = 0;
-      border-width = 0;
+      border-width = 5;
       margin = 0;
-      padding = 0;
+      padding = 5;
     };
 
     # Stylix does the heavy lifting when it comes to styling here
