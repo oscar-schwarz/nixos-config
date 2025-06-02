@@ -79,6 +79,13 @@
       url = "github:oscar-schwarz/libfprint-goodix-55b4";
       # inputs.nixpkgs.follows = "nixpkgs"; # needs a specific nixpkgs version
     };
+
+    # declarative neovim distribution
+    nvf = {
+      url = "github:NotAShelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
   outputs = {

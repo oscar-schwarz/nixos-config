@@ -1,6 +1,8 @@
 hostname: moduleArgs @ {
   pkgs,
   lib,
+  config,
+  inputs,
   ...
 }: let
   # --- FUNCTIONS

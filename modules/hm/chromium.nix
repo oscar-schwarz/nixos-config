@@ -12,7 +12,7 @@
       }
       {
         # Vue Devtools
-        id = "nhdogjmejiglipccpnnnanhbledajbpe";
+        id = "nhdogjmejiglipccpnnnanhbledajbpd";
       }
     ];
   };

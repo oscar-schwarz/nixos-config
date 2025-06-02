@@ -35,9 +35,10 @@
       name = "hypr-fix-flicker-screen";
       text = ''
         # intentionally set invalid resolution@framerate
+        # now the monitor is on, but it does not need to show hdmi input
         hyprctl keyword monitor "$MONITOR, 1920x1080@30, auto, preffered"
         
-        # let the old boy rest
+        # let him relax while being awake but without hdmi input
         sleep 30
         
         # put him to sleep
@@ -49,7 +50,7 @@
         # wake him up
         hyprctl dispatch dpms toggle "$MONITOR"
         
-        # snooze
+        # snooze a little
         sleep 10
         
         # everyting to be normal (sometimes the flicker stopped now)

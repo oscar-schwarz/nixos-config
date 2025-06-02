@@ -46,6 +46,7 @@
 
         # code editor
         "vscode"
+        "nvf"
 
         # web browser
         "firefox"

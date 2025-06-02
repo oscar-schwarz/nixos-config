@@ -10,5 +10,5 @@ cat status.txt
     | where {$in =~ "new file|modified|deleted"}
     | each {|$line|
         let splitted = $line | split row " ";
-        {name: ($line | split row " ") | first}
+        {name: ($splitted | first), action: }
     }
