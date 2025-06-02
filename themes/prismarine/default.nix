@@ -43,10 +43,10 @@ in {
   config = {
     # Implement the defined options from above
     prismarineTheme = {
-      border-radius = 10;
-      border-width = 3;
-      margin = 3;
-      padding = 7;
+      border-radius = 0;
+      border-width = 0;
+      margin = 0;
+      padding = 0;
     };
 
     # Stylix does the heavy lifting when it comes to styling here
