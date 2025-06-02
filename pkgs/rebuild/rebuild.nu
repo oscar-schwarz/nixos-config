@@ -26,10 +26,10 @@ def --wrapped main [
         cd $previousPWD
     }
 
-    let flakeFlag = $flake | default ($flakePath + "#" + $host)
-
-    
-    ^sudo nixos-rebuild --flake $flakeFlag $command ...$rest
+    (^sudo nixos-rebuild 
+        --flake ($flake | default ($flakePath + "#" + $host)) 
+        $command 
+        ...$rest)
         
     if not $disable_git_commit {
         cd $flakePath

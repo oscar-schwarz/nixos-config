@@ -8,3 +8,7 @@ cat status.txt
     | lines
     | each {remove-double-space | str trim}
     | where {$in =~ "new file|modified|deleted"}
+    | each {|$line|
+        let splitted = $line | split row " ";
+        {name: ($line | split row " ") | first}
+    }
