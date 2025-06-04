@@ -10,5 +10,6 @@ in {
     "obsidian"
     "steam-unwrapped"
     "steam"
+    "claude-code"
   ];
 }

@@ -86,10 +86,17 @@ in {
       ExtensionUpdate = false; # disable extension update, updating only should happen through updating the links below
       ExtensionSettings = {
         # Dark Reader: Dark Mode for every website
-        "addon@darkreader.org" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/file/4439735/darkreader-4.9.103.xpi";
+        # "addon@darkreader.org" = {
+        #  install_url = "https://addons.mozilla.org/firefox/downloads/file/4439735/darkreader-4.9.103.xpi";
+        #  installation_mode = "force_installed";
+        # };
+
+        # Dark Night: Dark Mode for every website
+        "{27c3c9d8-95cd-44e6-ae9c-ff537348b9f3}" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/file/4419518/dark_night_mode-2.0.7.xpi";
           installation_mode = "force_installed";
         };
+
         # Time-to-Work
         "{c52a7349-0c5d-479d-9917-0155a0c58c0a}" = {
           install_url = "https://github.com/OsiPog/time-to-work/releases/download/v1.2.5/time-to-work-1.2.5.xpi";

@@ -18,6 +18,7 @@ in {
     opencommit # use AI to generate commit messages
     # Tools
     wl-clipboard-rs # copy to clipboard from terminal
+    claude-code
 
     # Scripts
     heygptWrapper # terminal gpt integration
