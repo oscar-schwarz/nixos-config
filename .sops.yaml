@@ -1,5 +1,5 @@
 keys:
-  - &biome-fest age1h255jqgystcpptqq205u8l2jfvpkwx5hn25mgtydr92v95pymf4swh9n4q
+  - &biome-fest age18t59p33fjxw3xklt0wyaxtel6wqy4q8c7428kj0xaqxpsg4nhf7q4ex6vk
   - &blind-spots age1zyvzu2fhz8597af987h74ypty09lgdl82ts79lhxh7muu6z5zp8q87ndpd
 creation_rules:
   - path_regex: biome-fest.yaml$

@@ -1,8 +1,3 @@
-def quick-commit [] {
-    ^git status
-
-}
-
 def --wrapped main [ 
     --hostname: string 
     --flake-path: path
@@ -34,6 +29,7 @@ def --wrapped main [
     if not $disable_git_commit {
         cd $flakePath
         ^git commit -m "Successful Rebuild"
+        ^git push
         cd $previousPWD
     }
 }
