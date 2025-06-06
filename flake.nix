@@ -114,7 +114,6 @@
               stylix.nixosModules.stylix
               programs-sqlite.nixosModules.programs-sqlite
               custom-udev-rules.nixosModule
-              disko.nixosModules.disko
 
               # --- FLAKE MODULE ---
               # flake specific settings

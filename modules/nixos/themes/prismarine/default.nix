@@ -43,9 +43,9 @@ in {
   config = {
     # Implement the defined options from above
     prismarineTheme = {
-      border-radius = 0;
+      border-radius = 3;
       border-width = 5;
-      margin = 0;
+      margin = 3;
       padding = 5;
     };
 
@@ -53,7 +53,7 @@ in {
     stylix = {
       enable = true;
       base16Scheme = "${pkgs.base16-schemes}/share/themes/${themeName}.yaml";
-      image = ../../images/nms.jpg;
+      image = ./nms.jpg;
       polarity = "dark";
       autoEnable = true;
 

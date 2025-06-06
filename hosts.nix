@@ -1,16 +1,20 @@
 {
   biome-fest = {
-    machine = "LENOVO_LNVNB161216";
-    theme = "prismarine";
     ip-address = "10.12.21.10";
+    ssh.public-key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPCC/oIwcuAdyihRlqBGLA5s5wXmlmr+BmehBKJJ0/1S root@biome-fest";
     # NixOS modules this host consists of
     nixos-modules = [
+      # theme
+      "themes/prismarine/"
+
       # Essential things
       "essentials"
       "sound"
 
       # connection to the world
       "networking"
+
+      "speicherfresser"
 
       # fingerprint sensor
       "fingerprint"
@@ -26,6 +30,8 @@
 
       # Settings specific to my monitor setup
       "monitors"
+
+      "obs-studio"
     ];
     users.osi = {
       hm-modules = [
@@ -83,23 +89,4 @@
       ];
     };
   };
-
-  blind-spots = {
-    machine = "HP_250_G4_Notebook_PC";
-    theme = "prismarine";
-    ip-address = "10.12.21.33";
-    nixos-modules = [
-      ./modules/configs/server
-    ];
-  };
-
-  # haunt-muskie = {};
-  # dreiton = {};
-  # aria-math = {};
-  # taswell = {};
-  # dead-voxel = {};
-  # moog-city = {};
-  # concrete-halls = {};
-  # floating-trees = {};
-  # wet-hands = {};
 }

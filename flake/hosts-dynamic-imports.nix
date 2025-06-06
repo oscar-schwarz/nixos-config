@@ -71,14 +71,8 @@ in {
   imports =
     [
       # the machine of the host
-      (../machines + "/${host.machine}")
+      (../hardware + "/${hostname}.nix")
     ]
-    # if a theme is set import it here too
-    ++ (
-      if host ? "theme"
-      then [(../themes + "/${host.theme}")]
-      else []
-    )
     # The nixos modules of the host
     ++ host.nixos-modules
     # The nixos modules per user

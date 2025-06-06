@@ -68,24 +68,22 @@ in {
     hostOpts = addName: {...}: {
       options =
         {
-          machine = mkOption {
-            description = "The machine used for this host. Found in ./machines";
-            type = types.enum (allDirNamesInDir ../machines);
-          };
-          theme = mkOption {
-            description = "The style theme applied to the host. Found in ./themes";
-            type = with types; nullOr (enum (allDirNamesInDir ../themes));
-            default = null;
-          };
           ip-address = mkOption {
             description = "The IP address of the host in the private network.";
             type = types.str;
             default = null;
           };
-          allow-connections-from = mkOption {
-            description = "The hosts which are allowed to connect to this host via SSH.";
-            type = with types; listOf (attrNames hostDefinitions);
-            default = null;
+          ssh = {
+            allow-connections-from = mkOption {
+              description = "The hosts which are allowed to connect to this host via SSH.";
+              type = with types; listOf (attrNames hostDefinitions);
+              default = [];
+            };
+            public-key = mkOption {
+              description = "The SSH public key of this host.";
+              type = types.str;
+              default = null;
+            };
           };
           nixos-modules = mkOption {
             description = "All NixOS modules added to this host.";
@@ -152,9 +150,8 @@ in {
 
   config = let
     # --- FUNCTIONS
-    inherit (builtins) mapAttrs attrValues attrNames readFile;
+    inherit (builtins) mapAttrs attrValues;
     inherit (lib) pipe attrsToList listToAttrs concatLines;
-    fromYAML = import ../lib/from-yaml.nix pkgs;
   in {
     # --- HOSTS CONFIG DEFINITION
 
@@ -169,7 +166,9 @@ in {
     networking.hostName = hostname;
 
     # Set up the users, just give an empty set, but define the set
-    users.users = mapAttrs (_: _: {}) hostDefinitions.${hostname}.users;
+    users.users = mapAttrs (_: _: {}) hostDefinitions.${hostname}.users // {
+      root.openssh.authorizedKeys.keys = map (otherHostname: hostDefinitions.${otherHostname}.ssh.public-key) (hostDefinitions.${hostname}.ssh.allow-connections-from or []);
+    };
 
     # and set up home-manager users
     home-manager.users =
@@ -214,48 +213,5 @@ in {
       }))
       listToAttrs
     ];
-
-    # --- SECRETS RELATED TO HOSTS
-
-    # the public keys of the authorized hosts
-    sops.secrets = pipe hostDefinitions [
-      attrNames
-
-      (map (hostname: {
-        name = "authorized-hosts/${hostname}";
-        value = {mode = "0444";};
-      }))
-
-      listToAttrs
-    ];
-
-    system.activationScripts.setupAuthorizedKeys = {
-      # Run after we have the sops secrets
-      # puts each public key from the `authorizedHosts` set in /etc/ssh/authorized_keys
-      deps = ["setupSecrets"];
-      text =
-        ''
-          # --- clear file
-          : > /etc/ssh/authorized_keys
-        ''
-        + (pipe config.sops.defaultSopsFile [
-          # convert yaml file to attrset
-          readFile
-          fromYAML
-
-          # only the `authorized_hosts` key is interesting
-          (set: set.authorized-hosts or {})
-
-          # only the hostnames
-          attrNames
-
-          # make a cat call for each hostname file
-          (map (hostname: ''
-            cat ${config.getSopsFile "authorized-hosts/${hostname}"} >> /etc/ssh/authorized_keys
-            echo "" >> /etc/ssh/authorized_keys # add newline after public key
-          ''))
-          concatLines
-        ]);
-    };
   };
 }
