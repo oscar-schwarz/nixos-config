@@ -1,17 +1,19 @@
 {
   writeShellApplication,
   nushell,
-  git,
-  nixos-rebuild,
+  openssh,
+  ssh-to-age,
+  bash,
   ...
 }:
 writeShellApplication {
-  name = "rebuild";
+  name = "all-ssh-keys-to-age";
   
   runtimeInputs = [
     nushell
-    git
-    nixos-rebuild
+    openssh
+    ssh-to-age
+    bash
   ];
   
   text = ''

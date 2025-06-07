@@ -1,3 +1,6 @@
+#! /usr/bin/env nix-shell
+#! nix-shell -i nu -p nushell git
+
 def --wrapped main [ 
     --hostname: string 
     --flake-path: path

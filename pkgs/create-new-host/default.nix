@@ -1,17 +1,19 @@
 {
   writeShellApplication,
   nushell,
-  git,
-  nixos-rebuild,
+  openssh,
+  ssh-to-age,
+  age,
   ...
 }:
 writeShellApplication {
-  name = "rebuild";
+  name = "create-new-host";
   
   runtimeInputs = [
     nushell
-    git
-    nixos-rebuild
+    openssh
+    ssh-to-age
+    age
   ];
   
   text = ''

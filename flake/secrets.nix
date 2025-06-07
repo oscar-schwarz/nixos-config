@@ -3,6 +3,7 @@
   config,
   lib,
   inputs,
+  self,
   ...
 }: let
   inherit (builtins) listToAttrs head;
@@ -22,7 +23,7 @@ in {
     getSopsFile = name: config.sops.secrets.${name}.path /*or (toFile name "")*/;
 
     environment.systemPackages = with pkgs; [
-      # sops # not needed, sops-wrapper in flake dev shell
+      sops
     ];
 
     # Setup the secrets file
@@ -37,21 +38,16 @@ in {
       # `sudo sops ...` 
       keyFile = "/root/.config/sops/age/keys.txt";
       
-      # As we want the age key to be deterministic we will generate it from this SSH key which should be present on each host
-      sshKeyPaths = ["/etc/ssh/id_ed25519"];
-      
       # For some reason this option will not generate the age key from the given ssh key but just generate one at random
       # so we need to disable that and do it on owr own down beiow 
       generateKey = false;
     };
-    # An acivation script that runs on `nixos-rebuild switch` and reboot that generates a private AGE key from our private
-    # SSH key.
+    # An acivation script that runs on `nixos-rebuild switch` and reboot that generates private AGE keys from all private
+    # SSH keys found in /etc/ssh
     system.activationScripts = {
-      generateAgeKeyFromSSH.text = ''
-        ${getExe pkgs.ssh-to-age} -private-key -i ${head config.sops.age.sshKeyPaths} -o ${config.sops.age.keyFile}
-      '';
-      setupSecretsForUsers.deps = [ "generateAgeKeyFromSSH" ];
-      setupSecrets.deps = [ "generateAgeKeyFromSSH" ];
+      generateAgeKeysFromSSH.text = lib.getExe self.packages.${pkgs.system}.all-ssh-keys-to-age;
+      setupSecretsForUsers.deps = [ "generateAgeKeysFromSSH" ];
+      setupSecrets.deps = [ "generateAgeKeysFromSSH" ];
     };
 
 

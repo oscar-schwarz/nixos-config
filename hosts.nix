@@ -1,7 +1,7 @@
 {
   biome-fest = {
     ip-address = "10.12.21.10";
-    ssh.public-key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAsSWg4ehxDUVTWSubMzaaNyG2WNufg/IpcYomWJWgYA root@biome-fest";
+    ssh.public-key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDIcVpuDI9fFcNWeMEHelbaItqQJwmAkibSFR+nBhxng root@biome-fest";
     # NixOS modules this host consists of
     nixos-modules = [
       # theme

@@ -89,6 +89,7 @@
   };
 
   outputs = {
+    self,
     nixpkgs,
     flake-utils,
     ...
@@ -106,7 +107,7 @@
       (mapAttrs (
         hostName: host:
           nixosSystem {
-            specialArgs = {inherit inputs;};
+            specialArgs = {inherit self;inherit inputs;};
 
             modules = with inputs; [
               # --- FLAKE INPUTS MODULES ---
