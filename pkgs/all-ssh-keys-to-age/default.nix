@@ -17,6 +17,6 @@ writeShellApplication {
   ];
   
   text = ''
-    nu ${./script.nu} "$@"
+    nu ${./all-ssh-keys-to-age.nu} "$@"
   '';
 }

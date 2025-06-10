@@ -17,6 +17,6 @@ writeShellApplication {
   ];
   
   text = ''
-    nu ${./script.nu} "$@"
+    nu ${./create-new-host.nu} "$@"
   '';
 }

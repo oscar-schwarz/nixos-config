@@ -19,6 +19,6 @@ writeShellApplication {
   ];
   
   text = ''
-    nu ${./script.nu} "$@"
+    nu ${./rotate-ssh-key-of-host.nu} "$@"
   '';
 }

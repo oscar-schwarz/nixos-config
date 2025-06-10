@@ -15,6 +15,6 @@ writeShellApplication {
   ];
   
   text = ''
-    nu ${./script.nu} "$@"
+    nu ${./rebuild.nu} "$@"
   '';
 }
