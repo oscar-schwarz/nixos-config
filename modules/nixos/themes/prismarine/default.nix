@@ -43,9 +43,9 @@ in {
   config = {
     # Implement the defined options from above
     prismarineTheme = {
-      border-radius = 10;
+      border-radius = 3;
       border-width = 5;
-      margin = 10;
+      margin = 3;
       padding = 5;
     };
 
