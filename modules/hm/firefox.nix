@@ -129,6 +129,12 @@ in {
         #   install_url = "https://addons.mozilla.org/firefox/downloads/file/4325805/duckduckgo_for_firefox-2024.7.24.xpi";
         #   installation_mode = "force_installed";
         # };
+        
+        # Unhook, remove all the clutter from YouTube
+        "myallychou@gmail.com" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/file/4263531/youtube_recommended_videos-1.6.7.xpi";
+          installation_mode = "force_installed";
+        };
       };
       FirefoxHome = {
         TopSites = false;
