@@ -62,6 +62,11 @@
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # Repo containing firefox addons
+    nix-firefox-addons = {
+      url = "github:oscar-schwarz/nix-firefox-addons";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Better udev nix interface
     custom-udev-rules = {

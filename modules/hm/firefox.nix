@@ -2,9 +2,11 @@
   pkgs,
   lib,
   config,
+  inputs,
   ...
 }: let
   packageName = "librewolf";
+  addons = inputs.nix-firefox-addons.addons.${pkgs.system};
 in {
   # Make firefox default
   xdg.mimeApps.defaultApplications = lib.attrsets.genAttrs [
@@ -85,54 +87,9 @@ in {
       };
       ExtensionUpdate = false; # disable extension update, updating only should happen through updating the links below
       ExtensionSettings = {
-        # Dark Reader: Dark Mode for every website
-        # "addon@darkreader.org" = {
-        #  install_url = "https://addons.mozilla.org/firefox/downloads/file/4439735/darkreader-4.9.103.xpi";
-        #  installation_mode = "force_installed";
-        # };
-
-        # Dark Night: Dark Mode for every website
-        "{27c3c9d8-95cd-44e6-ae9c-ff537348b9f3}" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/file/4419518/dark_night_mode-2.0.7.xpi";
-          installation_mode = "force_installed";
-        };
-
         # Time-to-Work
         "{c52a7349-0c5d-479d-9917-0155a0c58c0a}" = {
           install_url = "https://github.com/OsiPog/time-to-work/releases/download/v1.2.5/time-to-work-1.2.5.xpi";
-          installation_mode = "force_installed";
-        };
-        # Chameleon, user-agent headers and more spoofer
-        "{3579f63b-d8ee-424f-bbb6-6d0ce3285e6a}" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/file/4455676/chameleon_ext-0.22.71.1.xpi";
-          installation_mode = "force_installed";
-        };
-        # uBlock Origin
-        "uBlock0@raymondhill.net" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/file/4458450/ublock_origin-1.63.2.xpi";
-          installation_mode = "force_installed";
-          private_browsing = true;
-        };
-        # Vimium, keyboard driven website navigation
-        "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/file/4458679/vimium_ff-2.2.1.xpi";
-          installation_mode = "force_installed";
-          private_browsing = true;
-        };
-        # Vue.js Devtools
-        "{5caff8cc-3d2e-4110-a88a-003cc85b3858}" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/file/4297952/vue_js_devtools-6.6.3.xpi";
-          installation_mode = "force_installed";
-        };
-        # DuckDuckGo, this extension sets the default search engine to ddg (not needed when using librewolf)
-        # "jid1-ZAdIEUB7XOzOJw@jetpack" = {
-        #   install_url = "https://addons.mozilla.org/firefox/downloads/file/4325805/duckduckgo_for_firefox-2024.7.24.xpi";
-        #   installation_mode = "force_installed";
-        # };
-        
-        # Unhook, remove all the clutter from YouTube
-        "myallychou@gmail.com" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/file/4263531/youtube_recommended_videos-1.6.7.xpi";
           installation_mode = "force_installed";
         };
       };
@@ -195,6 +152,20 @@ in {
         MoreFromMozilla = false;
         FirefoxLabs = false;
         Locked = true;
+      };
+    };
+
+    profiles.default = {
+      extensions = {
+        packages = with addons; [
+          ublock-origin # adblock
+          dark-night-mode # dark mode for every website
+          chameleon-ext # user agent spoofing
+          vimium-ff # vim motions for browser
+          vue-js-devtools # devtools for vue apps
+          # youtube-recommended-videos # unhook: unclutters youtube
+        ];
+        settings = {};
       };
     };
   };

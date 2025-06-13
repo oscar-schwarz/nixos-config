@@ -11,5 +11,6 @@ in {
     "steam-unwrapped"
     "steam"
     "claude-code"
+    "youtube-recommended-videos"
   ];
 }
