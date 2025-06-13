@@ -25,6 +25,7 @@ in {
   programs.firefox = {
     enable = true;
     package = pkgs.${packageName};
+    configPath = if packageName == "firefox" then ".mozilla/firefox" else ".librewolf";
 
     # Some installation-wide settings and extensions
     # https://mozilla.github.io/policy-templates/
