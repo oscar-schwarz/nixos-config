@@ -158,12 +158,12 @@ in {
     profiles.default = {
       extensions = {
         packages = with addons; [
-          ublock-origin # adblock
-          dark-night-mode # dark mode for every website
-          chameleon-ext # user agent spoofing
-          vimium-ff # vim motions for browser
-          vue-js-devtools # devtools for vue apps
-          # youtube-recommended-videos # unhook: unclutters youtube
+          # ublock-origin # adblock
+          # dark-night-mode # dark mode for every website
+          # chameleon-ext # user agent spoofing
+          # vimium-ff # vim motions for browser
+          # vue-js-devtools # devtools for vue apps
+          # # youtube-recommended-videos # unhook: unclutters youtube
         ];
         settings = {};
       };
