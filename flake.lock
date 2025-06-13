@@ -634,11 +634,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1749854410,
-        "narHash": "sha256-jDdCbzCvCSURS1EDOOu5NrZKUAYgW6L31rKYZpNY+lE=",
+        "lastModified": 1749857899,
+        "narHash": "sha256-lqv8NbaLOS9c1ZHgiJhjaTgdErll+zMfXjzqVCwl1zU=",
         "owner": "oscar-schwarz",
         "repo": "nix-firefox-addons",
-        "rev": "50954058569e156f6c47319ffe08eb80d3ac5b79",
+        "rev": "f812be33168d68e77ec94b0e60c83dc7a25d0ede",
         "type": "github"
       },
       "original": {
