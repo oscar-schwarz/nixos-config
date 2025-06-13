@@ -133,6 +133,7 @@ in {
       Preferences = {
         "browser.startup.homepage" = "";
         "browser.sessionstore.resume_from_crash" = false;
+        "extensions.autoDisableScopes" = 0;
       };
       PromptForDownloadLocation = false;
       SanitizeOnShutdown = {
