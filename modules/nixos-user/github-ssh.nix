@@ -27,6 +27,7 @@ username: {
       Port 21016
       User osi
       IdentityFile ${config.getSopsFile "ssh-keys/ag-link/private"}
+      IdentitiesOnly yes
 
     # Allow overwriting the values above
     Include ${config.home-manager.users.${username}.home.homeDirectory}/.ssh/config
