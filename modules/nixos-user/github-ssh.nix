@@ -3,8 +3,8 @@ username: {
   ...
 }: {
   sops.secrets = {
-    "ssh-keys/rsa_github_osipog/private" = {owner = username;};
-    "ssh-keys/rsa_github_os/private" = {owner = username;};
+    "ssh-keys/gh-primary/private" = {owner = username;};
+    "ssh-keys/gh-secondary/private" = {owner = username;};
     "ssh-keys/ag-link/private" = {owner = username;};
   };
 
@@ -12,13 +12,13 @@ username: {
     Host github.com
       HostName github.com
       User git
-      IdentityFile ${config.getSopsFile "ssh-keys/rsa_github_osipog/private"}
+      IdentityFile ${config.getSopsFile "ssh-keys/gh-primary/private"}
       IdentitiesOnly yes
 
-    Host os.github.com
+    Host secondary.github.com
       HostName github.com
       User git
-      IdentityFile ${config.getSopsFile "ssh-keys/rsa_github_os/private"}
+      IdentityFile ${config.getSopsFile "ssh-keys/gh-secondary/private"}
       IdentitiesOnly yes
 
     Host ag-link-hyperjump

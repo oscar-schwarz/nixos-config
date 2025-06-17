@@ -33,15 +33,27 @@ in {
   programs.bashmount.enable = true;
 
   # Youtube downloader
-  programs.yt-dlp = {
+  programs.yt-dlp.enable = true;
+
+  # for different environments based on .envrc in directory
+  programs.direnv = {
     enable = true;
+    silent = true;
+    nix-direnv.enable = true;
   };
 
-  # nice cli git experience
-  programs.lazygit = {
+  # better cd
+  programs.zoxide = {
+    enable = true;
+    enableFishIntegration = true;
+  };
+
+  # better top
+  programs.btop = {
     enable = true;
     settings = {
-      mouseEvents = false; # don't need no mouse
+      # Using the theme provided by the terminal
+      force_tty = "False";
     };
   };
 }

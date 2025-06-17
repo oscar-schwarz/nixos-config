@@ -10,11 +10,13 @@ username: {
     inputs.eduroam.packages.${pkgs.system}.install-eduroam-leipzig
     pkgs.openconnect # for the vpn
   ];
+  
+  sops.secrets = {
+    "other/uni-vpn-auth" = {};
+    "ssh-keys/uni-gitlab/private" = {};
+  };
 
   # --- VPN
-
-  # add the secret for the vpn
-  sops.secrets."other/uni-leipzig-vpn-auth" = {};
 
   networking.openconnect.interfaces = {
     uni-leipzig-vpn = {
@@ -23,7 +25,7 @@ username: {
       gateway = "vpn.uni-leipzig.de";
       protocol = "anyconnect";
       user = "zu66owol@uni-leipzig.de";
-      passwordFile = config.getSopsFile "other/uni-leipzig-vpn-auth";
+      passwordFile = config.getSopsFile "other/uni-vpn-auth";
     };
   };
 
@@ -32,7 +34,7 @@ username: {
     Host git.informatik.uni-leipzig.de
       HostName git.informatik.uni-leipzig.de
       User git
-      IdentityFile /home/${username}/.ssh/id_rsa_github_os
+      IdentityFile ${config.getSopsFile "ssh-keys/uni-gitlab/private"}
       IdentitiesOnly yes
   '';
 

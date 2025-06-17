@@ -23,6 +23,7 @@ in {
     usbutils # for lsusb and such
     fzf
     ripgrep
+    gitMinimal
   ];
 
   # Set your time zone.
@@ -63,41 +64,6 @@ in {
       ({...}: {
         # Let home manager manage itself
         programs.home-manager.enable = true;
-
-
-        # Configure direnv for home-manager
-        programs.direnv = {
-          enable = true;
-          silent = true;
-          nix-direnv.enable = true;
-        };
-
-        # better cd
-        programs.zoxide = {
-          enable = true;
-          enableFishIntegration = true;
-        };
-
-        # Git
-        programs.git = {
-          enable = true;
-          extraConfig = {
-            user = {
-              name = "Oscar Schwarz";
-              email = "121044740+oscar-schwarz@users.noreply.github.com";
-            };
-            init.defaultBranch = "main";
-            pull.rebase = true;
-          };
-        };
-
-        programs.btop = {
-          enable = true;
-          settings = {
-            # Using the theme provided by the terminal
-            force_tty = "False";
-          };
-        };
       })
     ];
   };

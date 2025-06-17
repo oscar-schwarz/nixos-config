@@ -38,6 +38,8 @@
         # shell
         "fish"
 
+        "git"
+        
         # terminal
         "kitty"
 
@@ -81,8 +83,8 @@
         # Use greetd as display manager and autologin to hyprland
         "greetd-hyprland-autologin"
 
-        # Uni Leipzig
-        "uni-leipzig"
+        # University specific configuration
+        "uni"
 
         # certain ssh keys configured
         "github-ssh"

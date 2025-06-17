@@ -64,7 +64,7 @@
     };
     # Repo containing firefox addons
     nix-firefox-addons = {
-      url = "github:oscar-schwarz/nix-firefox-addons";
+      url = "github:OsiPog/nix-firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -147,6 +147,7 @@
 
                       # custom flake packages
                       matcha = matcha.packages.${prev.system}.default;
+                      self = outputsEachSystem.packages.${prev.system};
                     }
                   )
                 ];
@@ -179,7 +180,7 @@
           # evaluate package and transform list to name-value-pairs
           (map (file: {
             name = removeSuffix ".nix" file;
-            value = import (./pkgs + "/${file}") pkgs;
+            value = pkgs.callPackage (./pkgs + "/${file}") {};
           }))
 
           listToAttrs
