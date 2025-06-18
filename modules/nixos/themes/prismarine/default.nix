@@ -7,7 +7,7 @@
   # themeName = "oceanicnext";
   # themeName = "sakura";
   # themeName = "aztec";
-  themeName = "materia";
+  themeName = "tomorrow-night";
 
   # helper
   absoluteNixFilesInDir = dir:
