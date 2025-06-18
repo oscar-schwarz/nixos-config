@@ -1,0 +1,21 @@
+system: "base16"
+name: "Anya"
+author: "Osi"
+variant: "dark"
+palette:
+  base00: "#1a1c19" # ----
+  base01: "#67384a" # ---
+  base02: "#a4514f" # --
+  base03: "#ea7d80" # -
+  base04: "#fd9fa0" # +
+  base05: "#ffdada" # ++
+  base06: "#ffeeda" # +++
+  base07: "#f8f0dd" # ++++
+  base08: "#d23f49" # red
+  base09: "#e28518" # orange
+  base0A: "#f0e054" # yellow
+  base0B: "#71c069" # green
+  base0C: "#38b69f" # aqua
+  base0D: "#7c42e5" # blue
+  base0E: "#df60b9" # purple
+  base0F: "#4e2930" # brown

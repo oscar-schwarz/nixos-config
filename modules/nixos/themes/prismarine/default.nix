@@ -54,6 +54,7 @@ in {
     stylix = {
       enable = true;
       # base16Scheme = "${pkgs.base16-schemes}/share/themes/${themeName}.yaml";
+      base16Scheme = ./anya.yaml;
       image = ./anya.jpg;
       polarity = "dark";
       autoEnable = true;
