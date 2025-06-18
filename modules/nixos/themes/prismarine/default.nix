@@ -52,8 +52,8 @@ in {
     # Stylix does the heavy lifting when it comes to styling here
     stylix = {
       enable = true;
-      base16Scheme = "${pkgs.base16-schemes}/share/themes/${themeName}.yaml";
-      image = ./pages_2-base16-oceanicnext-1440p.png;
+      # base16Scheme = "${pkgs.base16-schemes}/share/themes/${themeName}.yaml";
+      image = ./mayuri.jpg;
       polarity = "dark";
       autoEnable = true;
 
