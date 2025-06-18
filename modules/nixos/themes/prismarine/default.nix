@@ -53,7 +53,7 @@ in {
     # Stylix does the heavy lifting when it comes to styling here
     stylix = {
       enable = true;
-      base16Scheme = "${pkgs.base16-schemes}/share/themes/${themeName}.yaml";
+      # base16Scheme = "${pkgs.base16-schemes}/share/themes/${themeName}.yaml";
       image = ./anya.jpg;
       polarity = "dark";
       autoEnable = true;
