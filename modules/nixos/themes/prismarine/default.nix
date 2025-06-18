@@ -4,9 +4,10 @@
   ...
 }: let
   # The base 16 colorscheme used, modify this to see a theme change!
-  themeName = "oceanicnext";
+  # themeName = "oceanicnext";
   # themeName = "sakura";
   # themeName = "aztec";
+  themeName = "materia";
 
   # helper
   absoluteNixFilesInDir = dir:
@@ -52,7 +53,7 @@ in {
     # Stylix does the heavy lifting when it comes to styling here
     stylix = {
       enable = true;
-      # base16Scheme = "${pkgs.base16-schemes}/share/themes/${themeName}.yaml";
+      base16Scheme = "${pkgs.base16-schemes}/share/themes/${themeName}.yaml";
       image = ./steins-gate.jpg;
       polarity = "dark";
       autoEnable = true;
