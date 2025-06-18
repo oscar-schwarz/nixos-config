@@ -7,7 +7,7 @@
   # themeName = "oceanicnext";
   # themeName = "sakura";
   # themeName = "aztec";
-  themeName = "tomorrow-night";
+  themeName = "hopscotch";
 
   # helper
   absoluteNixFilesInDir = dir:
@@ -54,7 +54,7 @@ in {
     stylix = {
       enable = true;
       base16Scheme = "${pkgs.base16-schemes}/share/themes/${themeName}.yaml";
-      image = ./steins-gate.jpg;
+      image = ./anya.jpg;
       polarity = "dark";
       autoEnable = true;
 
