@@ -53,7 +53,7 @@ in {
     stylix = {
       enable = true;
       # base16Scheme = "${pkgs.base16-schemes}/share/themes/${themeName}.yaml";
-      image = ./mayuri.jpg;
+      image = ./steins-gate.jpg;
       polarity = "dark";
       autoEnable = true;
 
