@@ -57,7 +57,7 @@ in {
       base16Scheme = ./anya.yaml;
       image = ./anya.jpg;
       polarity = "dark";
-      autoEnable = true;
+      autoEnable = false;
 
       opacity = {
         desktop = 1.0;
@@ -108,6 +108,9 @@ in {
           home.packages = with pkgs; [
             adwaita-icon-theme
           ];
+
+          stylix.targets.kitty.enable = true;
+
           # little fix for gtk apps
           gtk.iconTheme.name = "Adwaita";
 

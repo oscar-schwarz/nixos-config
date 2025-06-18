@@ -3,19 +3,19 @@ name: "Anya"
 author: "Osi"
 variant: "dark"
 palette:
-  base00: "#1a1c19" # ----
-  base01: "#67384a" # ---
-  base02: "#a4514f" # --
-  base03: "#ea7d80" # -
-  base04: "#fd9fa0" # +
-  base05: "#ffdada" # ++
-  base06: "#ffeeda" # +++
-  base07: "#f8f0dd" # ++++
+  base00: "#403757" # ----
+  base01: "#5a4d79" # ---
+  base02: "#73639c" # --
+  base03: "#9286b2" # -
+  base04: "#aaa0c3" # +
+  base05: "#b1a8c8" # ++
+  base06: "#d0cbde" # +++
+  base07: "#efeef4" # ++++
   base08: "#d23f49" # red
-  base09: "#e28518" # orange
+  base09: "#e9865b" # orange
   base0A: "#f0e054" # yellow
-  base0B: "#71c069" # green
-  base0C: "#38b69f" # aqua
-  base0D: "#7c42e5" # blue
+  base0B: "#c26db8" # green
+  base0C: "#df7e96" # aqua
+  base0D: "#a184d6" # blue
   base0E: "#df60b9" # purple
-  base0F: "#4e2930" # brown
+  base0F: "#87554d" # brown

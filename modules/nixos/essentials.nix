@@ -10,7 +10,7 @@ in {
   # Bootloader setup
   boot.loader.systemd-boot = {
     enable = true;
-    configurationLimit = 42;
+    configurationLimit = 10;
   };
 
   # needed packages
