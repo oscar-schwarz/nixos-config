@@ -53,7 +53,7 @@ in {
     stylix = {
       enable = true;
       base16Scheme = "${pkgs.base16-schemes}/share/themes/${themeName}.yaml";
-      image = ./nms.jpg;
+      image = ./pages_2-base16-oceanicnext-1440p.png;
       polarity = "dark";
       autoEnable = true;
 

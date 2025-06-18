@@ -13,7 +13,7 @@ in {
     };
     background = {
       monitor = ""; # every monitor
-      path = lib.mkForce "screenshot";
+      path = config.stylix.image;
       blur_passes = 4;
       blur_size = 10;
     };
