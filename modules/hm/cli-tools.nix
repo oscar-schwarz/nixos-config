@@ -56,4 +56,7 @@ in {
       force_tty = "False";
     };
   };
+
+  # better neofetch
+  programs.fastfetch.enable = true;
 }

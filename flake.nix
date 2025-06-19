@@ -187,7 +187,7 @@
         ];
       in {
         formatter = pkgs.alejandra;
-        packages = customPackages;
+        packages = customPackages // {icon = pkgs.callPackage (import ./lib/tint-nixos-svg.nix {blue="ffa7a6";cyan="ffebd6";}) {};};
         devShells.default = pkgs.mkShell {
           name = (import ./flake.nix).description; # sir, is that legal?
           buildInputs = attrValues customPackages;

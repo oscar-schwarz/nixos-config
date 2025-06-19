@@ -1,14 +1,9 @@
 {
   pkgs,
   lib,
+  config,
   ...
 }: let
-  # The base 16 colorscheme used, modify this to see a theme change!
-  # themeName = "oceanicnext";
-  # themeName = "sakura";
-  # themeName = "aztec";
-  themeName = "hopscotch";
-
   # helper
   absoluteNixFilesInDir = dir:
     pipe (readDir dir) [
@@ -53,7 +48,7 @@ in {
     # Stylix does the heavy lifting when it comes to styling here
     stylix = {
       enable = true;
-      # base16Scheme = "${pkgs.base16-schemes}/share/themes/${themeName}.yaml";
+      # base16Scheme = "${pkgs.base16-schemes}/share/themes/oceanicnext.yaml";
       base16Scheme = ./anya.yaml;
       image = ./anya.jpg;
       polarity = "dark";
@@ -86,6 +81,12 @@ in {
           applications = 13;
         };
       };
+
+      targets = {
+        # plymouth.logo = pkgs.runCommand "tinted-nixos-256x256-png" {} ''
+        #   ${pkgs.imagemagick}/bin/convert -resize 256x256
+        # '';
+      };
     };
 
     # Enable plymouth for boot
@@ -96,6 +97,10 @@ in {
         "splash"
       ];
     };
+
+    nixpkgs.overlays = [(final: prev: {
+      fastfetch = prev.fastfetch;
+    })];
 
     # import additional modules
     # import = (absoluteNixFilesInDir ./nixos);
