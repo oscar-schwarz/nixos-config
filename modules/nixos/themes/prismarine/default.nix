@@ -46,9 +46,10 @@ in {
       size ? 256, # ignored when svg is true
     }:
       pkgs.runCommand "stylix-nixos-logo.${if svg then "svg" else "png"}" {
-        inherit size svg;
+        inherit size;
         blue = config.lib.stylix.colors.${blue};
         cyan = config.lib.stylix.colors.${cyan};
+        svg = if svg then "true" else "false";
         img = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
       } ''
         sed "
@@ -62,7 +63,7 @@ in {
 
         if ! $svg; then
           cp $out $TMPDIR/svg
-          ${lib.getExe' pkgs.imagemagick "convert"} -resize "$size""x""$size" $TMPDIR/svg $out
+          ${lib.getExe' pkgs.imagemagick "convert"} $TMPDIR/svg -resize "$size""x""$size" $out
         fi
       '';
 
