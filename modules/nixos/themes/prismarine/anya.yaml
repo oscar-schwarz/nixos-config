@@ -1,21 +1,18 @@
-system: "base16"
-name: "Anya"
-author: "Osi"
-variant: "dark"
-palette:
-  base00: "#3a324e" # ----
-  base01: "#534871" # ---
-  base02: "#6d5e93" # --
-  base03: "#8b7dac" # -
-  base04: "#f9f8fa" # +
-  base05: "#dfdce8" # ++
-  base06: "#c6bfd6" # +++
-  base07: "#a99fc2" # ++++
-  base08: "#c84444" # red
-  base09: "#dc9a48" # orange
-  base0A: "#c3c256" # yellow
-  base0B: "#9dd482" # green
-  base0C: "#a0adf4" # aqua
-  base0D: "#7e7de8" # blue
-  base0E: "#fd828c" # purple
-  base0F: "#fddfc2" # brown
+scheme: 'Anya'
+author: 'Osi'
+base00: '#3a324e'
+base01: '#6d5e93'
+base02: '#8b7dac'
+base03: '#aaa0c2'
+base04: '#e7dbf5'
+base05: '#c9c1e1'
+base06: '#baadd8'
+base07: '#a99fc2'
+base08: '#ef6b6b'
+base09: '#e4ac66'
+base0A: '#c3c256'
+base0B: '#9dd482'
+base0C: '#d3daff'
+base0D: '#eb4f87'
+base0E: '#ff8790'
+base0F: '#fddfc2'
