@@ -61,6 +61,7 @@ in {
   programs.fastfetch = {
     enable = true;
     settings = {
+      logo.type = "kitty-icat";
       display = {
         separator = " -> ";
         color = {
@@ -82,10 +83,7 @@ in {
         "display"
         "de"
         "wm"
-        "wmtheme"
         "theme"
-        "icons"
-        "font"
         "terminal"
         "terminalfont"
         "cpu"
@@ -96,7 +94,6 @@ in {
         "localip"
         "battery"
         "poweradapter"
-        "locale"
         "break"
         "colors"
       ];
