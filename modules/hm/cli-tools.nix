@@ -58,5 +58,48 @@ in {
   };
 
   # better neofetch
-  programs.fastfetch.enable = true;
+  programs.fastfetch = {
+    enable = true;
+    settings = {
+      display = {
+        separator = " -> ";
+        color = {
+          keys = "blue";
+          title = "yellow";
+        };
+      };
+      
+      modules = [
+        "break"
+        "title"
+        "separator"
+        "os"
+        "host"
+        "kernel"
+        "uptime"
+        "packages"
+        "shell"
+        "display"
+        "de"
+        "wm"
+        "wmtheme"
+        "theme"
+        "icons"
+        "font"
+        "terminal"
+        "terminalfont"
+        "cpu"
+        "gpu"
+        "memory"
+        "swap"
+        "disk"
+        "localip"
+        "battery"
+        "poweradapter"
+        "locale"
+        "break"
+        "colors"
+      ];
+    };
+  };
 }
