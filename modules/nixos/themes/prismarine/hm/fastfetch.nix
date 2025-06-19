@@ -2,12 +2,11 @@
   pkgs,
   lib,
   config,
+  nixosConfig,
   ...
-}: let
-  tintedNixosSvg = pkgs.callPackage (import ../../../../../lib/tint-nixos-svg.nix config.lib.stylix.colors) {};
-in {
+}: {
   programs.fastfetch.settings.logo = {
     width = lib.mkDefault 40;
-    source = tintedNixosSvg;
+    source = nixosConfig.lib.stylix.nixos-logo {svg = true;};
   };
 }
