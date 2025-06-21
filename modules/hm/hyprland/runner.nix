@@ -4,7 +4,6 @@
 {
   home.packages = with pkgs; [
     wofi-emoji
-    wofi-pass
   ];
 
   # Highly supported runner
@@ -32,7 +31,7 @@
     # emoji
     # "$meta, U, exec, pidof rofi || rofi -show emoji"
     # Pass
-    "$meta, P, exec, pidof rofi || rofi-pass"
+    "$meta, P, exec, pidof rofi || wofi-pass --type"
 
     # Wofi menus
     # launcher

@@ -1,12 +1,10 @@
 {
   pkgs,
   lib,
-  config,
-  nixosConfig,
   ...
 }: {
   programs.fastfetch.settings.logo = {
     width = lib.mkDefault 40;
-    source = nixosConfig.lib.stylix.nixos-logo {svg = true;};
+    source = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
   };
 }

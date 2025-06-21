@@ -35,7 +35,8 @@
 
     # Stylix, theming made easy peasy
     stylix = {
-      url = "github:danth/stylix";
+      # url = "github:nix-community/stylix";
+      url = "github:osipog/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };

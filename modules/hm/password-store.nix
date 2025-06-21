@@ -23,7 +23,13 @@ in {
         fi
       '';
     })
-  ];
+  ] ++ (lib.optional config.programs.wofi.enable [
+    (pkgs.wofi-pass.override {
+      extensions = (exts: [
+        exts.pass-otp
+      ]);
+    })
+  ]);
 
   # secrets needed in this file
   sops.secrets = {

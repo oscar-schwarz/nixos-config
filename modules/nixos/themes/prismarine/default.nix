@@ -37,36 +37,6 @@ in {
   };
 
   config = {
-
-  # Generate a PNG or SVG image of the NixOS logo fitting the colorscheme
-    lib.stylix.nixos-logo = {
-      blue ? "blue",
-      cyan ? "cyan",
-      svg ? false,
-      size ? 256, # ignored when svg is true
-    }:
-      pkgs.runCommand "stylix-nixos-logo.${if svg then "svg" else "png"}" {
-        inherit size;
-        blue = config.lib.stylix.colors.${blue};
-        cyan = config.lib.stylix.colors.${cyan};
-        svg = if svg then "true" else "false";
-        img = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-      } ''
-        sed "
-          s/699ad7/$cyan/g;
-          s/7eb1dd/$cyan/g;
-          s/7ebae4/$cyan/g;
-          s/415e9a/$blue/g;
-          s/4a6baf/$blue/g;
-          s/5277c3/$blue/g;
-        " $img > $out
-
-        if ! $svg; then
-          cp $out $TMPDIR/svg
-          ${lib.getExe' pkgs.imagemagick "convert"} $TMPDIR/svg -resize "$size""x""$size" $out
-        fi
-      '';
-
     # Implement the defined options from above
     prismarineTheme = {
       border-radius = 3;
