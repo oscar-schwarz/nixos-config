@@ -51,10 +51,8 @@ in {
 
       # --- Layerrules
       layerrule = [
-        "animation popin, rofi"
-        "animation popin, wofi"
-        # "xray on, rofi"
-        # "dimaround, rofi"
+        "animation popin, (w|r)ofi"
+        "dimaround, (w|r)ofi"
       ];
 
       # --- Plugins ---

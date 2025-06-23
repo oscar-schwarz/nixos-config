@@ -4,6 +4,9 @@
     ssh.public-key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDIcVpuDI9fFcNWeMEHelbaItqQJwmAkibSFR+nBhxng root@biome-fest";
     # NixOS modules this host consists of
     nixos-modules = [
+      # kernel
+      "kernel/cachyos"
+      
       # theme
       "themes/prismarine/"
 

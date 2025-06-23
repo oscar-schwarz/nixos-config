@@ -1,4 +1,10 @@
-{config, ...}: {
+{
+  config,
+  inputs,
+  ...
+}: {
+  imports = [ inputs.custom-udev-rules.nixosModule ];
+
   # Automount the bid hdd which is not always connected
   sops.secrets."drives/speicherfresser" = {};
 

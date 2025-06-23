@@ -91,8 +91,8 @@
       turbo = "always"; # Turbo should be used on charger
     };
   };
-  nix.settings.cores = 6; # do not occupy too many cores while building
-  nix.settings.max-jobs = 16;
+  nix.settings.cores = 12;
+  # nix.settings.max-jobs = 16;
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
