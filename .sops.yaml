@@ -1,11 +1,16 @@
 keys:
   - &biome-fest age1ak36zs98fj3eu3ysuc7krzh44fx5t6sf0plvqmmg3z0mqpg2vp5qqkvr4y
   - &blind-spots age1f2xd7ppnw49jq4tzke4js28rm7cwup7yje95ys84tvr6p5ke533qnqruxp
+  - &blind-spots age14y0mlx9rn8wev8lf92200zz3d7rrpg7phcrn9u9snpzx74qgzd2qace0hy
 creation_rules:
   - path_regex: biome-fest.yaml$
     key_groups:
     - age:
       - *biome-fest
+  - path_regex: blind-spots.yaml$
+    key_groups:
+    - age:
+      - *blind-spots
   - path_regex: blind-spots.yaml$
     key_groups:
     - age:

@@ -40,6 +40,7 @@
     systemd = {
       enable = true;
       fido2.enable = true;
+      tpm2.enable = false;
     };
     luks.fido2Support = false; # because systemd
   };
@@ -65,6 +66,7 @@
       "8250.nr_uarts=1" # disable serial tty (except one)
     ];
   };
+
   # Enable bluetooth
   hardware.bluetooth.enable = true;
 

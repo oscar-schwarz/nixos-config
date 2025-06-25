@@ -1,4 +1,5 @@
-def main [host?: string ssh_key_path: path = /etc/ssh/id_ed25519] {
+# Rotates the SSH key (and with that also the AGE key of a specific host)
+export def "main rotate-keys" [host?: string ssh_key_path: path = /etc/ssh/id_ed25519] {
     # make sure that the command is run as sudo
     if (^bash -c 'echo $EUID') != "0" {error make { msg: "This command must be run as sudo." }}
 

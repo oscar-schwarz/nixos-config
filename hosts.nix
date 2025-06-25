@@ -94,4 +94,11 @@
       ];
     };
   };
+  blind-spots = {
+    ip-address = "10.12.21.40";
+    ssh = {
+      public-key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDlvatOzYr9PmTl6v2Q1JiHNaOzbCOOe0/nL2RJS+VqV root@blind-spots";
+      allow-connections-from = [ "biome-fest" ];
+    }; 
+  };
 }

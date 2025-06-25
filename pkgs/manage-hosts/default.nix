@@ -2,21 +2,25 @@
   writeShellApplication,
   nushell,
   openssh,
+  sops,
   ssh-to-age,
   age,
+  sshpass,
   ...
 }:
 writeShellApplication {
-  name = "create-new-host";
+  name = "manage-hosts";
   
   runtimeInputs = [
     nushell
     openssh
     ssh-to-age
     age
+    sops
+    sshpass
   ];
   
   text = ''
-    nu ${./create-new-host.nu} "$@"
+    nu ${./.}/manage-hosts.nu "$@"
   '';
 }

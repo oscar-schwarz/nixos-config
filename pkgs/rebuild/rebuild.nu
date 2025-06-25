@@ -10,7 +10,7 @@ def --wrapped main [
     let host = $hostname | default (^hostname)
 
     if $command == null {
-        ^nixos-rebuild
+        ^nixos-rebuild --help
         exit
     }
 
