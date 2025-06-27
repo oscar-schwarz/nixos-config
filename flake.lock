@@ -716,11 +716,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1750886186,
-        "narHash": "sha256-8FwlKXEh3nW3/5cXGAE8R3DOFtBjJtuLl0HNua9ttSI=",
+        "lastModified": 1751014128,
+        "narHash": "sha256-ogiPrSbGInX+wsvRZXtjKTll2m3CvCXyc7/T8mW5VZc=",
         "owner": "OsiPog",
         "repo": "nix-firefox-addons",
-        "rev": "48bbc3f3027f00678f4394fa2b9ce7476803ab70",
+        "rev": "f11086ab52b037ad0d5d8f6d5599080b5b272b67",
         "type": "github"
       },
       "original": {
