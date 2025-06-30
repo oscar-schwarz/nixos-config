@@ -13,7 +13,8 @@ username: {
   
   sops.secrets = {
     "other/uni-vpn-auth" = {};
-    "ssh-keys/uni-gitlab/private" = {};
+    "ssh-keys/uni-gitlab/private" = {owner = username;};
+    "ssh-keys/ag-link/private" = {owner = username;};
   };
 
   # --- VPN
@@ -29,12 +30,20 @@ username: {
     };
   };
 
-  # --- ADD SSH CONFIG FOR GITLAB
+  # --- ADD SSH CONFIG FOR GITLAB AND AG-LINK
   programs.ssh.extraConfig = ''
     Host git.informatik.uni-leipzig.de
       HostName git.informatik.uni-leipzig.de
       User git
       IdentityFile ${config.getSopsFile "ssh-keys/uni-gitlab/private"}
+      IdentitiesOnly yes
+
+    Host ag-link-hyperjump
+      HostName hyperjump.reudnetz.org
+      ServerAliveInterval 15
+      Port 21016
+      User osi
+      IdentityFile ${config.getSopsFile "ssh-keys/ag-link/private"}
       IdentitiesOnly yes
   '';
 

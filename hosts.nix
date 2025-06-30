@@ -5,9 +5,7 @@
     # NixOS modules this host consists of
     nixos-modules = [
       # kernel
-      ({pkgs, ...}: {
-        boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
-      })
+      ({pkgs, ...}: {boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;})
       
       # theme
       "themes/prismarine/"
