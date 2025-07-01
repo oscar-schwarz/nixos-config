@@ -53,6 +53,8 @@ in {
       layerrule = [
         "animation popin, (w|r)ofi"
         # "dimaround, (w|r)ofi"
+        "abovelock true, waybar"
+        "abovelock true, wvkbd"
       ];
       windowrule = [
         "pin, class:(w|r)ofi"

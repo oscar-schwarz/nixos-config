@@ -35,8 +35,11 @@
           ", swipe:4:d, movetoworkspace, r+1"
           ", edge:r:l, exec, pkill hyprshot || hyprshot -m region --clipboard-only --freeze"
           ", edge:l:r, overview:toggle" # swipe from left to right
-          ", edge:u:d, exec, pkill waybar || waybar" # swipe from top to bottom
           # swipe from bottom to top does not work
+        ];
+
+        hyprgrass-bindl = [
+          ", edge:u:d, exec, pkill waybar || waybar" # swipe from top to bottom
         ];
       };
 
