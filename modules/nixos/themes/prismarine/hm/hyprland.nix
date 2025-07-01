@@ -52,11 +52,11 @@ in {
       # --- Layerrules and Window Rules
       layerrule = [
         "animation popin, (w|r)ofi"
-        "dimaround, (w|r)ofi"
+        # "dimaround, (w|r)ofi"
       ];
       windowrule = [
         "pin, class:(w|r)ofi"
-        "stayfocused, class:(w|r)ofi"
+        # "stayfocused, class:(w|r)ofi"
         "dimaround, class:(w|r)ofi"
       ];
 
