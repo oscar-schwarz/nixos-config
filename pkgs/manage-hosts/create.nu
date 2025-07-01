@@ -31,17 +31,6 @@ export def "main create" [ ip_address: string ] {
     # This script needs to be run as sudo
     if (^bash -c 'echo $EUID') != "0" {error make {msg: "This command must be run as sudo."}}
 
-    # Get ssh password
-    let SSHPASS = do {
-        mut password = "";
-        while (try {^sshpass -p $password ssh $"root@($ip_address)" exit; return true} catch {return false}) {
-            $password = input -s $"Please provide the SSH password for root@($ip_address)"
-        }
-    }
-
-    print "Correct password!"
-    exit
-
     # At first we create a stub hardware configuration
     let hardware_config_path = "./hardware/" + $NEW_HOSTNAME + ".nix"
     mkdir (^dirname $hardware_config_path)
@@ -67,7 +56,10 @@ export def "main create" [ ip_address: string ] {
     ssh = {
       public-key = "(^ssh-keygen -y -f $SSH_KEY_PATH)";
       allow-connections-from = [ "(^hostname)" ];
-    }; 
+    };
+    nixos-modules = [
+      "disko/basic"
+    ];
   };
 }
 '       )

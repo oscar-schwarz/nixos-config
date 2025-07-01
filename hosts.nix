@@ -101,4 +101,14 @@
       allow-connections-from = [ "biome-fest" ];
     }; 
   };
+  haunt-muskie = {
+    ip-address = "188.245.92.110";
+    ssh = {
+      public-key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAp5UxVvqO6i0Jp4W68CqYnKh5yEB+6ZzS987dT/eNtL root@haunt-muskie";
+      allow-connections-from = [ "biome-fest" ];
+    };
+    nixos-modules = [ 
+      "disko/basic"
+    ];
+  };
 }
