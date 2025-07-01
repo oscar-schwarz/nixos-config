@@ -39,9 +39,9 @@
           ", edge:u:d, exec, pkill waybar || waybar" # swipe from top to bottom
         ];
 
-        # hyprgrass-bindl = [
-        #   ", edge:u:d, exec, pkill waybar || waybar" # swipe from top to bottom
-        # ];
+        hyprgrass-bindl = [
+          ", edge:u:d, exec, pkill waybar || waybar" # swipe from top to bottom
+        ];
       };
 
       gestures = {
