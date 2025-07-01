@@ -67,7 +67,7 @@ in {
       .module {
         border-style: solid;
         border-width: ${str border.width}px;
-        border-radius: ${str border.radius}pt;
+        border-radius: ${str border.radius}px;
         border-color: @base03;
 
         margin-left: ${str margin}px;

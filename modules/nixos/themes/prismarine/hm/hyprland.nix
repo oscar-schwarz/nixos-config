@@ -52,7 +52,7 @@ in {
       # --- Layerrules
       layerrule = [
         "animation popin, (w|r)ofi"
-        "dimaround, (w|r)ofi"
+        # "dimaround, (w|r)ofi" # does not allow touch input in dimmed area
       ];
 
       # --- Plugins ---

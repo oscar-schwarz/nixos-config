@@ -99,7 +99,7 @@ in {
         modules-right = [
           "custom/hypr-window-close"
           "hyprland/window"
-          "custom/rofi-drun"
+          "custom/runner"
         ];
 
         # Module settings
@@ -162,10 +162,10 @@ in {
           '';
         };
 
-        "custom/rofi-drun" = {
+        "custom/runner" = {
           format = fa "ellipsis";
           on-click = pkgs.writeShellScript "" ''
-            pkill rofi || rofi -show drun
+            pkill wofi || wofi --show drun
           '';
         };
       };
