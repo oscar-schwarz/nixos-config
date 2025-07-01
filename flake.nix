@@ -134,6 +134,7 @@
                   "nix-command"
                   "flakes"
                 ];
+                programs.command-not-found.enable = true;
 
                 # Import home manager modules to home manager
                 # home-manager.sharedModules = with inputs; [ ];

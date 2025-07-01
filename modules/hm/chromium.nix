@@ -4,7 +4,7 @@
 }: {
   programs.chromium = {
     enable = true;
-    package = pkgs.cromite;
+    package = pkgs.brave;
     extensions = [
       {
         # Vimium
