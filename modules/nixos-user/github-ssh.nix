@@ -21,6 +21,6 @@ username: {
       IdentitiesOnly yes
 
     # Allow overwriting the values above
-    Include /etc/ssh/config_imperative
+    # Include /etc/ssh/config_imperative
   '';
 }

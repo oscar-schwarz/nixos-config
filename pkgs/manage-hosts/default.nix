@@ -6,6 +6,7 @@
   ssh-to-age,
   age,
   sshpass,
+  nixos-anywhere,
   ...
 }:
 writeShellApplication {
@@ -18,6 +19,7 @@ writeShellApplication {
     age
     sops
     sshpass
+    nixos-anywhere
   ];
   
   text = ''
