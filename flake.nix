@@ -105,35 +105,33 @@
     flake-utils,
     ...
   } @ inputs: let
-    inherit (builtins) attrNames attrValues readDir listToAttrs;
-    inherit (nixpkgs.lib) pipe nixosSystem removeSuffix mapAttrs;
+    inherit (builtins) readDir;
+    inherit (nixpkgs.lib) pipe nixosSystem;
+    inherit (nixpkgs.lib.trivial) flip; 
+    inherit (nixpkgs.lib.attrsets) mapAttrs listToAttrs attrNames attrValues;
+    inherit (nixpkgs.lib.strings) removeSuffix;
     inherit (flake-utils.lib) eachDefaultSystem;
 
     # --- NIXOS CONFIGURATIONS ---
-    # Definitions are in a seperate file next to this flake.nix
-    hostDefinitions = import ./hosts.nix;
-
     # Create a nixos configuration for each defined host in hosts.nix
-    nixosConfigurations = pipe hostDefinitions [
-      (mapAttrs (
-        hostName: host:
-          nixosSystem {
-            specialArgs = {inherit self;inherit inputs;};
-            modules = [
-              # --- SHARED MODULE ---
-              ./flake/shared-module.nix
+    nixosConfigurations = flip mapAttrs (import ./hosts.nix) (
+      hostName: host:
+        nixosSystem {
+          specialArgs = {inherit self;inherit inputs;};
+          modules = [
+            # --- SHARED MODULE ---
+            ./flake/shared-module.nix
 
-              # --- HOSTS MODULE ---
-              # All host specific settings are imported
-              (import ./flake/hosts.nix hostName)
+            # --- HOSTS MODULE ---
+            # All host specific settings are imported
+            (import ./flake/hosts.nix hostName)
 
-              # --- SOPS MODULE ---
-              # all hosts should have access to their respective secrets
-              ./flake/secrets.nix
-            ];
-          }
-      ))
-    ];
+            # --- SOPS MODULE ---
+            # all hosts should have access to their respective secrets
+            ./flake/secrets.nix
+          ];
+        }
+    );
 
     # --- OTHER OUTPUTS FOR EACH SYSTEM ---
     outputsEachSystem = eachDefaultSystem (
