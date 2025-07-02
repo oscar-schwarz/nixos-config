@@ -113,12 +113,12 @@
           "$meta, K, togglefloating"
 
           # switch workspaces
-          "$meta, J, workspace, m-1"
-          "$meta, H, workspace, m+1"
+          "$meta, J, workspace, r-1"
+          "$meta, H, workspace, r+1"
 
           # move window to workspaceso
-          "$meta_CTRL, J, movetoworkspace, m-1"
-          "$meta_CTRL, H, movetoworkspace, m+1"
+          "$meta_CTRL, J, movetoworkspace, r-1"
+          "$meta_CTRL, H, movetoworkspace, r+1"
 
           # Taking screenshots
           "$meta, A, exec, pidof hyprshot || hyprshot -m region --clipboard-only --freeze"
