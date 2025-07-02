@@ -22,6 +22,7 @@
         sensitivity = 4.0;
         workspace_swipe_fingers = 3;
         workspace_swipe_edge = false;
+        emulates_touchpad_swipe = false;
         edge_margin = 50;
 
         # Mouse binds

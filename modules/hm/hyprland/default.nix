@@ -15,6 +15,11 @@
   # Hyprland would be unusable without a terminal
   programs.kitty.enable = lib.mkDefault true;
 
+  # Fix for electron apps to use wayland
+  home.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+    ELECTRON_OZONE_PLATFORM_HINT = "auto";
+  };
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -25,6 +30,9 @@
       };
       misc = {
         enable_anr_dialog = false; # remove the "application not responding" popup when an app takes a little longer
+      };
+      debug = {
+        disable_logs = false; # enable debug logs
       };
 
       binds = {
@@ -105,12 +113,12 @@
           "$meta, K, togglefloating"
 
           # switch workspaces
-          "$meta, J, workspace, r-1"
-          "$meta, H, workspace, r+1"
+          "$meta, J, workspace, m-1"
+          "$meta, H, workspace, m+1"
 
           # move window to workspaceso
-          "$meta_CTRL, J, movetoworkspace, r-1"
-          "$meta_CTRL, H, movetoworkspace, r+1"
+          "$meta_CTRL, J, movetoworkspace, m-1"
+          "$meta_CTRL, H, movetoworkspace, m+1"
 
           # Taking screenshots
           "$meta, A, exec, pidof hyprshot || hyprshot -m region --clipboard-only --freeze"

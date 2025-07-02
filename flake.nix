@@ -125,6 +125,7 @@
               home-manager.nixosModules.default
               stylix.nixosModules.stylix
               programs-sqlite.nixosModules.programs-sqlite
+              disko.nixosModules.default
 
               # --- FLAKE MODULE ---
               # flake specific settings

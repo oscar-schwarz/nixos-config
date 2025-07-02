@@ -44,7 +44,7 @@ in {
     };
     # An acivation script that runs on `nixos-rebuild switch` and reboot that generates private AGE keys from all private
     # SSH keys found in /etc/ssh
-    system.activationScripts = {
+    system.activationScripts = lib.mkIf (config.sops.secrets != {}){
       generateAgeKeysFromSSH.text = lib.getExe self.packages.${pkgs.system}.all-ssh-keys-to-age;
       setupSecretsForUsers.deps = [ "generateAgeKeysFromSSH" ];
       setupSecrets.deps = [ "generateAgeKeysFromSSH" ];

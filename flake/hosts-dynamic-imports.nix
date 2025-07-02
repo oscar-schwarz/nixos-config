@@ -47,7 +47,7 @@ hostname: moduleArgs @ {
           hm-modules = userConf.hm-modules or [];
           user-nixos-modules = userConf.user-nixos-modules or [];
         })
-        hostDefinitions.${hostname}.users;
+        (hostDefinitions.${hostname}.users or {});
     } [
       # Apply the values from the host definition
       (defaults: defaults // hostDefinitions.${hostname})

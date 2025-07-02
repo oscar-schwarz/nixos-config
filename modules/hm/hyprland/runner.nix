@@ -35,7 +35,7 @@
 
     # Wofi menus
     # launcher
-    "$meta, E, exec, pidof wofi || wofi --show drun"
+    "$meta, E, exec, pidof wofi || wofi --show drun --normal-window"
     # emoji
     "$meta, U, exec, pidof wofi || wofi-emoji"
   ];

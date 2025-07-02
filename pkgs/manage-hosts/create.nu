@@ -28,9 +28,6 @@ export def "main create" [ ip_address: string ] {
 
     let SSH_KEY_PATH = "/etc/ssh/id_ed25519_" + $NEW_HOSTNAME
 
-    # This script needs to be run as sudo
-    if (^bash -c 'echo $EUID') != "0" {error make {msg: "This command must be run as sudo."}}
-
     # At first we create a stub hardware configuration
     let hardware_config_path = "./hardware/" + $NEW_HOSTNAME + ".nix"
     mkdir (^dirname $hardware_config_path)
@@ -42,9 +39,9 @@ export def "main create" [ ip_address: string ] {
     }
 
     # generate a new ssh key
-    ^ssh-keygen -t ed25519 -f $SSH_KEY_PATH -N "" -C ("root@" + $NEW_HOSTNAME)
+    ^sudo ssh-keygen -t ed25519 -f $SSH_KEY_PATH -N "" -C ("root@" + $NEW_HOSTNAME)
     # add age key to age keys file
-    let privateAgeKey = ^ssh-to-age -private-key -i $SSH_KEY_PATH
+    let privateAgeKey = ^sudo ssh-to-age -private-key -i $SSH_KEY_PATH
     ($privateAgeKey + "\n") | save --append /root/.config/sops/age/keys.txt
 
     # Then we append a new host to the hosts.nix file
@@ -54,10 +51,11 @@ export def "main create" [ ip_address: string ] {
   ($NEW_HOSTNAME) = {
     ip-address = "($ip_address)";
     ssh = {
-      public-key = "(^ssh-keygen -y -f $SSH_KEY_PATH)";
+      public-key = "(^sudo ssh-keygen -y -f $SSH_KEY_PATH)";
       allow-connections-from = [ "(^hostname)" ];
     };
     nixos-modules = [
+      "essentials"
       "disko/basic"
     ];
   };

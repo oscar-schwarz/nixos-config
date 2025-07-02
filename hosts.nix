@@ -108,6 +108,7 @@
       allow-connections-from = [ "biome-fest" ];
     };
     nixos-modules = [ 
+      "essentials"
       "disko/basic"
     ];
   };

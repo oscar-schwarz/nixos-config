@@ -166,7 +166,7 @@ in {
     networking.hostName = hostname;
 
     # Set up the users, just give an empty set, but define the set
-    users.users = mapAttrs (_: _: {}) hostDefinitions.${hostname}.users // {
+    users.users = mapAttrs (_: _: {}) (hostDefinitions.${hostname}.users or {}) // {
       root.openssh.authorizedKeys.keys = map (otherHostname: hostDefinitions.${otherHostname}.ssh.public-key) (hostDefinitions.${hostname}.ssh.allow-connections-from or []);
     };
 
@@ -182,10 +182,13 @@ in {
           home.stateVersion = config.system.stateVersion;
         }
       ))
-      hostDefinitions.${hostname}.users;
+      (hostDefinitions.${hostname}.users or {});
 
 
     # --- SSH
+
+    # enable openssh on port 22 if any connections are allowed
+    services.openssh.enable = (hostDefinitions.${hostname}.ssh.allow-connections-from or []) != [];
 
     # Set up ssh keys, you should be able to ssh into another host using its hostname at all times
     programs.ssh.extraConfig = pipe hostDefinitions [
