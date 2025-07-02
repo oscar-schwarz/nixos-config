@@ -4,7 +4,7 @@
   ...
 }: {
   # A fix for docker
-  environment.etc."resolv.conf".text = "nameserver 8.8.8.8";
+  # environment.etc."resolv.conf".text = "nameserver 8.8.8.8";
 
   networking = let
     wireguardPort = 51820;

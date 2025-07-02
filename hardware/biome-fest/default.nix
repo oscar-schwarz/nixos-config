@@ -9,15 +9,6 @@
   inputs,
   ...
 }: {
-  imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
-  ];
-
-  boot.initrd.availableKernelModules = ["xhci_pci" "thunderbolt" "nvme" "uas" "usb_storage" "usbhid" "sd_mod" "sdhci_pci" "i915"];
-  boot.initrd.kernelModules = ["i915"];
-  boot.kernelModules = ["kvm-intel"];
-  boot.extraModulePackages = [];
-
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/7aefc206-56e9-4426-a19e-f215dc813886";
     fsType = "ext4";
@@ -58,15 +49,6 @@
     }
   ];
 
-  boot = {
-    # Enable "Silent Boot"
-    consoleLogLevel = 0;
-    kernelParams = [
-      "boot.shell_on_fail"
-      "8250.nr_uarts=1" # disable serial tty (except one)
-    ];
-  };
-
   # Enable bluetooth
   hardware.bluetooth.enable = true;
 
@@ -94,17 +76,9 @@
     };
   };
   nix.settings.cores = 12;
-  # nix.settings.max-jobs = 16;
+  nix.settings.max-jobs = 24;
 
-  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
-  # (the default) this is the recommended approach. When using systemd-networkd it's
-  # still possible to use this option, but it's recommended to use it in conjunction
-  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
-  networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.wlp0s20f3.useDHCP = lib.mkDefault true;
-
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  # networking.useDHCP = lib.mkDefault true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

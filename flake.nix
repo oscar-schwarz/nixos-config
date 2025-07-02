@@ -5,13 +5,8 @@
     # Nix packages
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/release-24.11";
-    # "Too much bleeding" age nixpkgs
-    chaotic = {
-      url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
-    # Utilities
+    # Flake Utilities
     flake-utils.url = "github:numtide/flake-utils";
 
     # HOME MANAGER - for all user related stuff
@@ -23,6 +18,9 @@
     # make the disk layout of the machines declareable
     disko = {
       url = "github:nix-community/disko";
+    };
+    nixos-facter-modules = {
+      url = "github:nix-community/nixos-facter-modules";
     };
 
     # Idle inhibitor

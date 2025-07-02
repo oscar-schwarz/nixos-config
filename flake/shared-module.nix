@@ -11,6 +11,7 @@ in {
   imports = with inputs; [
     home-manager.nixosModules.default
     programs-sqlite.nixosModules.programs-sqlite
+    inputs.nixos-facter-modules.nixosModules.facter
   ];
 
   # --- NIX SETTINGS AND OPTIONS

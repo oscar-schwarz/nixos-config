@@ -70,8 +70,8 @@ in {
   # import the defined nixos modules
   imports =
     [
-      # the machine of the host
-      (../hardware + "/${hostname}.nix")
+      # the config specific to the machine of the host
+      (../hardware + "/${hostname}")
     ]
     # The nixos modules of the host
     ++ host.nixos-modules

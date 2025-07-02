@@ -146,7 +146,7 @@ in {
   # --- IMPLEMENTATION
 
   # Dynamic imports need to happen in a seperate file
-  imports = [ (import ./hosts-dynamic-imports.nix hostname)];
+  imports = [ (import ./hosts-dynamic-imports.nix hostname) ];
 
   config = let
     # --- FUNCTIONS
@@ -164,6 +164,9 @@ in {
 
     # Set the host name to the current host
     networking.hostName = hostname;
+
+    # Define the hardware
+    facter.reportPath = ../hardware + "/${hostname}/facter.json";
 
     # Set up the users, just give an empty set, but define the set
     users.users = mapAttrs (_: _: {}) (hostDefinitions.${hostname}.users or {}) // {
