@@ -106,7 +106,7 @@
     ...
   } @ inputs: let
     inherit (builtins) attrNames attrValues readDir listToAttrs;
-    inherit (nixpkgs.lib) pipe nixosSystem removeSuffix mapAttrs filterAttrs;
+    inherit (nixpkgs.lib) pipe nixosSystem removeSuffix mapAttrs;
     inherit (flake-utils.lib) eachDefaultSystem;
 
     # --- NIXOS CONFIGURATIONS ---

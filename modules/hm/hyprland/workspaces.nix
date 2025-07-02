@@ -6,18 +6,20 @@
 in {
   wayland.windowManager.hyprland = {
     plugins = with pkgs.hyprlandPlugins; [
-      hyprexpo
+      # hyprexpo
+      hyprspace
     ];
     
     settings = {
-      "plugin:hyprexpo" = {
-        inherit columns;
-        enable_gesture = false;
-        workspace_method = "center current";
-      };
+      # "plugin:hyprexpo" = {
+      #   inherit columns;
+      #   enable_gesture = false;
+      #   workspace_method = "center current";
+      # };
 
       bind = [
-        "$meta, O, hyprexpo:expo, toggle"
+        # "$meta, O, hyprexpo:expo, toggle"
+        "$meta, O, overview:toggle"
       ];
 
 
