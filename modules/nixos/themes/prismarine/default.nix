@@ -2,6 +2,7 @@
   pkgs,
   lib,
   config,
+  inputs,
   ...
 }: let
   # helper
@@ -35,6 +36,8 @@ in {
       type = types.int;
     };
   };
+
+  imports = [inputs.stylix.nixosModules.stylix];
 
   config = {
     # Implement the defined options from above
@@ -98,9 +101,11 @@ in {
       ];
     };
 
-    nixpkgs.overlays = [(final: prev: {
-      fastfetch = prev.fastfetch;
-    })];
+    nixpkgs.overlays = [
+      (final: prev: {
+        fastfetch = prev.fastfetch;
+      })
+    ];
 
     # import additional modules
     # import = (absoluteNixFilesInDir ./nixos);

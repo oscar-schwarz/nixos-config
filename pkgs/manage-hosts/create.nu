@@ -55,7 +55,6 @@ export def "main create" [ ip_address: string ] {
       allow-connections-from = [ "(^hostname)" ];
     };
     nixos-modules = [
-      "essentials"
       "disko/basic"
     ];
   };

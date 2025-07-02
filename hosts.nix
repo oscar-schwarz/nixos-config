@@ -11,7 +11,6 @@
       "themes/prismarine/"
 
       # Essential things
-      "essentials"
       "sound"
 
       # connection to the world
@@ -108,7 +107,6 @@
       allow-connections-from = [ "biome-fest" ];
     };
     nixos-modules = [ 
-      "essentials"
       "disko/basic"
     ];
   };

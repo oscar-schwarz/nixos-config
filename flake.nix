@@ -119,46 +119,9 @@
         hostName: host:
           nixosSystem {
             specialArgs = {inherit self;inherit inputs;};
-
-            modules = with inputs; [
-              # --- FLAKE INPUTS MODULES ---
-              home-manager.nixosModules.default
-              stylix.nixosModules.stylix
-              programs-sqlite.nixosModules.programs-sqlite
-              disko.nixosModules.default
-
-              # --- FLAKE MODULE ---
-              # flake specific settings
-              ({inputs, ...}: {
-                # Enable flakes and pipe operators
-                nix.settings.experimental-features = [
-                  "nix-command"
-                  "flakes"
-                ];
-                programs.command-not-found.enable = true;
-
-                # Import home manager modules to home manager
-                # home-manager.sharedModules = with inputs; [ ];
-
-                nixpkgs.overlays = with inputs; [
-                  # Add packages of the flakes in an overlay
-                  (
-                    final: prev: let
-                      stable = nixpkgs-stable.legacyPackages.${prev.system};
-                    in {
-                      # to access stable packages
-                      inherit stable;
-
-                      # stable packages
-                      auto-cpufreq = stable.auto-cpufreq;
-
-                      # custom flake packages
-                      matcha = matcha.packages.${prev.system}.default;
-                      self = outputsEachSystem.packages.${prev.system};
-                    }
-                  )
-                ];
-              })
+            modules = [
+              # --- SHARED MODULE ---
+              ./flake/shared-module.nix
 
               # --- HOSTS MODULE ---
               # All host specific settings are imported

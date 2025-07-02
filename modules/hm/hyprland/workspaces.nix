@@ -16,6 +16,21 @@ in {
       #   enable_gesture = false;
       #   workspace_method = "center current";
       # };
+      "plugin:overview" = {
+        hideBackgroundLayers = true; # no wallpaper
+        hideTopLayers = true; # no bar
+        # panelHeight = 250;
+
+        onBottom = true;
+
+        # hide as many empty workspaces as possible
+        showNewWorkspace = false;
+        showEmptyWorkspae = false;
+        
+        disableGestures = true;
+        affectStrut = false;
+
+      };
 
       bind = [
         # "$meta, O, hyprexpo:expo, toggle"
