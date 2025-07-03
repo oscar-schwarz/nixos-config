@@ -30,7 +30,6 @@
       "x-systemd.device-timeout=0"
       "x-systemd.idle-timeout=60"
       "noauto"
-      "x-systemd.requires=multi-user.target"
     ];
   };
 }

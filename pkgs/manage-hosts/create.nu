@@ -29,13 +29,13 @@ export def "main create" [ ip_address: string ] {
     let SSH_KEY_PATH = "/etc/ssh/id_ed25519_" + $NEW_HOSTNAME
 
     # At first we create a stub hardware configuration
-    let hardware_config_path = "./hardware/" + $NEW_HOSTNAME + ".nix"
+    let hardware_config_path = "./hardware/" + $NEW_HOSTNAME + "/default.nix"
     mkdir (^dirname $hardware_config_path)
-    # get the hardware configuration from nixos-anywhere (its just a nix throw expression)
-    if (not ($hardware_config_path | path exists)) {
-        http get https://raw.githubusercontent.com/nix-community/nixos-anywhere-examples/refs/heads/main/hardware-configuration.nix | save $hardware_config_path
+
+    if ($hardware_config_path | path exists) {
+      print $"($hardware_config_path) exists, keeping"
     } else {
-        print $"($hardware_config_path) exists, keeping file"
+      $"{...}: {system.stateVersion = \"(^nixos-version | split row "." | take 2 | str join ".")\";}" | save $hardware_config_path
     }
 
     # generate a new ssh key

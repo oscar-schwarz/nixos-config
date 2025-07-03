@@ -11,5 +11,5 @@ export def --wrapped "main install" [hostname: string ...rest: string] {
 
     # print "Correct password!"
 
-    ^nixos-anywhere --flake $".#($hostname)" --generate-hardware-config nixos-generate-config $"./hardware/($hostname).nix" --target-host $"root@($ip_address)" ...$rest
+    ^nixos-anywhere --flake $".#($hostname)" --generate-hardware-config nixos-facter $"./hardware/($hostname)/facter.json" --target-host $"root@($ip_address)" ...$rest
 }

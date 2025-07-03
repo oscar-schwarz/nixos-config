@@ -25,6 +25,13 @@ in {
     })
 
     (pkgs.wofi-pass.override {
+      wofi = pkgs.writeShellApplication {
+        name = "wofi";
+        runtimeInputs = [ pkgs.wofi ];
+        text = ''
+          wofi --normal-window "$@"
+        '';
+      };
       extensions = (exts: [
         exts.pass-otp
       ]);
@@ -63,11 +70,8 @@ in {
   };
 
   # add plugin to rofi if enabled
-  programs.rofi.pass = lib.mkIf config.programs.rofi.enable {
-    enable = true;
-    package =
-      if (match ".*wayland.*" config.programs.rofi.package.name) != null
-      then pkgs.rofi-pass-wayland
-      else pkgs.rofi-pass;
+  programs.rofi.pass = {
+    enable = config.programs.rofi.enable;
+    package = pkgs.rofi-pass-wayland;
   };
 }

@@ -175,7 +175,7 @@ in {
 
     # and set up home-manager users
     home-manager.users =
-      mapAttrs (userName: userConfig: (
+      mapAttrs (userName: userConfig:
         {
           # Define the user name and the home directory for reference
           home.username = userName;
@@ -184,7 +184,7 @@ in {
           # As home manager is installed on each system the same time as home manager the state version is the same
           home.stateVersion = config.system.stateVersion;
         }
-      ))
+      )
       (hostDefinitions.${hostname}.users or {});
 
 
