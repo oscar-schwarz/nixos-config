@@ -58,7 +58,7 @@ in {
       ];
       windowrule = [
         "pin, class:(w|r)ofi"
-        "stayfocused, class:(w|r)ofi"
+        # "stayfocused, class:(w|r)ofi" # cant click outside
         "dimaround, class:(w|r)ofi"
       ];
 
