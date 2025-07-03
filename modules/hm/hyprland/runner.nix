@@ -16,7 +16,13 @@
     ];
   };
 
-  programs.wofi.enable = true;
+  programs.wofi = {
+    enable = true;
+    settings = {
+      normal_window = true;
+      exec_search = true;
+    };
+  };
 
   services.gpg-agent.pinentry.package = pkgs.pinentry-rofi.override {
     rofi = pkgs.rofi-wayland;
@@ -35,7 +41,7 @@
 
     # Wofi menus
     # launcher
-    "$meta, E, exec, pidof wofi || wofi --show drun --normal-window"
+    "$meta, E, exec, pidof wofi || wofi --show drun"
     # emoji
     "$meta, U, exec, pidof wofi || wofi-emoji"
   ];

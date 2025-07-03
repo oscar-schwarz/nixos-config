@@ -25,13 +25,6 @@ in {
     })
 
     (pkgs.wofi-pass.override {
-      wofi = pkgs.writeShellApplication {
-        name = "wofi";
-        runtimeInputs = [ pkgs.wofi ];
-        text = ''
-          wofi --normal-window "$@"
-        '';
-      };
       extensions = (exts: [
         exts.pass-otp
       ]);

@@ -1,5 +1,6 @@
 {
   config,
+  nixosConfig,
   lib,
   ...
 }: let
@@ -16,7 +17,7 @@ in {
       transparency = "real";
       background-color = lib.mkForce (literal "transparent");
       border-color = literal base0D;
-      border-radius = literal "20px";
+      border-radius = literal ((toString nixosConfig.prismarineTheme.border-radius) + "px");
       border = literal "3px";
     };
 

@@ -165,7 +165,7 @@ in {
         "custom/runner" = {
           format = fa "ellipsis";
           on-click = pkgs.writeShellScript "" ''
-            pkill wofi || wofi --show drun --normal-window
+            pkill wofi || wofi --show drun
           '';
         };
       };
